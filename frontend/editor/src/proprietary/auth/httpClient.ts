@@ -8,38 +8,16 @@
  * single same-origin session.
  */
 import axios, { type AxiosInstance } from "axios";
+import { getToken, setToken, clearToken } from "@app/services/authTransport";
 
 /** localStorage key holding the Spring JWT. Shared so portal + editor agree. */
 export const JWT_STORAGE_KEY = "stirling_jwt";
 
-export function getStoredToken(): string | null {
-  try {
-    if (typeof localStorage === "undefined") return null;
-    return localStorage.getItem(JWT_STORAGE_KEY);
-  } catch {
-    return null;
-  }
-}
-
-export function setStoredToken(token: string): void {
-  try {
-    if (typeof localStorage !== "undefined") {
-      localStorage.setItem(JWT_STORAGE_KEY, token);
-    }
-  } catch {
-    // localStorage unavailable (private mode) - fail open
-  }
-}
-
-export function clearStoredToken(): void {
-  try {
-    if (typeof localStorage !== "undefined") {
-      localStorage.removeItem(JWT_STORAGE_KEY);
-    }
-  } catch {
-    // ignore
-  }
-}
+// Morphe-PDF: these now delegate to the shared auth transport, which returns null in
+// cookie mode so no bearer header is attached and the HttpOnly cookie is used instead.
+export const getStoredToken = getToken;
+export const setStoredToken = setToken;
+export const clearStoredToken = clearToken;
 
 /**
  * Create the fallback transport. `baseURL` defaults to "/" so it targets the

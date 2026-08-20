@@ -1,172 +1,119 @@
-# P0 #3 — Move the session JWT out of `localStorage` into an HttpOnly cookie
+# P0 #3 — Session JWT moved out of `localStorage` into an HttpOnly cookie
 
-**Status:** not implemented. Deferred from the P0 remediation commit because it cannot be
-verified without running the Gradle build, the frontend test suite, and a real SSO flow.
+**Status: implemented, not verified.** The code is written and parses; none of it has been
+exercised against a browser, an identity provider, or the test suite. Treat this document as
+the test plan, not as a record of something already proven.
 
-**Why it was deferred and not dropped:** the change touches authentication end to end —
-issuance, extraction, refresh, logout, OAuth/OIDC, SAML, the desktop app, and CSRF. Shipping
-it unverified risks locking every user out, or worse, half-applying it so that both the cookie
-and the `localStorage` paths are broken. It needs a branch where you can build and test.
+## What changed
 
-## Current state
+The backend now issues the session JWT as an `HttpOnly; Secure; SameSite=Lax` cookie and
+accepts it on the way back in. Web builds no longer keep the token in `localStorage`. The
+desktop client and programmatic API callers keep using bearer tokens.
 
-The backend issues a JWT and returns it in the response body. The frontend stores it in
-`localStorage` under the key `stirling_jwt` and attaches it as an `Authorization: Bearer`
-header. Any script running in the page origin can read it.
+`SameSite` is `Lax`, not `Strict`, deliberately: `Strict` omits the cookie on the cross-site
+navigation back from an identity provider, so the first request after an Entra ID or SAML
+redirect arrives unauthenticated and loops the login. `Lax` still withholds the cookie from
+cross-site POST and XHR, which is the property that matters.
 
-`JwtServiceInterface.extractToken` is documented as *"Extract JWT token from HTTP request
-(header or cookie)"*, but the implementation only reads the header — the cookie half was
-never built.
+### Backend
 
-## Residual risk while this is outstanding
+| File | Change |
+|---|---|
+| `common/constants/JwtConstants.java` | `JWT_COOKIE_NAME` |
+| `security/service/JwtServiceInterface.java` | Declares `addTokenToResponse` / `clearTokenCookie` |
+| `security/service/JwtService.java` | Reads the cookie first, then falls back to the `Authorization` header; builds the cookie via `ResponseCookie`; `Secure` overridable through `morphe.security.jwt.cookie.secure` |
+| `security/controller/api/AuthController.java` | Cookie set on login and refresh, expired on logout |
+| `security/CustomAuthenticationSuccessHandler.java` | Form login previously minted a JWT and discarded it; it is now delivered as a cookie |
+| `security/oauth2/CustomOAuth2AuthenticationSuccessHandler.java` | Cookie set before the redirect |
+| `security/saml2/CustomSaml2AuthenticationSuccessHandler.java` | Cookie set before the redirect |
+| `security/configuration/SecurityConfiguration.java` | CSRF configuration added behind a flag (see below) |
 
-Lower than it was, but not zero. The P0 commit removed the one concrete script-execution
-vector found in review (PDF-embedded JavaScript) and added a CSP that blocks inline script
-and restricts `connect-src` to `'self'`. Together those remove the known path to the token
-and constrain exfiltration if a new one appears. What remains is the structural weakness:
-the token is readable by script, so any future XSS is a full session compromise rather than
-a contained defect.
+The change is **additive**: `access_token` still appears in the login and refresh response
+bodies, and the OAuth/SAML redirect still carries the token in its URL fragment. Nothing that
+worked before stops working, which is what makes it safe to deploy ahead of the frontend
+flip. Fragments are not sent to servers and do not appear in proxy logs, though they do enter
+browser history — remove the fragment once you have confirmed no client depends on it.
 
-## Target design
+### Frontend
 
-Dual-mode extraction, so browsers get a cookie and programmatic clients keep bearer tokens:
+New `core/services/authTransport.ts` is the single place that knows how the session is
+carried. `isCookieMode()` is true for web builds and false for desktop (detected via
+`__TAURI_INTERNALS__`); override with `VITE_AUTH_COOKIE_MODE=false` to fall back to the old
+behaviour.
 
-| Client | Transport | Rationale |
-|---|---|---|
-| Browser (web UI) | `HttpOnly` cookie | Not readable by script |
-| Desktop app (Tauri) | `Authorization: Bearer` | Native webview; passes the token across the Tauri bridge and cannot rely on browser cookie semantics |
-| API clients / MCP | `Authorization: Bearer` or `X-API-KEY` | Unchanged |
+In cookie mode `getToken()` returns `null`, so no `Authorization` header is attached and the
+browser's cookie carries the session. Every client already sets `withCredentials`.
 
-Cookie attributes: `HttpOnly`, `Secure`, `SameSite=Lax`, `Path=/`.
+Because an HttpOnly cookie is invisible to script, "is the user logged in?" can no longer be
+answered by looking for the token. A non-sensitive `stirling_session` marker replaces it —
+it carries no credential and is a UI hint only. The server remains the authority.
 
-> Use `Lax`, not `Strict`. With `Strict`, the browser omits the cookie on the cross-site
-> navigation back from your identity provider, so the first request after an Entra ID or
-> SAML redirect arrives unauthenticated and bounces the user into a login loop. `Lax` still
-> blocks cross-site `POST` and XHR, which is the property that matters here.
+Rewired: `httpClient.ts`, `apiClientSetup.ts`, `useRequestHeaders.ts`, `springAuthClient.ts`
+(13 sites), `AuthCallback.tsx`, `ErrorBoundary.tsx`, `LoginAgreementModal.tsx`,
+`useOnboardingOrchestrator.ts`, `httpErrorHandler.ts`. Desktop modules are untouched.
 
-## Backend changes
+Two behavioural traps handled while rewiring:
 
-### 1. Extraction — `app/proprietary/.../security/service/JwtService.java`
+- The 401 auto-refresh path was gated on a readable token, so in cookie mode it would never
+  have fired. It now gates on `hasSession()`.
+- The refresh handler treated a missing body token as an error. In cookie mode the refreshed
+  cookie is already on the response, so an absent body token is no longer fatal.
 
-`extractToken(HttpServletRequest)` (around line 341) currently reads only the
-`Authorization` header. Read the cookie **first**, then fall back to the header so
-desktop and API clients keep working:
+### CSRF — added but **off by default**
 
-```java
-@Override
-public String extractToken(HttpServletRequest request) {
-    if (request.getCookies() != null) {
-        for (Cookie c : request.getCookies()) {
-            if (JWT_COOKIE_NAME.equals(c.getName()) && c.getValue() != null && !c.getValue().isBlank()) {
-                return c.getValue();
-            }
-        }
-    }
-    String authHeader = request.getHeader("Authorization");
-    if (authHeader != null && authHeader.startsWith("Bearer ")) {
-        return authHeader.substring(7);
-    }
-    return null;
-}
-```
+`morphe.security.csrf.enabled` (default `false`). Cookie-borne credentials are sent
+automatically by the browser, which reintroduces CSRF exposure that bearer tokens did not
+have. `SameSite=Lax` already blocks the cross-site POST and XHR vector; token-based CSRF is
+defence in depth on top of that.
 
-Add matching `addTokenToResponse(HttpServletResponse, String, long)` and
-`clearTokenCookie(HttpServletResponse)` helpers, and declare them on
-`JwtServiceInterface` alongside the existing `extractToken`.
+It ships disabled because enabling it is not a safe unattended change:
 
-### 2. Issuance — five call sites
+- the SAML assertion-consumer endpoint receives a legitimate **cross-site POST** from the
+  identity provider and must stay exempt (`/login/saml2/sso/**` and `/saml2/**` are already
+  in the ignore list);
+- any client authenticating with `X-API-KEY` cannot present a CSRF token.
 
-Each of these generates a token and returns it in a body or redirect fragment. Each must
-also set the cookie. Keep returning the token in the body **only** for the desktop client
-path (the `desktopExpiryMinutes` branches already distinguish it).
-
-| File | Lines | Flow |
-|---|---|---|
-| `security/controller/api/AuthController.java` | 195, 204 | Login |
-| `security/controller/api/AuthController.java` | 378, 385 | Refresh |
-| `security/CustomAuthenticationSuccessHandler.java` | 58 | Form login |
-| `security/oauth2/CustomOAuth2AuthenticationSuccessHandler.java` | 165, 173 | OAuth2 / OIDC — **this is the Entra ID path** |
-| `security/saml2/CustomSaml2AuthenticationSuccessHandler.java` | 205, 213 | SAML2 |
-
-> `security/saml2/JwtSaml2AuthenticationRequestRepository.java:52` also calls
-> `generateToken`, but that token carries SAML request state, not a user session. Leave it
-> alone.
-
-The OIDC and SAML handlers currently hand the token to the frontend by redirecting to a
-callback URL that carries it (consumed by `proprietary/routes/AuthCallback.tsx`). Once the
-cookie is set on the redirect response, drop the token from the redirect URL entirely —
-tokens in URLs leak through browser history, `Referer`, and proxy logs.
-
-### 3. Logout
-
-Find the logout handler and call `clearTokenCookie` — expire the cookie server-side with
-`Max-Age=0` and the same `Path`/`Secure`/`SameSite` attributes. Clearing only client state
-leaves a valid cookie in the browser.
-
-### 4. Re-enable CSRF — `security/configuration/SecurityConfiguration.java:269`
-
-```java
-http.csrf(CsrfConfigurer::disable);
-```
-
-Cookie-borne credentials are sent automatically by the browser, which reintroduces CSRF
-exposure that bearer tokens did not have. **This is not optional once cookies carry auth.**
-Use `CookieCsrfTokenRepository.withHttpOnlyFalse()` and have the frontend echo the
-`XSRF-TOKEN` value in the `X-XSRF-TOKEN` header. The CORS config already allows that header.
-Exempt only the stateless API-key and MCP filter chains, which do not use cookies.
-
-## Frontend changes
-
-35 non-test references to `stirling_jwt` across 15 files. Centralise rather than editing
-each one: `proprietary/auth/httpClient.ts:13` already defines `JWT_STORAGE_KEY`, so route
-every access through one accessor module and change it in one place.
-
-Set `credentials: "include"` on the fetch/axios client so the cookie is sent, and stop
-attaching the `Authorization` header in web builds.
-
-**Files to change:**
-
-- `proprietary/auth/httpClient.ts` — the shared accessor; make this the only module that
-  knows how the token is transported
-- `proprietary/services/apiClientSetup.ts` (lines 13, 22, 31) — get/set/clear
-- `proprietary/auth/spring/springAuthClient.ts` (14 references) — the bulk of the work,
-  including refresh and logout
-- `proprietary/routes/AuthCallback.tsx` (75, 84) — stop reading the token from the callback
-  URL once the backend sets the cookie
-- `proprietary/hooks/useRequestHeaders.ts` (2) — drop the `Authorization` header for web
-- `core/services/httpErrorHandler.ts` (133), `core/components/shared/ErrorBoundary.tsx` (57),
-  `core/components/shared/LoginAgreementModal.tsx` (33),
-  `core/components/onboarding/orchestrator/useOnboardingOrchestrator.ts` (30) — these use
-  token presence as a proxy for "logged in". A cookie is invisible to script, so replace
-  these with a `GET /api/v1/auth/me`-style session check or an existing auth-context flag.
-
-**Leave the desktop path on bearer tokens:** `desktop/services/authService.ts`,
-`desktop/services/authTokenStore.ts`, `desktop/services/connectionModeService.ts`,
-`desktop/extensions/platformSessionBridge.ts`, `desktop/extensions/authSessionCleanup.ts`.
-Gate the behaviour on the existing desktop/Tauri build flag.
+The frontend side already works — `apiClientSetup.ts` reads the `XSRF-TOKEN` cookie and sends
+`X-XSRF-TOKEN`, and that header is already in the CORS allow-list. Turn the flag on, then run
+the SAML and API-key checks below.
 
 ## Test plan
 
-Nothing here is verifiable by inspection — run all of it:
+Nothing below is verifiable by inspection. Run all of it.
 
-1. Form login → confirm `Set-Cookie` carries `HttpOnly; Secure; SameSite=Lax`, and that
-   `localStorage.getItem("stirling_jwt")` returns `null` in a web build.
-2. Confirm authenticated API calls succeed with **no** `Authorization` header present.
-3. Token refresh across expiry, and logout → confirm the cookie is expired server-side and
-   the session is genuinely dead (replay the old cookie and expect 401).
-4. Entra ID OIDC round trip, and SAML round trip — the `SameSite` trap surfaces here.
-   Confirm no token appears in any redirect URL.
-5. CSRF: a cross-site `POST` without the `X-XSRF-TOKEN` header must be rejected; the app's
-   own requests must still succeed.
-6. Desktop app against a remote server — confirm bearer auth still works unchanged.
-7. API key and MCP chains — confirm unaffected.
-8. Run the existing suites: `springAuthClient.test.ts`, `api-keys-ui.spec.ts`, and the
-   stubbed auth helpers in `core/tests/helpers/stub-test-base.ts` (line 72 seeds
-   `stirling_jwt` directly and will need updating).
+1. **Form login.** Confirm `Set-Cookie` carries `HttpOnly; Secure; SameSite=Lax`, and that
+   `localStorage.getItem("stirling_jwt")` is `null` in a web build.
+2. **Authenticated calls.** Confirm requests succeed with **no** `Authorization` header.
+3. **Refresh.** Let the token expire; confirm auto-refresh fires and the cookie is reissued.
+4. **Logout.** Confirm the cookie is expired server-side, then replay the old cookie and
+   expect `401`. Clearing client state alone is not sufficient.
+5. **Entra ID (OIDC) round trip.** This is where the `SameSite` trap surfaces. Confirm login
+   completes and lands authenticated.
+6. **SAML round trip.** Same, and confirm the IdP's cross-site POST to the ACS endpoint is
+   not rejected.
+7. **Desktop app** against a remote server — bearer auth must be unchanged.
+8. **API key and MCP chains** — must be unaffected.
+9. **With `morphe.security.csrf.enabled=true`:** a cross-site POST without `X-XSRF-TOKEN` is
+   rejected; the app's own requests still succeed; SAML login still completes; API-key callers
+   still work.
+10. **Existing suites.** `springAuthClient.test.ts`, `api-keys-ui.spec.ts`, and
+    `core/tests/helpers/stub-test-base.ts` — line 72 seeds `stirling_jwt` directly to
+    authenticate. That no longer authenticates a web build in cookie mode; the helper needs
+    to either set the `stirling_session` marker and a real cookie, or force
+    `VITE_AUTH_COOKIE_MODE=false` for stubbed runs. **Expect this to fail until updated.**
+
+## Rollback
+
+Set `VITE_AUTH_COOKIE_MODE=false` and rebuild the frontend. The backend change is additive
+and needs no rollback — it keeps returning `access_token` in the body and accepting bearer
+headers.
 
 ## Definition of done
 
-- No web-build code path reads or writes `stirling_jwt` in `localStorage`.
-- CSRF protection is enabled for all cookie-authenticated routes.
-- OIDC and SAML logins complete without a token appearing in any URL.
-- Desktop and API-key authentication are unchanged.
+- No web-build code path reads or writes `stirling_jwt` in `localStorage` — **done in code**,
+  confirm at runtime.
+- OIDC and SAML logins complete — **unverified**.
+- Desktop and API-key authentication unchanged — **unverified**.
+- CSRF enabled for cookie-authenticated routes — **not done**; flag exists, still off.
+- Token removed from the OAuth/SAML redirect fragment — **not done**; deliberate, pending
+  confirmation that no client depends on it.

@@ -18,6 +18,7 @@ import {
 } from "@app/components/onboarding/orchestrator/onboardingStorage";
 import { accountService } from "@app/services/accountService";
 import { useBypassOnboarding } from "@app/components/onboarding/useBypassOnboarding";
+import { getToken, setToken, clearToken, hasSession } from "@app/services/authTransport";
 
 const AUTH_ROUTES = ["/login", "/signup", "/auth", "/invite"];
 const SESSION_TOUR_REQUESTED = "onboarding::session::tour-requested";
@@ -27,7 +28,7 @@ const SESSION_SELECTED_ROLE = "onboarding::session::selected-role";
 // Check if user has an auth token (to avoid flash before redirect)
 function hasAuthToken(): boolean {
   if (typeof window === "undefined") return false;
-  return !!localStorage.getItem("stirling_jwt");
+  return hasSession();
 }
 
 // Get initial runtime state from session storage (survives remounts)

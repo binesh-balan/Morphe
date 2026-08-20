@@ -26,7 +26,9 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.saml2.provider.service.authentication.OpenSaml5AuthenticationProvider;
 import org.springframework.security.saml2.provider.service.registration.RelyingPartyRegistrationRepository;
 import org.springframework.security.saml2.provider.service.web.authentication.OpenSaml5AuthenticationRequestResolver;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.firewall.HttpFirewall;
@@ -72,6 +74,10 @@ import stirling.software.proprietary.security.session.SessionPersistentRegistry;
 @DependsOn("runningProOrHigher")
 @Profile("!saas")
 public class SecurityConfiguration {
+
+    /** See the CSRF block in configureSecurity() before enabling this. */
+    @Value("${morphe.security.csrf.enabled:false}")
+    private boolean csrfEnabled;
 
     private final CustomUserDetailsService userDetailsService;
     private final UserService userService;
@@ -271,7 +277,30 @@ public class SecurityConfiguration {
             http.cors(CorsConfigurer::disable);
         }
 
-        http.csrf(CsrfConfigurer::disable);
+        // Morphe-PDF: CSRF. The session JWT now travels in a SameSite=Lax cookie, which
+        // already withholds it from cross-site POST and XHR - that is the practical CSRF
+        // control. Token-based CSRF is defence in depth on top of it.
+        //
+        // Disabled by DEFAULT because enabling it is not a safe unattended change: the SAML
+        // assertion-consumer endpoint receives a legitimate cross-site POST from the identity
+        // provider and must stay exempt, and any client authenticating with X-API-KEY cannot
+        // present a CSRF token. Turn it on with morphe.security.csrf.enabled=true, then verify
+        // (a) SAML and OIDC login still complete, (b) API-key callers still work, and
+        // (c) the SPA's state-changing requests still succeed - the frontend echoes the
+        // XSRF-TOKEN cookie in the X-XSRF-TOKEN header.
+        if (csrfEnabled) {
+            http.csrf(
+                    csrf ->
+                            csrf.csrfTokenRepository(
+                                            CookieCsrfTokenRepository.withHttpOnlyFalse())
+                                    .ignoringRequestMatchers(
+                                            PathPatternRequestMatcher.withDefaults()
+                                                    .matcher("/login/saml2/sso/**"),
+                                            PathPatternRequestMatcher.withDefaults()
+                                                    .matcher("/saml2/**")));
+        } else {
+            http.csrf(CsrfConfigurer::disable);
+        }
 
         // Configure X-Frame-Options based on settings.yml configuration
         // When login is disabled, automatically disable X-Frame-Options to allow embedding

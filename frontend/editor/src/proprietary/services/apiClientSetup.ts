@@ -1,6 +1,14 @@
 import { AxiosInstance, AxiosError, InternalAxiosRequestConfig } from "axios";
 import { withBasePath } from "@app/constants/app";
 import { getBrowserId } from "@app/utils/browserIdentifier";
+import {
+  getToken,
+  setToken,
+  clearToken,
+  hasSession,
+  buildAuthHeaders,
+  isCookieMode as isCookieModeActive,
+} from "@app/services/authTransport";
 
 let isRefreshing = false;
 let failedQueue: Array<{
@@ -8,51 +16,12 @@ let failedQueue: Array<{
   reject: (error: Error) => void;
 }> = [];
 
-function getJwtTokenFromStorage(): string | null {
-  try {
-    return localStorage.getItem("stirling_jwt");
-  } catch (error) {
-    console.error("[API Client] Failed to read JWT from localStorage:", error);
-    return null;
-  }
-}
-
-function setJwtTokenInStorage(token: string): void {
-  try {
-    localStorage.setItem("stirling_jwt", token);
-    console.debug("[API Client] Stored new JWT token in localStorage");
-  } catch (error) {
-    console.error("[API Client] Failed to store JWT in localStorage:", error);
-  }
-}
-
-function clearJwtTokenFromStorage(): void {
-  try {
-    localStorage.removeItem("stirling_jwt");
-    console.debug("[API Client] Cleared JWT token from localStorage");
-  } catch (error) {
-    console.error("[API Client] Failed to clear JWT from localStorage:", error);
-  }
-}
-
-function getXsrfToken(): string | null {
-  try {
-    const cookies = document.cookie.split(";");
-    for (const cookie of cookies) {
-      const [name, value] = cookie.trim().split("=");
-      if (name === "XSRF-TOKEN") {
-        return decodeURIComponent(value);
-      }
-    }
-    return null;
-  } catch (error) {
-    console.error(
-      "[API Client] Failed to read XSRF token from cookies:",
-      error,
-    );
-    return null;
-  }
-}
+// Morphe-PDF: token access and CSRF reading now come from the shared auth transport.
+// In cookie mode getToken() returns null, so no bearer header is attached and the
+// HttpOnly session cookie carries the session instead.
+const getJwtTokenFromStorage = getToken;
+const setJwtTokenInStorage = setToken;
+const clearJwtTokenFromStorage = clearToken;
 
 function processQueue(error: Error | null, token: string | null = null): void {
   failedQueue.forEach((prom) => {
@@ -79,11 +48,13 @@ async function refreshAuthToken(client: AxiosInstance): Promise<string> {
     );
 
     const newToken = response.data?.session?.access_token;
-    if (!newToken) {
+    // Morphe-PDF: in cookie mode the refreshed cookie is already on the response, so an
+    // absent body token is not an error.
+    if (!newToken && !isCookieModeActive()) {
       throw new Error("No access token in refresh response");
     }
 
-    setJwtTokenInStorage(newToken);
+    setJwtTokenInStorage(newToken ?? "");
     console.log("[API Client] ✅ Token refreshed successfully");
     return newToken;
   } catch (error) {
@@ -103,16 +74,7 @@ async function refreshAuthToken(client: AxiosInstance): Promise<string> {
 
 /** Auth headers for raw fetch() calls (SSE streams). Async to match SaaS override. */
 export async function getAuthHeaders(): Promise<Record<string, string>> {
-  const headers: Record<string, string> = {};
-  const jwt = getJwtTokenFromStorage();
-  if (jwt) {
-    headers["Authorization"] = `Bearer ${jwt}`;
-  }
-  const xsrf = getXsrfToken();
-  if (xsrf) {
-    headers["X-XSRF-TOKEN"] = xsrf;
-  }
-  return headers;
+  return buildAuthHeaders();
 }
 
 export function setupApiInterceptors(client: AxiosInstance): void {
@@ -156,7 +118,9 @@ export function setupApiInterceptors(client: AxiosInstance): void {
       }
 
       // Handle 401 errors by attempting token refresh
-      if (error.response?.status === 401 && getJwtTokenFromStorage()) {
+      // Morphe-PDF: gate on session presence, not on a readable token - in cookie
+      // mode the token is invisible to script, so the old check never fired.
+      if (error.response?.status === 401 && hasSession()) {
         console.warn(
           "[API Client] Received 401 error, attempting token refresh...",
         );
@@ -167,7 +131,7 @@ export function setupApiInterceptors(client: AxiosInstance): void {
             failedQueue.push({ resolve, reject });
           })
             .then((token) => {
-              originalRequest.headers.Authorization = `Bearer ${token}`;
+              if (token) originalRequest.headers.Authorization = `Bearer ${token}`;
               return client(originalRequest);
             })
             .catch((err) => {
@@ -183,7 +147,7 @@ export function setupApiInterceptors(client: AxiosInstance): void {
           processQueue(null, newToken);
 
           // Retry original request with new token
-          originalRequest.headers.Authorization = `Bearer ${newToken}`;
+          if (newToken) originalRequest.headers.Authorization = `Bearer ${newToken}`;
           return client(originalRequest);
         } catch (refreshError) {
           processQueue(refreshError as Error, null);
