@@ -233,32 +233,14 @@ public class WebMvcConfig implements WebMvcConfigurer {
                     .allowCredentials(true)
                     .maxAge(3600);
         } else {
-            // Default to allowing all origins when nothing is configured
-            logger.debug(
+            // Morphe-PDF hardening: fail closed. Upstream registered
+            // allowedOriginPatterns("*") with allowCredentials(true) here, allowing any
+            // website to make credentialed cross-origin calls. Register no CORS mapping so
+            // the browser blocks cross-origin requests until origins are configured.
+            logger.warn(
                     "No CORS allowed origins configured in settings.yml"
-                            + " (system.corsAllowedOrigins); WebMvcConfig allowing all origins.");
-            registry.addMapping("/**")
-                    .allowedOriginPatterns("*")
-                    .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
-                    .allowedHeaders(
-                            "Authorization",
-                            "Content-Type",
-                            "X-Requested-With",
-                            "Accept",
-                            "Origin",
-                            "X-API-KEY",
-                            "X-CSRF-TOKEN",
-                            "X-XSRF-TOKEN",
-                            "X-Browser-Id")
-                    .exposedHeaders(
-                            "WWW-Authenticate",
-                            "X-Total-Count",
-                            "X-Page-Number",
-                            "X-Page-Size",
-                            "Content-Disposition",
-                            "Content-Type")
-                    .allowCredentials(true)
-                    .maxAge(3600);
+                            + " (system.corsAllowedOrigins); WebMvcConfig registers no CORS"
+                            + " mapping, so cross-origin requests are denied.");
         }
     }
 }
