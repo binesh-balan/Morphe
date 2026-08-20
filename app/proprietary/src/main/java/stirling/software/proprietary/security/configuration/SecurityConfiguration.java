@@ -184,11 +184,16 @@ public class SecurityConfiguration {
                     "CORS configured with allowed origin patterns from settings.yml: {}",
                     configuredOrigins);
         } else {
-            // Default to allowing all origins when nothing is configured
-            cfg.setAllowedOriginPatterns(List.of("*"));
-            log.info(
+            // Morphe-PDF hardening: fail closed. Upstream defaulted to
+            // allowedOriginPatterns("*") together with allowCredentials(true), which lets
+            // any website on the internet issue credentialed cross-origin requests to this
+            // instance. Deny cross-origin requests unless origins are explicitly configured.
+            cfg.setAllowedOriginPatterns(List.of());
+            cfg.setAllowedOrigins(List.of());
+            log.warn(
                     "No CORS allowed origins configured in settings.yml"
-                            + " (system.corsAllowedOrigins); allowing all origins.");
+                            + " (system.corsAllowedOrigins); denying all cross-origin requests."
+                            + " Set explicit origins to allow browser clients on other origins.");
         }
 
         // Explicitly configure supported HTTP methods (include OPTIONS for preflight)

