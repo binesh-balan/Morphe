@@ -863,10 +863,10 @@ if [[ "${INSTALL_BOOK_AND_ADVANCED_HTML_OPS:-false}" == "true" && "${FAT_DOCKER:
   log "issue with calibre in current version, feature currently disabled on Stirling-PDF"
 fi
 
-# Download security JAR in non-fat builds.
-if [[ "${FAT_DOCKER:-true}" != "true" && -x /scripts/download-security-jar.sh ]]; then
-  /scripts/download-security-jar.sh || true
-fi
+# MORPHE-PDF: removed. Upstream fetched Stirling-PDF-with-login.jar over the network
+# with no checksum or signature verification and symlinked it to app.jar, i.e. it
+# executed unverified remote code. The path was already unreachable in shipped images
+# (the script was not executable), and the script has been deleted from this fork.
 
 # ---------- UID/GID remap ----------
 # Remap user/group IDs to match container runtime settings.

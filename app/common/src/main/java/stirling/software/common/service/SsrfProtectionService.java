@@ -138,27 +138,42 @@ public class SsrfProtectionService {
 
             // Resolve hostname to IP address for network-based checks
             try {
-                InetAddress address = InetAddress.getByName(host);
-
-                if (config.isBlockPrivateNetworks() && isPrivateAddress(address)) {
-                    log.debug("URL blocked - private network address: {}", url);
+                // Morphe-PDF hardening: check EVERY address the name resolves to, not just
+                // the first. A host with both a public and a private A record would
+                // otherwise pass or fail depending on resolver ordering.
+                //
+                // Residual risk: this is still resolve-then-fetch. An attacker controlling
+                // DNS with a short TTL can answer with a public address here and a private
+                // one when the connection is actually made (DNS rebinding). Closing that
+                // fully requires pinning the validated address for the connection itself;
+                // until then, a default-deny egress policy is the durable control.
+                InetAddress[] addresses = InetAddress.getAllByName(host);
+                if (addresses == null || addresses.length == 0) {
+                    log.debug("URL blocked - host resolved to no addresses: {}", url);
                     return false;
                 }
 
-                if (config.isBlockLocalhost() && address.isLoopbackAddress()) {
-                    log.debug("URL blocked - localhost address: {}", url);
-                    return false;
-                }
+                for (InetAddress address : addresses) {
+                    if (config.isBlockPrivateNetworks() && isPrivateAddress(address)) {
+                        log.debug("URL blocked - private network address: {}", url);
+                        return false;
+                    }
 
-                if (config.isBlockLinkLocal() && address.isLinkLocalAddress()) {
-                    log.debug("URL blocked - link-local address: {}", url);
-                    return false;
-                }
+                    if (config.isBlockLocalhost() && address.isLoopbackAddress()) {
+                        log.debug("URL blocked - localhost address: {}", url);
+                        return false;
+                    }
 
-                if (config.isBlockCloudMetadata()
-                        && isCloudMetadataAddress(address.getHostAddress())) {
-                    log.debug("URL blocked - cloud metadata endpoint: {}", url);
-                    return false;
+                    if (config.isBlockLinkLocal() && address.isLinkLocalAddress()) {
+                        log.debug("URL blocked - link-local address: {}", url);
+                        return false;
+                    }
+
+                    if (config.isBlockCloudMetadata()
+                            && isCloudMetadataAddress(address.getHostAddress())) {
+                        log.debug("URL blocked - cloud metadata endpoint: {}", url);
+                        return false;
+                    }
                 }
 
             } catch (UnknownHostException e) {

@@ -231,13 +231,13 @@ system:
       calibre: "" # Defaults to /usr/bin/ebook-convert
       ocrmypdf: "" # Defaults to /usr/bin/ocrmypdf
       soffice: "" # Defaults to /usr/bin/soffice
-  fileUploadLimit: "" # Defaults to "". No limit when string is empty. Set a number, between 0 and 999, followed by one of the following strings to set a limit. "KB", "MB", "GB".
+  fileUploadLimit: "100MB" # MORPHE-PDF: explicit ceiling (upstream shipped "" = no limit). Format: number 0-999 followed by "KB", "MB" or "GB".
   tempFileManagement:
     baseTmpDir: "" # Defaults to java.io.tmpdir/stirling-pdf
     libreofficeDir: "" # Defaults to tempFileManagement.baseTmpDir/libreoffice
     systemTempDir: "" # Only used if cleanupSystemTemp is true
     prefix: stirling-pdf- # Prefix for temp file names
-    maxAgeHours: 24 # Maximum age in hours before temp files are cleaned up
+    maxAgeHours: 1 # MORPHE-PDF: was 24. Confidential documents should not linger a day on disk. Pair with a tmpfs mount for /tmp/stirling-pdf.
     cleanupIntervalMinutes: 30 # How often to run cleanup (in minutes)
     startupCleanup: true # Clean up old temp files on startup
     cleanupSystemTemp: false # Whether to clean broader system temp directory

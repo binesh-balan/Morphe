@@ -104,7 +104,6 @@ labels:
   - label: 'Security'
     files:
       - 'app/proprietary/src/main/java/stirling/software/proprietary/security/.*'
-      - 'scripts/download-security-jar.sh'
       - '.github/workflows/dependency-review.yml'
       - '.github/workflows/scorecards.yml'
 
@@ -134,7 +133,6 @@ labels:
       - 'Dockerfile.fat'
       - 'Dockerfile.ultra-lite'
       - 'exampleYmlFiles/.*.yml'
-      - 'scripts/download-security-jar.sh'
       - 'scripts/init.sh'
       - 'scripts/init-without-ocr.sh'
       - 'scripts/installFonts.sh'
