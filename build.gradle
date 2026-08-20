@@ -110,6 +110,15 @@ allprojects {
     group = 'stirling.software'
     version = '2.14.3'
 
+    // MORPHE-PDF: lock transitive dependency versions. Direct versions were already
+    // pinned in ext{}, but transitives resolved at build time, so builds were not
+    // reproducible and no scanner could enumerate the Java tree from source (Syft
+    // resolved 1 Maven component out of 1798; OSV and Trivy found no Java target).
+    // Generate the lock state once with:  ./gradlew resolveAndLockAll --write-locks
+    dependencyLocking {
+        lockAllConfigurations()
+    }
+
     configurations.configureEach {
         exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
     }
@@ -213,7 +222,9 @@ subprojects {
                 authentication {
                     basic(BasicAuthentication)
                 }
-                allowInsecureProtocol = true
+                // MORPHE-PDF: was true. An internal mirror must still be reached
+                // over TLS; plaintext Maven traffic is trivially injectable.
+                allowInsecureProtocol = false
             }
         }
         // Maven Central first; mirrors below are fallbacks for niche artifacts.
@@ -640,7 +651,8 @@ repositories {
             authentication {
                 basic(BasicAuthentication)
             }
-            allowInsecureProtocol = true
+            // MORPHE-PDF: was true. Internal mirrors must still use TLS.
+            allowInsecureProtocol = false
         }
     }
     mavenCentral()
@@ -813,5 +825,21 @@ tasks.register('jacocoReportFromExec', JacocoReport) {
         csv.required.set(false)
         xml.outputLocation.set(layout.projectDirectory.file("${reportProp}/jacocoTestReport.xml"))
         html.outputLocation.set(layout.projectDirectory.dir("${reportProp}/html"))
+    }
+}
+
+// MORPHE-PDF: resolves every lockable configuration so dependency lock state can be
+// written in one pass:  ./gradlew resolveAndLockAll --write-locks
+tasks.register("resolveAndLockAll") {
+    notCompatibleWithConfigurationCache("Resolves configurations at execution time")
+    doFirst {
+        if (!gradle.startParameter.writeDependencyLocks) {
+            throw new GradleException("Run this task with --write-locks")
+        }
+    }
+    doLast {
+        allprojects { p ->
+            p.configurations.findAll { it.canBeResolved }.each { it.resolve() }
+        }
     }
 }
