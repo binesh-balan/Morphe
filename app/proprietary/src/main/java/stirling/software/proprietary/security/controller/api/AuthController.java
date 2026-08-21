@@ -223,8 +223,7 @@ public class AuthController {
             // Morphe-PDF: deliver the session token as an HttpOnly cookie so page script
             // cannot read it. access_token stays in the body for the desktop client and
             // programmatic callers, which authenticate with a bearer header.
-            jwtService.addTokenToResponse(
-                    response, token, tokenExpiryMinutes(isDesktopClient));
+            jwtService.addTokenToResponse(response, token, tokenExpiryMinutes(isDesktopClient));
 
             return ResponseEntity.ok(
                     Map.of(
@@ -408,8 +407,7 @@ public class AuthController {
             log.debug("Token refreshed for user: {}", username);
 
             // Morphe-PDF: refresh the HttpOnly cookie alongside the body token.
-            jwtService.addTokenToResponse(
-                    response, newToken, tokenExpiryMinutes(isDesktopClient));
+            jwtService.addTokenToResponse(response, newToken, tokenExpiryMinutes(isDesktopClient));
 
             return ResponseEntity.ok(
                     Map.of(

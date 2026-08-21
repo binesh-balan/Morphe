@@ -29,8 +29,8 @@ public class SecurityHeadersFilter extends OncePerRequestFilter {
 
     /**
      * Default policy. {@code 'wasm-unsafe-eval'} is required by pdf.js; {@code blob:} is required
-     * for worker bootstrapping and rendered page images; {@code 'unsafe-inline'} on style-src covers
-     * React inline style attributes. Note there is no {@code 'unsafe-inline'} on script-src.
+     * for worker bootstrapping and rendered page images; {@code 'unsafe-inline'} on style-src
+     * covers React inline style attributes. Note there is no {@code 'unsafe-inline'} on script-src.
      */
     private static final String DEFAULT_CSP =
             "default-src 'self'; "
@@ -48,8 +48,10 @@ public class SecurityHeadersFilter extends OncePerRequestFilter {
                     + "form-action 'self'; "
                     + "frame-ancestors 'none'";
 
-    /** Blank means "use {@link #DEFAULT_CSP}". The default is resolved in code rather than in the
-     * placeholder so the policy string's own colons can never be parsed as placeholder defaults. */
+    /**
+     * Blank means "use {@link #DEFAULT_CSP}". The default is resolved in code rather than in the
+     * placeholder so the policy string's own colons can never be parsed as placeholder defaults.
+     */
     @Value("${morphe.security.csp.policy:}")
     private String cspPolicy;
 
