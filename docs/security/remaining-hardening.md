@@ -108,6 +108,20 @@ removed, so Actions can be re-enabled:
 gh api -X PUT repos/binesh-balan/Morphe-PDF/actions/permissions -F enabled=true
 ```
 
+### Enable GitHub's Dependency graph
+
+`dependency-review` is currently non-blocking because the action fails outright with
+*"Dependency review is not supported on this repository"* — Dependency graph is off by
+default on forks and can only be enabled in the UI
+(**Settings > Code security > Dependency graph**); there is no API for it.
+
+Dependency vulnerability coverage does not depend on this — `security-scan.yml` runs
+OSV-Scanner across every lockfile and needs no repo setting. But once Dependency graph is
+on, drop `continue-on-error` from `.github/workflows/dependency-review.yml` so a PR that
+introduces a vulnerable dependency is blocked at review time.
+
+Enabling it also unlocks Dependabot security updates, currently `disabled`.
+
 ## Not yet started
 
 - **Entra ID wiring.** OIDC and SAML2 are both supported by the application; nothing is

@@ -7,6 +7,7 @@ import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -178,25 +179,29 @@ class WebMvcConfigTest {
             verify(registry).addMapping("/**");
         }
 
+        // Morphe-PDF: these two previously asserted that an unconfigured instance registered
+        // allowedOriginPatterns("*") with allowCredentials(true) - i.e. that any website could
+        // make credentialed cross-origin requests. That default now fails closed, so the
+        // assertions are inverted: no CORS mapping is registered at all.
         @Test
-        @DisplayName("default branch allows all origins when nothing configured")
-        void defaultBranchAllowsAll() {
+        @DisplayName("default branch registers no CORS mapping when nothing configured")
+        void defaultBranchDeniesAll() {
             when(applicationProperties.getSystem()).thenReturn(system);
             when(system.getCorsAllowedOrigins()).thenReturn(List.of());
 
             config.addCorsMappings(registry);
 
-            verify(registry).addMapping("/**");
+            verify(registry, never()).addMapping(anyString());
         }
 
         @Test
-        @DisplayName("default branch also triggers when system is null")
+        @DisplayName("default branch also denies when system is null")
         void defaultBranchWhenSystemNull() {
             lenient().when(applicationProperties.getSystem()).thenReturn(null);
 
             config.addCorsMappings(registry);
 
-            verify(registry).addMapping("/**");
+            verify(registry, never()).addMapping(anyString());
         }
     }
 }
