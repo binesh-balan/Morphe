@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, Stack } from "@mantine/core";
 import { Button } from "@app/ui/Button";
+import { getToken, setToken, clearToken, hasSession } from "@app/services/authTransport";
 
 interface ErrorBoundaryState {
   hasError: boolean;
@@ -54,7 +55,7 @@ export default class ErrorBoundary extends React.Component<
 
     // Check localStorage for auth state
     try {
-      const jwt = localStorage.getItem("stirling_jwt");
+      const jwt = getToken();
       console.error("Auth state:", {
         hasJWT: !!jwt,
         jwtLength: jwt?.length || 0,

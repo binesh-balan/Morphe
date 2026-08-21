@@ -174,6 +174,19 @@ public class CustomOAuth2AuthenticationSuccessHandler
                         log.debug("Issued WEB OAuth2 token for user '{}'", username);
                     }
 
+                    // Morphe-PDF: also deliver the token as an HttpOnly cookie so browser
+                    // clients need not keep it in script-readable storage. The URL fragment
+                    // is retained for the desktop client; fragments are not sent to servers
+                    // or written to proxy logs, though they do enter browser history.
+                    jwtService.addTokenToResponse(
+                            response,
+                            jwt,
+                            isDesktopClient
+                                    ? DesktopClientUtils.getDesktopTokenExpiryMinutes(
+                                            applicationProperties)
+                                    : DesktopClientUtils.getWebTokenExpiryMinutes(
+                                            applicationProperties));
+
                     // Build context-aware redirect URL based on the original request
                     String redirectUrl =
                             buildContextAwareRedirectUrl(request, response, contextPath, jwt);

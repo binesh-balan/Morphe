@@ -4,6 +4,7 @@ import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.Date;
@@ -27,7 +28,12 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.SignatureException;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseCookie;
+
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,6 +49,13 @@ import tools.jackson.databind.ObjectMapper;
 @Slf4j
 @Service
 public class JwtService implements JwtServiceInterface {
+
+    /**
+     * Whether the session cookie carries the Secure attribute. Overridable only because a
+     * plain-HTTP local dev server cannot receive a Secure cookie; keep it true everywhere else.
+     */
+    @Value("${morphe.security.jwt.cookie.secure:true}")
+    private boolean cookieSecure = true;
 
     private final ObjectMapper objectMapper;
     private final KeyPersistenceServiceInterface keyPersistenceService;
@@ -339,14 +352,57 @@ public class JwtService implements JwtServiceInterface {
 
     @Override
     public String extractToken(HttpServletRequest request) {
-        // Extract from Authorization header Bearer token
+        // Morphe-PDF: prefer the HttpOnly cookie (browser clients), then fall back to the
+        // Authorization header so the desktop app and programmatic API callers keep working.
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (JwtConstants.JWT_COOKIE_NAME.equals(cookie.getName())) {
+                    String value = cookie.getValue();
+                    if (value != null && !value.isBlank()) {
+                        return value;
+                    }
+                }
+            }
+        }
+
         String authHeader = request.getHeader("Authorization");
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            String token = authHeader.substring(7); // Remove "Bearer " prefix
-            return token;
+            return authHeader.substring(7); // Remove "Bearer " prefix
         }
 
         return null;
+    }
+
+    @Override
+    public void addTokenToResponse(
+            HttpServletResponse response, String token, int expiryMinutes) {
+        response.addHeader(
+                "Set-Cookie", buildSessionCookie(token, Duration.ofMinutes(expiryMinutes)));
+    }
+
+    @Override
+    public void clearTokenCookie(HttpServletResponse response) {
+        response.addHeader("Set-Cookie", buildSessionCookie("", Duration.ZERO));
+    }
+
+    /**
+     * Build the session cookie.
+     *
+     * <p>SameSite is Lax rather than Strict deliberately: Strict omits the cookie on the
+     * cross-site navigation back from an identity provider, so the first request after an
+     * Entra ID or SAML redirect would arrive unauthenticated and loop the login. Lax still
+     * withholds the cookie from cross-site POST and XHR, which is the property that matters.
+     */
+    private String buildSessionCookie(String value, Duration maxAge) {
+        return ResponseCookie.from(JwtConstants.JWT_COOKIE_NAME, value)
+                .httpOnly(true)
+                .secure(cookieSecure)
+                .sameSite("Lax")
+                .path("/")
+                .maxAge(maxAge)
+                .build()
+                .toString();
     }
 
     @Override

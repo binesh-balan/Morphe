@@ -220,6 +220,12 @@ public class AuthController {
                     ip,
                     isDesktopClient);
 
+            // Morphe-PDF: deliver the session token as an HttpOnly cookie so page script
+            // cannot read it. access_token stays in the body for the desktop client and
+            // programmatic callers, which authenticate with a bearer header.
+            jwtService.addTokenToResponse(
+                    response, token, tokenExpiryMinutes(isDesktopClient));
+
             return ResponseEntity.ok(
                     Map.of(
                             "user", buildUserResponse(user),
@@ -295,6 +301,10 @@ public class AuthController {
             String username = jwtService.extractUsernameFromRequestAllowExpired(request);
             SecurityContextHolder.clearContext();
             aiUserDataService.purgeUserDocuments(username);
+
+            // Morphe-PDF: expire the cookie server-side. Clearing client state alone would
+            // leave a still-valid session cookie in the browser.
+            jwtService.clearTokenCookie(response);
 
             log.debug("User logged out successfully (username={})", username);
 
@@ -396,6 +406,10 @@ public class AuthController {
             // This prevents reusing the same expired token indefinitely
 
             log.debug("Token refreshed for user: {}", username);
+
+            // Morphe-PDF: refresh the HttpOnly cookie alongside the body token.
+            jwtService.addTokenToResponse(
+                    response, newToken, tokenExpiryMinutes(isDesktopClient));
 
             return ResponseEntity.ok(
                     Map.of(
@@ -657,6 +671,13 @@ public class AuthController {
         userMap.put("user_metadata", userMetadata);
 
         return userMap;
+    }
+
+    /** Cookie lifetime in minutes, matching the expiry the token itself was minted with. */
+    private int tokenExpiryMinutes(boolean isDesktopClient) {
+        return isDesktopClient
+                ? DesktopClientUtils.getDesktopTokenExpiryMinutes(applicationProperties)
+                : DesktopClientUtils.getWebTokenExpiryMinutes(applicationProperties);
     }
 
     private long getTokenExpirySeconds() {

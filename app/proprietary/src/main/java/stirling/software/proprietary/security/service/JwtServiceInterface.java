@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.security.core.Authentication;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public interface JwtServiceInterface {
 
@@ -111,5 +112,23 @@ public interface JwtServiceInterface {
      *
      * @return true if JWT is enabled, false otherwise
      */
+    /**
+     * Write the session JWT to the response as an HttpOnly cookie.
+     *
+     * @param response the response to add the cookie to
+     * @param token the signed JWT
+     * @param expiryMinutes cookie lifetime in minutes; must match the token's own expiry
+     */
+    void addTokenToResponse(HttpServletResponse response, String token, int expiryMinutes);
+
+    /**
+     * Expire the session JWT cookie server-side.
+     *
+     * <p>Clearing client state alone would leave a still-valid cookie in the browser.
+     *
+     * @param response the response to add the expiring cookie to
+     */
+    void clearTokenCookie(HttpServletResponse response);
+
     boolean isJwtEnabled();
 }

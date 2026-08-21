@@ -18,6 +18,7 @@ import { useAppConfig } from "@app/contexts/AppConfigContext";
 import { useAuth } from "@app/auth/UseSession";
 import { withBasePath } from "@app/constants/app";
 import { Z_INDEX_SIGN_IN_MODAL } from "@app/styles/zIndex";
+import { getToken, setToken, clearToken, hasSession } from "@app/services/authTransport";
 
 const ACCEPTED_STORAGE_KEY = "loginAgreementAccepted";
 
@@ -30,7 +31,7 @@ interface DisclaimerResponse {
 
 function readJwt(): string | null {
   try {
-    return localStorage.getItem("stirling_jwt");
+    return hasSession() ? "1" : null;
   } catch {
     return null;
   }
