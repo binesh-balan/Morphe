@@ -115,15 +115,20 @@ class SecurityConfigurationTest {
             assertThat(firewall).isInstanceOf(StrictHttpFirewall.class);
         }
 
+        // Morphe-PDF: this previously asserted that an unconfigured instance returns
+        // allowedOriginPatterns("*") with allowCredentials(true) - i.e. that any website
+        // could make credentialed cross-origin requests to it. That default now fails
+        // closed, so the assertion is inverted: no origin is permitted until one is
+        // explicitly configured.
         @Test
-        @DisplayName("corsConfigurationSource defaults to wildcard when nothing configured")
-        void corsDefaultsToWildcard() {
+        @DisplayName("corsConfigurationSource permits no origin when nothing configured")
+        void corsDefaultsToDeny() {
             CorsConfigurationSource source = newConfig(true).corsConfigurationSource();
             assertThat(source).isInstanceOf(UrlBasedCorsConfigurationSource.class);
 
             CorsConfiguration cfg = configFor(source);
-            assertThat(cfg.getAllowedOriginPatterns()).containsExactly("*");
-            assertThat(cfg.getAllowCredentials()).isTrue();
+            assertThat(cfg.getAllowedOriginPatterns()).isNullOrEmpty();
+            assertThat(cfg.getAllowedOrigins()).isNullOrEmpty();
             assertThat(cfg.getAllowedMethods()).contains("OPTIONS");
         }
 
