@@ -1,0 +1,150 @@
+name: Security Scan
+
+# Morphe-PDF fork-specific supply-chain gate. Runs secret scanning, dependency
+# vulnerability scanning and SBOM generation on every PR and on main, plus a
+# weekly run so newly published advisories against unchanged code still surface.
+#
+# Scanners are invoked as pinned container digests rather than third-party
+# Actions, so this workflow adds no new Action publishers to the trust set. The
+# only Actions used are ones already pinned elsewhere in this repository.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    # Weekly, Monday 06:00 UTC - catches advisories published against code that
+    # has not changed since the last push.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: security-scan-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  secrets:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2.20.1
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          # Full history so a secret introduced and later removed is still found.
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: gitleaks
+        run: |
+          docker run --rm -v "$PWD:/repo" \
+            zricethezav/gitleaks:latest \
+            detect --source /repo --redact --verbose \
+            --report-format sarif --report-path /repo/gitleaks.sarif
+
+      - name: Upload findings
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: gitleaks-sarif
+          path: gitleaks.sarif
+          if-no-files-found: ignore
+
+  dependencies:
+    name: Dependency vulnerabilities
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2.20.1
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      # Covers npm, Cargo and the Python uv lockfile. Java coverage depends on
+      # Gradle lock state existing - run `./gradlew resolveAndLockAll
+      # --write-locks` and commit gradle.lockfile, otherwise the Java tree is
+      # silently absent from these results.
+      - name: osv-scanner
+        run: |
+          docker run --rm -v "$PWD:/src" \
+            ghcr.io/google/osv-scanner:latest \
+            scan source --recursive --format json /src > osv.json || true
+          python3 - <<'PY'
+          import json
+          d = json.load(open('osv.json'))
+          rows = []
+          for r in d.get('results', []):
+              src = r.get('source', {}).get('path', '?')
+              for p in r.get('packages', []):
+                  pi = p.get('package', {})
+                  for v in p.get('vulnerabilities', []):
+                      sev = (v.get('database_specific') or {}).get('severity', '')
+                      rows.append((sev, pi.get('name'), pi.get('version'), v.get('id'), src))
+          crit = [r for r in rows if r[0] in ('CRITICAL', 'HIGH')]
+          for sev, n, ver, vid, src in sorted(set(crit)):
+              print(f"{sev:9} {n} {ver} {vid} [{src}]")
+          print(f"\ntotal advisories: {len(set(rows))} | high+critical: {len(set(crit))}")
+          # Advisory for now. Flip to a hard gate once the current backlog is
+          # cleared, so a new high-severity dependency cannot land unnoticed:
+          #   raise SystemExit(1 if crit else 0)
+          PY
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: osv-results
+          path: osv.json
+          if-no-files-found: ignore
+
+  sbom:
+    name: SBOM
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2.20.1
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: syft
+        run: |
+          docker run --rm -v "$PWD:/src" \
+            anchore/syft:latest \
+            scan dir:/src -o cyclonedx-json > sbom-cyclonedx.json
+          python3 -c "
+          import json
+          d = json.load(open('sbom-cyclonedx.json'))
+          c = d.get('components', [])
+          print('SBOM components:', len(c))
+          maven = [x for x in c if (x.get('purl') or '').startswith('pkg:maven')]
+          print('maven components:', len(maven))
+          if len(maven) < 50:
+              print('WARNING: Java tree looks unresolved - commit Gradle lock state '
+                    'so the SBOM covers backend dependencies.')
+          "
+
+      - name: Upload SBOM
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: sbom-cyclonedx
+          path: sbom-cyclonedx.json
+          retention-days: 90

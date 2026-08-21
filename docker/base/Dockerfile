@@ -273,6 +273,9 @@ RUN if [ "${CALIBRE_STRIP_WEBENGINE}" = "true" ]; then \
 FROM ubuntu:noble@sha256:561618e2c15bf2397621dd04f96926663a3b5616c189cf7e38db7e82f5c538ea AS gs-build
 ARG TARGETPLATFORM
 ARG GS_VERSION=10.06.0
+# MORPHE-PDF: integrity pin, from the SHA512SUMS asset published with the gs10060
+# release. Update together with GS_VERSION.
+ARG GS_SHA512=21ba2110693cfb98126f06daff410b0a94ae9b1690b867a383aa82b56a817ffd237044e024c2cf26daa6efe4d5cf8903db8e637c4629f0c8a0eb325a30fdc0cb
 
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/tmp/gs-build,id=gs-build-${TARGETPLATFORM:-local} \
@@ -281,7 +284,10 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     GS_TAG="gs$(printf '%s' "${GS_VERSION}" | tr -d '.')" && \
     cd /tmp/gs-build && \
     rm -rf ghostscript-* && \
-    (test -d "ghostscript-${GS_VERSION}" || curl -fsSL --max-time 300 --retry 3 --retry-delay 5 "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/${GS_TAG}/ghostscript-${GS_VERSION}.tar.gz" | tar xz) && \
+    (test -d "ghostscript-${GS_VERSION}" || { \
+      curl -fsSL --max-time 300 --retry 3 --retry-delay 5 -o dl.tgz "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/${GS_TAG}/ghostscript-${GS_VERSION}.tar.gz" && \
+      echo "${GS_SHA512}  dl.tgz" | sha512sum -c - && \
+      tar xzf dl.tgz && rm -f dl.tgz; }) && \
     cd "ghostscript-${GS_VERSION}" && \
     ./configure \
       --prefix=/usr/local \
@@ -297,7 +303,12 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 FROM ubuntu:noble@sha256:561618e2c15bf2397621dd04f96926663a3b5616c189cf7e38db7e82f5c538ea AS pdf-tools-build
 ARG TARGETPLATFORM
 ARG QPDF_VERSION=12.3.2
+# MORPHE-PDF: integrity pin, from the PGP-signed qpdf sha256 release asset.
+ARG QPDF_SHA256=6cba2f9f2cd887d905faeb99e0e51a307b217920d1bbf3e9cfbb2e8178a2deda
 ARG IM_VERSION=7.1.2-13
+# MORPHE-PDF: integrity pin, computed from the tag archive. NOTE: GitHub generates
+# /archive/ tarballs on demand; recompute if GitHub ever changes its compression.
+ARG IM_SHA256=3617bffe497690ffe5b731227d026db1150e138ddb129481a1e202442e558512
 
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/tmp/pdf-tools-build,id=pdf-tools-${TARGETPLATFORM:-local} \
@@ -308,14 +319,20 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     cd /tmp/pdf-tools-build && \
     rm -rf qpdf-* ImageMagick-* && \
     # Build QPDF
-    (test -d "qpdf-${QPDF_VERSION}" || curl -fsSL --max-time 300 --retry 3 --retry-delay 5 "https://github.com/qpdf/qpdf/releases/download/v${QPDF_VERSION}/qpdf-${QPDF_VERSION}.tar.gz" | tar xz) && \
+    (test -d "qpdf-${QPDF_VERSION}" || { \
+      curl -fsSL --max-time 300 --retry 3 --retry-delay 5 -o dl.tgz "https://github.com/qpdf/qpdf/releases/download/v${QPDF_VERSION}/qpdf-${QPDF_VERSION}.tar.gz" && \
+      echo "${QPDF_SHA256}  dl.tgz" | sha256sum -c - && \
+      tar xzf dl.tgz && rm -f dl.tgz; }) && \
     cd "qpdf-${QPDF_VERSION}" && \
     cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DALLOW_CRYPTO_OPENSSL=ON -DDEFAULT_CRYPTO=openssl && \
     cmake --build build --parallel "$(nproc)" && \
     cmake --install build --strip && \
     cd .. && \
     # Build ImageMagick 7
-    (test -d "ImageMagick-${IM_VERSION}" || curl -fsSL --max-time 300 --retry 3 --retry-delay 5 "https://github.com/ImageMagick/ImageMagick/archive/refs/tags/${IM_VERSION}.tar.gz" | tar xz) && \
+    (test -d "ImageMagick-${IM_VERSION}" || { \
+      curl -fsSL --max-time 300 --retry 3 --retry-delay 5 -o dl.tgz "https://github.com/ImageMagick/ImageMagick/archive/refs/tags/${IM_VERSION}.tar.gz" && \
+      echo "${IM_SHA256}  dl.tgz" | sha256sum -c - && \
+      tar xzf dl.tgz && rm -f dl.tgz; }) && \
     cd "ImageMagick-${IM_VERSION}" && \
     ./configure --prefix=/usr/local --with-modules --with-perl=no --with-magick-plus-plus=no --with-quantum-depth=16 --disable-static --enable-shared && \
     make -j"$(nproc)" && \

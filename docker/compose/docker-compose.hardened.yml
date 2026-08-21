@@ -1,0 +1,146 @@
+# Morphe-PDF - hardened deployment for handling confidential documents.
+#
+# The other compose files in this directory are demo/CI configurations. Notably
+# docker-compose.yml sets SECURITY_ENABLELOGIN=false and SYSTEM_GOOGLEVISIBILITY=true;
+# it exists to run a public demo site and must not be used as a deployment baseline.
+#
+# This file assumes Morphe-PDF sits behind a reverse proxy that terminates TLS.
+# The container port is published on loopback only, so nothing reaches it directly.
+#
+# ---------------------------------------------------------------------------
+# Before first start
+# ---------------------------------------------------------------------------
+#   1. Set SYSTEM_CORSALLOWEDORIGINS below to the exact origin(s) users browse
+#      from. CORS now fails closed - leaving it unset denies cross-origin
+#      requests, which is the intended behaviour.
+#   2. Set SYSTEM_BACKENDURL / SYSTEM_FRONTENDURL to your real external URL.
+#      SSO callbacks will not work until these are correct.
+#   3. Configure your identity provider (Entra ID via OIDC or SAML2) and enforce
+#      MFA there. Morphe-PDF delegates MFA to the IdP; it has none of its own.
+#
+# ---------------------------------------------------------------------------
+# Why the container runs as uid 1000
+# ---------------------------------------------------------------------------
+# The entrypoint normally starts as root and drops to stirlingpdfuser via
+# setpriv, which requires CAP_SETUID/CAP_SETGID/CAP_CHOWN. By starting as 1000
+# directly we take the entrypoint's non-root path (it execs the JVM straight
+# away) and can therefore drop *all* capabilities. Named volumes are seeded with
+# the image's directory ownership, so /configs and /logs come up writable. If you
+# switch to bind mounts, chown them to 1000:1000 on the host first.
+
+services:
+  morphe-pdf:
+    build:
+      context: ../..
+      dockerfile: docker/embedded/Dockerfile
+    image: morphe-pdf:hardened
+    container_name: morphe-pdf
+    restart: unless-stopped
+
+    user: "1000:1000"
+
+    security_opt:
+      - no-new-privileges:true
+      # Ships with Docker's default seccomp profile. Once you have a working
+      # deployment, capture a tighter profile for the document parsers and
+      # reference it here as: seccomp=./seccomp-morphe.json
+    cap_drop:
+      - ALL
+
+    read_only: true
+
+    # Every writable path the entrypoint needs. Document processing happens in
+    # /tmp, so it is memory-backed: files never touch persistent disk and vanish
+    # on container stop. Size it above your largest concurrent working set.
+    tmpfs:
+      - /tmp:mode=1777,size=2g
+      - /home/stirlingpdfuser:mode=0700,size=64m
+      - /customFiles:mode=0755,size=16m
+      - /pipeline:mode=0755,size=64m
+      - /storage:mode=0755,size=64m
+
+    volumes:
+      - morphe-configs:/configs
+      - morphe-logs:/logs
+      # Custom OCR language data, if you need languages beyond the bundled set:
+      # - ./tessdata:/usr/share/tessdata:ro
+
+    environment:
+      # --- authentication -------------------------------------------------
+      SECURITY_ENABLELOGIN: "true"
+
+      # --- CORS: no default. Set your real origin(s) or cross-origin is denied.
+      SYSTEM_CORSALLOWEDORIGINS: "https://pdf.example.com"
+
+      # --- external URLs (required for SSO callbacks) ---------------------
+      SYSTEM_BACKENDURL: "https://pdf.example.com"
+      SYSTEM_FRONTENDURL: "https://pdf.example.com"
+
+      # --- privacy: no telemetry, no update checks, no search indexing ----
+      SYSTEM_ENABLEANALYTICS: "false"
+      SYSTEM_SHOWUPDATE: "false"
+      SYSTEM_SHOWUPDATEONLYADMIN: "true"
+      SYSTEM_GOOGLEVISIBILITY: "false"
+
+      # --- keep known-dangerous features off ------------------------------
+      # Upstream marks URL-to-PDF as "INTERNAL ONLY, known security issues".
+      SYSTEM_ENABLEURLTOPDF: "false"
+      SYSTEM_DISABLESANITIZE: "false"
+
+      # --- no outbound calls driven by document content -------------------
+      # AIA/OCSP/CRL fetching and the Adobe/EU trust lists are all opt-in
+      # upstream; pinned off here so a config drift cannot switch them on.
+      SECURITY_VALIDATION_ALLOWAIA: "false"
+      SECURITY_VALIDATION_TRUST_USEAATL: "false"
+      SECURITY_VALIDATION_TRUST_USEEUTL: "false"
+
+      # --- limits ----------------------------------------------------------
+      SYSTEM_MAXFILESIZE: "100"
+      SESSION_COOKIE_SECURE: "true"
+
+      SYSTEM_DEFAULTLOCALE: en-GB
+
+    # Loopback only: reach it through the reverse proxy, never directly.
+    ports:
+      - "127.0.0.1:8080:8080"
+
+    # Bound resources so a decompression bomb or a runaway parser cannot take
+    # the host with it. Tune to your workload.
+    mem_limit: 4g
+    memswap_limit: 4g
+    cpus: 2.0
+    pids_limit: 512
+
+    # Cap log growth. Note that Morphe-PDF logs uploaded filenames at INFO, so
+    # treat these logs as confidential and keep retention short.
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -fsS http://localhost:8080/api/v1/info/status | grep -q 'UP'",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
+
+    networks:
+      - morphe-internal
+
+networks:
+  morphe-internal:
+    driver: bridge
+    # Egress belongs on your network layer, not here: Docker's `internal: true`
+    # would also block the reverse proxy from reaching this service. Enforce a
+    # default-deny outbound policy with an explicit allowlist on the host
+    # firewall or your CNI, and verify it with a packet capture before go-live.
+
+volumes:
+  morphe-configs:
+  morphe-logs:

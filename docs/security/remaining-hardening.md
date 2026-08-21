@@ -1,0 +1,124 @@
+# Remaining hardening
+
+What is still outstanding after the P0 and P1/P2 remediation work, why, and what closing
+each one requires. Everything here is deliberate — nothing was silently skipped.
+
+## Requires a build or a running instance
+
+These cannot be done or verified in a static environment.
+
+### Generate Gradle lock state
+
+`dependencyLocking` is enabled in `build.gradle`, but no lock state is committed yet, so
+Gradle still resolves transitives at build time. Until this is done, **no scanner can see
+the Java dependency tree** — Syft resolved 1 Maven component out of 1798, and OSV-Scanner
+and Trivy both detected no Java target at all. The "Java dependencies clean" result in the
+assessment therefore covers direct dependencies only.
+
+```bash
+./gradlew resolveAndLockAll --write-locks
+git add '**/gradle.lockfile' && git commit -m "build: commit Gradle dependency lock state"
+```
+
+Re-run and commit whenever a dependency changes. The `sbom` job in `security-scan.yml`
+warns if the SBOM comes back with fewer than 50 Maven components.
+
+### Validate the Content-Security-Policy
+
+`SecurityHeadersFilter` ships a strict default policy that has never been exercised against
+a browser. Run with `morphe.security.csp.report-only=true`, load every tool page, confirm
+the console reports no violations, then set it back to `false`. Swagger UI is the most
+likely thing to trip it, since `script-src` carries no `'unsafe-inline'`.
+
+### Runtime network and process observation
+
+Phases 18–19 of the assessment were never run. The air-gap conclusion rests on static
+analysis: every runtime outbound call is behind a flag that is off by default, and the
+container entrypoint contains no network calls. Confirm it empirically — run the built
+image on an isolated network with egress denied, exercise the tools, and capture traffic.
+
+### Pin the Calibre download
+
+`docker/base/Dockerfile` verifies Ghostscript (sha512), QPDF (sha256) and ImageMagick
+(sha256), but Calibre is still fetched unverified — its published checksum could not be
+retrieved when the pins were added. Calibre ships per-architecture, so this needs two
+values. To close it:
+
+```bash
+curl -fsSLO https://download.calibre-ebook.com/9.4.0/calibre-9.4.0-x86_64.txz
+sha256sum calibre-9.4.0-x86_64.txz     # repeat for the arm64 asset
+```
+
+Then add `CALIBRE_SHA256_X86_64` / `CALIBRE_SHA256_ARM64` build args and a `sha256sum -c`
+step, matching the pattern already used for the other three. Prefer verifying Calibre's
+GPG signature if you can establish the signing key out of band.
+
+Worth checking first whether you need Calibre at all — the entrypoint currently logs
+`"issue with calibre in current version, feature currently disabled"`, so the advanced
+HTML/ebook path it supports may be dead weight. Dropping it removes a large parser from
+the attack surface entirely.
+
+## Cannot be fixed upstream yet
+
+### `extract-zip` 2.0.1 — GHSA-jmr9-qjv8-65gv (High)
+
+Symlink path traversal. **2.0.1 is the latest published version — no fix exists.** Reached
+only through `@puppeteer/browsers`, a development dependency; Trivy's production scan does
+not report it. It never ships. Re-check when upstream publishes a fix.
+
+### `fast-uri` 3.1.4 — GHSA-7p8r-x3mc-p8w7 (High)
+
+Host confusion via backslash authority. Fixed in 4.x, but it is pulled in as `^3.0.1` by
+`table` → `ajv` (ESLint tooling). Forcing 4.x through an `overrides` entry crosses a major
+version with API changes, to patch a dev-only lint dependency. Not worth the breakage.
+Re-check when `ajv` widens its range.
+
+Both are dev-only. The two advisories that reached production (`nanoid` CVE-2026-67213 and
+`react-router` GHSA-qwww-vcr4-c8h2) are fixed.
+
+## Deliberate design decisions
+
+### P0 #3 — session JWT still in `localStorage`
+
+The largest open item. Full plan in
+[`P0-3-jwt-cookie-migration.md`](./P0-3-jwt-cookie-migration.md). Deferred because it needs
+a working build and real SSO round trips to verify. Mitigated but not closed: the PDF
+JavaScript execution path (the one known route to the token) is gone, and CSP restricts
+`connect-src` to `'self'`.
+
+### Cross-Origin-Opener-Policy is not set
+
+`same-origin` severs `window.opener` and breaks OAuth/SSO popup flows. Set it at the
+reverse proxy only after confirming your identity provider uses full-page redirects rather
+than a popup.
+
+### Committed test certificates and H2 fixtures are kept
+
+The assessment suggested deleting them. That was over-reach — they are throwaway fixtures
+under `src/test/resources` that real tests depend on, they are referenced only from `.spec`
+and `.test` files, and removing them breaks the suite for no security gain.
+
+### GitHub Actions are currently disabled on the fork
+
+Disabled to stop the inherited `push-docker.yml` publishing a container image to ghcr.io on
+push to `main`. That workflow and 16 other publish/deploy/sync workflows have since been
+removed, so Actions can be re-enabled:
+
+```bash
+gh api -X PUT repos/binesh-balan/Morphe-PDF/actions/permissions -F enabled=true
+```
+
+## Not yet started
+
+- **Entra ID wiring.** OIDC and SAML2 are both supported by the application; nothing is
+  configured. Enforce MFA at the IdP — Morphe-PDF has none of its own.
+- **Parser sandboxing.** Ghostscript, LibreOffice, ImageMagick and Calibre are the largest
+  inherent attack surface, and it is inherent rather than a code defect. Run them in a
+  network-less sidecar with a tailored seccomp profile.
+- **Image signing and admission control.** Sign built images (cosign) and require valid
+  signatures at deploy time.
+- **Branch protection** on `main`, requiring the `security-scan` and `all-checks-passed`
+  gates.
+- **Turn the dependency gate hard.** `security-scan.yml` currently reports high/critical
+  advisories without failing. Once the two dev-only advisories above are resolved or
+  formally accepted, uncomment the `raise SystemExit` so new ones cannot land unnoticed.
