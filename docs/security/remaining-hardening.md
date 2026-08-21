@@ -108,6 +108,20 @@ removed, so Actions can be re-enabled:
 gh api -X PUT repos/binesh-balan/Morphe-PDF/actions/permissions -F enabled=true
 ```
 
+### Enable GitHub's Dependency graph
+
+`dependency-review` is currently non-blocking because the action fails outright with
+*"Dependency review is not supported on this repository"* — Dependency graph is off by
+default on forks and can only be enabled in the UI
+(**Settings > Code security > Dependency graph**); there is no API for it.
+
+Dependency vulnerability coverage does not depend on this — `security-scan.yml` runs
+OSV-Scanner across every lockfile and needs no repo setting. But once Dependency graph is
+on, drop `continue-on-error` from `.github/workflows/dependency-review.yml` so a PR that
+introduces a vulnerable dependency is blocked at review time.
+
+Enabling it also unlocks Dependabot security updates, currently `disabled`.
+
 ## Not yet started
 
 - **Entra ID wiring.** OIDC and SAML2 are both supported by the application; nothing is
@@ -119,6 +133,12 @@ gh api -X PUT repos/binesh-balan/Morphe-PDF/actions/permissions -F enabled=true
   signatures at deploy time.
 - **Branch protection** on `main`, requiring the `security-scan` and `all-checks-passed`
   gates.
+- **Make the secret-scan gate blocking.** `security-scan.yml` runs gitleaks with
+  `--exit-code 0`, so it reports without failing. A full-history scan surfaces ~84 findings,
+  all of the false-positive classes verified during the assessment (interactive
+  "enter the password:" prompts, PostHog's public `phc_` key, test fixtures) — failing every
+  run would train people to ignore the job. Generate a baseline of the accepted findings,
+  commit it, then add `--baseline-path` with `--exit-code 1` so only *new* secrets fail.
 - **Turn the dependency gate hard.** `security-scan.yml` currently reports high/critical
   advisories without failing. Once the two dev-only advisories above are resolved or
   formally accepted, uncomment the `raise SystemExit` so new ones cannot land unnoticed.

@@ -16,6 +16,8 @@ import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -27,9 +29,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.SignatureException;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseCookie;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -375,8 +374,7 @@ public class JwtService implements JwtServiceInterface {
     }
 
     @Override
-    public void addTokenToResponse(
-            HttpServletResponse response, String token, int expiryMinutes) {
+    public void addTokenToResponse(HttpServletResponse response, String token, int expiryMinutes) {
         response.addHeader(
                 "Set-Cookie", buildSessionCookie(token, Duration.ofMinutes(expiryMinutes)));
     }
@@ -389,10 +387,10 @@ public class JwtService implements JwtServiceInterface {
     /**
      * Build the session cookie.
      *
-     * <p>SameSite is Lax rather than Strict deliberately: Strict omits the cookie on the
-     * cross-site navigation back from an identity provider, so the first request after an
-     * Entra ID or SAML redirect would arrive unauthenticated and loop the login. Lax still
-     * withholds the cookie from cross-site POST and XHR, which is the property that matters.
+     * <p>SameSite is Lax rather than Strict deliberately: Strict omits the cookie on the cross-site
+     * navigation back from an identity provider, so the first request after an Entra ID or SAML
+     * redirect would arrive unauthenticated and loop the login. Lax still withholds the cookie from
+     * cross-site POST and XHR, which is the property that matters.
      */
     private String buildSessionCookie(String value, Duration maxAge) {
         return ResponseCookie.from(JwtConstants.JWT_COOKIE_NAME, value)

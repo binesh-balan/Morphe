@@ -40,10 +40,10 @@ public final class JwtConstants {
     /**
      * Name of the HttpOnly cookie carrying the session JWT.
      *
-     * <p>Morphe-PDF: the token was previously held in browser localStorage, where any script
-     * in the page origin could read it. It is now delivered as an HttpOnly cookie so script
-     * cannot reach it. Bearer-token authentication remains supported for the desktop client
-     * and programmatic API callers.
+     * <p>Morphe-PDF: the token was previously held in browser localStorage, where any script in the
+     * page origin could read it. It is now delivered as an HttpOnly cookie so script cannot reach
+     * it. Bearer-token authentication remains supported for the desktop client and programmatic API
+     * callers.
      */
     public static final String JWT_COOKIE_NAME = "stirling_jwt";
 

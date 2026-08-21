@@ -61,8 +61,7 @@ public class CustomAuthenticationSuccessHandler
             // Morphe-PDF: upstream generated this token and then discarded it, leaving form
             // login to rely on the servlet session alone. Deliver it as an HttpOnly cookie so
             // the JWT filter chain authenticates the same way it does for API and SSO logins.
-            jwtService.addTokenToResponse(
-                    response, jwt, JwtConstants.DEFAULT_TOKEN_EXPIRY_MINUTES);
+            jwtService.addTokenToResponse(response, jwt, JwtConstants.DEFAULT_TOKEN_EXPIRY_MINUTES);
             log.debug("JWT generated for user: {}", userName);
 
             getRedirectStrategy().sendRedirect(request, response, "/");
