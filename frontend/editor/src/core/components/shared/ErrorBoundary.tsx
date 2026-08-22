@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, Stack } from "@mantine/core";
 import { Button } from "@app/ui/Button";
-import { getToken, setToken, clearToken, hasSession } from "@app/services/authTransport";
+import { getToken } from "@app/services/authTransport";
 
 interface ErrorBoundaryState {
   hasError: boolean;

@@ -28,6 +28,9 @@ async function setUpAdminWithAudit(
       "stirling_jwt",
       "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiJ9.signature",
     );
+    // Morphe-PDF: web builds default to cookie mode, where the JWT is an HttpOnly
+    // cookie the page cannot set. hasSession() reads this marker instead.
+    localStorage.setItem("stirling_session", "1");
   });
   await mockAppApis(page, {
     enableLogin: true,

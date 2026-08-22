@@ -96,11 +96,12 @@ Nothing below is verifiable by inspection. Run all of it.
 9. **With `morphe.security.csrf.enabled=true`:** a cross-site POST without `X-XSRF-TOKEN` is
    rejected; the app's own requests still succeed; SAML login still completes; API-key callers
    still work.
-10. **Existing suites.** `springAuthClient.test.ts`, `api-keys-ui.spec.ts`, and
-    `core/tests/helpers/stub-test-base.ts` — line 72 seeds `stirling_jwt` directly to
-    authenticate. That no longer authenticates a web build in cookie mode; the helper needs
-    to either set the `stirling_session` marker and a real cookie, or force
-    `VITE_AUTH_COOKIE_MODE=false` for stubbed runs. **Expect this to fail until updated.**
+10. **Existing suites — fixed.** The stubbed Playwright suites seeded `stirling_jwt` into
+    `localStorage` to authenticate, which no longer works in cookie mode. Every seeding site
+    now also sets the `stirling_session` marker that `hasSession()` reads:
+    `core/tests/helpers/stub-test-base.ts` plus `audit-log-ui`, `license-states`,
+    `first-login-modal` and `api-keys-ui`. That is sufficient for the stubbed suite because
+    MSW mocks every backend call; `stirling_jwt` is retained for desktop/bearer mode.
 
 ## Rollback
 

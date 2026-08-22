@@ -23,7 +23,7 @@ import type {
   AuthResponse,
   AuthChangeEvent,
 } from "@app/auth/types";
-import { getToken, setToken, clearToken, hasSession } from "@app/services/authTransport";
+import { getToken, setToken, clearToken } from "@app/services/authTransport";
 
 export type { User, Session, AuthError, AuthResponse, AuthChangeEvent };
 

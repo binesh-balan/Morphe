@@ -92,6 +92,8 @@ async function setUpApiKeys(
   await seedCookieConsent(page);
   await page.addInitScript((jwt) => {
     localStorage.setItem("stirling_jwt", jwt);
+    // Morphe-PDF: cookie mode - hasSession() reads this marker.
+    localStorage.setItem("stirling_session", "1");
   }, token);
 
   // Revoke: flip the addressed key to revoked, 204 like the real endpoint.

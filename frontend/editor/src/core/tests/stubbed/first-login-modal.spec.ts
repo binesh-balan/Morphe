@@ -21,6 +21,8 @@ async function setUpFirstLoginPage(page: Page) {
       // before deciding to call /account, then trusts the API mocks.
       "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiJ9.signature",
     );
+    // Morphe-PDF: cookie mode - hasSession() reads this marker.
+    localStorage.setItem("stirling_session", "1");
   });
   // Note: deliberately NOT calling skipOnboarding here.
   await mockAppApis(page, {

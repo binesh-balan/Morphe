@@ -13,7 +13,7 @@ import { withBasePath } from "@app/constants/app";
 import "@app/auth/ui/auth.css";
 import loginHeader from "@app/assets/brand/modern-logo/LoginLightModeHeader.svg";
 import i18n from "@app/i18n";
-import { getToken, setToken, clearToken, hasSession } from "@app/services/authTransport";
+import { setToken, clearToken } from "@app/services/authTransport";
 
 /**
  * OAuth Callback Handler

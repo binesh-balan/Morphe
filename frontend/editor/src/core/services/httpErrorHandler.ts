@@ -12,7 +12,7 @@ import {
   extractAxiosErrorMessage,
 } from "@app/services/httpErrorUtils";
 import { withBasePath } from "@app/constants/app";
-import { getToken, setToken, clearToken, hasSession } from "@app/services/authTransport";
+import { hasSession } from "@app/services/authTransport";
 
 // Module-scoped state to reduce global variable usage
 const recentSpecialByEndpoint: Record<string, number> = {};
