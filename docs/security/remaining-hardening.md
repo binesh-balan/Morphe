@@ -43,8 +43,19 @@ Regenerate the lock state afterwards and confirm with OSV.
 
 ### Generate Gradle lock state
 
-**Done.** Lock state committed for the root project and all three modules (1,632 pinned
-entries). Regenerate whenever a dependency changes:
+**Done.** Lock state committed for the root project and all three modules.
+
+Locking runs in `LockMode.LENIENT`, not the default STRICT, because the build has three
+flavours that resolve different dependency sets — `core`
+(`DISABLE_ADDITIONAL_FEATURES=true`), `proprietary`, and `saas`. Lock state is
+per-configuration, not per-flavour, so STRICT fails the `core` flavour with *"Did not
+resolve &lt;x&gt; which is part of the dependency lock state"* for every security/SAML/JPA
+module the wider flavours pull in.
+
+LENIENT still pins every version the lock records, which is what makes the tree
+reproducible and scannable. The trade-off: a **new** dependency absent from the lock state
+no longer fails the build. Regenerate and review the lockfile diff whenever dependencies
+change.
 
 ```bash
 ./gradlew resolveAndLockAll --write-locks
