@@ -69,7 +69,13 @@ export const test = base.extend<StubFixtures>({
       // so those overlays don't block clicks.
       await bypassOnboarding(page);
       await page.addInitScript((token) => {
+        // Morphe-PDF: seed BOTH transports. Web builds default to cookie mode, where
+        // the JWT lives in an HttpOnly cookie the page cannot set and getToken()
+        // returns null - so a bare stirling_jwt no longer authenticates anything.
+        // hasSession() reads this marker, which is all the stubbed suite needs since
+        // MSW mocks every backend call. stirling_jwt is kept for desktop/bearer mode.
         localStorage.setItem("stirling_jwt", token);
+        localStorage.setItem("stirling_session", "1");
       }, STUB_JWT);
     } else {
       await skipOnboarding(page);

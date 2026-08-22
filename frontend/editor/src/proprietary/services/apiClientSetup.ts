@@ -2,7 +2,6 @@ import { AxiosInstance, AxiosError, InternalAxiosRequestConfig } from "axios";
 import { withBasePath } from "@app/constants/app";
 import { getBrowserId } from "@app/utils/browserIdentifier";
 import {
-  getToken,
   setToken,
   clearToken,
   hasSession,
@@ -19,7 +18,6 @@ let failedQueue: Array<{
 // Morphe-PDF: token access and CSRF reading now come from the shared auth transport.
 // In cookie mode getToken() returns null, so no bearer header is attached and the
 // HttpOnly session cookie carries the session instead.
-const getJwtTokenFromStorage = getToken;
 const setJwtTokenInStorage = setToken;
 const clearJwtTokenFromStorage = clearToken;
 
@@ -131,7 +129,8 @@ export function setupApiInterceptors(client: AxiosInstance): void {
             failedQueue.push({ resolve, reject });
           })
             .then((token) => {
-              if (token) originalRequest.headers.Authorization = `Bearer ${token}`;
+              if (token)
+                originalRequest.headers.Authorization = `Bearer ${token}`;
               return client(originalRequest);
             })
             .catch((err) => {
@@ -147,7 +146,8 @@ export function setupApiInterceptors(client: AxiosInstance): void {
           processQueue(null, newToken);
 
           // Retry original request with new token
-          if (newToken) originalRequest.headers.Authorization = `Bearer ${newToken}`;
+          if (newToken)
+            originalRequest.headers.Authorization = `Bearer ${newToken}`;
           return client(originalRequest);
         } catch (refreshError) {
           processQueue(refreshError as Error, null);

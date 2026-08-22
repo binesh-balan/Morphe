@@ -23,8 +23,19 @@ const SESSION_MARKER_KEY = "stirling_session";
 /**
  * True when the session travels as an HttpOnly cookie rather than a bearer token.
  *
- * Defaults to cookie mode for web builds. Set `VITE_AUTH_COOKIE_MODE=false` to fall back to
- * the previous localStorage behaviour if a deployment needs it.
+ * OPT-IN. Enable with `VITE_AUTH_COOKIE_MODE=true`.
+ *
+ * It shipped on by default and that was wrong: the migration was merged without the
+ * frontend suite ever running against it (build.yml only triggers on PRs targeting main,
+ * and the migration PR targeted another branch), and when the suite finally ran it failed
+ * 30 authenticated UI tests. The backend half is additive and always active - it sets the
+ * HttpOnly cookie AND returns the body token, and accepts either on the way back - so the
+ * server side is ready whenever this is switched on.
+ *
+ * Before enabling: work through docs/security/P0-3-jwt-cookie-migration.md, in particular
+ * the Entra ID and SAML round trips, and get the stubbed suite green with the flag set.
+ * Until then the token stays in localStorage, which is the residual risk P0 #3 exists to
+ * remove - see the note in docs/security/remaining-hardening.md.
  */
 export function isCookieMode(): boolean {
   // Tauri exposes this global; desktop always uses bearer tokens.
@@ -32,8 +43,7 @@ export function isCookieMode(): boolean {
     return false;
   }
   const flag = import.meta.env?.VITE_AUTH_COOKIE_MODE;
-  if (flag === "false" || flag === false) return false;
-  return true;
+  return flag === "true" || flag === true;
 }
 
 /** The bearer token, or null in cookie mode (where the browser carries the cookie). */

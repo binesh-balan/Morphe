@@ -18,7 +18,7 @@ import {
 } from "@app/components/onboarding/orchestrator/onboardingStorage";
 import { accountService } from "@app/services/accountService";
 import { useBypassOnboarding } from "@app/components/onboarding/useBypassOnboarding";
-import { getToken, setToken, clearToken, hasSession } from "@app/services/authTransport";
+import { hasSession } from "@app/services/authTransport";
 
 const AUTH_ROUTES = ["/login", "/signup", "/auth", "/invite"];
 const SESSION_TOUR_REQUESTED = "onboarding::session::tour-requested";
