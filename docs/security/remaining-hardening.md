@@ -7,39 +7,24 @@ each one requires. Everything here is deliberate — nothing was silently skippe
 
 These cannot be done or verified in a static environment.
 
-### Jackson runs with known HIGH advisories on the shipped runtime classpath
+### resolutionStrategy.force does not work in this build
 
-Surfaced immediately by the lock state, and invisible before it — the original assessment
-queried the *declared* version (`2.22.1`, clean) rather than the *resolved* one.
+**Important build defect, verified empirically.** Every `resolutionStrategy.force` inside
+`subprojects { configurations.configureEach { … } }` in `build.gradle` is **inert** — the
+declared version is never applied. Several of those lines carry CVE-mitigation comments
+(`commons-lang3` CVE-2025-48924, `commons-io` CVE-2024-47554, `gson` CVE-2022-25647,
+`rhino` CVE-2025-66453). None of them is mitigating anything.
 
-`:stirling-pdf` (`app/core`) is the shipped application, and its
-`productionRuntimeClasspath` resolves:
+Proven by adding a force for `httpcore5` to 5.4.3 there and regenerating the lock state:
+it stayed on 5.3.6. Re-expressed as `resolutionStrategy.eachDependency` — which runs *at
+resolution time* rather than configuration time — it applied immediately.
 
-| Component | Resolved | Advisories | Fixed in |
-|---|---|---|---|
-| `com.fasterxml.jackson.core:jackson-databind` | **2.21.2** | 2 HIGH, 8 MODERATE | 2.21.4 / 2.22.x |
-| `tools.jackson.core:jackson-databind` (Jackson 3) | **3.1.2** | 2 HIGH, 7 MODERATE | 3.1.4 |
-
-The two HIGH issues are `GHSA-j3rv-43j4-c7qm` (PolymorphicTypeValidator bypass via generic
-types) and `GHSA-rmj7-2vxq-3g9f` (array subtype allowlist bypass in
-`BasicPolymorphicTypeValidator`) — both polymorphic-deserialization escapes.
-
-**The existing `resolutionStrategy.force` for jackson-databind is not taking effect.**
-`build.gradle:257` forces `${jackson2Version}` (2.22.1) inside
-`subprojects { configurations.configureEach { … } }`, but only `:proprietary` resolves
-2.22.1 at runtime — and it does so because `app/proprietary/build.gradle:45` declares
-`runtimeOnly` explicitly, not because of the force. `:stirling-pdf` and `:common` resolve
-2.21.2 on every configuration.
-
-Fixing it needs two things, and both want a CI run because Spring Boot 4 manages Jackson
-through its BOM:
-
-1. Replace the ineffective `force` with a mechanism that actually applies — a
-   `resolutionStrategy.eachDependency` rule, or dependency constraints using `strictly`.
-2. Bump `tools.jackson.core:jackson-databind` to 3.1.4. It comes from the Spring Boot BOM,
-   so check whether a Spring Boot patch release already carries it before forcing it.
-
-Regenerate the lock state afterwards and confirm with OSV.
+The Morphe-PDF security floors at the bottom of `build.gradle` use `eachDependency` for
+this reason. **The pre-existing `force` block has been left alone** rather than converted:
+after the Spring Boot 4.0.8 bump every version it targets already resolves clean, so
+converting it would change resolved versions for no security gain and some risk. Convert
+it when one of those pins actually matters again — and verify against the lockfile, never
+by reading the build file.
 
 ### Generate Gradle lock state
 
