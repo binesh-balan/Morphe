@@ -20,17 +20,15 @@ jobs:
 
       - name: "Checkout Repository"
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      # Morphe-PDF: non-blocking. dependency-review needs GitHub's Dependency graph, which
-      # is OFF by default on forks and can only be turned on in the UI
-      # (Settings > Code security > Dependency graph) - it is not settable via the API.
-      # Until it is enabled this action fails with "Dependency review is not supported on
-      # this repository", which would red the whole build gate.
+      # Morphe-PDF: blocking. Dependency graph is now enabled on this repository, so a PR
+      # that introduces a vulnerable dependency fails here rather than being merged and
+      # found later by the scheduled scan.
       #
-      # Dependency vulnerability coverage does not depend on this: the security-scan
-      # workflow runs OSV-Scanner across every lockfile and needs no repo setting. Once
-      # Dependency graph is enabled, drop continue-on-error to make this blocking again.
+      # This checks the PR DIFF, not the existing tree, so the two accepted dev-only npm
+      # advisories (extract-zip, fast-uri) do not trip it. Severity threshold is the
+      # action's default; add fail-on-severity to .github/config/dependency-review-config.yml
+      # if that proves too strict, and allow-ghsas there for anything formally accepted.
       - name: "Dependency Review"
-        continue-on-error: true
         uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
         with:
           config-file: "./.github/config/dependency-review-config.yml"
