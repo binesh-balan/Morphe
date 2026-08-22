@@ -114,9 +114,21 @@ allprojects {
     // pinned in ext{}, but transitives resolved at build time, so builds were not
     // reproducible and no scanner could enumerate the Java tree from source (Syft
     // resolved 1 Maven component out of 1798; OSV and Trivy found no Java target).
-    // Generate the lock state once with:  ./gradlew resolveAndLockAll --write-locks
+    // Generate the lock state with:  ./gradlew resolveAndLockAll --write-locks
+    //
+    // LENIENT, not the default STRICT, because this build has three flavours that resolve
+    // different dependency sets - core (DISABLE_ADDITIONAL_FEATURES=true, no proprietary,
+    // no saas), proprietary, and saas. Lock state is per-configuration, not per-flavour, so
+    // under STRICT the core flavour fails with "Did not resolve <x> which is part of the
+    // dependency lock state" for every security/SAML/JPA module the wider flavours pull in.
+    //
+    // LENIENT still pins every version the lock state records - which is what makes the
+    // dependency tree reproducible and scannable. The trade-off is that a NEW dependency
+    // absent from the lock state no longer fails the build, so regenerate and review the
+    // lockfile diff whenever dependencies change.
     dependencyLocking {
         lockAllConfigurations()
+        lockMode = org.gradle.api.artifacts.dsl.LockMode.LENIENT
     }
 
     configurations.configureEach {

@@ -7,13 +7,55 @@ each one requires. Everything here is deliberate — nothing was silently skippe
 
 These cannot be done or verified in a static environment.
 
+### Jackson runs with known HIGH advisories on the shipped runtime classpath
+
+Surfaced immediately by the lock state, and invisible before it — the original assessment
+queried the *declared* version (`2.22.1`, clean) rather than the *resolved* one.
+
+`:stirling-pdf` (`app/core`) is the shipped application, and its
+`productionRuntimeClasspath` resolves:
+
+| Component | Resolved | Advisories | Fixed in |
+|---|---|---|---|
+| `com.fasterxml.jackson.core:jackson-databind` | **2.21.2** | 2 HIGH, 8 MODERATE | 2.21.4 / 2.22.x |
+| `tools.jackson.core:jackson-databind` (Jackson 3) | **3.1.2** | 2 HIGH, 7 MODERATE | 3.1.4 |
+
+The two HIGH issues are `GHSA-j3rv-43j4-c7qm` (PolymorphicTypeValidator bypass via generic
+types) and `GHSA-rmj7-2vxq-3g9f` (array subtype allowlist bypass in
+`BasicPolymorphicTypeValidator`) — both polymorphic-deserialization escapes.
+
+**The existing `resolutionStrategy.force` for jackson-databind is not taking effect.**
+`build.gradle:257` forces `${jackson2Version}` (2.22.1) inside
+`subprojects { configurations.configureEach { … } }`, but only `:proprietary` resolves
+2.22.1 at runtime — and it does so because `app/proprietary/build.gradle:45` declares
+`runtimeOnly` explicitly, not because of the force. `:stirling-pdf` and `:common` resolve
+2.21.2 on every configuration.
+
+Fixing it needs two things, and both want a CI run because Spring Boot 4 manages Jackson
+through its BOM:
+
+1. Replace the ineffective `force` with a mechanism that actually applies — a
+   `resolutionStrategy.eachDependency` rule, or dependency constraints using `strictly`.
+2. Bump `tools.jackson.core:jackson-databind` to 3.1.4. It comes from the Spring Boot BOM,
+   so check whether a Spring Boot patch release already carries it before forcing it.
+
+Regenerate the lock state afterwards and confirm with OSV.
+
 ### Generate Gradle lock state
 
-`dependencyLocking` is enabled in `build.gradle`, but no lock state is committed yet, so
-Gradle still resolves transitives at build time. Until this is done, **no scanner can see
-the Java dependency tree** — Syft resolved 1 Maven component out of 1798, and OSV-Scanner
-and Trivy both detected no Java target at all. The "Java dependencies clean" result in the
-assessment therefore covers direct dependencies only.
+**Done.** Lock state committed for the root project and all three modules.
+
+Locking runs in `LockMode.LENIENT`, not the default STRICT, because the build has three
+flavours that resolve different dependency sets — `core`
+(`DISABLE_ADDITIONAL_FEATURES=true`), `proprietary`, and `saas`. Lock state is
+per-configuration, not per-flavour, so STRICT fails the `core` flavour with *"Did not
+resolve &lt;x&gt; which is part of the dependency lock state"* for every security/SAML/JPA
+module the wider flavours pull in.
+
+LENIENT still pins every version the lock records, which is what makes the tree
+reproducible and scannable. The trade-off: a **new** dependency absent from the lock state
+no longer fails the build. Regenerate and review the lockfile diff whenever dependencies
+change.
 
 ```bash
 ./gradlew resolveAndLockAll --write-locks
