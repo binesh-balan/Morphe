@@ -1,6 +1,20 @@
 # P0 #3 — Session JWT moved out of `localStorage` into an HttpOnly cookie
 
-**Status: implemented, not verified.** The code is written and parses; none of it has been
+**Status: implemented, DISABLED BY DEFAULT, not verified.**
+
+> Cookie mode is opt-in behind `VITE_AUTH_COOKIE_MODE=true`. It shipped on by default and
+> that was a mistake: `build.yml` only triggers on PRs targeting `main`, this migration
+> targeted another branch, and #6/#9 touched no frontend paths — so the frontend suite never
+> ran against it. When it finally did (via a Dependabot PR touching the frontend lockfile) it
+> failed **30 authenticated UI tests**, starting with the settings/config button never
+> rendering.
+>
+> **The token therefore still lives in `localStorage` — P0 #3 is not closed.** The backend
+> half is additive and always active: it sets the HttpOnly cookie *and* returns the body
+> token, and accepts either on the way back. So the server is ready; only the frontend flip
+> is gated.
+
+**Original status note:** The code is written and parses; none of it has been
 exercised against a browser, an identity provider, or the test suite. Treat this document as
 the test plan, not as a record of something already proven.
 

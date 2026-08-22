@@ -105,13 +105,23 @@ Both are dev-only. The two advisories that reached production (`nanoid` CVE-2026
 
 ## Deliberate design decisions
 
-### P0 #3 — session JWT still in `localStorage`
+### P0 #3 — session JWT still in `localStorage` (cookie mode built, not enabled)
 
-The largest open item. Full plan in
-[`P0-3-jwt-cookie-migration.md`](./P0-3-jwt-cookie-migration.md). Deferred because it needs
-a working build and real SSO round trips to verify. Mitigated but not closed: the PDF
-JavaScript execution path (the one known route to the token) is gone, and CSP restricts
-`connect-src` to `'self'`.
+Still the largest open item, and **not closed** despite the migration being merged. The
+backend issues and accepts the HttpOnly cookie, but the frontend flip is gated behind
+`VITE_AUTH_COOKIE_MODE=true` because enabling it fails 30 authenticated UI tests.
+
+Two process failures let an unvalidated auth change reach `main`, both worth avoiding again:
+
+- `build.yml` only triggers on `pull_request: branches: ["main"]`. A PR stacked on another
+  branch never runs it, and **retargeting a PR does not re-trigger workflows** — close and
+  reopen, or push a commit.
+- `frontend-validation` and `playwright-e2e` are path-filtered, so backend/workflow/lockfile
+  PRs skip them entirely. A frontend change merged this way can sit unverified indefinitely.
+
+To close it: enable the flag, get the stubbed suite green, then work the test plan in
+[`P0-3-jwt-cookie-migration.md`](./P0-3-jwt-cookie-migration.md) — Entra ID and SAML round
+trips especially.
 
 ### Cross-Origin-Opener-Policy is not set
 

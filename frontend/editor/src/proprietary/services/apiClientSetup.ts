@@ -129,7 +129,8 @@ export function setupApiInterceptors(client: AxiosInstance): void {
             failedQueue.push({ resolve, reject });
           })
             .then((token) => {
-              if (token) originalRequest.headers.Authorization = `Bearer ${token}`;
+              if (token)
+                originalRequest.headers.Authorization = `Bearer ${token}`;
               return client(originalRequest);
             })
             .catch((err) => {
@@ -145,7 +146,8 @@ export function setupApiInterceptors(client: AxiosInstance): void {
           processQueue(null, newToken);
 
           // Retry original request with new token
-          if (newToken) originalRequest.headers.Authorization = `Bearer ${newToken}`;
+          if (newToken)
+            originalRequest.headers.Authorization = `Bearer ${newToken}`;
           return client(originalRequest);
         } catch (refreshError) {
           processQueue(refreshError as Error, null);
