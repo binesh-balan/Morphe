@@ -38,7 +38,7 @@ ext {
     gsonVersion = "2.14.0"
     guavaVersion = "33.6.0-jre"
     jinjavaVersion = "2.8.4"
-    jackson2Version = "2.22.1"
+    jackson2Version = "2.22.2"
     httpcore5Version = "5.4.3"
     httpclient5Version = "5.6.4"
     jsoupSecureVersion = "1.23.1"
