@@ -14,7 +14,7 @@ const USER_INFO_KEY: &str = "user_info";
 const TOKENS_STORE_FILE: &str = "tokens.json";
 const REFRESH_TOKEN_STORE_KEY: &str = "refresh_token";
 const AUTH_TOKEN_STORE_KEY: &str = "auth_token";
-const KEYRING_SERVICE: &str = "stirling-pdf";
+const KEYRING_SERVICE: &str = "morphe-pdf";
 const KEYRING_TOKEN_KEY: &str = "auth-token";
 const KEYRING_REFRESH_TOKEN_KEY: &str = "refresh-token";
 
@@ -435,7 +435,7 @@ pub async fn login(
     let client = reqwest::Client::builder()
         .danger_accept_invalid_certs(true)
         .timeout(std::time::Duration::from_secs(30))
-        .user_agent("StirlingPDF-Desktop/1.0 Tauri")
+        .user_agent("MorphePDF-Desktop/1.0 Tauri")
         .build()
         .map_err(|e| {
             log::error!("Failed to create HTTP client: {}", e);
@@ -791,7 +791,7 @@ async fn exchange_code_for_token(
     let client = reqwest::Client::builder()
         .danger_accept_invalid_certs(true)
         .timeout(std::time::Duration::from_secs(30))
-        .user_agent("StirlingPDF-Desktop/1.0 Tauri")
+        .user_agent("MorphePDF-Desktop/1.0 Tauri")
         .build()
         .map_err(|e| {
             log::error!("Failed to create HTTP client: {}", e);

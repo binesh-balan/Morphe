@@ -148,8 +148,8 @@ After downloading the built artifacts:
 
 **Windows (PowerShell):**
 ```powershell
-Get-AuthenticodeSignature "Stirling-PDF-windows-x86_64.exe"
-Get-AuthenticodeSignature "Stirling-PDF-windows-x86_64.msi"
+Get-AuthenticodeSignature "Morphe-PDF-windows-x86_64.exe"
+Get-AuthenticodeSignature "Morphe-PDF-windows-x86_64.msi"
 ```
 
 Look for:
