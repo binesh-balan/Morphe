@@ -1,4 +1,4 @@
-# Stirling-PDF - Fat version (embedded frontend)
+# Morphe PDF - Fat version (embedded frontend)
 # Extra fonts for air-gapped environments
 # Uses pre-built base image for fast builds
 
@@ -120,7 +120,7 @@ ENV VERSION_TAG=$VERSION_TAG \
     SAL_TMP=/tmp/stirling-pdf/libre
 
 # Metadata labels
-LABEL org.opencontainers.image.title="Stirling-PDF Fat" \
+LABEL org.opencontainers.image.title="Morphe PDF Fat" \
       org.opencontainers.image.description="Fat version with extra fonts for air-gapped environments, includes Calibre, LibreOffice, Tesseract, OCRmyPDF" \
       org.opencontainers.image.source="https://github.com/Stirling-Tools/Stirling-PDF" \
       org.opencontainers.image.licenses="MIT" \

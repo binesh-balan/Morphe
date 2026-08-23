@@ -1,16 +1,20 @@
-/* Morphing Stirling mark. At rest: the two-tone red brand parallelograms
-   (from the `d` attributes in the markup). When an ancestor marked
-   [data-brandmark-morph] is hovered / focused / open, each parallelogram is
-   transformed into one arm of a smaller, symmetric downward chevron in the
-   primary text colour.
+/* Morphing Morphe PDF mark. At rest: the two-tone indigo brand arms meeting in
+   an upward caret (from the `d` attributes in the markup). When an ancestor
+   marked [data-brandmark-morph] is hovered / focused / open, each arm is
+   transformed into one arm of a smaller downward chevron in the primary text
+   colour — the caret flips into a menu affordance.
 
    The morph uses a CSS `transform` (not the `d` property) so it works in every
-   browser: both the logo shape and its target chevron arm are parallelograms,
-   and an affine matrix maps one exactly onto the other. The matrices below were
+   browser: both the rest arm and its target chevron arm are parallelograms, and
+   an affine matrix maps one exactly onto the other. The matrices below were
    solved to send each path's 4 corners onto the chevron-arm corners:
-     arm A (left):  M13 27 L35.5 41 L35.5 53 L13 39 Z
-     arm B (right): M35.5 41 L58 27 L58 39 L35.5 53 Z
-   (mirror images — equal area + dimensions). */
+     rest arm A (left):   M4 60 L35.5 10 L35.5 26 L4 76 Z
+     rest arm B (right):  M67 60 L35.5 10 L35.5 26 L67 76 Z
+     target arm A (left):  M13 27 L35.5 41 L35.5 53 L13 39 Z
+     target arm B (right): M58 27 L35.5 41 L35.5 53 L58 39 Z
+   (mirror images — equal area + dimensions). Corner error of the rounded
+   values below is under 3e-05 user units. Re-solve both matrices if either
+   path's `d` changes, or the morph lands off-target. */
 .sui-brandmark {
   display: block;
   width: auto;
@@ -39,13 +43,13 @@
 [data-brandmark-morph]:focus-visible .sui-brandmark__a,
 [data-brandmark-morph].is-open .sui-brandmark__a {
   fill: var(--c-text);
-  transform: matrix(0.483871, 0.584583, 0, 0.338028, 13, 13.8169);
+  transform: matrix(0.714286, 1.634921, 0, 0.75, 10.142857, -24.539683);
 }
 [data-brandmark-morph]:hover .sui-brandmark__b,
 [data-brandmark-morph]:focus-visible .sui-brandmark__b,
 [data-brandmark-morph].is-open .sui-brandmark__b {
   fill: var(--c-text);
-  transform: matrix(0.483871, -0.017568, 0, 0.338028, 23.887097, 26.886428);
+  transform: matrix(0.714286, -1.634921, 0, 0.75, 10.142857, 91.539683);
 }
 
 /* One-shot "thinking" drift — the two parallelograms swap past each other and

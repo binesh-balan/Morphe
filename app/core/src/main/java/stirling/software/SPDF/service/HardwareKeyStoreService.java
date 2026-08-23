@@ -106,7 +106,7 @@ public class HardwareKeyStoreService {
         if (!isDesktop()) {
             throw ExceptionUtils.createIllegalArgumentException(
                     "error.hardwareSigningDesktopOnly",
-                    "Hardware-backed signing is only available in the Stirling PDF desktop app");
+                    "Hardware-backed signing is only available in the Morphe PDF desktop app");
         }
         if (request != null && !isLocalRequest(request.getRemoteAddr())) {
             throw ExceptionUtils.createIllegalArgumentException(

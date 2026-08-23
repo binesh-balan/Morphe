@@ -1,4 +1,4 @@
-# Stirling-PDF Dockerfile - Ultra-lite version with embedded frontend
+# Morphe PDF Dockerfile - Ultra-lite version with embedded frontend
 # Single JAR contains both frontend and backend with minimal dependencies
 
 # Stage 1: Build application with embedded frontend
@@ -66,8 +66,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
 ARG VERSION_TAG
 
 # Labels
-LABEL org.opencontainers.image.title="Stirling-PDF Ultra-Lite" \
-      org.opencontainers.image.description="Stirling-PDF with embedded frontend - Ultra-lite version with minimal dependencies" \
+LABEL org.opencontainers.image.title="Morphe PDF Ultra-Lite" \
+      org.opencontainers.image.description="Morphe PDF with embedded frontend - Ultra-lite version with minimal dependencies" \
       org.opencontainers.image.source="https://github.com/Stirling-Tools/Stirling-PDF" \
       org.opencontainers.image.licenses="MIT" \
       org.opencontainers.image.vendor="Stirling-Tools" \

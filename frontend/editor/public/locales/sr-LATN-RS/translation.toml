@@ -727,7 +727,7 @@ description = "Broj najrelevantnijih delova dobijenih po pretrazi."
 label = "Top K"
 
 [admin.settings.ai.general]
-description = "Povežite Stirling sa Python AI mehanizmom i izaberite koje AI mogućnosti su dostupne. Promene se primenjuju pri ponovnom pokretanju."
+description = "Povežite Morphe sa Python AI mehanizmom i izaberite koje AI mogućnosti su dostupne. Promene se primenjuju pri ponovnom pokretanju."
 title = "AI mehanizam"
 
 [admin.settings.ai.general.capabilities]
@@ -1075,11 +1075,11 @@ description = "Podesite opcione funkcije i funkcionalnosti."
 title = "Funkcije"
 
 [admin.settings.features.serverCertificate]
-description = "Podesite generisanje serverskog sertifikata za funkcionalnost \"Sign with Stirling-PDF\""
+description = "Podesite generisanje serverskog sertifikata za funkcionalnost \"Sign with Morphe PDF\""
 label = "Serverski sertifikat"
 
 [admin.settings.features.serverCertificate.enabled]
-description = "Omogući serverski sertifikat za opciju \"Sign with Stirling-PDF\""
+description = "Omogući serverski sertifikat za opciju \"Sign with Morphe PDF\""
 label = "Omogući serverski sertifikat"
 
 [admin.settings.features.serverCertificate.organizationName]
@@ -1096,11 +1096,11 @@ label = "Važenje sertifikata (dani)"
 
 [admin.settings.folderAccess]
 description = "Direktorijumi iz kojih izvori fascikli i izlazi fascikli smeju da čitaju i u koje smeju da pišu. Ovo je bezbednosna granica: automatizacije nikada ne mogu biti usmerene na serversku putanju van ove liste."
-securityNote = "Ostavite ovo prazno da biste potpuno onemogućili izvore i izlaze fascikli. Stirling-ov sopstveni konfiguracioni direktorijum je uvek zabranjen."
+securityNote = "Ostavite ovo prazno da biste potpuno onemogućili izvore i izlaze fascikli. Morphe-ov sopstveni konfiguracioni direktorijum je uvek zabranjen."
 title = "Pristup fasciklama"
 
 [admin.settings.folderAccess.implied]
-description = "Ovi direktorijumi kojima upravlja Stirling su uvek dozvoljeni i ovde se ne mogu menjati."
+description = "Ovi direktorijumi kojima upravlja Morphe su uvek dozvoljeni i ovde se ne mogu menjati."
 serverStorage = "Skladište datoteka na serveru"
 title = "Uvek dozvoljeno"
 watchedFolder = "Nadzirana fascikla pipeline-a"
@@ -1246,7 +1246,7 @@ description = "URL ili naziv datoteke do politike kolačića"
 label = "Politika kolačića"
 
 [admin.settings.legal.disclaimer]
-message = "Prilagođavanjem ovih pravnih dokumenata preuzimate punu odgovornost za obezbeđivanje usklađenosti sa svim primenjivim zakonima i propisima, uključujući, ali ne ograničavajući se na GDPR i druge EU zahteve zaštite podataka. Menjajte ova podešavanja samo ako: (1) upravljate ličnom/privatnom instancom, (2) nalazite se van jurisdikcije EU i razumete svoje lokalne pravne obaveze, ili (3) ste pribavili odgovarajući pravni savet i prihvatate punu odgovornost za sve korisničke podatke i pravnu usklađenost. Stirling-PDF i njegovi developeri ne snose odgovornost za vaše pravne obaveze."
+message = "Prilagođavanjem ovih pravnih dokumenata preuzimate punu odgovornost za obezbeđivanje usklađenosti sa svim primenjivim zakonima i propisima, uključujući, ali ne ograničavajući se na GDPR i druge EU zahteve zaštite podataka. Menjajte ova podešavanja samo ako: (1) upravljate ličnom/privatnom instancom, (2) nalazite se van jurisdikcije EU i razumete svoje lokalne pravne obaveze, ili (3) ste pribavili odgovarajući pravni savet i prihvatate punu odgovornost za sve korisničke podatke i pravnu usklađenost. Morphe PDF i njegovi developeri ne snose odgovornost za vaše pravne obaveze."
 title = "Upozorenje o pravnoj odgovornosti"
 
 [admin.settings.legal.impressum]
@@ -1333,8 +1333,8 @@ description = "Korisničko ime za SMTP autentikaciju"
 label = "SMTP korisničko ime"
 
 [admin.settings.mcp]
-apikeyNote = "Clients send a Stirling API key in the X-API-KEY header (or Authorization: Bearer <key>). The key maps to its owning Stirling user - only provisioned accounts get in, and actions are audited as that user. Manage keys under Account > API Keys."
-description = "Expose Stirling's PDF tools and AI agents to MCP clients over an OAuth-protected endpoint."
+apikeyNote = "Clients send a Morphe API key in the X-API-KEY header (or Authorization: Bearer <key>). The key maps to its owning Morphe user - only provisioned accounts get in, and actions are audited as that user. Manage keys under Account > API Keys."
+description = "Expose Morphe's PDF tools and AI agents to MCP clients over an OAuth-protected endpoint."
 title = "MCP Server"
 
 [admin.settings.mcp.acceptedAudiences]
@@ -1364,7 +1364,7 @@ step3ApiKeyb = "header (or Authorization: Bearer <key>). No OAuth or metadata di
 step4 = "Approve the sign-in; the client retries with a token. Tools appear grouped: convert, pages, misc, security, ai."
 step4ApiKey = "Tools appear grouped: convert, pages, misc, security, ai - and every call is audited as the key's owner."
 tip = "Tip: register the resource ID as an allowed audience in your IdP. Tested with MCP Inspector and Claude Desktop."
-tipApiKey = "Tip: API-key mode needs no external IdP - simplest for self-host. The key maps to its owning Stirling user."
+tipApiKey = "Tip: API-key mode needs no external IdP - simplest for self-host. The key maps to its owning Morphe user."
 title = "Connect an MCP client"
 
 [admin.settings.mcp.issuerUri]
@@ -1377,12 +1377,12 @@ label = "JWKS URL (optional)"
 placeholder = "Auto-discovered from issuer"
 
 [admin.settings.mcp.mode]
-description = "OAuth needs an external IdP. API key uses a Stirling per-user API key (X-API-KEY) - simplest for self-host."
+description = "OAuth needs an external IdP. API key uses a Morphe per-user API key (X-API-KEY) - simplest for self-host."
 label = "Authentication mode"
 
 [admin.settings.mcp.requireAccount]
-description = "Only let tokens through if their subject maps to a provisioned, enabled Stirling user."
-label = "Require an existing Stirling account"
+description = "Only let tokens through if their subject maps to a provisioned, enabled Morphe user."
+label = "Require an existing Morphe account"
 
 [admin.settings.mcp.resourceId]
 description = "This server's public /mcp URL. Tokens must list it in their audience (RFC 8707) or they are rejected."
@@ -1393,7 +1393,7 @@ description = "Require mcp.tools.read for read ops and mcp.tools.write for write
 label = "Enforce OAuth scopes"
 
 [admin.settings.mcp.usernameClaim]
-description = "JWT claim matched against a Stirling username (e.g. sub, email, preferred_username)."
+description = "JWT claim matched against a Morphe username (e.g. sub, email, preferred_username)."
 label = "Username claim"
 
 [admin.settings.plan.noData]
@@ -1714,7 +1714,7 @@ description = "Kada je omogućeno, samo navedeni ID-jevi korisnika mogu koristit
 label = "Dozvoli određene ID-jeve korisnika"
 
 [admin.settings.telegram.enabled]
-description = "Omogućava korisnicima interakciju sa Stirling PDF putem vašeg podešenog Telegram bota."
+description = "Omogućava korisnicima interakciju sa Morphe PDF putem vašeg podešenog Telegram bota."
 label = "Omogući Telegram bot"
 
 [admin.settings.telegram.feedback]
@@ -1787,20 +1787,20 @@ settingsOverview = "Ovo je <strong>Panel podešavanja</strong>. Admin podešavan
 systemCustomization = "Postoje široke mogućnosti prilagođavanja UI-ja: <strong>System Settings</strong> vam omogućavaju promenu imena aplikacije i jezika, <strong>Features</strong> omogućava upravljanje sertifikatima servera, a <strong>Endpoints</strong> omogućava uključivanje ili isključivanje pojedinačnih alata za vaše korisnike."
 teamsAndUsers = "Ovde upravljajte <strong>timovima</strong> i pojedinačnim korisnicima. Možete pozvati nove korisnike emailom, deljivim linkovima ili im sami kreirati naloge."
 welcome = "Dobrodošli u <strong>Admin turu</strong>! Hajde da istražimo moćne enterprise funkcije i podešavanja dostupna sistemskim administratorima."
-wrapUp = "To je bila admin tura! Videli ste enterprise funkcije koje čine Stirling PDF moćnim, prilagodljivim rešenjem za organizacije. Ovoj turi možete pristupiti uvek preko menija <strong>Pomoć</strong>."
+wrapUp = "To je bila admin tura! Videli ste enterprise funkcije koje čine Morphe PDF moćnim, prilagodljivim rešenjem za organizacije. Ovoj turi možete pristupiti uvek preko menija <strong>Pomoć</strong>."
 
 [adminUserSettings]
 admin = "Administrator"
 title = "Podešavanja kontrole korisnika"
 
 [agents]
-stirling_name = "Stirling"
+stirling_name = "Morphe"
 
 [analytics]
 learnMore = "Saznaj više"
-paragraph1 = "Stirling PDF ima opcioni sistem analitike koji nam pomaže da unapredimo proizvod. Ne pratimo nikakve lične podatke niti sadržaj fajlova."
-paragraph2 = "Molimo te da razmotriš uključivanje analitike kako bi pomogao Stirling PDF-u da raste i omogućio nam bolje razumevanje naših korisnika."
-title = "Želiš li da učiniš Stirling PDF boljim?"
+paragraph1 = "Morphe PDF ima opcioni sistem analitike koji nam pomaže da unapredimo proizvod. Ne pratimo nikakve lične podatke niti sadržaj fajlova."
+paragraph2 = "Molimo te da razmotriš uključivanje analitike kako bi pomogao Morphe PDF-u da raste i omogućio nam bolje razumevanje naših korisnika."
+title = "Želiš li da učiniš Morphe PDF boljim?"
 
 [annotate]
 tags = "annotate,highlight,draw,markup,comment,notes,review,redline,feedback,markup tools,sticky notes,shapes,arrows,text box,freehand"
@@ -2935,10 +2935,10 @@ copy = "Kopiraj poruku"
 
 [chat.fab]
 close = "Close chat"
-open = "Open Stirling AI assistant"
+open = "Open Morphe AI assistant"
 
 [chat.header]
-agentMenu = "Opcije Stirling agenta"
+agentMenu = "Opcije Morphe agenta"
 clearChat = "Obriši čet"
 
 [chat.input]
@@ -3270,13 +3270,13 @@ upgradeButton = "Nadogradi nalog"
 [config.apiKeys]
 copyKeyAriaLabel = "Kopiraj API ključ"
 description = "Vaš API ključ za pristup Stirlingovom paketu PDF alata. Kopirajte ga u svoj projekat ili osvežite da generišete novi."
-docsDescription = "Saznajte više o integraciji sa Stirling PDF:"
+docsDescription = "Saznajte više o integraciji sa Morphe PDF:"
 docsLink = "API dokumentacija"
 docsTitle = "API dokumentacija"
 generateError = "Nismo mogli da generišemo vaš API ključ."
 goToAccount = "Idi na nalog"
 guestInfo = "Gosti ne dobijaju API ključeve. Napravite nalog da biste dobili API ključ koji možete koristiti u svojim aplikacijama."
-intro = "Koristite svoj API ključ za programski pristup mogućnostima obrade koje nudi Stirling PDF."
+intro = "Koristite svoj API ključ za programski pristup mogućnostima obrade koje nudi Morphe PDF."
 label = "API ključ"
 publicKeyAriaLabel = "Javni API ključ"
 refreshAriaLabel = "Osveži API ključ"
@@ -3300,10 +3300,10 @@ title = "Osveži API ključeve"
 warning = "⚠️ Upozorenje: Ova radnja će generisati nove API ključeve i poništiti vaše prethodne ključeve."
 
 [config.mcp]
-description = "Model Context Protocol (MCP) lets AI assistants like Claude use your Stirling PDF tools directly. Connect a client once and your assistant can convert, edit, secure and process documents on your behalf."
-guestInfo = "Guest users can't connect MCP clients. Create an account to use the MCP server and let your AI assistant run Stirling PDF tools on your behalf."
+description = "Model Context Protocol (MCP) lets AI assistants like Claude use your Morphe PDF tools directly. Connect a client once and your assistant can convert, edit, secure and process documents on your behalf."
+guestInfo = "Guest users can't connect MCP clients. Create an account to use the MCP server and let your AI assistant run Morphe PDF tools on your behalf."
 navLabel = "MCP Server"
-tip = "Every action your assistant runs is performed as your account and counts towards your usage, just like using Stirling PDF directly."
+tip = "Every action your assistant runs is performed as your account and counts towards your usage, just like using Morphe PDF directly."
 title = "MCP Server"
 viewApiKeys = "View API keys"
 
@@ -3320,7 +3320,7 @@ label = "Your MCP endpoint"
 
 [config.mcp.setup]
 addTo = "Add to"
-hint = "Pick your client, paste the snippet into the file shown, then restart it. You'll sign in with your Stirling account on first use - no keys to copy."
+hint = "Pick your client, paste the snippet into the file shown, then restart it. You'll sign in with your Morphe account on first use - no keys to copy."
 title = "Connect your AI assistant"
 
 [config.overview]
@@ -3429,7 +3429,7 @@ showPreferencesBtn = "Upravljaj podešavanjima"
 title = "Kako koristimo kolačiće"
 
 [cookieBanner.popUp.description]
-1 = "Koristimo kolačiće i druge tehnologije kako bismo poboljšali rad Stirling PDF-a — pomažući nam da unapredimo naše alate i nastavimo da razvijamo funkcije koje ćete voleti."
+1 = "Koristimo kolačiće i druge tehnologije kako bismo poboljšali rad Morphe PDF-a — pomažući nam da unapredimo naše alate i nastavimo da razvijamo funkcije koje ćete voleti."
 2 = "If you’d rather not, clicking 'No Thanks' will only enable the essential cookies needed to keep things running smoothly."
 
 [cookieBanner.preferencesModal]
@@ -3442,12 +3442,12 @@ subtitle = "Korišćenje kolačića"
 title = "Centar za podešavanja saglasnoti"
 
 [cookieBanner.preferencesModal.analytics]
-description = "Ovi kolačići nam pomažu da razumemo kako se naši alati koriste, kako bismo mogli da se fokusiramo na razvoj funkcija koje naša zajednica najviše ceni. Budite sigurni — Stirling PDF ne može i nikada neće pratiti sadržaj dokumenata sa kojima radite."
+description = "Ovi kolačići nam pomažu da razumemo kako se naši alati koriste, kako bismo mogli da se fokusiramo na razvoj funkcija koje naša zajednica najviše ceni. Budite sigurni — Morphe PDF ne može i nikada neće pratiti sadržaj dokumenata sa kojima radite."
 title = "Analitika"
 
 [cookieBanner.preferencesModal.description]
-1 = "Stirling PDF koristi kolačiće i slične tehnologije kako bi poboljšao vaše iskustvo i razumeo kako se naši alati koriste. Ovo nam pomaže da unapredimo performanse, razvijamo funkcije koje su vam važne i pružimo kontinuiranu podršku našim korisnicima."
-2 = "Stirling PDF ne može — i nikada neće — pratiti ili pristupati sadržaju dokumenata koje koristite."
+1 = "Morphe PDF koristi kolačiće i slične tehnologije kako bi poboljšao vaše iskustvo i razumeo kako se naši alati koriste. Ovo nam pomaže da unapredimo performanse, razvijamo funkcije koje su vam važne i pružimo kontinuiranu podršku našim korisnicima."
+2 = "Morphe PDF ne može — i nikada neće — pratiti ili pristupati sadržaju dokumenata koje koristite."
 3 = "Vaša privatnost i poverenje su osnovni principi našeg rada."
 
 [cookieBanner.preferencesModal.necessary]
@@ -3526,14 +3526,14 @@ title = "Greška"
 
 [defaultApp.prompt]
 dontRemind = "Ne podsećaj me ponovo"
-message = "Postavite Stirling PDF kao podrazumevanu aplikaciju za otvaranje PDF fajlova."
+message = "Postavite Morphe PDF kao podrazumevanu aplikaciju za otvaranje PDF fajlova."
 
 [defaultApp.settingsOpened]
-message = "Molimo izaberite Stirling PDF u podešavanjima sistema"
+message = "Molimo izaberite Morphe PDF u podešavanjima sistema"
 title = "Podešavanja otvorena"
 
 [defaultApp.success]
-message = "Stirling PDF je sada vaš podrazumevani PDF uređivač"
+message = "Morphe PDF je sada vaš podrazumevani PDF uređivač"
 title = "Podrazumevana aplikacija postavljena"
 
 [desktopUpdate]
@@ -3549,7 +3549,7 @@ updateFailedMessage = "Nije uspelo preuzimanje ili instalacija ažuriranja."
 
 [desktopUpdate.blocked]
 docsLink = "Prikaži dokumentaciju za instalaciju"
-message = "Stirling-PDF nema dozvolu da se sam ažurira na ovoj mašini."
+message = "Morphe PDF nema dozvolu da se sam ažurira na ovoj mašini."
 title = "Potrebne su administratorske dozvole"
 
 [devAirgapped]
@@ -4107,7 +4107,7 @@ title = "Premesti u fasciklu"
 [filesPage.origin]
 all = "Svi izvori"
 cloud = "Oblak"
-cloudHint = "Skladišteno na Stirling serveru"
+cloudHint = "Skladišteno na Morphe serveru"
 local = "Lokalno"
 localHint = "Samo skladišteno u ovom pregledaču"
 shared = "Podeljeno"
@@ -4378,7 +4378,7 @@ invisible = "Nevidljivo (samo metapodaci)"
 location = "Lokacija:"
 logo = "Logotip:"
 logoHidden = "Bez logotipa"
-logoShown = "Prikazan Stirling PDF logotip"
+logoShown = "Prikazan Morphe PDF logotip"
 participantCount_one = "{{count}} participant will sign in order"
 participantCount_other = "{{count}} participants will sign in order"
 participants = "Učesnici"
@@ -4432,7 +4432,7 @@ title = "Sekvencijalno potpisivanje"
 dismiss = "Zatvori baner"
 message = "Kreirajte besplatan nalog da sačuvate svoj rad, pristupite dodatnim funkcijama i podržite projekat."
 signUp = "Registruj se besplatno"
-title = "Koristite Stirling PDF kao gost!"
+title = "Koristite Morphe PDF kao gost!"
 
 [home.addAttachments]
 desc = "Dodajte ili uklonite ugradene datoteke (priloge) u/iz PDF-a"
@@ -4596,7 +4596,7 @@ tags = "spoji,pridruži,ujedini"
 title = "Spajanje"
 
 [home.mobile]
-brandAlt = "logo Stirling PDF"
+brandAlt = "logo Morphe PDF"
 openFiles = "Otvori datoteke"
 swipeHint = "Prevucite levo ili desno da biste promenili prikaz"
 tools = "Alati"
@@ -4635,7 +4635,7 @@ tags = "organizuj,preuredi,redosled"
 title = "Organizacija"
 
 [home.pdfTextEditor]
-desc = "Pregledajte i uređujte Stirling PDF JSON izvoze uz grupisano uređivanje teksta i ponovno generisanje PDF-a"
+desc = "Pregledajte i uređujte Morphe PDF JSON izvoze uz grupisano uređivanje teksta i ponovno generisanje PDF-a"
 tags = "edit text,modify text,change text,edit content,update text,rewrite,correct,amend,redline,revise,text editor,content editor"
 title = "PDF uređivač teksta"
 
@@ -4821,7 +4821,7 @@ passwordRequired = "Lozinka je obavezna"
 signIn = "Prijavite se"
 validating = "Validacija poziva..."
 validationError = "Nije uspela validacija pozivnog linka"
-welcome = "Dobrodošli u Stirling PDF"
+welcome = "Dobrodošli u Morphe PDF"
 welcomeSubtitle = "Dovršite podešavanje naloga da biste počeli"
 welcomeTitle = "Pozvani ste!"
 
@@ -4847,7 +4847,7 @@ terms = "Uslovi i odredbe"
 title = "3rd Party Licenses"
 
 [localMode]
-toolUnavailable = "Ovaj alat zahteva nalog. Prijavite se na Stirling Cloud ili se povežite na samohostovani server da biste ga koristili."
+toolUnavailable = "Ovaj alat zahteva nalog. Prijavite se na Morphe Cloud ili se povežite na samohostovani server da biste ga koristili."
 
 [localMode.toolPicker]
 message = "Prijavite se da otključate sve alate."
@@ -5005,7 +5005,7 @@ message = "Autentikacija nije uspela. Možete zatvoriti ovaj prozor i pokušati 
 title = "Autentikacija neuspešna"
 
 [oauth.success]
-message = "Možete zatvoriti ovaj prozor i vratiti se u Stirling PDF."
+message = "Možete zatvoriti ovaj prozor i vratiti se u Morphe PDF."
 title = "Autentikacija uspešna"
 
 [oauthConsent]
@@ -5018,17 +5018,17 @@ loadFailed = "This authorisation request is invalid or has expired. Close this t
 loading = "Loading authorisation request..."
 missingId = "Missing authorisation request. Start the connection from your app and try again."
 redirecting = "Returning you to the app..."
-requesting = "{{app}} wants to access your Stirling PDF account"
+requesting = "{{app}} wants to access your Morphe PDF account"
 scopesIntro = "This will allow {{app}} to:"
 signedInAs = "Signed in as {{name}}"
 signInButton = "Sign in to continue"
-signInPrompt = "Sign in to your Stirling PDF account to continue connecting the app."
+signInPrompt = "Sign in to your Morphe PDF account to continue connecting the app."
 title = "Authorise access"
 unknownApp = "A third-party application"
 
 [oauthConsent.access]
 actAsYou = "Act as you - everything {{app}} does runs under your account and counts towards your usage"
-tools = "Use your Stirling PDF tools on your behalf - convert, edit, sign, secure and process your documents"
+tools = "Use your Morphe PDF tools on your behalf - convert, edit, sign, secure and process your documents"
 
 [oauthConsent.scope]
 email = "See your email address"
@@ -5152,26 +5152,26 @@ skipTheTour = "Preskoči obilazak"
 
 [onboarding.checklist]
 dismiss = "Odbaci"
-title = "Podesite Stirling PDF"
+title = "Podesite Morphe PDF"
 
 [onboarding.checklist.downloadDesktop]
-description = "Pokrenite Stirling nativno na svom računaru"
-title = "Preuzmite Stirling za desktop"
+description = "Pokrenite Morphe nativno na svom računaru"
+title = "Preuzmite Morphe za desktop"
 
 [onboarding.checklist.inviteTeam]
 description = "Sarađujte sa svojim timom"
 title = "Pozovite članove tima"
 
 [onboarding.checklist.shareAnalytics]
-description = "Pomozite da se Stirling poboljša"
+description = "Pomozite da se Morphe poboljša"
 title = "Delite anonimne podatke o korišćenju"
 
 [onboarding.checklist.takeTour]
-description = "Pogledajte kako Stirling radi u kratkom obilasku"
+description = "Pogledajte kako Morphe radi u kratkom obilasku"
 title = "Pokrenite obilazak"
 
 [onboarding.desktopInstall]
-body = "Stirling najbolje radi kao desktop aplikacija. Možete je koristiti offline, brže pristupati dokumentima i praviti izmene lokalno na računaru."
+body = "Morphe najbolje radi kao desktop aplikacija. Možete je koristiti offline, brže pristupati dokumentima i praviti izmene lokalno na računaru."
 selectOs = "Izaberite operativni sistem"
 title = "Preuzmi"
 titleWithOs = "Preuzmi za {{osLabel}}"
@@ -5195,21 +5195,21 @@ success = "MFA je omogućen. Sada možete da nastavite."
 title = "Podešavanje višefaktorske autentifikacije"
 
 [onboarding.planOverview]
-adminBodyLoginDisabled = "Kada omogućite režim prijave, možete upravljati korisnicima, podešavati opcije i pratiti stanje servera. Prvih <strong>{{freeTierLimit}}</strong> ljudi na vašem serveru koristi Stirling besplatno."
-adminBodyLoginEnabled = "Kao admin, možete upravljati korisnicima, podešavati opcije i pratiti stanje servera. Prvih <strong>{{freeTierLimit}}</strong> ljudi na vašem serveru koristi Stirling besplatno."
+adminBodyLoginDisabled = "Kada omogućite režim prijave, možete upravljati korisnicima, podešavati opcije i pratiti stanje servera. Prvih <strong>{{freeTierLimit}}</strong> ljudi na vašem serveru koristi Morphe besplatno."
+adminBodyLoginEnabled = "Kao admin, možete upravljati korisnicima, podešavati opcije i pratiti stanje servera. Prvih <strong>{{freeTierLimit}}</strong> ljudi na vašem serveru koristi Morphe besplatno."
 adminTitle = "Admin pregled"
 userBody = "Pozovite kolege, dodeljujte uloge i držite dokumente organizovanim u jednom bezbednom prostoru. Omogućite režim prijave kad god ste spremni da pređete preko solo upotrebe."
 userTitle = "Pregled plana"
 
 [onboarding.processorIntro]
-body = "Stirling sada pokreće <strong>Pravila</strong> — automatizovana pravila koja klasifikuju, štite i obrađuju svaki dokument po dolasku. Podesite ih i pratite izvršavanja u <strong>Procesoru</strong>."
+body = "Morphe sada pokreće <strong>Pravila</strong> — automatizovana pravila koja klasifikuju, štite i obrađuju svaki dokument po dolasku. Podesite ih i pratite izvršavanja u <strong>Procesoru</strong>."
 cta = "Pogledajte Procesor"
-title = "Pogledajte Stirling Procesor"
+title = "Pogledajte Morphe Procesor"
 
 [onboarding.saas.freeEditor]
 freeLine = "The editor is now <free>completely free</free>."
 premium = "We've added loads of new features, including <strong>Policies</strong> and <strong>Agent Chat</strong>."
-title = "Welcome to Stirling"
+title = "Welcome to Morphe"
 
 [onboarding.saas.team]
 addButton = "Add"
@@ -5229,20 +5229,20 @@ rolePlaceholder = "Potvrdite svoju ulogu"
 roleUser = "Korisnik"
 
 [onboarding.serverLicense]
-freeBody = "Naše <strong>Open-Core</strong> licenciranje dozvoljava do <strong>{{freeTierLimit}}</strong> korisnika besplatno po serveru. Da se bez prekida skalirate i dobijete rani pristup našem novom <strong>alatu za uređivanje PDF teksta</strong>, preporučujemo Stirling Server plan - puno uređivanje i <strong>neograničena mesta</strong> za $99/server/mes."
+freeBody = "Naše <strong>Open-Core</strong> licenciranje dozvoljava do <strong>{{freeTierLimit}}</strong> korisnika besplatno po serveru. Da se bez prekida skalirate i dobijete rani pristup našem novom <strong>alatu za uređivanje PDF teksta</strong>, preporučujemo Morphe Server plan - puno uređivanje i <strong>neograničena mesta</strong> za $99/server/mes."
 freeTitle = "Serverska licenca"
-overLimitBody = "Naše licenciranje dozvoljava do <strong>{{freeTierLimit}}</strong> korisnika besplatno po serveru. Imate <strong>{{overLimitUserCopy}}</strong> Stirling korisnika. Da nastavite bez prekida, pređite na Stirling Server plan - <strong>neograničena mesta</strong>, uređivanje PDF teksta i puna admin kontrola za $99/server/mes."
+overLimitBody = "Naše licenciranje dozvoljava do <strong>{{freeTierLimit}}</strong> korisnika besplatno po serveru. Imate <strong>{{overLimitUserCopy}}</strong> Morphe korisnika. Da nastavite bez prekida, pređite na Morphe Server plan - <strong>neograničena mesta</strong>, uređivanje PDF teksta i puna admin kontrola za $99/server/mes."
 overLimitTitle = "Potrebna serverska licenca"
 seePlans = "Pogledajte planove →"
 upgrade = "Nadogradite sada →"
 
 [onboarding.tourOverview]
-body = "Stirling PDF V2 dolazi sa desetinama alata i osveženim rasporedom. Pođite na kratki obilazak da vidite šta se promenilo i gde da pronađete funkcije koje su vam potrebne."
+body = "Morphe PDF V2 dolazi sa desetinama alata i osveženim rasporedom. Pođite na kratki obilazak da vidite šta se promenilo i gde da pronađete funkcije koje su vam potrebne."
 title = "Pregled obilaska"
 
 [onboarding.welcomeSlide]
-body = "Stirling PDF je sada spreman za timove svih veličina. Ovo ažuriranje donosi novi raspored, moćne admin mogućnosti i našu najtraženiju funkciju - <strong>Uredi tekst</strong>."
-title = "Dobrodošli u Stirling"
+body = "Morphe PDF je sada spreman za timove svih veličina. Ovo ažuriranje donosi novi raspored, moćne admin mogućnosti i našu najtraženiju funkciju - <strong>Uredi tekst</strong>."
+title = "Dobrodošli u Morphe"
 
 [onboarding.whatsNew]
 activeFilesView = "Koristite Aktivne fajlove da vidite sve što je otvoreno i izaberete na čemu ćete raditi."
@@ -5548,7 +5548,7 @@ benefit1Body = "chain tools, schedule runs, batch process"
 benefit1Title = "Automation pipelines"
 benefit2Body = "summarise, classify, redact, AI-OCR"
 benefit2Title = "AI tools"
-benefit3Body = "call any Stirling endpoint programmatically"
+benefit3Body = "call any Morphe endpoint programmatically"
 benefit3Title = "API access"
 button = "Turn on Processor →"
 reassurance = "No minimum · Set a $0 cap to test · Cancel anytime"
@@ -5629,7 +5629,7 @@ leader = "Team owner"
 member = "Member"
 
 [payg.signupRequired]
-body = "Stirling PDF gives every signed-up account 500 free operations, enough to keep most workflows humming without paying a cent. You're currently using Stirling as a guest, which doesn't include billable tools like AI, automations, or hosted processing."
+body = "Morphe PDF gives every signed-up account 500 free operations, enough to keep most workflows humming without paying a cent. You're currently using Morphe as a guest, which doesn't include billable tools like AI, automations, or hosted processing."
 cancel = "Not now"
 cta = "Sign up free"
 subtext = "Creating an account is free and takes a few seconds. No credit card required."
@@ -5677,7 +5677,7 @@ usdNote = "Estimated in USD. You can adjust your cap any time after subscribing,
 [payg.upgrade.checkout]
 capValue = "{{symbol}}{{amount}} / month"
 edit = "Edit"
-help = "Stripe handles your card details. Stirling never sees them."
+help = "Stripe handles your card details. Morphe never sees them."
 loading = "Loading checkout…"
 noCap = "No cap"
 title = "Add your payment method"
@@ -5685,7 +5685,7 @@ title = "Add your payment method"
 [payg.upgrade.help]
 aiBody = "summarise, classify, redact, AI-OCR"
 aiTitle = "AI tools"
-apiBody = "programmatic access to any Stirling endpoint"
+apiBody = "programmatic access to any Morphe endpoint"
 apiTitle = "API calls"
 automationBody = "chained tools or scheduled runs that don't need clicks"
 automationTitle = "Automation pipelines"
@@ -6116,7 +6116,7 @@ upToFiveUsers = "Do 5 korisnika"
 usageTrackingPrometheus = "Praćenje upotrebe i Prometheus"
 
 [plan.licenseWarning]
-body = "Imate {{total}} korisnika, ali besplatni nivo podržava samo {{limit}} po serveru. Nadogradite da bi Stirling PDF radio neometano."
+body = "Imate {{total}} korisnika, ali besplatni nivo podržava samo {{limit}} po serveru. Nadogradite da bi Morphe PDF radio neometano."
 cta = "Pogledajte planove"
 overLimit = "više od {{limit}}"
 title = "Dostignuto ograničenje za besplatno samohostovanje"
@@ -6251,25 +6251,25 @@ comingSoon = "Uskoro"
 [portal.accountLink.card]
 billingNote = "Nenadzirana obrada se naplaćuje iz novčanika vaše organizacije."
 eyebrow = "Povezivanje naloga"
-linkButton = "Poveži svoj Stirling nalog"
+linkButton = "Poveži svoj Morphe nalog"
 linked = "Povezano"
 linkedAs = "Povezano kao {{name}}."
 linkedGeneric = "Ova instanca je povezana."
 notLinked = "Nije povezano"
-title = "Poveži ovu organizaciju sa njenim Stirling nalogom"
+title = "Poveži ovu organizaciju sa njenim Morphe nalogom"
 unlink = "Prekini vezu"
 
 [portal.accountLink.card.error]
 title = "Nije moguće povezati"
 
 [portal.accountLink.card.loginNotConfigured]
-after = "da biste omogućili povezivanje naloga sa hostovanim Stirling nalogom. U razvojnom okruženju možete simulirati prijavu iz dijaloga za povezivanje."
+after = "da biste omogućili povezivanje naloga sa hostovanim Morphe nalogom. U razvojnom okruženju možete simulirati prijavu iz dijaloga za povezivanje."
 before = "Podesite"
 title = "SaaS prijava nije konfigurisana"
 
 [portal.accountLink.gate]
 action = "Poveži nalog"
-description = "Povežite Stirling nalog ove organizacije da biste koristili funkcije koje se naplaćuju."
+description = "Povežite Morphe nalog ove organizacije da biste koristili funkcije koje se naplaćuju."
 title = "Povežite za otključavanje"
 titleFeature = "Povežite za otključavanje {{feature}}"
 
@@ -6301,13 +6301,13 @@ never = "nikad"
 
 [portal.accountLink.modal]
 linkSubtitle = "Prijavite se na nalog na koji ovaj server treba da naplaćuje."
-linkTitle = "Povežite svoj Stirling nalog"
-reauthSubtitle = "Vaša sesija je istekla — ponovo se prijavite na svoj Stirling nalog. Vaša instanca ostaje povezana."
+linkTitle = "Povežite svoj Morphe nalog"
+reauthSubtitle = "Vaša sesija je istekla — ponovo se prijavite na svoj Morphe nalog. Vaša instanca ostaje povezana."
 reauthTitle = "Prijavite se ponovo"
 simulateSignIn = "Simuliraj prijavu (dev)"
 
 [portal.accountLink.modal.loginNotConfigured]
-after = "da biste omogućili povezivanje u aplikaciji sa hostovanim Stirling nalogom."
+after = "da biste omogućili povezivanje u aplikaciji sa hostovanim Morphe nalogom."
 and = "i"
 before = "Podesite"
 title = "SaaS prijava nije konfigurisana"
@@ -6316,7 +6316,7 @@ title = "SaaS prijava nije konfigurisana"
 instancesSub = "Svaka self-hosted instanca registrovana za ovu organizaciju. Opozovite akreditiv da biste odmah prekinuli njen nenadzirani pristup."
 instancesTitle = "Povezane instance"
 revokeError = "Nije moguće opozvati instancu"
-sub = "Povežite ovu self-hosted organizaciju sa njenim Stirling nalogom kako bi se nenadzirana obrada naplaćivala iz novčanika vaše organizacije."
+sub = "Povežite ovu self-hosted organizaciju sa njenim Morphe nalogom kako bi se nenadzirana obrada naplaćivala iz novčanika vaše organizacije."
 
 [portal.accountLink.panel.loadError]
 forbidden = "Samo vlasnik tima može da vidi povezane instance organizacije."
@@ -6333,7 +6333,7 @@ close = "Zatvori asistenta"
 error = "Nije moguće doći do asistenta."
 errorWithDetail = "Nije moguće doći do asistenta: {{detail}}"
 inputAriaLabel = "Pitajte asistenta"
-inputPlaceholder = "Pitajte o Stirling…"
+inputPlaceholder = "Pitajte o Morphe…"
 open = "Otvori asistenta"
 send = "Pošalji"
 title = "Asistent"
@@ -6380,7 +6380,7 @@ title = "Postavite limit potrošnje"
 [portal.billing.checkout.card]
 fields = "Broj kartice · MM / GG · CVC · ZIP"
 label = "Podaci kartice"
-note = "Podatke kartice prikuplja Stripe. Stirling nikada ne čuva PAN ili CVC."
+note = "Podatke kartice prikuplja Stripe. Morphe nikada ne čuva PAN ili CVC."
 
 [portal.billing.checkout.error]
 title = "Nije moguće pokrenuti checkout"
@@ -6398,7 +6398,7 @@ limitNoCap = "Bez limita potrošnje. Obrada se neće pauzirati. Fakture se izdaj
 cta = "Sastavite svoju Enterprise ponudu"
 description = "Popusti za ugovoreni obim, air-gapped implementacija, prilagođeni MSA i bezbednosne provere, kao i partnerstva sa distributerima trećih strana."
 eyebrow = "Popust na obim · 1M+ PDF dokumenata"
-title = "Stirling Enterprise"
+title = "Morphe Enterprise"
 
 [portal.billing.freeEditors]
 activeThisMonth = "Aktivno ovog meseca"
@@ -6447,9 +6447,9 @@ viewAriaLabel = "Prikaži fakturu {{number}} u Stripe"
 viewLink = "Prikaži ↗"
 
 [portal.billing.linkPrompt]
-cta = "Poveži Stirling nalog"
+cta = "Poveži Morphe nalog"
 description = "Ručno uređivanje PDF-a — prikaz, potpisivanje, spajanje, deljenje, vodeni žig, kompresovanje, konvertovanje, ručni OCR — uvek je besplatno, povezano ili ne. Povežite da biste preuzeli 500 besplatnih PDF dokumenata merene obrade (automatizacija, AI i API); kada vam zatreba više, uključite Processor plan i plaćajte samo ono što koristite."
-title = "Povežite svoj Stirling nalog"
+title = "Povežite svoj Morphe nalog"
 
 [portal.billing.paymentMethod]
 billedMonthly = "Naplaćuje se mesečno"
@@ -6523,9 +6523,9 @@ usersLabel = "Ukupno korisnika"
 label = "Razumem da, kada se moj unapred plaćeni kapacitet potroši ili istekne posle 12 meseci, obrada automatski nastavlja po standardnoj stopi plaćanja po potrošnji (do mog limita potrošnje) osim ako ne otkažem, i da mogu da otkažem bilo kada iz portala za naplatu."
 
 [portal.billing.prepaid.deploy]
-cloud = "Stirling Cloud"
-cloudDesc = "Upravlja Stirling. Uživo za nekoliko minuta."
-cloudValue = "Stirling Cloud · Upravljano"
+cloud = "Morphe Cloud"
+cloudDesc = "Upravlja Morphe. Uživo za nekoliko minuta."
+cloudValue = "Morphe Cloud · Upravljano"
 selfhost = "Self-hosted"
 selfhostDesc = "Radi na privatnoj infrastrukturi. Ista cena."
 selfhostValue = "Self-hosted · Privatna infrastruktura"
@@ -6681,7 +6681,7 @@ description = "Gde obrađeni dokumenti završavaju - bucket, drive, tiket ili st
 label = "Datoteke i prilozi"
 
 [portal.connections.commonFields.accessToken]
-helperText = "Stirling ovo čuva šifrovano i nikada ga više ne prikazuje."
+helperText = "Morphe ovo čuva šifrovano i nikada ga više ne prikazuje."
 label = "Pristupni token"
 
 [portal.connections.commonFields.apiKey]
@@ -7191,7 +7191,7 @@ time = "Vreme"
 user = "Korisnik"
 
 [portal.editorAdmin]
-subtitle = "Postavite Stirling PDF Editor, uparite self-hosted instance sa svojom organizacijom i upravljajte aktivnom flotom — ciljevima, stanjem, akreditivima i offline aktivacijom na jednom mestu."
+subtitle = "Postavite Morphe PDF Editor, uparite self-hosted instance sa svojom organizacijom i upravljajte aktivnom flotom — ciljevima, stanjem, akreditivima i offline aktivacijom na jednom mestu."
 title = "Postavljanje Editora"
 
 [portal.editorAdmin.health.columns]
@@ -7282,7 +7282,7 @@ guide = "Otvori {{name}} vodič"
 openInBrowser = "Otvori u pregledaču umesto toga"
 sectionDesktop = "Desktop aplikacija"
 sectionSelfHosted = "Self-hosted"
-title = "Instalirajte Stirling PDF Editor"
+title = "Instalirajte Morphe PDF Editor"
 
 [portal.home.download.docker]
 detailBody = "Pokrenite zvaničnu sliku na svom serveru."
@@ -7330,7 +7330,7 @@ title = "Windows"
 
 [portal.home.editor]
 activeOfDeployed = "{{active}} od {{total}} aktivno ovog meseca"
-name = "Stirling PDF Editor"
+name = "Morphe PDF Editor"
 open = "Otvori u pregledaču"
 updated = "ažurirano {{time}}"
 
@@ -7352,7 +7352,7 @@ morning = "Dobro jutro"
 [portal.infrastructure]
 manageEditorDeployment = "Upravljajte postavljanjem Editora"
 sectionsAriaLabel = "Odeljci infrastrukture"
-subtitle = "Postavljanja, akreditivi, bezbednosni položaj, skladište i audit trag za vaš Stirling radni prostor."
+subtitle = "Postavljanja, akreditivi, bezbednosni položaj, skladište i audit trag za vaš Morphe radni prostor."
 title = "Infrastruktura"
 
 [portal.infrastructure.apiKeys]
@@ -7368,7 +7368,7 @@ usageMonth = "Korišćenje ovog meseca"
 usageToday = "Korišćenje danas"
 
 [portal.infrastructure.apiKeys.empty]
-description = "Kreirajte ključ sa opsegom da biste počeli da pozivate Stirling API."
+description = "Kreirajte ključ sa opsegom da biste počeli da pozivate Morphe API."
 title = "Još nema API ključeva"
 
 [portal.infrastructure.apiKeys.error]
@@ -7468,7 +7468,7 @@ done = "Gotovo"
 keyNameLabel = "Naziv ključa"
 keyNamePlaceholder = "npr. Produkcija · unos"
 secretKeyCaption = "Tajni ključ"
-secretWarning = "Sačuvajte ovo u menadžeru tajni. Stirling uvek čuva samo hash — nema načina da se kasnije oporavi."
+secretWarning = "Sačuvajte ovo u menadžeru tajni. Morphe uvek čuva samo hash — nema načina da se kasnije oporavi."
 subtitle = "Ograničite opseg ključa na minimum koji mu je potreban. Možete ga rotirati ili opozvati u bilo kom trenutku."
 subtitleCreated = "Kopirajte ovu tajnu sada — neće biti ponovo prikazana."
 title = "Kreiraj API ključ"
@@ -7509,7 +7509,7 @@ version = "Verzija"
 
 [portal.infrastructure.deployments.regions]
 heading = "Regioni"
-subheading = "Uživo stanje svakog postavljenog Stirling regiona — latencija, opterećenje i verzija uvođenja."
+subheading = "Uživo stanje svakog postavljenog Morphe regiona — latencija, opterećenje i verzija uvođenja."
 
 [portal.infrastructure.deployments.regions.empty]
 description = "Postavljeni regioni će se ovde pojaviti kada vaš radni prostor bude obezbeđen."
@@ -7590,16 +7590,16 @@ down = "Nedostupno"
 healthy = "Ispravno"
 
 [portal.infrastructure.security.access.byok]
-description = "Obezbedite ključ iz sopstvenog KMS. Stirling šifruje njime, ali i dalje može da čita."
+description = "Obezbedite ključ iz sopstvenog KMS. Morphe šifruje njime, ali i dalje može da čita."
 label = "Donesite sopstveni ključ (BYOK)"
 
 [portal.infrastructure.security.access.hyok]
-description = "Ključevi nikada ne napuštaju vaš KMS. Stirling čuva samo šifrovani tekst."
+description = "Ključevi nikada ne napuštaju vaš KMS. Morphe čuva samo šifrovani tekst."
 label = "Zadržite sopstveni ključ (HYOK)"
 
 [portal.infrastructure.security.access.stirling]
-description = "Stirling upravlja ključevima za šifrovanje. Najjednostavnije — bez upravljanja ključevima sa vaše strane."
-label = "Ključevi koje drži Stirling"
+description = "Morphe upravlja ključevima za šifrovanje. Najjednostavnije — bez upravljanja ključevima sa vaše strane."
+label = "Ključevi koje drži Morphe"
 
 [portal.infrastructure.security.accessPolicy]
 heading = "Politika pristupa dokumentima"
@@ -7613,15 +7613,15 @@ viewReport = "Prikaži izveštaj →"
 
 [portal.infrastructure.security.compliance]
 heading = "Usklađenost"
-subheading = "Potvrde i sertifikati koji pokrivaju Stirling platformu."
+subheading = "Potvrde i sertifikati koji pokrivaju Morphe platformu."
 
 [portal.infrastructure.security.empty]
 description = "Bezbednosna konfiguracija vašeg radnog prostora će se ovde pojaviti."
 title = "Bezbednosni položaj nije dostupan"
 
 [portal.infrastructure.security.hyokBanner]
-description = "Uz HYOK, ključevi za šifrovanje nikada ne napuštaju vaš KMS. Stirling čuva i obrađuje samo šifrovani tekst koji možete opozvati u bilo kom trenutku."
-title = "Stirling ne može da dešifruje vaše dokumente"
+description = "Uz HYOK, ključevi za šifrovanje nikada ne napuštaju vaš KMS. Morphe čuva i obrađuje samo šifrovani tekst koji možete opozvati u bilo kom trenutku."
+title = "Morphe ne može da dešifruje vaše dokumente"
 
 [portal.infrastructure.security.ipAllowlist]
 empty = "Nema konfigurisanih IP opsega — sve IP adrese su dozvoljene."
@@ -7650,7 +7650,7 @@ subheading = "Starateljstvo nad ključevima koji šifruju dokumente u mirovanju 
 
 [portal.infrastructure.security.managedBanner]
 description = "Starateljstvo po principu donesite sopstveni ključ (BYOK) i zadržite sopstveni ključ (HYOK) dostupno je na Enterprise planu. Nadogradite da obezbedite ključeve iz sopstvenog KMS."
-title = "Ključevima na vašem planu upravlja Stirling"
+title = "Ključevima na vašem planu upravlja Morphe"
 
 [portal.infrastructure.security.residency.apac]
 description = "ap-southeast-1"
@@ -7724,7 +7724,7 @@ connectionCount_one = "{{count}} veza"
 connectionCount_other = "{{count}} veza"
 customApi = "Prilagođeni API"
 searchPlaceholder = "Pretraži integracije"
-subtitle = "Sve sa čim Stirling može da komunicira. Akreditivi se ovde kreiraju jednom, a zatim ih koriste izvori, politike i tokovi obrade."
+subtitle = "Sve sa čim Morphe može da komunicira. Akreditivi se ovde kreiraju jednom, a zatim ih koriste izvori, politike i tokovi obrade."
 title = "Integracije"
 typedName = "Naziv za {{tool}}"
 
@@ -8405,7 +8405,7 @@ title = "Još nema toka"
 
 [portal.processorFlow.sources]
 comingSoonTag = "Poveži"
-editor = "Stirling PDF Editor"
+editor = "Morphe PDF Editor"
 heading = "Izvori"
 perDay = "{{n}} / 24h"
 
@@ -8421,8 +8421,8 @@ title = "Nabavka"
 [portal.procurement.agreement]
 agreeCta = "Prihvati i pretplati se"
 confidential = "Poverljivo"
-confirm = "Pročitao/la sam i prihvatam Stirling Enterprise Agreement."
-docName = "Stirling Enterprise ugovor"
+confirm = "Pročitao/la sam i prihvatam Morphe Enterprise Agreement."
+docName = "Morphe Enterprise ugovor"
 docSub = "MSA, narudžbeni obrazac, EULA i DPA, objedinjeni u jedan potpis."
 download = "Preuzmi"
 downloadDraftError = "Nije moguće generisati PDF ugovora - renderer dokumenta nije dostupan. Pokušajte ponovo uskoro ili kontaktirajte podršku."
@@ -8458,7 +8458,7 @@ contactName = "Ime kontakta"
 contactNamePlaceholder = "Jane Doe"
 continue = "Nastavi"
 done = "Gotovo"
-eula = "Pročitao/la sam i prihvatam Stirling Enterprise EULA. Ona uređuje ugovor generisan iz ove ponude."
+eula = "Pročitao/la sam i prihvatam Morphe Enterprise EULA. Ona uređuje ugovor generisan iz ove ponude."
 generate = "Generiši ponudu"
 indemnification = "IP obeštećenje"
 indemnificationSub = "Branimo kvalifikovane IP zahteve, prema EULA"
@@ -8556,7 +8556,7 @@ eyebrowCompany = "{{company}} Enterprise"
 inviteTeammates = "Pozovite članove tima"
 licenseKey = "Licencni ključ"
 liveSub = "Vaša organizacija je provisionirana i vaša licenca je aktivna."
-liveTitle = "Uživo ste na Stirling Enterprise"
+liveTitle = "Uživo ste na Morphe Enterprise"
 next = "Sledeće: {{stage}}"
 open = "Otvori nabavku"
 scheduleCall = "Zakaži poziv"
@@ -8591,7 +8591,7 @@ gatingAction = "Prihvatite svoju ponudu"
 label = "Ponuda"
 
 [portal.procurement.journeySteps.trial]
-blurb = "Procenite Stirling prema svojim dokumentima i tokovima rada."
+blurb = "Procenite Morphe prema svojim dokumentima i tokovima rada."
 gatingAction = "Napravite svoju ponudu"
 label = "Probni period"
 
@@ -8608,14 +8608,14 @@ trialFileHint = "Ovo je vaša probna licencna datoteka. Kada ugovor bude usposta
 
 [portal.procurement.link]
 cta = "Poveži nalog"
-description = "Nabavka radi na vašem povezanom Stirling nalogu: tako obezbeđujemo probni period, određujemo cenu ponude i pokrećemo naplatu. Povežite nalog za početak."
+description = "Nabavka radi na vašem povezanom Morphe nalogu: tako obezbeđujemo probni period, određujemo cenu ponude i pokrećemo naplatu. Povežite nalog za početak."
 eyebrow = "Enterprise"
 title = "Povežite svoj nalog da biste počeli"
 
 [portal.procurement.live]
 description = "Vaša pretplata je aktivna i licenca je izdata. Vaš tim je obezbeđen i naplata je počela."
 eyebrow = "Uživo"
-title = "Uživo ste na Stirling Enterprise"
+title = "Uživo ste na Morphe Enterprise"
 
 [portal.procurement.milestone]
 downloadError = "Još nije moguće preuzeti PDF ponude — pokušajte ponovo za trenutak."
@@ -8650,11 +8650,11 @@ airgapSub = "Izolovano, bez odlaznog saobraćaja"
 back = "Nazad"
 businessName = "Naziv preduzeća"
 businessNamePlaceholder = "Acme Corp"
-cloud = "Stirling Cloud"
+cloud = "Morphe Cloud"
 cloudSub = "Upravljano, najbrži početak"
 continue = "Nastavi"
 deployment = "Gde treba implementirati?"
-eula = "Slažem se sa Stirling EULA i komercijalnim uslovima."
+eula = "Slažem se sa Morphe EULA i komercijalnim uslovima."
 fullName = "Puno ime"
 fullNamePlaceholder = "Vaše ime"
 invites = "Pozovite članove tima · opciono"
@@ -8685,7 +8685,7 @@ title = "Enterprise probni period"
 
 [portal.search]
 ariaLabel = "Pretraga"
-placeholder = "Pretražite Stirling — endpoint-i, tokovi obrade, dokumenti…"
+placeholder = "Pretražite Morphe — endpoint-i, tokovi obrade, dokumenti…"
 
 [portal.search.empty]
 noActionsDescription = "Brze radnje će se pojaviti ovde kada budu dostupne."
@@ -8702,7 +8702,7 @@ account-link = "Povezivanje naloga"
 [portal.shell.sidebar]
 appEditor = "Editor"
 appProcessor = "Processor"
-linkAccount = "Poveži Stirling nalog"
+linkAccount = "Poveži Morphe nalog"
 primaryNav = "Primarna navigacija"
 switchApp = "Promeni aplikaciju"
 
@@ -8712,7 +8712,7 @@ openNav = "Otvori navigaciju"
 search = "Pretraga"
 
 [portal.sources]
-subtitle = "Ponovo upotrebljive ulazne veze koje dostavljaju dokumente u Stirling. Konfigurišite vezu jednom, a zatim je referencirajte iz bilo kog broja politika. Kliknite na red za njenu konfiguraciju i politike koje je koriste."
+subtitle = "Ponovo upotrebljive ulazne veze koje dostavljaju dokumente u Morphe. Konfigurišite vezu jednom, a zatim je referencirajte iz bilo kog broja politika. Kliknite na red za njenu konfiguraciju i politike koje je koriste."
 title = "Izvori"
 
 [portal.sources.actions]
@@ -8809,7 +8809,7 @@ description = "Prati direktorijum na serveru za nove dokumente."
 label = "Fascikla"
 
 [portal.sources.types.folder.fields.directory]
-helperText = "Apsolutna putanja koju Stirling prati za datoteke za obradu."
+helperText = "Apsolutna putanja koju Morphe prati za datoteke za obradu."
 label = "Putanja direktorijuma"
 placeholder = "/data/incoming"
 
@@ -8896,7 +8896,7 @@ secretNote = "Tajna za potpisivanje prikazuje se jednom, kada se webhook kreira.
 copy = "Kopiraj"
 done = "Gotovo"
 secret = "Tajna za potpisivanje"
-secretHelp = "Potpišite sirovo telo svake isporuke ovim ključem (HMAC-SHA256) i pošaljite ga kao X-Stirling-Signature zaglavlje."
+secretHelp = "Potpišite sirovo telo svake isporuke ovim ključem (HMAC-SHA256) i pošaljite ga kao X-Morphe-Signature zaglavlje."
 secretWarning = "Kopirajte tajnu za potpisivanje sada. Radi vaše bezbednosti prikazuje se samo jednom i ne može se kasnije preuzeti."
 title = "Webhook kreiran"
 url = "URL za isporuku"
@@ -8912,7 +8912,7 @@ close = "Zatvori"
 
 [portal.usage]
 managePayment = "Upravljaj plaćanjem"
-subtitle = "Potrošnja, fakture i upravljanje planom za svaki PDF koji je Stirling naplatio, u jednoj konzoli."
+subtitle = "Potrošnja, fakture i upravljanje planom za svaki PDF koji je Morphe naplatio, u jednoj konzoli."
 title = "Korišćenje i naplata"
 
 [portal.usage.error]
@@ -8922,7 +8922,7 @@ walletUnavailable = "Novčanik nije dostupan: {{status}} {{statusText}}"
 
 [portal.usage.sessionExpired]
 action = "Prijavite se ponovo"
-body = "Sesija vašeg Stirling naloga je istekla. Prijavite se ponovo da biste videli naplatu — vaša instanca ostaje povezana."
+body = "Sesija vašeg Morphe naloga je istekla. Prijavite se ponovo da biste videli naplatu — vaša instanca ostaje povezana."
 title = "Sesija je istekla"
 
 [portal.users]
@@ -9695,8 +9695,8 @@ hideTools = "Sakrij nedostupne alate ▴"
 messageNoFallback = "Alati nisu dostupni dok se vaš server ne vrati na mrežu."
 messageWithFallback = "Neki alati zahtevaju vezu sa serverom."
 showTools = "Prikaži nedostupne alate ▾"
-title = "Vaš Stirling-PDF server je nedostupan"
-toolNotAvailableLocally = "Vaš Stirling-PDF server je van mreže i \"{{endpoint}}\" nije dostupan na lokalnom pozadinskom servisu."
+title = "Vaš Morphe PDF server je nedostupan"
+toolNotAvailableLocally = "Vaš Morphe PDF server je van mreže i \"{{endpoint}}\" nije dostupan na lokalnom pozadinskom servisu."
 
 [session]
 expired = "Istekla ti je sesija. Osveži stranicu i pokušaj ponovo."
@@ -9732,7 +9732,7 @@ user = "Prijavljeni kao"
 
 [settings.connection.mode]
 local = "Samo lokalno"
-saas = "Stirling Cloud"
+saas = "Morphe Cloud"
 selfhosted = "Samohostovano"
 
 [settings.developer]
@@ -9747,11 +9747,11 @@ autoUnzipFileLimitDescription = "Maksimalan broj datoteka za izdvajanje iz ZIP-a
 autoUnzipFileLimitTooltip = "Raspakuj samo ako ZIP sadrži ovoliko ili manje datoteka. Povećajte vrednost da biste izdvojili veće ZIP-ove."
 autoUnzipTooltip = "Automatski raspakuj ZIP datoteke vraćene iz API operacija. Isključite da biste zadržali ZIP datoteke netaknute. Ovo ne utiče na automatizovane tokove rada."
 defaultPdfEditor = "Podrazumevani PDF uređivač"
-defaultPdfEditorActive = "Stirling PDF je vaš podrazumevani PDF uređivač"
+defaultPdfEditorActive = "Morphe PDF je vaš podrazumevani PDF uređivač"
 defaultPdfEditorChecking = "Provera..."
 defaultPdfEditorInactive = "Druga aplikacija je postavljena kao podrazumevana"
 defaultPdfEditorRemind = "Podseti me da postavim kao podrazumevano"
-defaultPdfEditorRemindDescription = "Prikaži baner kada Stirling PDF nije vaša podrazumevana PDF aplikacija."
+defaultPdfEditorRemindDescription = "Prikaži baner kada Morphe PDF nije vaša podrazumevana PDF aplikacija."
 defaultPdfEditorSet = "Već podrazumevano"
 defaultStartupView = "Podrazumevani prikaz pri pokretanju"
 defaultStartupViewDescription = "Izaberite koja je kartica aktivna u levoj koloni kada se aplikacija pokrene"
@@ -9795,7 +9795,7 @@ learnMore = "Saznaj više u dokumentaciji"
 title = "Za sistemske administratore"
 
 [settings.general.loginLanding]
-description = "Izaberite koja se aplikacija otvara kada se prijavite u Stirling Cloud."
+description = "Izaberite koja se aplikacija otvara kada se prijavite u Morphe Cloud."
 editor = "Uređivač"
 processor = "Procesor"
 title = "Nakon prijavljivanja"
@@ -9825,7 +9825,7 @@ updateBehavior = "Ponašanje pri ažuriranju"
 updateBehaviorDescription = "Izaberite da li želite upit pre instaliranja ažuriranja, automatsku instalaciju ili potpuno preskakanje provera ažuriranja."
 updateBehaviorError = "Nije moguće promeniti ponašanje pri ažuriranju"
 updateBehaviorErrorLocked = "Ovu postavku je zaključao vaš administrator."
-updateBehaviorLockedDescription = "Vaš administrator je podesio kako Stirling-PDF rukuje ažuriranjima na ovoj mašini. Kontaktirajte ih da to promene."
+updateBehaviorLockedDescription = "Vaš administrator je podesio kako Morphe PDF rukuje ažuriranjima na ovoj mašini. Kontaktirajte ih da to promene."
 updateBehaviorSaved = "Ponašanje pri ažuriranju sačuvano."
 versionMismatch = "Warning: A mismatch has been detected between the client version and the AppConfig version. Using different versions can lead to compatibility issues, errors, and security risks. Please ensure that server and client are using the same version."
 viewDetails = "Prikaži detalje"
@@ -9909,7 +9909,7 @@ usageAnalytics = "Analitika korišćenja"
 [settings.planBilling]
 currentPlan = "Trenutni plan"
 loading = "Učitavanje informacija o naplati..."
-notAvailable = "Plan i naplata su dostupni samo kada ste povezani na Stirling Cloud (SaaS režim)."
+notAvailable = "Plan i naplata su dostupni samo kada ste povezani na Morphe Cloud (SaaS režim)."
 title = "Plan i naplata"
 
 [settings.planBilling.billing]
@@ -10040,7 +10040,7 @@ emptyUsername = "Unesite korisničko ime"
 oauthFailed = "OAuth prijava nije uspela. Pokušajte ponovo."
 
 [setup.saas]
-title = "Prijavite se u Stirling"
+title = "Prijavite se u Morphe"
 
 [setup.selfhosted]
 changeServerLocked = "Vaša organizacija je ograničila ovu aplikaciju na određeni server"
@@ -10078,7 +10078,7 @@ step3 = "Restartujte server"
 title = "Prijavljivanje nije omogućeno"
 
 [setup.server.url]
-description = "Unesite puni URL vašeg samohostovanog Stirling PDF servera"
+description = "Unesite puni URL vašeg samohostovanog Morphe PDF servera"
 label = "URL servera"
 
 [sharedSign]
@@ -10314,7 +10314,7 @@ pleaseFillAllFields = "Popunite sva polja"
 signUp = "Registruj se"
 signUpWith = "Sign up with"
 skip = "Skip"
-subtitle = "Pridružite se Stirling PDF da biste započeli"
+subtitle = "Pridružite se Morphe PDF da biste započeli"
 title = "Kreirajte nalog"
 unexpectedError = "Neočekivana greška: {{message}}"
 
@@ -10541,7 +10541,7 @@ download = "Preuzmi"
 downloaded = "Preuzeto"
 downloadFailed = "Nije moguće preuzeti ovu datoteku."
 downloadsCount = "Preuzimanja: {{count}}"
-emailWarningBody = "Ovo izgleda kao adresa e-pošte. Ako ova osoba nije već korisnik Stirling PDF-a, neće moći da pristupi datoteci."
+emailWarningBody = "Ovo izgleda kao adresa e-pošte. Ako ova osoba nije već korisnik Morphe PDF-a, neće moći da pristupi datoteci."
 emailWarningConfirm = "Ipak podeli"
 emailWarningTitle = "Adresa e-pošte"
 errorTitle = "Deljenje nije uspelo"
@@ -10572,7 +10572,7 @@ manageTitle = "Upravljanje deljenjem"
 noActivity = "Još nema aktivnosti."
 noLinks = "Još nema aktivnih linkova za deljenje."
 noSharedUsers = "Još niko nema pristup."
-openInApp = "Otvori u Stirling PDF"
+openInApp = "Otvori u Morphe PDF"
 ownerLabel = "Vlasnik"
 ownerUnknown = "Nepoznato"
 removeLink = "Ukloni link"
@@ -10626,7 +10626,7 @@ updateButton = "Ažuriraj na serveru"
 uploadButton = "Otpremi na server"
 
 [survey]
-title = "Stirling-PDF Survey"
+title = "Morphe PDF Survey"
 
 [swagger]
 clickHere = "kliknite ovde"
@@ -10785,7 +10785,7 @@ favorites = "Omiljeno"
 heading = "Svi alati (prikaz preko celog ekrana)"
 noResults = "Pokušajte da prilagodite pretragu ili uključite opise da biste našli šta vam treba."
 recommended = "Preporučeno"
-selfHostedOffline = "Zahteva vaš Stirling-PDF server (trenutno van mreže):"
+selfHostedOffline = "Zahteva vaš Morphe PDF server (trenutno van mreže):"
 showDetails = "Prikaži detalje"
 unavailable = "Onemogućio administrator servera:"
 unavailableDependency = "Nedostupno - potreban alat nedostaje na serveru:"
@@ -10794,7 +10794,7 @@ unfavorite = "Ukloni iz omiljenog"
 [toolPanel.modePrompt]
 chooseFullscreen = "Koristi režim celog ekrana"
 chooseSidebar = "Koristi režim bočne trake"
-description = "Pregledajte oba rasporeda i odlučite kako želite da istražujete Stirling PDF alate."
+description = "Pregledajte oba rasporeda i odlučite kako želite da istražujete Morphe PDF alate."
 dismiss = "Možda kasnije"
 fullscreenDescription = "Pregledajte svaki alat u katalogu koji prekriva radni prostor dok ne izaberete jedan."
 fullscreenTitle = "Režim celog ekrana - (zastarelo)"
@@ -10857,7 +10857,7 @@ loadingDetailedInfo = "Učitavanje detaljnih informacija..."
 migrationGuide = "Vodič za migraciju"
 migrationGuides = "Vodiči za migraciju"
 migrationGuidesDesc = "Pregledajte važne promene pre ažuriranja."
-modalSubtitle = "Nova verzija Stirling PDF je spremna za instalaciju."
+modalSubtitle = "Nova verzija Morphe PDF je spremna za instalaciju."
 modalTitle = "Dostupno ažuriranje"
 notes = "Napomene"
 releaseNotes = "Beleške izdanja"
@@ -10881,7 +10881,7 @@ urgent = "Hitno"
 attentionBody = "Vaš admin treba da se prijavi da vidi više informacija. Odmah ih kontaktirajte."
 attentionBodyAdmin = "Pregledajte zahteve licence da ovaj server ostane usklađen."
 attentionTitle = "Ovaj server zahteva pažnju admina"
-message = "Iskoristite maksimum iz Stirling PDF uz neograničene korisnike i napredne funkcije"
+message = "Iskoristite maksimum iz Morphe PDF uz neograničene korisnike i napredne funkcije"
 seeInfo = "Pogledajte info"
 title = "Nadogradite na Server plan"
 upgradeButton = "Nadogradite sada"
@@ -11016,7 +11016,7 @@ authWeb = "Lozinka"
 create = "Kreiraj nalog"
 createSubtitle = "Kreirajte self-hosted nalog sa lozinkom ili SSO."
 createTitle = "Kreiraj nalog"
-editorDesc = "Uređujte PDF-ove u Stirling PDF Editor-u. Svi dobijaju ovo."
+editorDesc = "Uređujte PDF-ove u Morphe PDF Editor-u. Svi dobijaju ovo."
 email = "Email adresa"
 emailError = "Unesite važeću email adresu"
 emailPlaceholder2 = "name@company.com"
@@ -11031,7 +11031,7 @@ processorDeferred = "Pozivnica je poslata, ali Processor pristup još nije mogao
 processorDesc = "Površina za upravljanje, pokretanje tokova obrade, agenti i API."
 role = "Uloga"
 send2 = "Pošalji poziv"
-subtitle2 = "Dobiće email da se pridruže vašem Stirling radnom prostoru."
+subtitle2 = "Dobiće email da se pridruže vašem Morphe radnom prostoru."
 team = "Tim"
 title = "Pozovi ljude"
 username = "Korisničko ime"
@@ -11164,7 +11164,7 @@ downloads = "Preuzimanja"
 entryLabel = "Rezime potpisa"
 filesEvaluated_one = "Procenjena je {{count}} datoteka"
 filesEvaluated_other = "Procenjeno je {{count}} datoteka"
-footer = "Validirano preko Stirling PDF"
+footer = "Validirano preko Morphe PDF"
 generatedAt = "Generisano"
 noPdf = "PDF izveštaj će biti dostupan nakon uspešne validacije."
 page = "Stranica"

@@ -60,7 +60,7 @@ export const Json: Story = {
     file: makeFile(
       "config.json",
       "application/json",
-      JSON.stringify({ name: "Stirling PDF", version: 1 }, null, 2),
+      JSON.stringify({ name: "Morphe PDF", version: 1 }, null, 2),
     ),
   },
 };

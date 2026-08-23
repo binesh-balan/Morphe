@@ -59,7 +59,7 @@ export const Input_WithIcon: Story = {
     <FormField label="Search">
       <Input
         leadingIcon={<SearchIcon size={14} />}
-        placeholder="Search Stirling…"
+        placeholder="Search Morphe…"
       />
     </FormField>
   ),
@@ -120,8 +120,8 @@ export const Radio_Group: Story = {
             options={[
               {
                 value: "stirling",
-                label: "Stirling-managed",
-                description: "Stirling generates and rotates keys.",
+                label: "Morphe-managed",
+                description: "Morphe generates and rotates keys.",
               },
               {
                 value: "byok",
@@ -131,7 +131,7 @@ export const Radio_Group: Story = {
               {
                 value: "hyok",
                 label: "HYOK (Enterprise)",
-                description: "Stirling never sees the key material.",
+                description: "Morphe never sees the key material.",
               },
             ]}
           />
@@ -250,7 +250,7 @@ export const FullForm: Story = {
               value={mode}
               onChange={setMode}
               options={[
-                { value: "stirling", label: "Stirling-managed" },
+                { value: "stirling", label: "Morphe-managed" },
                 { value: "byok", label: "BYOK" },
                 { value: "hyok", label: "HYOK" },
               ]}

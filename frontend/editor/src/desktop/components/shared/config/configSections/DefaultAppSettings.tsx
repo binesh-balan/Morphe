@@ -29,7 +29,7 @@ export const DefaultAppSettings: React.FC = () => {
               {isDefault === true
                 ? t(
                     "settings.general.defaultPdfEditorActive",
-                    "Stirling PDF is your default PDF editor",
+                    "Morphe PDF is your default PDF editor",
                   )
                 : isDefault === false
                   ? t(
@@ -67,7 +67,7 @@ export const DefaultAppSettings: React.FC = () => {
               <Text size="xs" c="dimmed" mt={4}>
                 {t(
                   "settings.general.defaultPdfEditorRemindDescription",
-                  "Show a banner when Stirling PDF is not your default PDF application.",
+                  "Show a banner when Morphe PDF is not your default PDF application.",
                 )}
               </Text>
             </div>

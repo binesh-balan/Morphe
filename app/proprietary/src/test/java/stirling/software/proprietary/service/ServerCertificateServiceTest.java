@@ -50,9 +50,9 @@ class ServerCertificateServiceTest {
     @BeforeEach
     void setUp() {
         service = new ServerCertificateService(licenseKeyChecker, new ApplicationProperties());
-        // default: feature enabled, validity 365, org Stirling-PDF, no regenerate
+        // default: feature enabled, validity 365, org Morphe PDF, no regenerate
         ReflectionTestUtils.setField(service, "enabled", true);
-        ReflectionTestUtils.setField(service, "organizationName", "Stirling-PDF");
+        ReflectionTestUtils.setField(service, "organizationName", "Morphe PDF");
         ReflectionTestUtils.setField(service, "validityDays", 365);
         ReflectionTestUtils.setField(service, "regenerateOnStartup", false);
     }
@@ -263,7 +263,7 @@ class ServerCertificateServiceTest {
                 service.initializeServerCertificate();
                 X509Certificate cert = service.getServerCertificate();
                 assertThat(cert).isNotNull();
-                assertThat(cert.getSubjectX500Principal().getName()).contains("Stirling-PDF");
+                assertThat(cert.getSubjectX500Principal().getName()).contains("Morphe PDF");
             }
         }
 
@@ -296,8 +296,8 @@ class ServerCertificateServiceTest {
                 service.initializeServerCertificate();
                 var info = service.getServerCertificateInfo();
                 assertThat(info.isExists()).isTrue();
-                assertThat(info.getSubject()).contains("Stirling-PDF");
-                assertThat(info.getIssuer()).contains("Stirling-PDF");
+                assertThat(info.getSubject()).contains("Morphe PDF");
+                assertThat(info.getIssuer()).contains("Morphe PDF");
                 assertThat(info.getValidFrom()).isNotNull();
                 assertThat(info.getValidTo()).isNotNull();
             }

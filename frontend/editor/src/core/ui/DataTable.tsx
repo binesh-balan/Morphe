@@ -140,7 +140,7 @@ function SortGlyph() {
 const CHEVRON_COLUMN_KEY = "__affordance";
 
 /**
- * The shared Stirling table. Call-sites supply data + behaviour; the component
+ * The shared Morphe table. Call-sites supply data + behaviour; the component
  * owns 100% of the appearance. Columns come from the `column` vocabulary (typed
  * cell kinds, no raw markup), the surface / density / states are standardized
  * here, and the only look choice exposed is the closed `variant`. Behaviour -

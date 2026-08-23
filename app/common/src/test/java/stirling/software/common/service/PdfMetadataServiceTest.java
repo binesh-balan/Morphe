@@ -27,7 +27,7 @@ import stirling.software.common.model.PdfMetadata;
 
 class PdfMetadataServiceTest {
 
-    private static final String LABEL = "Stirling-PDF v1.0.0";
+    private static final String LABEL = "Morphe PDF v1.0.0";
 
     /**
      * Builds a service whose pro-features are disabled (real ApplicationProperties, all defaults).

@@ -78,7 +78,7 @@ const ToolPanelModePrompt = ({
         <Text size="sm" c="dimmed">
           {t(
             "toolPanel.modePrompt.description",
-            "Preview both layouts and decide how you want to explore Stirling PDF tools.",
+            "Preview both layouts and decide how you want to explore Morphe PDF tools.",
           )}
         </Text>
         <div className="tool-panel-mode-prompt__options">

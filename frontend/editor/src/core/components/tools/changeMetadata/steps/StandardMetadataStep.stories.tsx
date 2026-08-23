@@ -32,8 +32,8 @@ function StandardMetadataStepDemo({
           author: "Jane Doe",
           subject: "Financial Summary",
           keywords: "finance, report, annual",
-          creator: "Stirling PDF",
-          producer: "Stirling PDF",
+          creator: "Morphe PDF",
+          producer: "Morphe PDF",
         }
       : {}),
   });

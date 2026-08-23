@@ -727,7 +727,7 @@ description = "Số đoạn liên quan nhất được truy xuất cho mỗi l�
 label = "Top K"
 
 [admin.settings.ai.general]
-description = "Kết nối Stirling với Python AI engine và chọn các khả năng AI được hiển thị. Thay đổi áp dụng khi khởi động lại."
+description = "Kết nối Morphe với Python AI engine và chọn các khả năng AI được hiển thị. Thay đổi áp dụng khi khởi động lại."
 title = "AI Engine"
 
 [admin.settings.ai.general.capabilities]
@@ -1075,11 +1075,11 @@ description = "Cấu hình các tính năng và chức năng tùy chọn."
 title = "Tính năng"
 
 [admin.settings.features.serverCertificate]
-description = "Cấu hình tạo chứng chỉ phía máy chủ cho chức năng \"Sign with Stirling-PDF\""
+description = "Cấu hình tạo chứng chỉ phía máy chủ cho chức năng \"Sign with Morphe PDF\""
 label = "Chứng chỉ máy chủ"
 
 [admin.settings.features.serverCertificate.enabled]
-description = "Bật chứng chỉ phía máy chủ cho tùy chọn \"Sign with Stirling-PDF\""
+description = "Bật chứng chỉ phía máy chủ cho tùy chọn \"Sign with Morphe PDF\""
 label = "Bật chứng chỉ máy chủ"
 
 [admin.settings.features.serverCertificate.organizationName]
@@ -1096,11 +1096,11 @@ label = "Hiệu lực chứng chỉ (ngày)"
 
 [admin.settings.folderAccess]
 description = "Các thư mục mà nguồn thư mục và đầu ra thư mục được phép đọc và ghi. Đây là ranh giới bảo mật: tự động hóa không bao giờ có thể được trỏ tới đường dẫn máy chủ nằm ngoài danh sách này."
-securityNote = "Để trống mục này để tắt hoàn toàn nguồn thư mục và đầu ra thư mục. Thư mục cấu hình riêng của Stirling luôn bị cấm truy cập."
+securityNote = "Để trống mục này để tắt hoàn toàn nguồn thư mục và đầu ra thư mục. Thư mục cấu hình riêng của Morphe luôn bị cấm truy cập."
 title = "Quyền truy cập thư mục"
 
 [admin.settings.folderAccess.implied]
-description = "Các thư mục do Stirling quản lý này luôn được phép và không thể thay đổi tại đây."
+description = "Các thư mục do Morphe quản lý này luôn được phép và không thể thay đổi tại đây."
 serverStorage = "Lưu trữ tệp máy chủ"
 title = "Luôn được phép"
 watchedFolder = "Thư mục được Pipeline theo dõi"
@@ -1246,7 +1246,7 @@ description = "URL hoặc tên tệp cho chính sách cookie"
 label = "Chính sách cookie"
 
 [admin.settings.legal.disclaimer]
-message = "Bằng cách tùy chỉnh các tài liệu pháp lý này, bạn tự chịu hoàn toàn trách nhiệm bảo đảm tuân thủ mọi luật và quy định áp dụng, bao gồm nhưng không giới hạn GDPR và các yêu cầu bảo vệ dữ liệu của EU khác. Chỉ sửa các cài đặt này nếu: (1) bạn đang vận hành bản cài đặt cá nhân/riêng tư, (2) bạn ở ngoài phạm vi pháp lý của EU và hiểu nghĩa vụ pháp lý địa phương của mình, hoặc (3) bạn đã nhận được tư vấn pháp lý phù hợp và chấp nhận tự chịu trách nhiệm với toàn bộ dữ liệu người dùng và tuân thủ pháp lý. Stirling-PDF và các nhà phát triển không chịu bất kỳ trách nhiệm nào cho nghĩa vụ pháp lý của bạn."
+message = "Bằng cách tùy chỉnh các tài liệu pháp lý này, bạn tự chịu hoàn toàn trách nhiệm bảo đảm tuân thủ mọi luật và quy định áp dụng, bao gồm nhưng không giới hạn GDPR và các yêu cầu bảo vệ dữ liệu của EU khác. Chỉ sửa các cài đặt này nếu: (1) bạn đang vận hành bản cài đặt cá nhân/riêng tư, (2) bạn ở ngoài phạm vi pháp lý của EU và hiểu nghĩa vụ pháp lý địa phương của mình, hoặc (3) bạn đã nhận được tư vấn pháp lý phù hợp và chấp nhận tự chịu trách nhiệm với toàn bộ dữ liệu người dùng và tuân thủ pháp lý. Morphe PDF và các nhà phát triển không chịu bất kỳ trách nhiệm nào cho nghĩa vụ pháp lý của bạn."
 title = "Cảnh báo trách nhiệm pháp lý"
 
 [admin.settings.legal.impressum]
@@ -1333,8 +1333,8 @@ description = "Tên người dùng để xác thực SMTP"
 label = "Tên người dùng SMTP"
 
 [admin.settings.mcp]
-apikeyNote = "Clients send a Stirling API key in the X-API-KEY header (or Authorization: Bearer <key>). The key maps to its owning Stirling user - only provisioned accounts get in, and actions are audited as that user. Manage keys under Account > API Keys."
-description = "Expose Stirling's PDF tools and AI agents to MCP clients over an OAuth-protected endpoint."
+apikeyNote = "Clients send a Morphe API key in the X-API-KEY header (or Authorization: Bearer <key>). The key maps to its owning Morphe user - only provisioned accounts get in, and actions are audited as that user. Manage keys under Account > API Keys."
+description = "Expose Morphe's PDF tools and AI agents to MCP clients over an OAuth-protected endpoint."
 title = "MCP Server"
 
 [admin.settings.mcp.acceptedAudiences]
@@ -1364,7 +1364,7 @@ step3ApiKeyb = "header (or Authorization: Bearer <key>). No OAuth or metadata di
 step4 = "Approve the sign-in; the client retries with a token. Tools appear grouped: convert, pages, misc, security, ai."
 step4ApiKey = "Tools appear grouped: convert, pages, misc, security, ai - and every call is audited as the key's owner."
 tip = "Tip: register the resource ID as an allowed audience in your IdP. Tested with MCP Inspector and Claude Desktop."
-tipApiKey = "Tip: API-key mode needs no external IdP - simplest for self-host. The key maps to its owning Stirling user."
+tipApiKey = "Tip: API-key mode needs no external IdP - simplest for self-host. The key maps to its owning Morphe user."
 title = "Connect an MCP client"
 
 [admin.settings.mcp.issuerUri]
@@ -1377,12 +1377,12 @@ label = "JWKS URL (optional)"
 placeholder = "Auto-discovered from issuer"
 
 [admin.settings.mcp.mode]
-description = "OAuth needs an external IdP. API key uses a Stirling per-user API key (X-API-KEY) - simplest for self-host."
+description = "OAuth needs an external IdP. API key uses a Morphe per-user API key (X-API-KEY) - simplest for self-host."
 label = "Authentication mode"
 
 [admin.settings.mcp.requireAccount]
-description = "Only let tokens through if their subject maps to a provisioned, enabled Stirling user."
-label = "Require an existing Stirling account"
+description = "Only let tokens through if their subject maps to a provisioned, enabled Morphe user."
+label = "Require an existing Morphe account"
 
 [admin.settings.mcp.resourceId]
 description = "This server's public /mcp URL. Tokens must list it in their audience (RFC 8707) or they are rejected."
@@ -1393,7 +1393,7 @@ description = "Require mcp.tools.read for read ops and mcp.tools.write for write
 label = "Enforce OAuth scopes"
 
 [admin.settings.mcp.usernameClaim]
-description = "JWT claim matched against a Stirling username (e.g. sub, email, preferred_username)."
+description = "JWT claim matched against a Morphe username (e.g. sub, email, preferred_username)."
 label = "Username claim"
 
 [admin.settings.plan.noData]
@@ -1714,7 +1714,7 @@ description = "Khi bật, chỉ các User ID trong danh sách mới được dù
 label = "Chỉ cho phép User ID cụ thể"
 
 [admin.settings.telegram.enabled]
-description = "Cho phép người dùng tương tác với Stirling PDF qua bot Telegram đã cấu hình của bạn."
+description = "Cho phép người dùng tương tác với Morphe PDF qua bot Telegram đã cấu hình của bạn."
 label = "Bật Bot Telegram"
 
 [admin.settings.telegram.feedback]
@@ -1787,20 +1787,20 @@ settingsOverview = "Đây là <strong>Bảng Cài đặt</strong>. Cài đặt q
 systemCustomization = "Chúng tôi có nhiều cách tùy biến UI: <strong>Cài đặt hệ thống</strong> cho phép đổi tên ứng dụng và ngôn ngữ, <strong>Tính năng</strong> cho phép quản lý chứng chỉ máy chủ, và <strong>Endpoint</strong> cho phép bật/tắt công cụ cụ thể cho người dùng của bạn."
 teamsAndUsers = "Quản lý <strong>Nhóm</strong> và người dùng riêng lẻ tại đây. Bạn có thể mời người dùng mới qua email, liên kết chia sẻ, hoặc tự tạo tài khoản tùy chỉnh cho họ."
 welcome = "Chào mừng đến với <strong>Chuyến tham quan Quản trị</strong>! Hãy khám phá các tính năng enterprise mạnh mẽ và cài đặt dành cho quản trị viên hệ thống."
-wrapUp = "Đó là chuyến tham quan quản trị! Bạn đã thấy các tính năng enterprise giúp Stirling PDF trở thành giải pháp mạnh mẽ, tùy biến cho các tổ chức. Truy cập chuyến tham quan này bất cứ lúc nào từ menu <strong>Trợ giúp</strong>."
+wrapUp = "Đó là chuyến tham quan quản trị! Bạn đã thấy các tính năng enterprise giúp Morphe PDF trở thành giải pháp mạnh mẽ, tùy biến cho các tổ chức. Truy cập chuyến tham quan này bất cứ lúc nào từ menu <strong>Trợ giúp</strong>."
 
 [adminUserSettings]
 admin = "Quản trị viên"
 title = "Cài đặt kiểm soát người dùng"
 
 [agents]
-stirling_name = "Stirling"
+stirling_name = "Morphe"
 
 [analytics]
 learnMore = "Tìm hiểu thêm"
-paragraph1 = "Stirling PDF có thu thập phân tích theo tùy chọn để giúp chúng tôi cải thiện sản phẩm. Chúng tôi không theo dõi bất kỳ thông tin cá nhân hoặc nội dung tệp nào."
-paragraph2 = "Vui lòng cân nhắc bật phân tích để giúp Stirling-PDF phát triển và cho phép chúng tôi hiểu người dùng tốt hơn."
-title = "Bạn muốn giúp cải thiện Stirling PDF không?"
+paragraph1 = "Morphe PDF có thu thập phân tích theo tùy chọn để giúp chúng tôi cải thiện sản phẩm. Chúng tôi không theo dõi bất kỳ thông tin cá nhân hoặc nội dung tệp nào."
+paragraph2 = "Vui lòng cân nhắc bật phân tích để giúp Morphe PDF phát triển và cho phép chúng tôi hiểu người dùng tốt hơn."
+title = "Bạn muốn giúp cải thiện Morphe PDF không?"
 
 [annotate]
 tags = "annotate,highlight,draw,markup,comment,notes,review,redline,feedback,markup tools,sticky notes,shapes,arrows,text box,freehand"
@@ -2935,10 +2935,10 @@ copy = "Sao chép tin nhắn"
 
 [chat.fab]
 close = "Close chat"
-open = "Open Stirling AI assistant"
+open = "Open Morphe AI assistant"
 
 [chat.header]
-agentMenu = "Tùy chọn tác nhân Stirling"
+agentMenu = "Tùy chọn tác nhân Morphe"
 clearChat = "Xóa trò chuyện"
 
 [chat.input]
@@ -3269,14 +3269,14 @@ upgradeButton = "Nâng cấp tài khoản"
 
 [config.apiKeys]
 copyKeyAriaLabel = "Sao chép khóa API"
-description = "Khóa API của bạn để truy cập bộ công cụ PDF của Stirling. Sao chép vào dự án của bạn hoặc làm mới để tạo khóa mới."
-docsDescription = "Tìm hiểu thêm về tích hợp với Stirling PDF:"
+description = "Khóa API của bạn để truy cập bộ công cụ PDF của Morphe. Sao chép vào dự án của bạn hoặc làm mới để tạo khóa mới."
+docsDescription = "Tìm hiểu thêm về tích hợp với Morphe PDF:"
 docsLink = "Tài liệu API"
 docsTitle = "Tài liệu API"
 generateError = "Chúng tôi không thể tạo khóa API của bạn."
 goToAccount = "Đến Tài khoản"
 guestInfo = "Người dùng khách không nhận khóa API. Tạo tài khoản để có khóa API dùng trong ứng dụng của bạn."
-intro = "Sử dụng khóa API của bạn để truy cập lập trình vào khả năng xử lý của Stirling PDF."
+intro = "Sử dụng khóa API của bạn để truy cập lập trình vào khả năng xử lý của Morphe PDF."
 label = "Khóa API"
 publicKeyAriaLabel = "Khóa API công khai"
 refreshAriaLabel = "Làm mới khóa API"
@@ -3300,10 +3300,10 @@ title = "Làm mới khóa API"
 warning = "⚠️ Cảnh báo: Thao tác này sẽ tạo khóa API mới và khiến các khóa trước đó không còn hiệu lực."
 
 [config.mcp]
-description = "Model Context Protocol (MCP) lets AI assistants like Claude use your Stirling PDF tools directly. Connect a client once and your assistant can convert, edit, secure and process documents on your behalf."
-guestInfo = "Guest users can't connect MCP clients. Create an account to use the MCP server and let your AI assistant run Stirling PDF tools on your behalf."
+description = "Model Context Protocol (MCP) lets AI assistants like Claude use your Morphe PDF tools directly. Connect a client once and your assistant can convert, edit, secure and process documents on your behalf."
+guestInfo = "Guest users can't connect MCP clients. Create an account to use the MCP server and let your AI assistant run Morphe PDF tools on your behalf."
 navLabel = "MCP Server"
-tip = "Every action your assistant runs is performed as your account and counts towards your usage, just like using Stirling PDF directly."
+tip = "Every action your assistant runs is performed as your account and counts towards your usage, just like using Morphe PDF directly."
 title = "MCP Server"
 viewApiKeys = "View API keys"
 
@@ -3320,7 +3320,7 @@ label = "Your MCP endpoint"
 
 [config.mcp.setup]
 addTo = "Add to"
-hint = "Pick your client, paste the snippet into the file shown, then restart it. You'll sign in with your Stirling account on first use - no keys to copy."
+hint = "Pick your client, paste the snippet into the file shown, then restart it. You'll sign in with your Morphe account on first use - no keys to copy."
 title = "Connect your AI assistant"
 
 [config.overview]
@@ -3429,7 +3429,7 @@ showPreferencesBtn = "Quản lý tùy chọn"
 title = "Cách chúng tôi sử dụng Cookie"
 
 [cookieBanner.popUp.description]
-1 = "Chúng tôi sử dụng cookie và các công nghệ khác để Stirling PDF hoạt động tốt hơn cho bạn — giúp cải thiện công cụ và tiếp tục xây dựng các tính năng bạn sẽ yêu thích."
+1 = "Chúng tôi sử dụng cookie và các công nghệ khác để Morphe PDF hoạt động tốt hơn cho bạn — giúp cải thiện công cụ và tiếp tục xây dựng các tính năng bạn sẽ yêu thích."
 2 = "If you’d rather not, clicking 'No Thanks' will only enable the essential cookies needed to keep things running smoothly."
 
 [cookieBanner.preferencesModal]
@@ -3442,12 +3442,12 @@ subtitle = "Cách sử dụng cookie"
 title = "Trung tâm tùy chọn đồng ý"
 
 [cookieBanner.preferencesModal.analytics]
-description = "Những cookie này giúp chúng tôi hiểu cách công cụ được sử dụng, để chúng tôi tập trung xây dựng các tính năng mà cộng đồng coi trọng nhất. Hãy yên tâm — Stirling PDF không và sẽ không bao giờ theo dõi nội dung tài liệu bạn làm việc cùng."
+description = "Những cookie này giúp chúng tôi hiểu cách công cụ được sử dụng, để chúng tôi tập trung xây dựng các tính năng mà cộng đồng coi trọng nhất. Hãy yên tâm — Morphe PDF không và sẽ không bao giờ theo dõi nội dung tài liệu bạn làm việc cùng."
 title = "Phân tích"
 
 [cookieBanner.preferencesModal.description]
-1 = "Stirling PDF sử dụng cookie và các công nghệ tương tự để nâng cao trải nghiệm của bạn và hiểu cách các công cụ được sử dụng. Điều này giúp chúng tôi cải thiện hiệu năng, phát triển các tính năng bạn quan tâm và hỗ trợ người dùng lâu dài."
-2 = "Stirling PDF không thể — và sẽ không bao giờ — theo dõi hoặc truy cập nội dung các tài liệu bạn sử dụng."
+1 = "Morphe PDF sử dụng cookie và các công nghệ tương tự để nâng cao trải nghiệm của bạn và hiểu cách các công cụ được sử dụng. Điều này giúp chúng tôi cải thiện hiệu năng, phát triển các tính năng bạn quan tâm và hỗ trợ người dùng lâu dài."
+2 = "Morphe PDF không thể — và sẽ không bao giờ — theo dõi hoặc truy cập nội dung các tài liệu bạn sử dụng."
 3 = "Quyền riêng tư và sự tin tưởng của bạn là cốt lõi trong những gì chúng tôi làm."
 
 [cookieBanner.preferencesModal.necessary]
@@ -3526,14 +3526,14 @@ title = "Lỗi"
 
 [defaultApp.prompt]
 dontRemind = "Đừng nhắc lại"
-message = "Đặt Stirling PDF làm ứng dụng mặc định để mở tệp PDF."
+message = "Đặt Morphe PDF làm ứng dụng mặc định để mở tệp PDF."
 
 [defaultApp.settingsOpened]
-message = "Vui lòng chọn Stirling PDF trong cài đặt hệ thống"
+message = "Vui lòng chọn Morphe PDF trong cài đặt hệ thống"
 title = "Đã mở Cài đặt"
 
 [defaultApp.success]
-message = "Stirling PDF hiện là trình chỉnh sửa PDF mặc định của bạn"
+message = "Morphe PDF hiện là trình chỉnh sửa PDF mặc định của bạn"
 title = "Đã đặt ứng dụng mặc định"
 
 [desktopUpdate]
@@ -3549,7 +3549,7 @@ updateFailedMessage = "Không thể tải xuống hoặc cài đặt bản cập
 
 [desktopUpdate.blocked]
 docsLink = "Xem tài liệu cài đặt"
-message = "Stirling-PDF không có quyền tự cập nhật trên máy này."
+message = "Morphe PDF không có quyền tự cập nhật trên máy này."
 title = "Cần quyền quản trị viên"
 
 [devAirgapped]
@@ -4107,7 +4107,7 @@ title = "Di chuyển đến thư mục"
 [filesPage.origin]
 all = "Tất cả nguồn"
 cloud = "Đám mây"
-cloudHint = "Lưu trên máy chủ Stirling"
+cloudHint = "Lưu trên máy chủ Morphe"
 local = "Cục bộ"
 localHint = "Chỉ lưu trong trình duyệt này"
 shared = "Được chia sẻ"
@@ -4378,7 +4378,7 @@ invisible = "Ẩn (chỉ siêu dữ liệu)"
 location = "Vị trí:"
 logo = "Logo:"
 logoHidden = "Không có logo"
-logoShown = "Hiển thị logo Stirling PDF"
+logoShown = "Hiển thị logo Morphe PDF"
 participantCount_one = "{{count}} participant will sign in order"
 participantCount_other = "{{count}} participants will sign in order"
 participants = "Người tham gia"
@@ -4432,7 +4432,7 @@ title = "Ký tuần tự"
 dismiss = "Ẩn banner"
 message = "Tạo tài khoản miễn phí để lưu công việc, truy cập nhiều tính năng hơn và ủng hộ dự án."
 signUp = "Đăng ký miễn phí"
-title = "Bạn đang dùng Stirling PDF với tư cách khách!"
+title = "Bạn đang dùng Morphe PDF với tư cách khách!"
 
 [home.addAttachments]
 desc = "Thêm hoặc xóa tệp nhúng (tệp đính kèm) vào/khỏi PDF"
@@ -4596,7 +4596,7 @@ tags = "kết hợp,ghép,hợp nhất"
 title = "Ghép nối"
 
 [home.mobile]
-brandAlt = "Logo Stirling PDF"
+brandAlt = "Logo Morphe PDF"
 openFiles = "Mở tệp"
 swipeHint = "Vuốt sang trái hoặc phải để chuyển chế độ xem"
 tools = "Công cụ"
@@ -4635,7 +4635,7 @@ tags = "tổ chức,sắp xếp lại,đổi thứ tự"
 title = "Sắp xếp"
 
 [home.pdfTextEditor]
-desc = "Xem và chỉnh sửa xuất JSON của Stirling PDF với chỉnh sửa văn bản theo nhóm và tái tạo PDF"
+desc = "Xem và chỉnh sửa xuất JSON của Morphe PDF với chỉnh sửa văn bản theo nhóm và tái tạo PDF"
 tags = "edit text,modify text,change text,edit content,update text,rewrite,correct,amend,redline,revise,text editor,content editor"
 title = "Trình chỉnh sửa văn bản PDF"
 
@@ -4821,7 +4821,7 @@ passwordRequired = "Yêu cầu mật khẩu"
 signIn = "Đăng nhập"
 validating = "Đang xác thực lời mời..."
 validationError = "Không thể xác thực liên kết mời"
-welcome = "Chào mừng đến với Stirling PDF"
+welcome = "Chào mừng đến với Morphe PDF"
 welcomeSubtitle = "Hoàn tất thiết lập tài khoản để bắt đầu"
 welcomeTitle = "Bạn đã được mời!"
 
@@ -4847,7 +4847,7 @@ terms = "Điều khoản và điều kiện"
 title = "Giấy phép bên thứ 3"
 
 [localMode]
-toolUnavailable = "Công cụ này cần có tài khoản. Đăng nhập vào Stirling Cloud hoặc kết nối với máy chủ tự lưu trữ để sử dụng."
+toolUnavailable = "Công cụ này cần có tài khoản. Đăng nhập vào Morphe Cloud hoặc kết nối với máy chủ tự lưu trữ để sử dụng."
 
 [localMode.toolPicker]
 message = "Đăng nhập để mở khóa tất cả công cụ."
@@ -5005,7 +5005,7 @@ message = "Xác thực không thành công. Bạn có thể đóng cửa sổ n�
 title = "Xác thực thất bại"
 
 [oauth.success]
-message = "Bạn có thể đóng cửa sổ này và quay lại Stirling PDF."
+message = "Bạn có thể đóng cửa sổ này và quay lại Morphe PDF."
 title = "Xác thực thành công"
 
 [oauthConsent]
@@ -5018,17 +5018,17 @@ loadFailed = "This authorisation request is invalid or has expired. Close this t
 loading = "Loading authorisation request..."
 missingId = "Missing authorisation request. Start the connection from your app and try again."
 redirecting = "Returning you to the app..."
-requesting = "{{app}} wants to access your Stirling PDF account"
+requesting = "{{app}} wants to access your Morphe PDF account"
 scopesIntro = "This will allow {{app}} to:"
 signedInAs = "Signed in as {{name}}"
 signInButton = "Sign in to continue"
-signInPrompt = "Sign in to your Stirling PDF account to continue connecting the app."
+signInPrompt = "Sign in to your Morphe PDF account to continue connecting the app."
 title = "Authorise access"
 unknownApp = "A third-party application"
 
 [oauthConsent.access]
 actAsYou = "Act as you - everything {{app}} does runs under your account and counts towards your usage"
-tools = "Use your Stirling PDF tools on your behalf - convert, edit, sign, secure and process your documents"
+tools = "Use your Morphe PDF tools on your behalf - convert, edit, sign, secure and process your documents"
 
 [oauthConsent.scope]
 email = "See your email address"
@@ -5152,26 +5152,26 @@ skipTheTour = "Bỏ qua hướng dẫn"
 
 [onboarding.checklist]
 dismiss = "Bỏ qua"
-title = "Thiết lập Stirling PDF"
+title = "Thiết lập Morphe PDF"
 
 [onboarding.checklist.downloadDesktop]
-description = "Chạy Stirling nguyên bản trên máy của bạn"
-title = "Tải xuống Stirling cho Desktop"
+description = "Chạy Morphe nguyên bản trên máy của bạn"
+title = "Tải xuống Morphe cho Desktop"
 
 [onboarding.checklist.inviteTeam]
 description = "Cộng tác với đội ngũ của bạn"
 title = "Mời thành viên đội ngũ"
 
 [onboarding.checklist.shareAnalytics]
-description = "Giúp cải thiện Stirling"
+description = "Giúp cải thiện Morphe"
 title = "Chia sẻ dữ liệu sử dụng ẩn danh"
 
 [onboarding.checklist.takeTour]
-description = "Xem cách Stirling hoạt động qua hướng dẫn nhanh"
+description = "Xem cách Morphe hoạt động qua hướng dẫn nhanh"
 title = "Tham quan nhanh"
 
 [onboarding.desktopInstall]
-body = "Stirling hoạt động tốt nhất như ứng dụng desktop. Bạn có thể dùng offline, truy cập tài liệu nhanh hơn và chỉnh sửa trực tiếp trên máy."
+body = "Morphe hoạt động tốt nhất như ứng dụng desktop. Bạn có thể dùng offline, truy cập tài liệu nhanh hơn và chỉnh sửa trực tiếp trên máy."
 selectOs = "Chọn hệ điều hành"
 title = "Tải xuống"
 titleWithOs = "Tải cho {{osLabel}}"
@@ -5195,21 +5195,21 @@ success = "MFA đã được bật. Bây giờ bạn có thể tiếp tục."
 title = "Thiết lập xác thực đa yếu tố"
 
 [onboarding.planOverview]
-adminBodyLoginDisabled = "Khi bật chế độ đăng nhập, bạn có thể quản lý người dùng, cấu hình cài đặt và theo dõi tình trạng server. <strong>{{freeTierLimit}}</strong> người đầu tiên trên server của bạn được dùng Stirling miễn phí."
-adminBodyLoginEnabled = "Là admin, bạn có thể quản lý người dùng, cấu hình cài đặt và theo dõi tình trạng server. <strong>{{freeTierLimit}}</strong> người đầu tiên trên server của bạn được dùng Stirling miễn phí."
+adminBodyLoginDisabled = "Khi bật chế độ đăng nhập, bạn có thể quản lý người dùng, cấu hình cài đặt và theo dõi tình trạng server. <strong>{{freeTierLimit}}</strong> người đầu tiên trên server của bạn được dùng Morphe miễn phí."
+adminBodyLoginEnabled = "Là admin, bạn có thể quản lý người dùng, cấu hình cài đặt và theo dõi tình trạng server. <strong>{{freeTierLimit}}</strong> người đầu tiên trên server của bạn được dùng Morphe miễn phí."
 adminTitle = "Tổng quan Admin"
 userBody = "Mời đồng đội, gán vai trò và quản lý tài liệu gọn gàng trong một không gian làm việc an toàn. Bật chế độ đăng nhập khi bạn sẵn sàng vượt qua chế độ dùng cá nhân."
 userTitle = "Tổng quan gói"
 
 [onboarding.processorIntro]
-body = "Stirling hiện chạy <strong>Chính sách</strong> — các quy tắc tự động phân loại, bảo mật và xử lý mọi tài liệu khi tài liệu đến. Thiết lập và theo dõi các lần chạy trong <strong>Processor</strong>."
+body = "Morphe hiện chạy <strong>Chính sách</strong> — các quy tắc tự động phân loại, bảo mật và xử lý mọi tài liệu khi tài liệu đến. Thiết lập và theo dõi các lần chạy trong <strong>Processor</strong>."
 cta = "Xem Processor"
-title = "Khám phá Stirling Processor"
+title = "Khám phá Morphe Processor"
 
 [onboarding.saas.freeEditor]
 freeLine = "The editor is now <free>completely free</free>."
 premium = "We've added loads of new features, including <strong>Policies</strong> and <strong>Agent Chat</strong>."
-title = "Welcome to Stirling"
+title = "Welcome to Morphe"
 
 [onboarding.saas.team]
 addButton = "Add"
@@ -5229,20 +5229,20 @@ rolePlaceholder = "Xác nhận vai trò của bạn"
 roleUser = "Người dùng"
 
 [onboarding.serverLicense]
-freeBody = "Giấy phép <strong>Open-Core</strong> của chúng tôi cho phép tối đa <strong>{{freeTierLimit}}</strong> người dùng miễn phí mỗi server. Để mở rộng không gián đoạn và truy cập sớm <strong>công cụ chỉnh sửa văn bản PDF</strong> mới, chúng tôi khuyến nghị gói Stirling Server - chỉnh sửa đầy đủ và <strong>số ghế không giới hạn</strong> với $99/server/tháng."
+freeBody = "Giấy phép <strong>Open-Core</strong> của chúng tôi cho phép tối đa <strong>{{freeTierLimit}}</strong> người dùng miễn phí mỗi server. Để mở rộng không gián đoạn và truy cập sớm <strong>công cụ chỉnh sửa văn bản PDF</strong> mới, chúng tôi khuyến nghị gói Morphe Server - chỉnh sửa đầy đủ và <strong>số ghế không giới hạn</strong> với $99/server/tháng."
 freeTitle = "Giấy phép Server"
-overLimitBody = "Giấy phép của chúng tôi cho phép tối đa <strong>{{freeTierLimit}}</strong> người dùng miễn phí mỗi server. Bạn có <strong>{{overLimitUserCopy}}</strong> người dùng Stirling. Để tiếp tục không gián đoạn, hãy nâng cấp lên gói Stirling Server - <strong>số ghế không giới hạn</strong>, chỉnh sửa văn bản PDF và toàn quyền quản trị với $99/server/tháng."
+overLimitBody = "Giấy phép của chúng tôi cho phép tối đa <strong>{{freeTierLimit}}</strong> người dùng miễn phí mỗi server. Bạn có <strong>{{overLimitUserCopy}}</strong> người dùng Morphe. Để tiếp tục không gián đoạn, hãy nâng cấp lên gói Morphe Server - <strong>số ghế không giới hạn</strong>, chỉnh sửa văn bản PDF và toàn quyền quản trị với $99/server/tháng."
 overLimitTitle = "Cần giấy phép Server"
 seePlans = "Xem gói →"
 upgrade = "Nâng cấp ngay →"
 
 [onboarding.tourOverview]
-body = "Stirling PDF V2 đi kèm hàng chục công cụ và bố cục được làm mới. Hãy tham quan nhanh để xem những thay đổi và nơi tìm các tính năng bạn cần."
+body = "Morphe PDF V2 đi kèm hàng chục công cụ và bố cục được làm mới. Hãy tham quan nhanh để xem những thay đổi và nơi tìm các tính năng bạn cần."
 title = "Tổng quan tour"
 
 [onboarding.welcomeSlide]
-body = "Stirling PDF nay sẵn sàng cho mọi quy mô đội nhóm. Bản cập nhật này có bố cục mới, khả năng quản trị mạnh mẽ và tính năng được yêu cầu nhiều nhất - <strong>Chỉnh sửa văn bản</strong>."
-title = "Chào mừng đến với Stirling"
+body = "Morphe PDF nay sẵn sàng cho mọi quy mô đội nhóm. Bản cập nhật này có bố cục mới, khả năng quản trị mạnh mẽ và tính năng được yêu cầu nhiều nhất - <strong>Chỉnh sửa văn bản</strong>."
+title = "Chào mừng đến với Morphe"
 
 [onboarding.whatsNew]
 activeFilesView = "Dùng Tệp đang hoạt động để xem mọi thứ bạn đang mở và chọn việc cần làm."
@@ -5548,7 +5548,7 @@ benefit1Body = "chain tools, schedule runs, batch process"
 benefit1Title = "Automation pipelines"
 benefit2Body = "summarise, classify, redact, AI-OCR"
 benefit2Title = "AI tools"
-benefit3Body = "call any Stirling endpoint programmatically"
+benefit3Body = "call any Morphe endpoint programmatically"
 benefit3Title = "API access"
 button = "Turn on Processor →"
 reassurance = "No minimum · Set a $0 cap to test · Cancel anytime"
@@ -5629,7 +5629,7 @@ leader = "Team owner"
 member = "Member"
 
 [payg.signupRequired]
-body = "Stirling PDF gives every signed-up account 500 free operations, enough to keep most workflows humming without paying a cent. You're currently using Stirling as a guest, which doesn't include billable tools like AI, automations, or hosted processing."
+body = "Morphe PDF gives every signed-up account 500 free operations, enough to keep most workflows humming without paying a cent. You're currently using Morphe as a guest, which doesn't include billable tools like AI, automations, or hosted processing."
 cancel = "Not now"
 cta = "Sign up free"
 subtext = "Creating an account is free and takes a few seconds. No credit card required."
@@ -5677,7 +5677,7 @@ usdNote = "Estimated in USD. You can adjust your cap any time after subscribing,
 [payg.upgrade.checkout]
 capValue = "{{symbol}}{{amount}} / month"
 edit = "Edit"
-help = "Stripe handles your card details. Stirling never sees them."
+help = "Stripe handles your card details. Morphe never sees them."
 loading = "Loading checkout…"
 noCap = "No cap"
 title = "Add your payment method"
@@ -5685,7 +5685,7 @@ title = "Add your payment method"
 [payg.upgrade.help]
 aiBody = "summarise, classify, redact, AI-OCR"
 aiTitle = "AI tools"
-apiBody = "programmatic access to any Stirling endpoint"
+apiBody = "programmatic access to any Morphe endpoint"
 apiTitle = "API calls"
 automationBody = "chained tools or scheduled runs that don't need clicks"
 automationTitle = "Automation pipelines"
@@ -6116,7 +6116,7 @@ upToFiveUsers = "Tối đa 5 người dùng"
 usageTrackingPrometheus = "Theo dõi sử dụng & Prometheus"
 
 [plan.licenseWarning]
-body = "Bạn có {{total}} người dùng nhưng gói miễn phí chỉ hỗ trợ {{limit}} mỗi server. Hãy nâng cấp để Stirling PDF hoạt động ổn định."
+body = "Bạn có {{total}} người dùng nhưng gói miễn phí chỉ hỗ trợ {{limit}} mỗi server. Hãy nâng cấp để Morphe PDF hoạt động ổn định."
 cta = "Xem gói"
 overLimit = "nhiều hơn {{limit}}"
 title = "Đã đạt giới hạn miễn phí tự lưu trữ"
@@ -6251,25 +6251,25 @@ comingSoon = "Sắp ra mắt"
 [portal.accountLink.card]
 billingNote = "Xử lý không giám sát được tính phí vào ví tổ chức của bạn."
 eyebrow = "Liên kết tài khoản"
-linkButton = "Liên kết tài khoản Stirling của bạn"
+linkButton = "Liên kết tài khoản Morphe của bạn"
 linked = "Đã liên kết"
 linkedAs = "Đã liên kết dưới tên {{name}}."
 linkedGeneric = "Phiên bản này đã được liên kết."
 notLinked = "Chưa liên kết"
-title = "Liên kết tổ chức này với tài khoản Stirling của tổ chức"
+title = "Liên kết tổ chức này với tài khoản Morphe của tổ chức"
 unlink = "Hủy liên kết"
 
 [portal.accountLink.card.error]
 title = "Không thể liên kết"
 
 [portal.accountLink.card.loginNotConfigured]
-after = "để bật liên kết tài khoản với tài khoản Stirling được lưu trữ. Trong môi trường dev, bạn có thể mô phỏng đăng nhập từ hộp thoại liên kết."
+after = "để bật liên kết tài khoản với tài khoản Morphe được lưu trữ. Trong môi trường dev, bạn có thể mô phỏng đăng nhập từ hộp thoại liên kết."
 before = "Đặt"
 title = "Chưa cấu hình đăng nhập SaaS"
 
 [portal.accountLink.gate]
 action = "Liên kết tài khoản"
-description = "Liên kết tài khoản Stirling của tổ chức này để dùng các tính năng tính phí."
+description = "Liên kết tài khoản Morphe của tổ chức này để dùng các tính năng tính phí."
 title = "Liên kết để mở khóa"
 titleFeature = "Liên kết để mở khóa {{feature}}"
 
@@ -6301,13 +6301,13 @@ never = "chưa bao giờ"
 
 [portal.accountLink.modal]
 linkSubtitle = "Đăng nhập vào tài khoản mà máy chủ này sẽ tính phí."
-linkTitle = "Liên kết tài khoản Stirling của bạn"
-reauthSubtitle = "Phiên của bạn đã hết hạn — hãy đăng nhập lại vào tài khoản Stirling của bạn. Phiên bản của bạn vẫn được liên kết."
+linkTitle = "Liên kết tài khoản Morphe của bạn"
+reauthSubtitle = "Phiên của bạn đã hết hạn — hãy đăng nhập lại vào tài khoản Morphe của bạn. Phiên bản của bạn vẫn được liên kết."
 reauthTitle = "Đăng nhập lại"
 simulateSignIn = "Mô phỏng đăng nhập (dev)"
 
 [portal.accountLink.modal.loginNotConfigured]
-after = "để bật liên kết trong ứng dụng với tài khoản Stirling được lưu trữ."
+after = "để bật liên kết trong ứng dụng với tài khoản Morphe được lưu trữ."
 and = "và"
 before = "Đặt"
 title = "Chưa cấu hình đăng nhập SaaS"
@@ -6316,7 +6316,7 @@ title = "Chưa cấu hình đăng nhập SaaS"
 instancesSub = "Mọi phiên bản tự lưu trữ đã đăng ký với tổ chức này. Thu hồi thông tin xác thực để ngay lập tức cắt quyền truy cập không giám sát của phiên bản đó."
 instancesTitle = "Phiên bản đã liên kết"
 revokeError = "Không thể thu hồi phiên bản"
-sub = "Liên kết tổ chức tự lưu trữ này với tài khoản Stirling của tổ chức để xử lý không giám sát được tính phí vào ví tổ chức của bạn."
+sub = "Liên kết tổ chức tự lưu trữ này với tài khoản Morphe của tổ chức để xử lý không giám sát được tính phí vào ví tổ chức của bạn."
 
 [portal.accountLink.panel.loadError]
 forbidden = "Chỉ chủ sở hữu nhóm mới có thể xem các phiên bản đã liên kết của tổ chức."
@@ -6333,7 +6333,7 @@ close = "Đóng trợ lý"
 error = "Không thể kết nối với trợ lý."
 errorWithDetail = "Không thể kết nối với trợ lý: {{detail}}"
 inputAriaLabel = "Hỏi trợ lý"
-inputPlaceholder = "Hỏi về Stirling…"
+inputPlaceholder = "Hỏi về Morphe…"
 open = "Mở trợ lý"
 send = "Gửi"
 title = "Trợ lý"
@@ -6380,7 +6380,7 @@ title = "Đặt giới hạn chi tiêu của bạn"
 [portal.billing.checkout.card]
 fields = "Số thẻ · MM / YY · CVC · ZIP"
 label = "Chi tiết thẻ"
-note = "Chi tiết thẻ do Stripe thu thập. Stirling không bao giờ lưu PAN hoặc CVC."
+note = "Chi tiết thẻ do Stripe thu thập. Morphe không bao giờ lưu PAN hoặc CVC."
 
 [portal.billing.checkout.error]
 title = "Không thể bắt đầu thanh toán"
@@ -6398,7 +6398,7 @@ limitNoCap = "Không có giới hạn chi tiêu. Xử lý sẽ không tạm dừ
 cta = "Tạo báo giá Enterprise của bạn"
 description = "Chiết khấu theo khối lượng cam kết, triển khai air-gapped, MSA tùy chỉnh và đánh giá bảo mật, cùng quan hệ đối tác nhà phân phối bên thứ 3."
 eyebrow = "Chiết khấu khối lượng · 1M+ PDF"
-title = "Stirling Enterprise"
+title = "Morphe Enterprise"
 
 [portal.billing.freeEditors]
 activeThisMonth = "Hoạt động trong tháng này"
@@ -6447,9 +6447,9 @@ viewAriaLabel = "Xem hóa đơn {{number}} trong Stripe"
 viewLink = "Xem ↗"
 
 [portal.billing.linkPrompt]
-cta = "Liên kết tài khoản Stirling"
+cta = "Liên kết tài khoản Morphe"
 description = "Chỉnh sửa PDF thủ công — xem, ký, hợp nhất, tách, watermark, nén, chuyển đổi, OCR thủ công — luôn miễn phí, dù có liên kết hay không. Liên kết để nhận 500 PDF miễn phí cho xử lý tính theo mức sử dụng (tự động hóa, AI và API); khi cần thêm, hãy bật gói Processor và chỉ trả tiền cho những gì bạn dùng."
-title = "Liên kết tài khoản Stirling của bạn"
+title = "Liên kết tài khoản Morphe của bạn"
 
 [portal.billing.paymentMethod]
 billedMonthly = "Tính phí hàng tháng"
@@ -6523,9 +6523,9 @@ usersLabel = "Tổng số người dùng"
 label = "Tôi hiểu rằng khi dung lượng trả trước của tôi được dùng hết hoặc hết hạn sau 12 tháng, quá trình xử lý sẽ tự động tiếp tục theo mức giá trả theo mức sử dụng tiêu chuẩn (tối đa đến giới hạn chi tiêu của tôi) trừ khi tôi hủy, và tôi có thể hủy bất cứ lúc nào từ cổng thanh toán."
 
 [portal.billing.prepaid.deploy]
-cloud = "Stirling Cloud"
-cloudDesc = "Do Stirling quản lý. Hoạt động trong vài phút."
-cloudValue = "Stirling Cloud · Được quản lý"
+cloud = "Morphe Cloud"
+cloudDesc = "Do Morphe quản lý. Hoạt động trong vài phút."
+cloudValue = "Morphe Cloud · Được quản lý"
 selfhost = "Tự lưu trữ"
 selfhostDesc = "Chạy trên hạ tầng riêng. Cùng mức giá."
 selfhostValue = "Tự lưu trữ · Hạ tầng riêng"
@@ -6681,7 +6681,7 @@ description = "Nơi tài liệu đã xử lý kết thúc - bucket, drive, ticke
 label = "Tệp & đính kèm"
 
 [portal.connections.commonFields.accessToken]
-helperText = "Stirling lưu trữ mục này ở dạng mã hóa và không bao giờ hiển thị lại."
+helperText = "Morphe lưu trữ mục này ở dạng mã hóa và không bao giờ hiển thị lại."
 label = "Access token"
 
 [portal.connections.commonFields.apiKey]
@@ -7191,7 +7191,7 @@ time = "Thời gian"
 user = "Người dùng"
 
 [portal.editorAdmin]
-subtitle = "Triển khai Stirling PDF Editor, ghép nối các phiên bản self-hosted với tổ chức của bạn và vận hành đội hình đang chạy — mục tiêu, tình trạng, thông tin xác thực và kích hoạt offline tại một nơi."
+subtitle = "Triển khai Morphe PDF Editor, ghép nối các phiên bản self-hosted với tổ chức của bạn và vận hành đội hình đang chạy — mục tiêu, tình trạng, thông tin xác thực và kích hoạt offline tại một nơi."
 title = "Triển khai Editor"
 
 [portal.editorAdmin.health.columns]
@@ -7282,7 +7282,7 @@ guide = "Mở hướng dẫn {{name}}"
 openInBrowser = "Mở trong trình duyệt thay thế"
 sectionDesktop = "Ứng dụng desktop"
 sectionSelfHosted = "Tự lưu trữ"
-title = "Cài đặt Stirling PDF Editor"
+title = "Cài đặt Morphe PDF Editor"
 
 [portal.home.download.docker]
 detailBody = "Chạy image chính thức trên máy chủ của bạn."
@@ -7330,7 +7330,7 @@ title = "Windows"
 
 [portal.home.editor]
 activeOfDeployed = "{{active}} trong {{total}} hoạt động tháng này"
-name = "Stirling PDF Editor"
+name = "Morphe PDF Editor"
 open = "Mở trong trình duyệt"
 updated = "đã cập nhật {{time}}"
 
@@ -7352,7 +7352,7 @@ morning = "Chào buổi sáng"
 [portal.infrastructure]
 manageEditorDeployment = "Quản lý triển khai Editor"
 sectionsAriaLabel = "Các phần hạ tầng"
-subtitle = "Triển khai, thông tin xác thực, tư thế bảo mật, lưu trữ và dấu vết kiểm tra cho workspace Stirling của bạn."
+subtitle = "Triển khai, thông tin xác thực, tư thế bảo mật, lưu trữ và dấu vết kiểm tra cho workspace Morphe của bạn."
 title = "Hạ tầng"
 
 [portal.infrastructure.apiKeys]
@@ -7368,7 +7368,7 @@ usageMonth = "Sử dụng tháng này"
 usageToday = "Sử dụng hôm nay"
 
 [portal.infrastructure.apiKeys.empty]
-description = "Tạo khóa có phạm vi để bắt đầu gọi Stirling API."
+description = "Tạo khóa có phạm vi để bắt đầu gọi Morphe API."
 title = "Chưa có khóa API"
 
 [portal.infrastructure.apiKeys.error]
@@ -7468,7 +7468,7 @@ done = "Xong"
 keyNameLabel = "Tên khóa"
 keyNamePlaceholder = "ví dụ: Production · ingest"
 secretKeyCaption = "Khóa bí mật"
-secretWarning = "Lưu khóa này trong trình quản lý bí mật. Stirling chỉ lưu hash — không có cách nào khôi phục lại sau này."
+secretWarning = "Lưu khóa này trong trình quản lý bí mật. Morphe chỉ lưu hash — không có cách nào khôi phục lại sau này."
 subtitle = "Giới hạn phạm vi khóa ở mức tối thiểu cần thiết. Bạn có thể xoay vòng hoặc thu hồi bất cứ lúc nào."
 subtitleCreated = "Sao chép bí mật này ngay — nó sẽ không được hiển thị lại."
 title = "Tạo khóa API"
@@ -7509,7 +7509,7 @@ version = "Phiên bản"
 
 [portal.infrastructure.deployments.regions]
 heading = "Khu vực"
-subheading = "Tình trạng trực tiếp cho từng khu vực Stirling đã triển khai — độ trễ, tải và phiên bản phát hành."
+subheading = "Tình trạng trực tiếp cho từng khu vực Morphe đã triển khai — độ trễ, tải và phiên bản phát hành."
 
 [portal.infrastructure.deployments.regions.empty]
 description = "Các khu vực đã triển khai sẽ xuất hiện tại đây sau khi workspace của bạn được cấp phát."
@@ -7590,16 +7590,16 @@ down = "Ngừng hoạt động"
 healthy = "Khỏe mạnh"
 
 [portal.infrastructure.security.access.byok]
-description = "Cung cấp khóa từ KMS của riêng bạn. Stirling mã hóa bằng khóa đó nhưng vẫn có thể đọc."
+description = "Cung cấp khóa từ KMS của riêng bạn. Morphe mã hóa bằng khóa đó nhưng vẫn có thể đọc."
 label = "Mang khóa của riêng bạn (BYOK)"
 
 [portal.infrastructure.security.access.hyok]
-description = "Khóa không bao giờ rời khỏi KMS của bạn. Stirling chỉ giữ ciphertext."
+description = "Khóa không bao giờ rời khỏi KMS của bạn. Morphe chỉ giữ ciphertext."
 label = "Giữ khóa của riêng bạn (HYOK)"
 
 [portal.infrastructure.security.access.stirling]
-description = "Stirling quản lý khóa mã hóa. Đơn giản nhất — phía bạn không cần vận hành khóa."
-label = "Khóa do Stirling giữ"
+description = "Morphe quản lý khóa mã hóa. Đơn giản nhất — phía bạn không cần vận hành khóa."
+label = "Khóa do Morphe giữ"
 
 [portal.infrastructure.security.accessPolicy]
 heading = "Chính sách truy cập tài liệu"
@@ -7613,15 +7613,15 @@ viewReport = "Xem báo cáo →"
 
 [portal.infrastructure.security.compliance]
 heading = "Tuân thủ"
-subheading = "Chứng nhận và chứng chỉ bao phủ nền tảng Stirling."
+subheading = "Chứng nhận và chứng chỉ bao phủ nền tảng Morphe."
 
 [portal.infrastructure.security.empty]
 description = "Cấu hình bảo mật của workspace sẽ xuất hiện tại đây."
 title = "Không có tư thế bảo mật"
 
 [portal.infrastructure.security.hyokBanner]
-description = "Với HYOK, khóa mã hóa không bao giờ rời khỏi KMS của bạn. Stirling chỉ lưu trữ và xử lý ciphertext mà bạn có thể thu hồi bất cứ lúc nào."
-title = "Stirling không thể giải mã tài liệu của bạn"
+description = "Với HYOK, khóa mã hóa không bao giờ rời khỏi KMS của bạn. Morphe chỉ lưu trữ và xử lý ciphertext mà bạn có thể thu hồi bất cứ lúc nào."
+title = "Morphe không thể giải mã tài liệu của bạn"
 
 [portal.infrastructure.security.ipAllowlist]
 empty = "Chưa cấu hình dải IP nào — tất cả IP đều được phép."
@@ -7650,7 +7650,7 @@ subheading = "Quyền lưu giữ các khóa mã hóa tài liệu khi lưu trữ 
 
 [portal.infrastructure.security.managedBanner]
 description = "Quyền lưu giữ bring-your-own-key (BYOK) và hold-your-own-key (HYOK) khả dụng trên Enterprise. Nâng cấp để cung cấp khóa từ KMS của riêng bạn."
-title = "Khóa được Stirling quản lý trên gói của bạn"
+title = "Khóa được Morphe quản lý trên gói của bạn"
 
 [portal.infrastructure.security.residency.apac]
 description = "ap-southeast-1"
@@ -7724,7 +7724,7 @@ connectionCount_one = "{{count}} kết nối"
 connectionCount_other = "{{count}} kết nối"
 customApi = "API tùy chỉnh"
 searchPlaceholder = "Tìm kiếm tích hợp"
-subtitle = "Mọi thứ Stirling có thể giao tiếp. Thông tin xác thực được tạo một lần tại đây, rồi được tham chiếu bởi nguồn, chính sách và pipeline."
+subtitle = "Mọi thứ Morphe có thể giao tiếp. Thông tin xác thực được tạo một lần tại đây, rồi được tham chiếu bởi nguồn, chính sách và pipeline."
 title = "Tích hợp"
 typedName = "Tên {{tool}}"
 
@@ -8405,7 +8405,7 @@ title = "Chưa có luồng"
 
 [portal.processorFlow.sources]
 comingSoonTag = "Kết nối"
-editor = "Stirling PDF Editor"
+editor = "Morphe PDF Editor"
 heading = "Nguồn"
 perDay = "{{n}} / 24h"
 
@@ -8421,8 +8421,8 @@ title = "Mua sắm"
 [portal.procurement.agreement]
 agreeCta = "Đồng ý & đăng ký"
 confidential = "Bảo mật"
-confirm = "Tôi đã đọc và đồng ý với Thỏa thuận Stirling Enterprise."
-docName = "Thỏa thuận Stirling Enterprise"
+confirm = "Tôi đã đọc và đồng ý với Thỏa thuận Morphe Enterprise."
+docName = "Thỏa thuận Morphe Enterprise"
 docSub = "MSA, Order Form, EULA và DPA, kết hợp trong một chữ ký."
 download = "Tải xuống"
 downloadDraftError = "Không thể tạo PDF thỏa thuận - trình kết xuất tài liệu không khả dụng. Vui lòng thử lại sau hoặc liên hệ bộ phận hỗ trợ."
@@ -8458,7 +8458,7 @@ contactName = "Tên liên hệ"
 contactNamePlaceholder = "Jane Doe"
 continue = "Tiếp tục"
 done = "Xong"
-eula = "Tôi đã đọc và đồng ý với Stirling Enterprise EULA. EULA này điều chỉnh thỏa thuận được tạo từ báo giá này."
+eula = "Tôi đã đọc và đồng ý với Morphe Enterprise EULA. EULA này điều chỉnh thỏa thuận được tạo từ báo giá này."
 generate = "Tạo báo giá"
 indemnification = "Bồi thường IP"
 indemnificationSub = "Chúng tôi bảo vệ các khiếu nại IP đủ điều kiện, theo EULA"
@@ -8556,7 +8556,7 @@ eyebrowCompany = "{{company}} Enterprise"
 inviteTeammates = "Mời đồng đội"
 licenseKey = "Khóa giấy phép"
 liveSub = "Tổ chức của bạn đã được cấp phát và giấy phép của bạn đang hoạt động."
-liveTitle = "Bạn đang chạy Stirling Enterprise"
+liveTitle = "Bạn đang chạy Morphe Enterprise"
 next = "Tiếp theo: {{stage}}"
 open = "Mở mua sắm"
 scheduleCall = "Lên lịch cuộc gọi"
@@ -8591,7 +8591,7 @@ gatingAction = "Chấp nhận báo giá của bạn"
 label = "Báo giá"
 
 [portal.procurement.journeySteps.trial]
-blurb = "Đánh giá Stirling với tài liệu và workflow của bạn."
+blurb = "Đánh giá Morphe với tài liệu và workflow của bạn."
 gatingAction = "Tạo báo giá của bạn"
 label = "Dùng thử"
 
@@ -8608,14 +8608,14 @@ trialFileHint = "Đây là file giấy phép dùng thử của bạn. Khi thỏa
 
 [portal.procurement.link]
 cta = "Liên kết tài khoản"
-description = "Mua sắm chạy trên tài khoản Stirling được liên kết của bạn: đó là cách chúng tôi cấp phát bản dùng thử, định giá báo giá và bắt đầu lập hóa đơn. Liên kết một tài khoản để bắt đầu."
+description = "Mua sắm chạy trên tài khoản Morphe được liên kết của bạn: đó là cách chúng tôi cấp phát bản dùng thử, định giá báo giá và bắt đầu lập hóa đơn. Liên kết một tài khoản để bắt đầu."
 eyebrow = "Enterprise"
 title = "Liên kết tài khoản của bạn để bắt đầu"
 
 [portal.procurement.live]
 description = "Đăng ký của bạn đang hoạt động và giấy phép của bạn đã được cấp. Đội ngũ của bạn đã được cấp phát và việc lập hóa đơn đã bắt đầu."
 eyebrow = "Hoạt động"
-title = "Bạn đã hoạt động trên Stirling Enterprise"
+title = "Bạn đã hoạt động trên Morphe Enterprise"
 
 [portal.procurement.milestone]
 downloadError = "Chưa thể tải xuống PDF báo giá — vui lòng thử lại sau giây lát."
@@ -8650,11 +8650,11 @@ airgapSub = "Kín, không có kết nối outbound"
 back = "Quay lại"
 businessName = "Tên doanh nghiệp"
 businessNamePlaceholder = "Acme Corp"
-cloud = "Stirling Cloud"
+cloud = "Morphe Cloud"
 cloudSub = "Được quản lý, bắt đầu nhanh nhất"
 continue = "Tiếp tục"
 deployment = "Nên triển khai ở đâu?"
-eula = "Tôi đồng ý với Stirling EULA & Điều khoản thương mại."
+eula = "Tôi đồng ý với Morphe EULA & Điều khoản thương mại."
 fullName = "Họ và tên"
 fullNamePlaceholder = "Tên của bạn"
 invites = "Mời đồng đội · tùy chọn"
@@ -8685,7 +8685,7 @@ title = "Dùng thử Enterprise"
 
 [portal.search]
 ariaLabel = "Tìm kiếm"
-placeholder = "Tìm kiếm Stirling — endpoint, pipeline, tài liệu…"
+placeholder = "Tìm kiếm Morphe — endpoint, pipeline, tài liệu…"
 
 [portal.search.empty]
 noActionsDescription = "Hành động nhanh sẽ xuất hiện ở đây khi có sẵn."
@@ -8702,7 +8702,7 @@ account-link = "Liên kết tài khoản"
 [portal.shell.sidebar]
 appEditor = "Trình chỉnh sửa"
 appProcessor = "Trình xử lý"
-linkAccount = "Liên kết tài khoản Stirling"
+linkAccount = "Liên kết tài khoản Morphe"
 primaryNav = "Điều hướng chính"
 switchApp = "Chuyển ứng dụng"
 
@@ -8712,7 +8712,7 @@ openNav = "Mở điều hướng"
 search = "Tìm kiếm"
 
 [portal.sources]
-subtitle = "Các kết nối đầu vào có thể tái sử dụng để đưa tài liệu vào Stirling. Cấu hình một kết nối một lần, sau đó tham chiếu nó từ bất kỳ số lượng chính sách nào. Nhấp vào một hàng để xem cấu hình và những chính sách sử dụng nó."
+subtitle = "Các kết nối đầu vào có thể tái sử dụng để đưa tài liệu vào Morphe. Cấu hình một kết nối một lần, sau đó tham chiếu nó từ bất kỳ số lượng chính sách nào. Nhấp vào một hàng để xem cấu hình và những chính sách sử dụng nó."
 title = "Nguồn"
 
 [portal.sources.actions]
@@ -8809,7 +8809,7 @@ description = "Theo dõi một thư mục trên server để phát hiện tài l
 label = "Thư mục"
 
 [portal.sources.types.folder.fields.directory]
-helperText = "Đường dẫn tuyệt đối mà Stirling theo dõi để xử lý file."
+helperText = "Đường dẫn tuyệt đối mà Morphe theo dõi để xử lý file."
 label = "Đường dẫn thư mục"
 placeholder = "/data/incoming"
 
@@ -8896,7 +8896,7 @@ secretNote = "Signing secret được hiển thị một lần, khi webhook đư
 copy = "Sao chép"
 done = "Xong"
 secret = "Signing secret"
-secretHelp = "Ký raw body của mỗi lần gửi bằng khóa này (HMAC-SHA256) và gửi dưới dạng header X-Stirling-Signature."
+secretHelp = "Ký raw body của mỗi lần gửi bằng khóa này (HMAC-SHA256) và gửi dưới dạng header X-Morphe-Signature."
 secretWarning = "Sao chép signing secret ngay bây giờ. Vì bảo mật của bạn, nó chỉ được hiển thị một lần và không thể truy xuất sau."
 title = "Webhook đã được tạo"
 url = "Delivery URL"
@@ -8912,7 +8912,7 @@ close = "Đóng"
 
 [portal.usage]
 managePayment = "Quản lý thanh toán"
-subtitle = "Tiêu thụ, hóa đơn và quản lý gói cho mọi PDF Stirling đã lập hóa đơn, trong một bảng điều khiển."
+subtitle = "Tiêu thụ, hóa đơn và quản lý gói cho mọi PDF Morphe đã lập hóa đơn, trong một bảng điều khiển."
 title = "Sử dụng & thanh toán"
 
 [portal.usage.error]
@@ -8922,7 +8922,7 @@ walletUnavailable = "Ví không khả dụng: {{status}} {{statusText}}"
 
 [portal.usage.sessionExpired]
 action = "Đăng nhập lại"
-body = "Phiên tài khoản Stirling của bạn đã hết hạn. Đăng nhập lại để xem thanh toán — phiên bản của bạn vẫn được liên kết."
+body = "Phiên tài khoản Morphe của bạn đã hết hạn. Đăng nhập lại để xem thanh toán — phiên bản của bạn vẫn được liên kết."
 title = "Phiên đã hết hạn"
 
 [portal.users]
@@ -9695,8 +9695,8 @@ hideTools = "Ẩn các công cụ không khả dụng ▴"
 messageNoFallback = "Các công cụ sẽ không khả dụng cho đến khi máy chủ của bạn trực tuyến trở lại."
 messageWithFallback = "Một số công cụ cần kết nối máy chủ."
 showTools = "Xem các công cụ không khả dụng ▾"
-title = "Máy chủ Stirling-PDF của bạn không thể truy cập"
-toolNotAvailableLocally = "Máy chủ Stirling-PDF của bạn đang ngoại tuyến và \"{{endpoint}}\" không có sẵn trên backend cục bộ."
+title = "Máy chủ Morphe PDF của bạn không thể truy cập"
+toolNotAvailableLocally = "Máy chủ Morphe PDF của bạn đang ngoại tuyến và \"{{endpoint}}\" không có sẵn trên backend cục bộ."
 
 [session]
 expired = "Phiên của bạn đã hết hạn. Vui lòng làm mới trang và thử lại."
@@ -9732,7 +9732,7 @@ user = "Đăng nhập với tư cách"
 
 [settings.connection.mode]
 local = "Chỉ cục bộ"
-saas = "Stirling Cloud"
+saas = "Morphe Cloud"
 selfhosted = "Tự lưu trữ"
 
 [settings.developer]
@@ -9747,11 +9747,11 @@ autoUnzipFileLimitDescription = "Số lượng tệp tối đa để giải nén
 autoUnzipFileLimitTooltip = "Chỉ giải nén nếu ZIP chứa số tệp bằng hoặc ít hơn giá trị này. Tăng lên để giải nén ZIP lớn hơn."
 autoUnzipTooltip = "Tự động giải nén các tệp ZIP trả về từ thao tác API. Tắt để giữ nguyên tệp ZIP. Điều này không ảnh hưởng đến các quy trình tự động."
 defaultPdfEditor = "Trình chỉnh sửa PDF mặc định"
-defaultPdfEditorActive = "Stirling PDF là trình chỉnh sửa PDF mặc định của bạn"
+defaultPdfEditorActive = "Morphe PDF là trình chỉnh sửa PDF mặc định của bạn"
 defaultPdfEditorChecking = "Đang kiểm tra..."
 defaultPdfEditorInactive = "Ứng dụng khác đang được đặt mặc định"
 defaultPdfEditorRemind = "Nhắc tôi đặt làm mặc định"
-defaultPdfEditorRemindDescription = "Hiển thị biểu ngữ khi Stirling PDF không phải là ứng dụng PDF mặc định của bạn."
+defaultPdfEditorRemindDescription = "Hiển thị biểu ngữ khi Morphe PDF không phải là ứng dụng PDF mặc định của bạn."
 defaultPdfEditorSet = "Đã là mặc định"
 defaultStartupView = "Chế độ xem mặc định khi khởi chạy"
 defaultStartupViewDescription = "Chọn tab sẽ hoạt động trong cột bên trái khi ứng dụng khởi động"
@@ -9795,7 +9795,7 @@ learnMore = "Tìm hiểu thêm trong tài liệu"
 title = "Dành cho Quản trị viên Hệ thống"
 
 [settings.general.loginLanding]
-description = "Chọn ứng dụng sẽ mở khi bạn đăng nhập vào Stirling Cloud."
+description = "Chọn ứng dụng sẽ mở khi bạn đăng nhập vào Morphe Cloud."
 editor = "Trình chỉnh sửa"
 processor = "Bộ xử lý"
 title = "Sau khi đăng nhập"
@@ -9825,7 +9825,7 @@ updateBehavior = "Hành vi cập nhật"
 updateBehaviorDescription = "Chọn xem có hỏi trước khi cài đặt, tự động cài đặt, hoặc bỏ qua kiểm tra cập nhật."
 updateBehaviorError = "Không thể thay đổi hành vi cập nhật"
 updateBehaviorErrorLocked = "Thiết lập này bị khóa bởi quản trị viên của bạn."
-updateBehaviorLockedDescription = "Quản trị viên đã cấu hình cách Stirling-PDF xử lý cập nhật trên máy này. Liên hệ họ để thay đổi."
+updateBehaviorLockedDescription = "Quản trị viên đã cấu hình cách Morphe PDF xử lý cập nhật trên máy này. Liên hệ họ để thay đổi."
 updateBehaviorSaved = "Đã lưu hành vi cập nhật."
 versionMismatch = "Warning: A mismatch has been detected between the client version and the AppConfig version. Using different versions can lead to compatibility issues, errors, and security risks. Please ensure that server and client are using the same version."
 viewDetails = "Xem chi tiết"
@@ -9909,7 +9909,7 @@ usageAnalytics = "Phân tích sử dụng"
 [settings.planBilling]
 currentPlan = "Gói hiện tại"
 loading = "Đang tải thông tin thanh toán..."
-notAvailable = "Gói & Thanh toán chỉ khả dụng khi kết nối với Stirling Cloud (chế độ SaaS)."
+notAvailable = "Gói & Thanh toán chỉ khả dụng khi kết nối với Morphe Cloud (chế độ SaaS)."
 title = "Gói & Thanh toán"
 
 [settings.planBilling.billing]
@@ -10040,7 +10040,7 @@ emptyUsername = "Vui lòng nhập tên người dùng"
 oauthFailed = "Đăng nhập OAuth thất bại. Vui lòng thử lại."
 
 [setup.saas]
-title = "Đăng nhập vào Stirling"
+title = "Đăng nhập vào Morphe"
 
 [setup.selfhosted]
 changeServerLocked = "Tổ chức của bạn đã giới hạn ứng dụng này vào một máy chủ cụ thể"
@@ -10078,7 +10078,7 @@ step3 = "Khởi động lại máy chủ"
 title = "Chưa bật đăng nhập"
 
 [setup.server.url]
-description = "Nhập URL đầy đủ của server Stirling PDF tự lưu trữ"
+description = "Nhập URL đầy đủ của server Morphe PDF tự lưu trữ"
 label = "URL server"
 
 [sharedSign]
@@ -10314,7 +10314,7 @@ pleaseFillAllFields = "Vui lòng điền đầy đủ tất cả các trường"
 signUp = "Đăng ký"
 signUpWith = "Sign up with"
 skip = "Skip"
-subtitle = "Tham gia Stirling PDF để bắt đầu"
+subtitle = "Tham gia Morphe PDF để bắt đầu"
 title = "Tạo tài khoản"
 unexpectedError = "Lỗi không mong muốn: {{message}}"
 
@@ -10541,7 +10541,7 @@ download = "Tải xuống"
 downloaded = "Đã tải xuống"
 downloadFailed = "Không thể tải xuống tệp này."
 downloadsCount = "Lượt tải xuống: {{count}}"
-emailWarningBody = "Có vẻ đây là một địa chỉ email. Nếu người này chưa là người dùng Stirling PDF, họ sẽ không thể truy cập tệp."
+emailWarningBody = "Có vẻ đây là một địa chỉ email. Nếu người này chưa là người dùng Morphe PDF, họ sẽ không thể truy cập tệp."
 emailWarningConfirm = "Vẫn chia sẻ"
 emailWarningTitle = "Địa chỉ email"
 errorTitle = "Chia sẻ thất bại"
@@ -10572,7 +10572,7 @@ manageTitle = "Quản lý chia sẻ"
 noActivity = "Chưa có hoạt động."
 noLinks = "Chưa có liên kết chia sẻ đang hoạt động."
 noSharedUsers = "Chưa có người dùng nào có quyền truy cập."
-openInApp = "Mở trong Stirling PDF"
+openInApp = "Mở trong Morphe PDF"
 ownerLabel = "Chủ sở hữu"
 ownerUnknown = "Không xác định"
 removeLink = "Xóa liên kết"
@@ -10626,7 +10626,7 @@ updateButton = "Cập nhật trên máy chủ"
 uploadButton = "Tải lên máy chủ"
 
 [survey]
-title = "Stirling-PDF Survey"
+title = "Morphe PDF Survey"
 
 [swagger]
 clickHere = "nhấp vào đây"
@@ -10785,7 +10785,7 @@ favorites = "Mục yêu thích"
 heading = "Tất cả công cụ (chế độ toàn màn hình)"
 noResults = "Hãy thử điều chỉnh tìm kiếm hoặc chuyển đổi mô tả để tìm thứ bạn cần."
 recommended = "Đề xuất"
-selfHostedOffline = "Cần máy chủ Stirling-PDF của bạn (hiện đang ngoại tuyến):"
+selfHostedOffline = "Cần máy chủ Morphe PDF của bạn (hiện đang ngoại tuyến):"
 showDetails = "Hiển thị chi tiết"
 unavailable = "Bị quản trị viên server vô hiệu hóa:"
 unavailableDependency = "Không khả dụng - thiếu công cụ cần thiết trên server:"
@@ -10794,7 +10794,7 @@ unfavorite = "Xóa khỏi Mục yêu thích"
 [toolPanel.modePrompt]
 chooseFullscreen = "Dùng chế độ toàn màn hình"
 chooseSidebar = "Dùng chế độ thanh bên"
-description = "Xem trước cả hai bố cục và quyết định cách bạn muốn khám phá các công cụ của Stirling PDF."
+description = "Xem trước cả hai bố cục và quyết định cách bạn muốn khám phá các công cụ của Morphe PDF."
 dismiss = "Để sau"
 fullscreenDescription = "Duyệt mọi công cụ trong một danh mục che khu vực làm việc cho đến khi bạn chọn một công cụ."
 fullscreenTitle = "Chế độ toàn màn hình - (cũ)"
@@ -10857,7 +10857,7 @@ loadingDetailedInfo = "Đang tải thông tin chi tiết..."
 migrationGuide = "Hướng dẫn chuyển đổi"
 migrationGuides = "Hướng dẫn chuyển đổi"
 migrationGuidesDesc = "Xem lại những thay đổi quan trọng trước khi cập nhật."
-modalSubtitle = "Một phiên bản mới của Stirling PDF đã sẵn sàng để cài đặt."
+modalSubtitle = "Một phiên bản mới của Morphe PDF đã sẵn sàng để cài đặt."
 modalTitle = "Có bản cập nhật"
 notes = "Ghi chú"
 releaseNotes = "Ghi chú phát hành"
@@ -10881,7 +10881,7 @@ urgent = "Khẩn cấp"
 attentionBody = "Admin của bạn cần đăng nhập để xem thêm thông tin. Vui lòng liên hệ ngay."
 attentionBodyAdmin = "Xem lại yêu cầu giấy phép để giữ server tuân thủ."
 attentionTitle = "Server này cần sự chú ý của admin"
-message = "Tận dụng tối đa Stirling PDF với người dùng không giới hạn và tính năng nâng cao"
+message = "Tận dụng tối đa Morphe PDF với người dùng không giới hạn và tính năng nâng cao"
 seeInfo = "Xem thông tin"
 title = "Nâng cấp lên gói Server"
 upgradeButton = "Nâng cấp ngay"
@@ -11016,7 +11016,7 @@ authWeb = "Mật khẩu"
 create = "Tạo tài khoản"
 createSubtitle = "Tạo tài khoản tự host bằng mật khẩu hoặc SSO."
 createTitle = "Tạo tài khoản"
-editorDesc = "Chỉnh sửa PDF trong Stirling PDF Editor. Mọi người đều có quyền này."
+editorDesc = "Chỉnh sửa PDF trong Morphe PDF Editor. Mọi người đều có quyền này."
 email = "Địa chỉ email"
 emailError = "Nhập địa chỉ email hợp lệ"
 emailPlaceholder2 = "name@company.com"
@@ -11031,7 +11031,7 @@ processorDeferred = "Đã gửi lời mời, nhưng chưa thể cấp quyền tr
 processorDesc = "Bề mặt quản trị, chạy pipeline, agent và API."
 role = "Vai trò"
 send2 = "Gửi lời mời"
-subtitle2 = "Họ sẽ nhận được email để tham gia không gian làm việc Stirling của bạn."
+subtitle2 = "Họ sẽ nhận được email để tham gia không gian làm việc Morphe của bạn."
 team = "Nhóm"
 title = "Mời mọi người"
 username = "Tên người dùng"
@@ -11164,7 +11164,7 @@ downloads = "Tải xuống"
 entryLabel = "Tóm tắt chữ ký"
 filesEvaluated_one = "{{count}} tệp đã được đánh giá"
 filesEvaluated_other = "{{count}} tệp đã được đánh giá"
-footer = "Xác thực qua Stirling PDF"
+footer = "Xác thực qua Morphe PDF"
 generatedAt = "Đã tạo"
 noPdf = "Báo cáo PDF sẽ khả dụng sau khi xác thực thành công."
 page = "Trang"

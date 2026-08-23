@@ -1,4 +1,4 @@
-# Stirling-PDF - Full version (embedded frontend)
+# Morphe PDF - Full version (embedded frontend)
 # Uses pre-built base image for fast builds
 
 ARG BASE_VERSION=1.0.2@sha256:c7698687f486707ddef9e0298587ca8b44c4e96185e1bdb0c3d119eb2bf9a82e
@@ -124,7 +124,7 @@ ENV VERSION_TAG=$VERSION_TAG \
     SAL_TMP=/tmp/stirling-pdf/libre
 
 # Metadata labels
-LABEL org.opencontainers.image.title="Stirling-PDF" \
+LABEL org.opencontainers.image.title="Morphe PDF" \
       org.opencontainers.image.description="Full version with Calibre, LibreOffice, Tesseract, OCRmyPDF" \
       org.opencontainers.image.source="https://github.com/Stirling-Tools/Stirling-PDF" \
       org.opencontainers.image.licenses="MIT" \

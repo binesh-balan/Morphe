@@ -727,7 +727,7 @@ description = "Bilaketa bakoitzean berreskuratzen diren zatirik garrantzitsuenen
 label = "Top K"
 
 [admin.settings.ai.general]
-description = "Konektatu Stirling Python AI motorrarekin eta aukeratu zein AI gaitasun erakutsiko diren. Aldaketak berrabiaraztean aplikatzen dira."
+description = "Konektatu Morphe Python AI motorrarekin eta aukeratu zein AI gaitasun erakutsiko diren. Aldaketak berrabiaraztean aplikatzen dira."
 title = "AI motorra"
 
 [admin.settings.ai.general.capabilities]
@@ -1075,11 +1075,11 @@ description = "Konfiguratu aukerako eginbideak eta funtzionalitatea."
 title = "Eginbideak"
 
 [admin.settings.features.serverCertificate]
-description = "Konfiguratu zerbitzarian ziurtagiriak sortzea \"Stirling-PDFekin sinatu\" funtzionalitaterako"
+description = "Konfiguratu zerbitzarian ziurtagiriak sortzea \"Morphe PDFekin sinatu\" funtzionalitaterako"
 label = "Zerbitzari-ziurtagiria"
 
 [admin.settings.features.serverCertificate.enabled]
-description = "Gaitu zerbitzari-ziurtagiria \"Stirling-PDFekin sinatu\" aukerarako"
+description = "Gaitu zerbitzari-ziurtagiria \"Morphe PDFekin sinatu\" aukerarako"
 label = "Zerbitzari-ziurtagiria gaitu"
 
 [admin.settings.features.serverCertificate.organizationName]
@@ -1096,11 +1096,11 @@ label = "Ziurtagiriaren balio-epea (egunak)"
 
 [admin.settings.folderAccess]
 description = "Karpeta-iturriek eta karpeta-irteerek irakurri eta idatz ditzaketen direktorioak. Hau segurtasun-muga bat da: automatizazioak ezin dira inoiz zerrenda honetatik kanpoko zerbitzari-bide batera zuzendu."
-securityNote = "Utzi hau hutsik karpeta-iturriak eta irteerak erabat desgaitzeko. Stirling-en konfigurazio-direktorioa beti dago mugaz kanpo."
+securityNote = "Utzi hau hutsik karpeta-iturriak eta irteerak erabat desgaitzeko. Morphe-en konfigurazio-direktorioa beti dago mugaz kanpo."
 title = "Karpeta-sarbidea"
 
 [admin.settings.folderAccess.implied]
-description = "Stirling-ek kudeatutako direktorio hauek beti baimenduta daude eta ezin dira hemen aldatu."
+description = "Morphe-ek kudeatutako direktorio hauek beti baimenduta daude eta ezin dira hemen aldatu."
 serverStorage = "Zerbitzariko fitxategi-biltegia"
 title = "Beti baimenduta"
 watchedFolder = "Pipelinearen zaindutako karpeta"
@@ -1246,7 +1246,7 @@ description = "Cookieen politikara doan URLa edo fitxategi-izena"
 label = "Cookieen politika"
 
 [admin.settings.legal.disclaimer]
-message = "Dokumentu legal hauek pertsonalizatuta, erantzukizun osoa hartzen duzu indarrean dauden lege eta araudi guztiekin bat etortzea bermatzeko, GDPR eta beste EBko datu-babes eskakizunak barne baina ez soilik. Ezarpen hauek soilik aldatu: (1) instantzia pertsonal/pribatua erabiltzen baduzu, (2) EBko jurisdikziotik kanpo bazaude eta zure betebehar legalak ulertzen badituzu, edo (3) aholku legal egokia eskuratu baduzu eta erabiltzaileen datu eta lege-betetze guztien erantzukizun esklusiboa onartzen baduzu. Stirling-PDF eta bere garatzaileek ez dute zure betebehar legalen erantzukizunik hartzen."
+message = "Dokumentu legal hauek pertsonalizatuta, erantzukizun osoa hartzen duzu indarrean dauden lege eta araudi guztiekin bat etortzea bermatzeko, GDPR eta beste EBko datu-babes eskakizunak barne baina ez soilik. Ezarpen hauek soilik aldatu: (1) instantzia pertsonal/pribatua erabiltzen baduzu, (2) EBko jurisdikziotik kanpo bazaude eta zure betebehar legalak ulertzen badituzu, edo (3) aholku legal egokia eskuratu baduzu eta erabiltzaileen datu eta lege-betetze guztien erantzukizun esklusiboa onartzen baduzu. Morphe PDF eta bere garatzaileek ez dute zure betebehar legalen erantzukizunik hartzen."
 title = "Erantzukizun legalaren abisua"
 
 [admin.settings.legal.impressum]
@@ -1333,8 +1333,8 @@ description = "SMTP autentifikaziorako erabiltzaile-izena"
 label = "SMTP erabiltzaile-izena"
 
 [admin.settings.mcp]
-apikeyNote = "Clients send a Stirling API key in the X-API-KEY header (or Authorization: Bearer <key>). The key maps to its owning Stirling user - only provisioned accounts get in, and actions are audited as that user. Manage keys under Account > API Keys."
-description = "Expose Stirling's PDF tools and AI agents to MCP clients over an OAuth-protected endpoint."
+apikeyNote = "Clients send a Morphe API key in the X-API-KEY header (or Authorization: Bearer <key>). The key maps to its owning Morphe user - only provisioned accounts get in, and actions are audited as that user. Manage keys under Account > API Keys."
+description = "Expose Morphe's PDF tools and AI agents to MCP clients over an OAuth-protected endpoint."
 title = "MCP Server"
 
 [admin.settings.mcp.acceptedAudiences]
@@ -1364,7 +1364,7 @@ step3ApiKeyb = "header (or Authorization: Bearer <key>). No OAuth or metadata di
 step4 = "Approve the sign-in; the client retries with a token. Tools appear grouped: convert, pages, misc, security, ai."
 step4ApiKey = "Tools appear grouped: convert, pages, misc, security, ai - and every call is audited as the key's owner."
 tip = "Tip: register the resource ID as an allowed audience in your IdP. Tested with MCP Inspector and Claude Desktop."
-tipApiKey = "Tip: API-key mode needs no external IdP - simplest for self-host. The key maps to its owning Stirling user."
+tipApiKey = "Tip: API-key mode needs no external IdP - simplest for self-host. The key maps to its owning Morphe user."
 title = "Connect an MCP client"
 
 [admin.settings.mcp.issuerUri]
@@ -1377,12 +1377,12 @@ label = "JWKS URL (optional)"
 placeholder = "Auto-discovered from issuer"
 
 [admin.settings.mcp.mode]
-description = "OAuth needs an external IdP. API key uses a Stirling per-user API key (X-API-KEY) - simplest for self-host."
+description = "OAuth needs an external IdP. API key uses a Morphe per-user API key (X-API-KEY) - simplest for self-host."
 label = "Authentication mode"
 
 [admin.settings.mcp.requireAccount]
-description = "Only let tokens through if their subject maps to a provisioned, enabled Stirling user."
-label = "Require an existing Stirling account"
+description = "Only let tokens through if their subject maps to a provisioned, enabled Morphe user."
+label = "Require an existing Morphe account"
 
 [admin.settings.mcp.resourceId]
 description = "This server's public /mcp URL. Tokens must list it in their audience (RFC 8707) or they are rejected."
@@ -1393,7 +1393,7 @@ description = "Require mcp.tools.read for read ops and mcp.tools.write for write
 label = "Enforce OAuth scopes"
 
 [admin.settings.mcp.usernameClaim]
-description = "JWT claim matched against a Stirling username (e.g. sub, email, preferred_username)."
+description = "JWT claim matched against a Morphe username (e.g. sub, email, preferred_username)."
 label = "Username claim"
 
 [admin.settings.plan.noData]
@@ -1714,7 +1714,7 @@ description = "Gaituta dagoenean, zerrendatutako erabiltzaile IDek bakarrik erab
 label = "Baimendu erabiltzaile ID zehatzak"
 
 [admin.settings.telegram.enabled]
-description = "Baimendu erabiltzaileek Stirling PDFekin elkarreragitea konfiguratutako Telegram bot-aren bidez."
+description = "Baimendu erabiltzaileek Morphe PDFekin elkarreragitea konfiguratutako Telegram bot-aren bidez."
 label = "Gaitu Telegram bot-a"
 
 [admin.settings.telegram.feedback]
@@ -1787,20 +1787,20 @@ settingsOverview = "Hau da <strong>Ezarpenen panela</strong>. Administrazio-ezar
 systemCustomization = "UI pertsonalizatzeko modu ugari ditugu: <strong>Sistemaren ezarpenek</strong> aplikazioaren izena eta hizkuntzak aldatzea uzten dute, <strong>Ezaugarriek</strong> zerbitzariaren ziurtagirien kudeaketa ahalbidetzen dute, eta <strong>Endpoints</strong> atalak erabiltzaileentzako tresna zehatzak gaitu edo desgaitu ditzake."
 teamsAndUsers = "Kudeatu hemen <strong>Taldeak</strong> eta erabiltzaile indibidualak. Erabiltzaile berriak e-postaz, partekatzeko esteken bidez gonbidatu edo zuk zeuk kontu pertsonalizatuak sor ditzakezu."
 welcome = "Ongi etorri <strong>Administrazio-birara</strong>! Azter ditzagun sistema-administratzaileentzako ezaugarri eta ezarpen boteretsuak."
-wrapUp = "Hori da administrazio-bira! Erakundeei egokitutako eta pertsonalizagarriak diren ezaugarriak ezagutu dituzu Stirling PDF irtenbide indartsu bihurtzen dutenak. Sar zaitez bira honetara edozein unetan <strong>Laguntza</strong> menutik."
+wrapUp = "Hori da administrazio-bira! Erakundeei egokitutako eta pertsonalizagarriak diren ezaugarriak ezagutu dituzu Morphe PDF irtenbide indartsu bihurtzen dutenak. Sar zaitez bira honetara edozein unetan <strong>Laguntza</strong> menutik."
 
 [adminUserSettings]
 admin = "Admin"
 title = "Erabiltzailearen Ezarpenen Kontrolak"
 
 [agents]
-stirling_name = "Stirling"
+stirling_name = "Morphe"
 
 [analytics]
 learnMore = "Argibide gehiago"
-paragraph1 = "Stirling PDF-k aukerazko analitikak ditu produktua hobetzen laguntzeko. Ez dugu informazio pertsonalik edo fitxategi-edukirik jarraitzen."
-paragraph2 = "Mesedez, kontuan hartu analitikak gaitzea Stirling-PDF hazten laguntzeko eta gure erabiltzaileak hobeto ulertzeko."
-title = "Stirling PDF hobetzea nahi duzu?"
+paragraph1 = "Morphe PDF-k aukerazko analitikak ditu produktua hobetzen laguntzeko. Ez dugu informazio pertsonalik edo fitxategi-edukirik jarraitzen."
+paragraph2 = "Mesedez, kontuan hartu analitikak gaitzea Morphe PDF hazten laguntzeko eta gure erabiltzaileak hobeto ulertzeko."
+title = "Morphe PDF hobetzea nahi duzu?"
 
 [annotate]
 tags = "annotate,highlight,draw,markup,comment,notes,review,redline,feedback,markup tools,sticky notes,shapes,arrows,text box,freehand"
@@ -2935,10 +2935,10 @@ copy = "Kopiatu mezua"
 
 [chat.fab]
 close = "Close chat"
-open = "Open Stirling AI assistant"
+open = "Open Morphe AI assistant"
 
 [chat.header]
-agentMenu = "Stirling agentearen aukerak"
+agentMenu = "Morphe agentearen aukerak"
 clearChat = "Garbitu txata"
 
 [chat.input]
@@ -3270,13 +3270,13 @@ upgradeButton = "Bertsio-berritu kontua"
 [config.apiKeys]
 copyKeyAriaLabel = "API gakoa kopiatu"
 description = "Stirlingen PDF tresna-multzora sartzeko zure API gakoa. Kopiatu zure proiektuara edo berritu berri bat sortzeko."
-docsDescription = "Ikasi gehiago Stirling PDFrekin integrazioari buruz:"
+docsDescription = "Ikasi gehiago Morphe PDFrekin integrazioari buruz:"
 docsLink = "API dokumentazioa"
 docsTitle = "API dokumentazioa"
 generateError = "Ezin izan dugu zure API gakoa sortu."
 goToAccount = "Joan kontura"
 guestInfo = "Gonbidatu erabiltzaileek ez dute API gakorik jasotzen. Sortu kontu bat zure aplikazioetan erabil dezakezun API gakoa lortzeko."
-intro = "Erabili zure API gakoa Stirling PDFren prozesatzeko gaitasunetara programatikoki sartzeko."
+intro = "Erabili zure API gakoa Morphe PDFren prozesatzeko gaitasunetara programatikoki sartzeko."
 label = "API gakoa"
 publicKeyAriaLabel = "API gako publikoa"
 refreshAriaLabel = "API gakoa berritu"
@@ -3300,10 +3300,10 @@ title = "API gakoak berritu"
 warning = "⚠️ Abisua: Ekintza honek API gako berriak sortuko ditu eta aurreko gakoak baliogabe utziko ditu."
 
 [config.mcp]
-description = "Model Context Protocol (MCP) lets AI assistants like Claude use your Stirling PDF tools directly. Connect a client once and your assistant can convert, edit, secure and process documents on your behalf."
-guestInfo = "Guest users can't connect MCP clients. Create an account to use the MCP server and let your AI assistant run Stirling PDF tools on your behalf."
+description = "Model Context Protocol (MCP) lets AI assistants like Claude use your Morphe PDF tools directly. Connect a client once and your assistant can convert, edit, secure and process documents on your behalf."
+guestInfo = "Guest users can't connect MCP clients. Create an account to use the MCP server and let your AI assistant run Morphe PDF tools on your behalf."
 navLabel = "MCP Server"
-tip = "Every action your assistant runs is performed as your account and counts towards your usage, just like using Stirling PDF directly."
+tip = "Every action your assistant runs is performed as your account and counts towards your usage, just like using Morphe PDF directly."
 title = "MCP Server"
 viewApiKeys = "View API keys"
 
@@ -3320,7 +3320,7 @@ label = "Your MCP endpoint"
 
 [config.mcp.setup]
 addTo = "Add to"
-hint = "Pick your client, paste the snippet into the file shown, then restart it. You'll sign in with your Stirling account on first use - no keys to copy."
+hint = "Pick your client, paste the snippet into the file shown, then restart it. You'll sign in with your Morphe account on first use - no keys to copy."
 title = "Connect your AI assistant"
 
 [config.overview]
@@ -3429,7 +3429,7 @@ showPreferencesBtn = "Kudeatu hobespenak"
 title = "Cookieak nola erabiltzen ditugu"
 
 [cookieBanner.popUp.description]
-1 = "Cookieak eta beste teknologiak erabiltzen ditugu Stirling PDF zuretzat hobeto funtziona dadin—gure tresnak hobetzen eta gustuko izango dituzun ezaugarriak eraikitzen jarraitzen laguntzen digute."
+1 = "Cookieak eta beste teknologiak erabiltzen ditugu Morphe PDF zuretzat hobeto funtziona dadin—gure tresnak hobetzen eta gustuko izango dituzun ezaugarriak eraikitzen jarraitzen laguntzen digute."
 2 = "If you’d rather not, clicking 'No Thanks' will only enable the essential cookies needed to keep things running smoothly."
 
 [cookieBanner.preferencesModal]
@@ -3442,12 +3442,12 @@ subtitle = "Cookieen erabilera"
 title = "Baimen-hobespenen zentroa"
 
 [cookieBanner.preferencesModal.analytics]
-description = "Cookie hauek gure tresnak nola erabiltzen diren ulertzen laguntzen digute, gure komunitateak baloratzen dituen ezaugarriak eraikitzera bideratu ahal izateko. Ziur egon—Stirling PDFk ezin du eta ez du inoiz jarraituko lantzen dituzun dokumentuen edukia."
+description = "Cookie hauek gure tresnak nola erabiltzen diren ulertzen laguntzen digute, gure komunitateak baloratzen dituen ezaugarriak eraikitzera bideratu ahal izateko. Ziur egon—Morphe PDFk ezin du eta ez du inoiz jarraituko lantzen dituzun dokumentuen edukia."
 title = "Analitika"
 
 [cookieBanner.preferencesModal.description]
-1 = "Stirling PDFk cookieak eta antzeko teknologiak erabiltzen ditu zure esperientzia hobetzeko eta gure tresnak nola erabiltzen diren ulertzeko. Honek errendimendua hobetzen eta axola zaizkizun ezaugarriak garatzen laguntzen digu, eta erabiltzaileei etengabeko laguntza ematen die."
-2 = "Stirling PDF ezin da—eta ez du inoiz egingo—zuri erabiltzen dituzun dokumentuen edukia jarraitu edo atzitu."
+1 = "Morphe PDFk cookieak eta antzeko teknologiak erabiltzen ditu zure esperientzia hobetzeko eta gure tresnak nola erabiltzen diren ulertzeko. Honek errendimendua hobetzen eta axola zaizkizun ezaugarriak garatzen laguntzen digu, eta erabiltzaileei etengabeko laguntza ematen die."
+2 = "Morphe PDF ezin da—eta ez du inoiz egingo—zuri erabiltzen dituzun dokumentuen edukia jarraitu edo atzitu."
 3 = "Zure pribatutasuna eta konfiantza gure lanaren muinean daude."
 
 [cookieBanner.preferencesModal.necessary]
@@ -3526,14 +3526,14 @@ title = "Errorea"
 
 [defaultApp.prompt]
 dontRemind = "Ez gogorarazi berriro"
-message = "Egin Stirling PDF PDF fitxategiak irekitzeko zure aplikazio lehenetsia."
+message = "Egin Morphe PDF PDF fitxategiak irekitzeko zure aplikazio lehenetsia."
 
 [defaultApp.settingsOpened]
-message = "Hautatu Stirling PDF sistemaren ezarpenetan, mesedez"
+message = "Hautatu Morphe PDF sistemaren ezarpenetan, mesedez"
 title = "Ezarpenak ireki dira"
 
 [defaultApp.success]
-message = "Stirling PDF orain zure PDF editore lehenetsia da"
+message = "Morphe PDF orain zure PDF editore lehenetsia da"
 title = "Aplikazio lehenetsia ezarrita"
 
 [desktopUpdate]
@@ -3549,7 +3549,7 @@ updateFailedMessage = "Ezin izan da eguneratzea deskargatu edo instalatu."
 
 [desktopUpdate.blocked]
 docsLink = "Ikusi instalazioaren dokumentazioa"
-message = "Stirling-PDFk ez du baimenik makina honetan bere burua eguneratzeko."
+message = "Morphe PDFk ez du baimenik makina honetan bere burua eguneratzeko."
 title = "Administratzaile-baimenak behar dira"
 
 [devAirgapped]
@@ -4107,7 +4107,7 @@ title = "Eraman karpetara"
 [filesPage.origin]
 all = "Jatorri guztiak"
 cloud = "Hodeia"
-cloudHint = "Stirling zerbitzarian gordeta"
+cloudHint = "Morphe zerbitzarian gordeta"
 local = "Tokikoa"
 localHint = "Nabigatzaile honetan soilik gordeta"
 shared = "Partekatuak"
@@ -4378,7 +4378,7 @@ invisible = "Ikusezina (metadatuak soilik)"
 location = "Kokapena:"
 logo = "Logotipoa:"
 logoHidden = "Logotiporik ez"
-logoShown = "Stirling PDF logotipoa erakusten da"
+logoShown = "Morphe PDF logotipoa erakusten da"
 participantCount_one = "{{count}} participant will sign in order"
 participantCount_other = "{{count}} participants will sign in order"
 participants = "Parte-hartzaileak"
@@ -4432,7 +4432,7 @@ title = "Sinadura sekuentziala"
 dismiss = "Baztertu pankarta"
 message = "Sortu doako kontu bat zure lana gordetzeko, ezaugarri gehiago eskuratzeko eta proiektua babesteko."
 signUp = "Izena eman doan"
-title = "Stirling PDF gonbidatu gisa erabiltzen ari zara!"
+title = "Morphe PDF gonbidatu gisa erabiltzen ari zara!"
 
 [home.addAttachments]
 desc = "Gehitu edo kendu txertatutako fitxategiak (eranskinak) PDF batean"
@@ -4596,7 +4596,7 @@ tags = "batu,elkartu,bat egin"
 title = "Elkartu"
 
 [home.mobile]
-brandAlt = "Stirling PDF logotipoa"
+brandAlt = "Morphe PDF logotipoa"
 openFiles = "Ireki fitxategiak"
 swipeHint = "Egin hatz-keinua ezkerrera edo eskuinera ikuspegiak aldatzeko"
 tools = "Tresnak"
@@ -4635,7 +4635,7 @@ tags = "antolatu,berrordenatu,ordena aldatu"
 title = "Antolatzailea"
 
 [home.pdfTextEditor]
-desc = "Berrikusi eta editatu Stirling PDF JSON esportazioak taldekatutako testu-edizioarekin eta PDF birsorkuntzarekin"
+desc = "Berrikusi eta editatu Morphe PDF JSON esportazioak taldekatutako testu-edizioarekin eta PDF birsorkuntzarekin"
 tags = "edit text,modify text,change text,edit content,update text,rewrite,correct,amend,redline,revise,text editor,content editor"
 title = "PDF testu-editorea"
 
@@ -4821,7 +4821,7 @@ passwordRequired = "Pasahitza beharrezkoa da"
 signIn = "Hasi saioa"
 validating = "Gonbidapena baliozkotzen..."
 validationError = "Ezin izan da gonbidapen-esteka baliozkotu"
-welcome = "Ongi etorri Stirling PDFra"
+welcome = "Ongi etorri Morphe PDFra"
 welcomeSubtitle = "Amaitu zure kontuaren konfigurazioa hasteko"
 welcomeTitle = "Gonbidapena jaso duzu!"
 
@@ -4847,7 +4847,7 @@ terms = "Baldintzak eta erabilera-baldintzak"
 title = "3rd Party Licenses"
 
 [localMode]
-toolUnavailable = "Tresna honek kontu bat behar du. Hasi saioa Stirling Cloud-en edo konektatu norberak ostatatutako zerbitzari batera erabiltzeko."
+toolUnavailable = "Tresna honek kontu bat behar du. Hasi saioa Morphe Cloud-en edo konektatu norberak ostatatutako zerbitzari batera erabiltzeko."
 
 [localMode.toolPicker]
 message = "Hasi saioa tresna guztiak desblokeatzeko."
@@ -5005,7 +5005,7 @@ message = "Autentifikazioa ez da ongi burutu. Leiho hau itxi eta saiatu berriro.
 title = "Autentifikazioak huts egin du"
 
 [oauth.success]
-message = "Leiho hau itxi eta Stirling PDF-era itzul zaitezke."
+message = "Leiho hau itxi eta Morphe PDF-era itzul zaitezke."
 title = "Autentifikazioa ongi burutu da"
 
 [oauthConsent]
@@ -5018,17 +5018,17 @@ loadFailed = "This authorisation request is invalid or has expired. Close this t
 loading = "Loading authorisation request..."
 missingId = "Missing authorisation request. Start the connection from your app and try again."
 redirecting = "Returning you to the app..."
-requesting = "{{app}} wants to access your Stirling PDF account"
+requesting = "{{app}} wants to access your Morphe PDF account"
 scopesIntro = "This will allow {{app}} to:"
 signedInAs = "Signed in as {{name}}"
 signInButton = "Sign in to continue"
-signInPrompt = "Sign in to your Stirling PDF account to continue connecting the app."
+signInPrompt = "Sign in to your Morphe PDF account to continue connecting the app."
 title = "Authorise access"
 unknownApp = "A third-party application"
 
 [oauthConsent.access]
 actAsYou = "Act as you - everything {{app}} does runs under your account and counts towards your usage"
-tools = "Use your Stirling PDF tools on your behalf - convert, edit, sign, secure and process your documents"
+tools = "Use your Morphe PDF tools on your behalf - convert, edit, sign, secure and process your documents"
 
 [oauthConsent.scope]
 email = "See your email address"
@@ -5152,26 +5152,26 @@ skipTheTour = "Utzi bisita gidatua"
 
 [onboarding.checklist]
 dismiss = "Baztertu"
-title = "Konfiguratu Stirling PDF"
+title = "Konfiguratu Morphe PDF"
 
 [onboarding.checklist.downloadDesktop]
-description = "Exekutatu Stirling modu natiboan zure makinan"
-title = "Deskargatu Stirling mahaigainerako"
+description = "Exekutatu Morphe modu natiboan zure makinan"
+title = "Deskargatu Morphe mahaigainerako"
 
 [onboarding.checklist.inviteTeam]
 description = "Kolaboratu zure taldearekin"
 title = "Gonbidatu taldeko kideak"
 
 [onboarding.checklist.shareAnalytics]
-description = "Lagundu Stirling hobetzen"
+description = "Lagundu Morphe hobetzen"
 title = "Partekatu erabilera-datu anonimoak"
 
 [onboarding.checklist.takeTour]
-description = "Ikusi Stirling nola dabilen ibilbide azkar batean"
+description = "Ikusi Morphe nola dabilen ibilbide azkar batean"
 title = "Egin ibilbidea"
 
 [onboarding.desktopInstall]
-body = "Stirling hobekien funtzionatzen du mahaigaineko aplikazio gisa. Offline erabil dezakezu, dokumentuak azkarrago atzitu, eta editatu tokian bertan zure ordenagailuan."
+body = "Morphe hobekien funtzionatzen du mahaigaineko aplikazio gisa. Offline erabil dezakezu, dokumentuak azkarrago atzitu, eta editatu tokian bertan zure ordenagailuan."
 selectOs = "Hautatu sistema eragilea"
 title = "Deskargatu"
 titleWithOs = "Deskargatu {{osLabel}}-rako"
@@ -5195,21 +5195,21 @@ success = "MFA gaituta dago. Orain jarrai dezakezu."
 title = "Faktore anitzeko autentifikazioaren konfigurazioa"
 
 [onboarding.planOverview]
-adminBodyLoginDisabled = "Saio-hasiera modua gaitzen duzunean, erabiltzaileak kudeatu, ezarpenak konfiguratu eta zerbitzariaren osasuna monitorizatu ahal izango dituzu. Zure zerbitzariko lehen <strong>{{freeTierLimit}}</strong> pertsonek doan erabil dezakete Stirling."
-adminBodyLoginEnabled = "Admin gisa, erabiltzaileak kudeatu, ezarpenak konfiguratu eta zerbitzariaren osasuna monitorizatu ditzakezu. Zure zerbitzariko lehen <strong>{{freeTierLimit}}</strong> pertsonak doan erabil dezakete Stirling."
+adminBodyLoginDisabled = "Saio-hasiera modua gaitzen duzunean, erabiltzaileak kudeatu, ezarpenak konfiguratu eta zerbitzariaren osasuna monitorizatu ahal izango dituzu. Zure zerbitzariko lehen <strong>{{freeTierLimit}}</strong> pertsonek doan erabil dezakete Morphe."
+adminBodyLoginEnabled = "Admin gisa, erabiltzaileak kudeatu, ezarpenak konfiguratu eta zerbitzariaren osasuna monitorizatu ditzakezu. Zure zerbitzariko lehen <strong>{{freeTierLimit}}</strong> pertsonak doan erabil dezakete Morphe."
 adminTitle = "Admin ikuspegi orokorra"
 userBody = "Gonbidatu taldekideak, esleitu rolak eta mantendu dokumentuak antolatuta lan-espazio seguruan. Gaitu saio-hasiera modua bakarkako erabileratik harago hazteko prest zaudenean."
 userTitle = "Planaren ikuspegi orokorra"
 
 [onboarding.processorIntro]
-body = "Stirling-ek orain <strong>Politikak</strong> exekutatzen ditu — dokumentu bakoitza iristen denean sailkatu, babestu eta prozesatzen duten arau automatizatuak. Konfiguratu eta monitorizatu exekuzioak <strong>Processor</strong>-en."
+body = "Morphe-ek orain <strong>Politikak</strong> exekutatzen ditu — dokumentu bakoitza iristen denean sailkatu, babestu eta prozesatzen duten arau automatizatuak. Konfiguratu eta monitorizatu exekuzioak <strong>Processor</strong>-en."
 cta = "Ikusi Processor"
-title = "Ikusi Stirling Processor"
+title = "Ikusi Morphe Processor"
 
 [onboarding.saas.freeEditor]
 freeLine = "The editor is now <free>completely free</free>."
 premium = "We've added loads of new features, including <strong>Policies</strong> and <strong>Agent Chat</strong>."
-title = "Welcome to Stirling"
+title = "Welcome to Morphe"
 
 [onboarding.saas.team]
 addButton = "Add"
@@ -5229,19 +5229,19 @@ rolePlaceholder = "Baieztatu zure rola"
 roleUser = "Erabiltzailea"
 
 [onboarding.serverLicense]
-freeBody = "Gure <strong>Open-Core</strong> lizentziak <strong>{{freeTierLimit}}</strong> erabiltzaile arte baimentzen ditu doan zerbitzari bakoitzeko. Etenik gabe eskalatzeko eta gure <strong>PDF testu-edizio tresna</strong> berrirako sarbide goiztiarra lortzeko, gomendatzen dugu Stirling Server plana - edizio osoa eta <strong>eserleku mugagabeak</strong> $99/zerbitzari/hilean."
+freeBody = "Gure <strong>Open-Core</strong> lizentziak <strong>{{freeTierLimit}}</strong> erabiltzaile arte baimentzen ditu doan zerbitzari bakoitzeko. Etenik gabe eskalatzeko eta gure <strong>PDF testu-edizio tresna</strong> berrirako sarbide goiztiarra lortzeko, gomendatzen dugu Morphe Server plana - edizio osoa eta <strong>eserleku mugagabeak</strong> $99/zerbitzari/hilean."
 freeTitle = "Zerbitzari-lizentzia"
-overLimitBody = "Gure lizentziak baimentzen ditu <strong>{{freeTierLimit}}</strong> erabiltzaile doan zerbitzari bakoitzeko. <strong>{{overLimitUserCopy}}</strong> Stirling erabiltzaile dituzu. Jarraitzeko etenik gabe, eguneratu Stirling Server planera - <strong>eserleku mugagabeak</strong>, PDF testu-edizioa, eta admin kontrol osoa $99/zerbitzari/hilean."
+overLimitBody = "Gure lizentziak baimentzen ditu <strong>{{freeTierLimit}}</strong> erabiltzaile doan zerbitzari bakoitzeko. <strong>{{overLimitUserCopy}}</strong> Morphe erabiltzaile dituzu. Jarraitzeko etenik gabe, eguneratu Morphe Server planera - <strong>eserleku mugagabeak</strong>, PDF testu-edizioa, eta admin kontrol osoa $99/zerbitzari/hilean."
 overLimitTitle = "Beharrezkoa da zerbitzari-lizentzia"
 seePlans = "Ikusi planak →"
 upgrade = "Eguneratu orain →"
 
 [onboarding.tourOverview]
-body = "Stirling PDF V2k dozenaka tresna eta diseinu berritua dakartza. Egin ibilbide azkar bat aldaketak eta behar dituzun funtzioak non dauden ikusteko."
+body = "Morphe PDF V2k dozenaka tresna eta diseinu berritua dakartza. Egin ibilbide azkar bat aldaketak eta behar dituzun funtzioak non dauden ikusteko."
 title = "Ibilbidearen ikuspegi orokorra"
 
 [onboarding.welcomeSlide]
-body = "Stirling PDF orain tamaina guztietako taldeentzat prest dago. Eguneratze honek diseinu berria, admin gaitasun indartsu berriak, eta eskatuen izan den eginbidea dakar - <strong>Testua editatu</strong>."
+body = "Morphe PDF orain tamaina guztietako taldeentzat prest dago. Eguneratze honek diseinu berria, admin gaitasun indartsu berriak, eta eskatuen izan den eginbidea dakar - <strong>Testua editatu</strong>."
 title = "Ongi etorri Stirlingera"
 
 [onboarding.whatsNew]
@@ -5548,7 +5548,7 @@ benefit1Body = "chain tools, schedule runs, batch process"
 benefit1Title = "Automation pipelines"
 benefit2Body = "summarise, classify, redact, AI-OCR"
 benefit2Title = "AI tools"
-benefit3Body = "call any Stirling endpoint programmatically"
+benefit3Body = "call any Morphe endpoint programmatically"
 benefit3Title = "API access"
 button = "Turn on Processor →"
 reassurance = "No minimum · Set a $0 cap to test · Cancel anytime"
@@ -5629,7 +5629,7 @@ leader = "Team owner"
 member = "Member"
 
 [payg.signupRequired]
-body = "Stirling PDF gives every signed-up account 500 free operations, enough to keep most workflows humming without paying a cent. You're currently using Stirling as a guest, which doesn't include billable tools like AI, automations, or hosted processing."
+body = "Morphe PDF gives every signed-up account 500 free operations, enough to keep most workflows humming without paying a cent. You're currently using Morphe as a guest, which doesn't include billable tools like AI, automations, or hosted processing."
 cancel = "Not now"
 cta = "Sign up free"
 subtext = "Creating an account is free and takes a few seconds. No credit card required."
@@ -5677,7 +5677,7 @@ usdNote = "Estimated in USD. You can adjust your cap any time after subscribing,
 [payg.upgrade.checkout]
 capValue = "{{symbol}}{{amount}} / month"
 edit = "Edit"
-help = "Stripe handles your card details. Stirling never sees them."
+help = "Stripe handles your card details. Morphe never sees them."
 loading = "Loading checkout…"
 noCap = "No cap"
 title = "Add your payment method"
@@ -5685,7 +5685,7 @@ title = "Add your payment method"
 [payg.upgrade.help]
 aiBody = "summarise, classify, redact, AI-OCR"
 aiTitle = "AI tools"
-apiBody = "programmatic access to any Stirling endpoint"
+apiBody = "programmatic access to any Morphe endpoint"
 apiTitle = "API calls"
 automationBody = "chained tools or scheduled runs that don't need clicks"
 automationTitle = "Automation pipelines"
@@ -6116,7 +6116,7 @@ upToFiveUsers = "Gehienez 5 erabiltzaile"
 usageTrackingPrometheus = "Erabilera-jarraipena eta Prometheus"
 
 [plan.licenseWarning]
-body = "{{total}} erabiltzaile dituzu baina maila doakoak {{limit}} soilik onartzen ditu zerbitzari bakoitzeko. Eguneratu Stirling PDF ondo ibil dadin."
+body = "{{total}} erabiltzaile dituzu baina maila doakoak {{limit}} soilik onartzen ditu zerbitzari bakoitzeko. Eguneratu Morphe PDF ondo ibil dadin."
 cta = "Ikusi planak"
 overLimit = "{{limit}} baino gehiago"
 title = "Doako auto-ostatu muga gaindituta"
@@ -6251,25 +6251,25 @@ comingSoon = "Laster"
 [portal.accountLink.card]
 billingNote = "Gainbegiratu gabeko prozesamendua zure erakundearen zorroari fakturatzen zaio."
 eyebrow = "Kontu-lotura"
-linkButton = "Lotu zure Stirling kontua"
+linkButton = "Lotu zure Morphe kontua"
 linked = "Lotuta"
 linkedAs = "{{name}} gisa lotuta."
 linkedGeneric = "Instantzia hau lotuta dago."
 notLinked = "Lotu gabe"
-title = "Lotu erakunde hau bere Stirling kontuarekin"
+title = "Lotu erakunde hau bere Morphe kontuarekin"
 unlink = "Kendu lotura"
 
 [portal.accountLink.card.error]
 title = "Ezin izan da lotu"
 
 [portal.accountLink.card.loginNotConfigured]
-after = "hostatutako Stirling kontuarekin kontu-lotura gaitzeko. Garapenean, saio-hasiera simula dezakezu lotura-elkarrizketatik."
+after = "hostatutako Morphe kontuarekin kontu-lotura gaitzeko. Garapenean, saio-hasiera simula dezakezu lotura-elkarrizketatik."
 before = "Ezarri"
 title = "SaaS saio-hasiera ez dago konfiguratuta"
 
 [portal.accountLink.gate]
 action = "Lotu kontua"
-description = "Lotu erakunde honen Stirling kontua fakturagarriak diren eginbideak erabiltzeko."
+description = "Lotu erakunde honen Morphe kontua fakturagarriak diren eginbideak erabiltzeko."
 title = "Lotu desblokeatzeko"
 titleFeature = "Lotu {{feature}} desblokeatzeko"
 
@@ -6301,13 +6301,13 @@ never = "inoiz ez"
 
 [portal.accountLink.modal]
 linkSubtitle = "Hasi saioa zerbitzari honek fakturatu behar duen kontuan."
-linkTitle = "Lotu zure Stirling kontua"
-reauthSubtitle = "Zure saioa iraungi da — hasi saioa berriro zure Stirling kontuan. Zure instantziak lotuta jarraituko du."
+linkTitle = "Lotu zure Morphe kontua"
+reauthSubtitle = "Zure saioa iraungi da — hasi saioa berriro zure Morphe kontuan. Zure instantziak lotuta jarraituko du."
 reauthTitle = "Hasi saioa berriro"
 simulateSignIn = "Simulatu saio-hasiera (dev)"
 
 [portal.accountLink.modal.loginNotConfigured]
-after = "hostatutako Stirling kontuarekin aplikazio barruko lotura gaitzeko."
+after = "hostatutako Morphe kontuarekin aplikazio barruko lotura gaitzeko."
 and = "eta"
 before = "Ezarri"
 title = "SaaS saio-hasiera ez dago konfiguratuta"
@@ -6316,7 +6316,7 @@ title = "SaaS saio-hasiera ez dago konfiguratuta"
 instancesSub = "Erakunde honetan erregistratutako self-hosted instantzia guztiak. Ezeztatu kredentzial bat berehala haren gainbegiratu gabeko sarbidea eteteko."
 instancesTitle = "Lotutako instantziak"
 revokeError = "Ezin izan da instantzia ezeztatu"
-sub = "Lotu self-hosted erakunde hau bere Stirling kontuarekin, gainbegiratu gabeko prozesamendua zure erakundearen zorroari fakturatzeko."
+sub = "Lotu self-hosted erakunde hau bere Morphe kontuarekin, gainbegiratu gabeko prozesamendua zure erakundearen zorroari fakturatzeko."
 
 [portal.accountLink.panel.loadError]
 forbidden = "Taldearen jabeak bakarrik ikus ditzake erakundearen lotutako instantziak."
@@ -6333,7 +6333,7 @@ close = "Itxi laguntzailea"
 error = "Ezin izan da laguntzailearekin konektatu."
 errorWithDetail = "Ezin izan da laguntzailearekin konektatu: {{detail}}"
 inputAriaLabel = "Galdetu laguntzaileari"
-inputPlaceholder = "Galdetu Stirling-i buruz…"
+inputPlaceholder = "Galdetu Morphe-i buruz…"
 open = "Ireki laguntzailea"
 send = "Bidali"
 title = "Laguntzailea"
@@ -6380,7 +6380,7 @@ title = "Ezarri zure gastu-muga"
 [portal.billing.checkout.card]
 fields = "Txartel-zenbakia · HH / UU · CVC · ZIP"
 label = "Txartelaren xehetasunak"
-note = "Txartelaren xehetasunak Stripe-k biltzen ditu. Stirling-ek ez du inoiz PAN edo CVC gordetzen."
+note = "Txartelaren xehetasunak Stripe-k biltzen ditu. Morphe-ek ez du inoiz PAN edo CVC gordetzen."
 
 [portal.billing.checkout.error]
 title = "Ezin izan da ordainketa-prozesua hasi"
@@ -6398,7 +6398,7 @@ limitNoCap = "Gastu-mugarik ez. Prozesamendua ez da pausatuko. Fakturak hilero i
 cta = "Sortu zure Enterprise aurrekontua"
 description = "Bolumen-konpromisoagatiko deskontuak, air-gapped hedapena, MSA pertsonalizatua eta segurtasun-berrikuspenak, eta hirugarrenen banatzaileekin lankidetzak."
 eyebrow = "Bolumen-deskontua · 1M+ PDF"
-title = "Stirling Enterprise"
+title = "Morphe Enterprise"
 
 [portal.billing.freeEditors]
 activeThisMonth = "Aktibo hilabete honetan"
@@ -6447,9 +6447,9 @@ viewAriaLabel = "Ikusi {{number}} faktura Stripe-n"
 viewLink = "Ikusi ↗"
 
 [portal.billing.linkPrompt]
-cta = "Lotu Stirling kontua"
+cta = "Lotu Morphe kontua"
 description = "Eskuzko PDF edizioa — ikusi, sinatu, bateratu, zatitu, ur-marka jarri, konprimitu, bihurtu, eskuzko OCR — beti doakoa da, lotuta egon ala ez. Lotu 500 PDF doako neurtutako prozesamendurako (automatizazioa, AI eta API) eskuratzeko; gehiago behar duzunean, aktibatu Processor plana eta ordaindu erabiltzen duzunagatik soilik."
-title = "Lotu zure Stirling kontua"
+title = "Lotu zure Morphe kontua"
 
 [portal.billing.paymentMethod]
 billedMonthly = "Hilero fakturatua"
@@ -6523,9 +6523,9 @@ usersLabel = "Erabiltzaileak guztira"
 label = "Ulertzen dut nire aurrez ordaindutako edukiera agortzen denean edo 12 hilabeteren ondoren iraungitzen denean, prozesamenduak automatikoki jarraituko duela erabileraren araberako tarifa estandar neurtuan (nire gastu-mugaraino), ezeztatzen ez badut, eta edonoiz ezezta dezakedala fakturazio-ataritik."
 
 [portal.billing.prepaid.deploy]
-cloud = "Stirling Cloud"
-cloudDesc = "Stirling-ek kudeatua. Martxan minutu gutxitan."
-cloudValue = "Stirling Cloud · Kudeatua"
+cloud = "Morphe Cloud"
+cloudDesc = "Morphe-ek kudeatua. Martxan minutu gutxitan."
+cloudValue = "Morphe Cloud · Kudeatua"
 selfhost = "Self-hosted"
 selfhostDesc = "Azpiegitura pribatuan exekutatzen da. Tarifa bera."
 selfhostValue = "Self-hosted · Azpiegitura pribatua"
@@ -6681,7 +6681,7 @@ description = "Prozesatutako dokumentuak non amaitzen diren - bucket bat, drive 
 label = "Fitxategia eta erantsi"
 
 [portal.connections.commonFields.accessToken]
-helperText = "Stirling-ek hau zifratuta gordetzen du eta ez du berriro erakusten."
+helperText = "Morphe-ek hau zifratuta gordetzen du eta ez du berriro erakusten."
 label = "Sarbide-tokena"
 
 [portal.connections.commonFields.apiKey]
@@ -7191,7 +7191,7 @@ time = "Ordua"
 user = "Erabiltzailea"
 
 [portal.editorAdmin]
-subtitle = "Hedatu Stirling PDF Editor, parekatu norberak ostatatutako instantziak zure erakundearekin, eta kudeatu martxan dagoen flota — helburuak, osasuna, kredentzialak eta offline aktibazioa leku bakarrean."
+subtitle = "Hedatu Morphe PDF Editor, parekatu norberak ostatatutako instantziak zure erakundearekin, eta kudeatu martxan dagoen flota — helburuak, osasuna, kredentzialak eta offline aktibazioa leku bakarrean."
 title = "Editorearen hedapena"
 
 [portal.editorAdmin.health.columns]
@@ -7282,7 +7282,7 @@ guide = "Ireki {{name}} gida"
 openInBrowser = "Ireki arakatzailean ordez"
 sectionDesktop = "Mahaigaineko aplikazioa"
 sectionSelfHosted = "Self-hosted"
-title = "Instalatu Stirling PDF Editor"
+title = "Instalatu Morphe PDF Editor"
 
 [portal.home.download.docker]
 detailBody = "Exekutatu irudi ofiziala zure zerbitzarian."
@@ -7330,7 +7330,7 @@ title = "Windows"
 
 [portal.home.editor]
 activeOfDeployed = "{{active}} / {{total}} aktibo hilabete honetan"
-name = "Stirling PDF Editor"
+name = "Morphe PDF Editor"
 open = "Ireki arakatzailean"
 updated = "eguneratua {{time}}"
 
@@ -7352,7 +7352,7 @@ morning = "Egun on"
 [portal.infrastructure]
 manageEditorDeployment = "Kudeatu Editorearen hedapena"
 sectionsAriaLabel = "Azpiegitura-atalak"
-subtitle = "Hedapenak, kredentzialak, segurtasun-jarrera, biltegiratzea eta auditoria-arrastoa zure Stirling lan-eremurako."
+subtitle = "Hedapenak, kredentzialak, segurtasun-jarrera, biltegiratzea eta auditoria-arrastoa zure Morphe lan-eremurako."
 title = "Azpiegitura"
 
 [portal.infrastructure.apiKeys]
@@ -7368,7 +7368,7 @@ usageMonth = "Hilabete honetako erabilera"
 usageToday = "Gaurko erabilera"
 
 [portal.infrastructure.apiKeys.empty]
-description = "Sortu esparru mugatuko gako bat Stirling API deitzen hasteko."
+description = "Sortu esparru mugatuko gako bat Morphe API deitzen hasteko."
 title = "Oraindik ez dago API gakorik"
 
 [portal.infrastructure.apiKeys.error]
@@ -7468,7 +7468,7 @@ done = "Eginda"
 keyNameLabel = "Gakoaren izena"
 keyNamePlaceholder = "adib. Ekoizpena · ingestioa"
 secretKeyCaption = "Gako sekretua"
-secretWarning = "Gorde hau sekretuen kudeatzaile batean. Stirling-ek hash bat baino ez du gordetzen — ez dago gero berreskuratzeko modurik."
+secretWarning = "Gorde hau sekretuen kudeatzaile batean. Morphe-ek hash bat baino ez du gordetzen — ez dago gero berreskuratzeko modurik."
 subtitle = "Mugatu gakoa behar duen gutxienekora. Edonoiz biratu edo baliogabetu dezakezu."
 subtitleCreated = "Kopiatu sekretu hau orain — ez da berriro erakutsiko."
 title = "Sortu API gakoa"
@@ -7509,7 +7509,7 @@ version = "Bertsioa"
 
 [portal.infrastructure.deployments.regions]
 heading = "Eskualdeak"
-subheading = "Hedatutako Stirling eskualde bakoitzaren zuzeneko osasuna — latentzia, karga eta zabalkunde-bertsioa."
+subheading = "Hedatutako Morphe eskualde bakoitzaren zuzeneko osasuna — latentzia, karga eta zabalkunde-bertsioa."
 
 [portal.infrastructure.deployments.regions.empty]
 description = "Hedatutako eskualdeak hemen agertuko dira zure lan-eremua hornitu ondoren."
@@ -7590,16 +7590,16 @@ down = "Erorita"
 healthy = "Osasuntsu"
 
 [portal.infrastructure.security.access.byok]
-description = "Eman zure KMS propioaren gako bat. Stirling-ek harekin zifratzen du, baina oraindik irakur dezake."
+description = "Eman zure KMS propioaren gako bat. Morphe-ek harekin zifratzen du, baina oraindik irakur dezake."
 label = "Ekarri zure gakoa (BYOK)"
 
 [portal.infrastructure.security.access.hyok]
-description = "Gakoak ez dira inoiz zure KMS-tik irteten. Stirling-ek zifratu-testua baino ez du gordetzen."
+description = "Gakoak ez dira inoiz zure KMS-tik irteten. Morphe-ek zifratu-testua baino ez du gordetzen."
 label = "Gorde zure gakoa (HYOK)"
 
 [portal.infrastructure.security.access.stirling]
-description = "Stirling-ek zifratze-gakoak kudeatzen ditu. Errazena — zure aldetik gako-eragiketarik gabe."
-label = "Stirling-ek gordetako gakoak"
+description = "Morphe-ek zifratze-gakoak kudeatzen ditu. Errazena — zure aldetik gako-eragiketarik gabe."
+label = "Morphe-ek gordetako gakoak"
 
 [portal.infrastructure.security.accessPolicy]
 heading = "Dokumentuetarako sarbide-gidalerroa"
@@ -7613,15 +7613,15 @@ viewReport = "Ikusi txostena →"
 
 [portal.infrastructure.security.compliance]
 heading = "Betetzea"
-subheading = "Stirling plataforma estaltzen duten egiaztapenak eta ziurtagiriak."
+subheading = "Morphe plataforma estaltzen duten egiaztapenak eta ziurtagiriak."
 
 [portal.infrastructure.security.empty]
 description = "Zure lan-eremuko segurtasun-konfigurazioa hemen agertuko da."
 title = "Segurtasun-jarrera ez dago eskuragarri"
 
 [portal.infrastructure.security.hyokBanner]
-description = "HYOK erabiliz, zifratze-gakoak ez dira inoiz zure KMS-tik irteten. Stirling-ek edozein unetan baliogabetu dezakezun zifratu-testua baino ez du gordetzen eta prozesatzen."
-title = "Stirling-ek ezin ditu zure dokumentuak deszifratu"
+description = "HYOK erabiliz, zifratze-gakoak ez dira inoiz zure KMS-tik irteten. Morphe-ek edozein unetan baliogabetu dezakezun zifratu-testua baino ez du gordetzen eta prozesatzen."
+title = "Morphe-ek ezin ditu zure dokumentuak deszifratu"
 
 [portal.infrastructure.security.ipAllowlist]
 empty = "Ez dago IP barrutirik konfiguratuta — IP guztiak baimenduta daude."
@@ -7650,7 +7650,7 @@ subheading = "Atsedenean dokumentuak zifratzen dituzten gakoen zaintza — nork 
 
 [portal.infrastructure.security.managedBanner]
 description = "Bring-your-own-key (BYOK) eta hold-your-own-key (HYOK) zaintza Enterprise planean daude eskuragarri. Berritu zure KMS propioko gakoak emateko."
-title = "Zure planean, gakoak Stirling-ek kudeatzen ditu"
+title = "Zure planean, gakoak Morphe-ek kudeatzen ditu"
 
 [portal.infrastructure.security.residency.apac]
 description = "ap-southeast-1"
@@ -7724,7 +7724,7 @@ connectionCount_one = "{{count}} konexio"
 connectionCount_other = "{{count}} konexio"
 customApi = "API pertsonalizatua"
 searchPlaceholder = "Bilatu integrazioak"
-subtitle = "Stirling-ek komunikatu dezakeen guztia. Kredentzialak behin sortzen dira hemen, eta gero iturburu, politika eta pipeline-ek erreferentziatzen dituzte."
+subtitle = "Morphe-ek komunikatu dezakeen guztia. Kredentzialak behin sortzen dira hemen, eta gero iturburu, politika eta pipeline-ek erreferentziatzen dituzte."
 title = "Integrazioak"
 typedName = "{{tool}} izena"
 
@@ -8405,7 +8405,7 @@ title = "Oraindik ez dago fluxurik"
 
 [portal.processorFlow.sources]
 comingSoonTag = "Konektatu"
-editor = "Stirling PDF editorea"
+editor = "Morphe PDF editorea"
 heading = "Iturburuak"
 perDay = "{{n}} / 24h"
 
@@ -8421,8 +8421,8 @@ title = "Erosketa"
 [portal.procurement.agreement]
 agreeCta = "Adostu eta harpidetu"
 confidential = "Konfidentziala"
-confirm = "Stirling Enterprise Agreement irakurri dut eta ados nago."
-docName = "Stirling Enterprise akordioa"
+confirm = "Morphe Enterprise Agreement irakurri dut eta ados nago."
+docName = "Morphe Enterprise akordioa"
 docSub = "MSA, Order Form, EULA eta DPA, sinadura bakarrean konbinatuta."
 download = "Deskargatu"
 downloadDraftError = "Ezin izan da akordioaren PDF-a sortu - dokumentu-errendatzailea ez dago erabilgarri. Saiatu berriro laster edo jarri harremanetan laguntzarekin."
@@ -8458,7 +8458,7 @@ contactName = "Harremanetarako izena"
 contactNamePlaceholder = "Jane Doe"
 continue = "Jarraitu"
 done = "Eginda"
-eula = "Stirling Enterprise EULA irakurri dut eta ados nago. Aurrekontu honetatik sortutako akordioa arautzen du."
+eula = "Morphe Enterprise EULA irakurri dut eta ados nago. Aurrekontu honetatik sortutako akordioa arautzen du."
 generate = "Sortu aurrekontua"
 indemnification = "IP kalte-ordaina"
 indemnificationSub = "EULAren arabera, IP erreklamazio kalifikatuak defendatzen ditugu"
@@ -8556,7 +8556,7 @@ eyebrowCompany = "{{company}} Enterprise"
 inviteTeammates = "Gonbidatu taldekideak"
 licenseKey = "Lizentzia-gakoa"
 liveSub = "Zure erakundea hornituta dago eta zure lizentzia aktibo dago."
-liveTitle = "Stirling Enterprise martxan duzu"
+liveTitle = "Morphe Enterprise martxan duzu"
 next = "Hurrengoa: {{stage}}"
 open = "Ireki erosketa"
 scheduleCall = "Programatu dei bat"
@@ -8591,7 +8591,7 @@ gatingAction = "Onartu zure aurrekontua"
 label = "Aurrekontua"
 
 [portal.procurement.journeySteps.trial]
-blurb = "Ebaluatu Stirling zure dokumentu eta lan-fluxuen aurka."
+blurb = "Ebaluatu Morphe zure dokumentu eta lan-fluxuen aurka."
 gatingAction = "Eraiki zure aurrekontua"
 label = "Probaldia"
 
@@ -8608,14 +8608,14 @@ trialFileHint = "Hau zure proba-lizentziaren fitxategia da. Zure akordioa indarr
 
 [portal.procurement.link]
 cta = "Lotu kontua"
-description = "Erosketa zure lotutako Stirling kontuan exekutatzen da: horrela hornitzen dugu probaldia, aurrekontuaren prezioa kalkulatzen dugu eta fakturazioa hasten dugu. Lotu kontu bat hasteko."
+description = "Erosketa zure lotutako Morphe kontuan exekutatzen da: horrela hornitzen dugu probaldia, aurrekontuaren prezioa kalkulatzen dugu eta fakturazioa hasten dugu. Lotu kontu bat hasteko."
 eyebrow = "Enterprise"
 title = "Lotu zure kontua hasteko"
 
 [portal.procurement.live]
 description = "Zure harpidetza aktibo dago eta zure lizentzia jaulkita dago. Zure taldea hornituta dago eta fakturazioa hasi da."
 eyebrow = "Martxan"
-title = "Stirling Enterprise-n martxan zaude"
+title = "Morphe Enterprise-n martxan zaude"
 
 [portal.procurement.milestone]
 downloadError = "Oraindik ezin izan da aurrekontuaren PDFa deskargatu — saiatu berriro une batean."
@@ -8650,11 +8650,11 @@ airgapSub = "Zigilatua, irteerarik gabe"
 back = "Atzera"
 businessName = "Enpresaren izena"
 businessNamePlaceholder = "Acme Corp"
-cloud = "Stirling Cloud"
+cloud = "Morphe Cloud"
 cloudSub = "Kudeatua, hasiera azkarrena"
 continue = "Jarraitu"
 deployment = "Non zabaldu behar da?"
-eula = "Stirling EULA eta merkataritza-baldintzak onartzen ditut."
+eula = "Morphe EULA eta merkataritza-baldintzak onartzen ditut."
 fullName = "Izen-abizenak"
 fullNamePlaceholder = "Zure izena"
 invites = "Gonbidatu taldekideak · aukerakoa"
@@ -8685,7 +8685,7 @@ title = "Enterprise probaldia"
 
 [portal.search]
 ariaLabel = "Bilatu"
-placeholder = "Bilatu Stirling — endpointak, pipelineak, dokumentuak…"
+placeholder = "Bilatu Morphe — endpointak, pipelineak, dokumentuak…"
 
 [portal.search.empty]
 noActionsDescription = "Ekintza azkarrak hemen agertuko dira erabilgarri daudenean."
@@ -8702,7 +8702,7 @@ account-link = "Kontu-lotura"
 [portal.shell.sidebar]
 appEditor = "Editorea"
 appProcessor = "Prozesadorea"
-linkAccount = "Lotu Stirling kontua"
+linkAccount = "Lotu Morphe kontua"
 primaryNav = "Nabigazio nagusia"
 switchApp = "Aldatu aplikazioa"
 
@@ -8712,7 +8712,7 @@ openNav = "Ireki nabigazioa"
 search = "Bilatu"
 
 [portal.sources]
-subtitle = "Stirling-era dokumentuak elikatzen dituzten sarrera-konexio berrerabilgarriak. Konfiguratu konexio bat behin, eta erreferentziatu nahi adina politikatan. Egin klik errenkada batean haren konfigurazioa eta zein politikek erabiltzen duten ikusteko."
+subtitle = "Morphe-era dokumentuak elikatzen dituzten sarrera-konexio berrerabilgarriak. Konfiguratu konexio bat behin, eta erreferentziatu nahi adina politikatan. Egin klik errenkada batean haren konfigurazioa eta zein politikek erabiltzen duten ikusteko."
 title = "Iturburuak"
 
 [portal.sources.actions]
@@ -8809,7 +8809,7 @@ description = "Begiratu zerbitzariko direktorio bat dokumentu berriak detektatze
 label = "Karpeta"
 
 [portal.sources.types.folder.fields.directory]
-helperText = "Stirling-ek prozesatzeko fitxategiak zaintzen dituen bide absolutua."
+helperText = "Morphe-ek prozesatzeko fitxategiak zaintzen dituen bide absolutua."
 label = "Direktorioaren bidea"
 placeholder = "/data/incoming"
 
@@ -8896,7 +8896,7 @@ secretNote = "Sinadura-sekretua behin erakusten da, webhook-a sortzen denean. It
 copy = "Kopiatu"
 done = "Eginda"
 secret = "Sinadura-sekretua"
-secretHelp = "Sinatu bidalketa bakoitzaren gorputz gordina gako honekin (HMAC-SHA256) eta bidali X-Stirling-Signature goiburu gisa."
+secretHelp = "Sinatu bidalketa bakoitzaren gorputz gordina gako honekin (HMAC-SHA256) eta bidali X-Morphe-Signature goiburu gisa."
 secretWarning = "Kopiatu sinadura-sekretua orain. Zure segurtasunerako behin bakarrik erakusten da eta ezin da gero berreskuratu."
 title = "Webhook sortuta"
 url = "Bidalketa-URL"
@@ -8912,7 +8912,7 @@ close = "Itxi"
 
 [portal.usage]
 managePayment = "Kudeatu ordainketa"
-subtitle = "Stirling-ek fakturatutako PDF guztien kontsumoa, fakturak eta plan-kudeaketa, kontsola bakarrean."
+subtitle = "Morphe-ek fakturatutako PDF guztien kontsumoa, fakturak eta plan-kudeaketa, kontsola bakarrean."
 title = "Erabilera eta fakturazioa"
 
 [portal.usage.error]
@@ -8922,7 +8922,7 @@ walletUnavailable = "Wallet ez dago erabilgarri: {{status}} {{statusText}}"
 
 [portal.usage.sessionExpired]
 action = "Hasi saioa berriro"
-body = "Zure Stirling kontuaren saioa iraungi da. Hasi saioa berriro fakturazioa ikusteko — zure instantziak lotuta jarraitzen du."
+body = "Zure Morphe kontuaren saioa iraungi da. Hasi saioa berriro fakturazioa ikusteko — zure instantziak lotuta jarraitzen du."
 title = "Saioa iraungi da"
 
 [portal.users]
@@ -9695,8 +9695,8 @@ hideTools = "Ezkutatu erabilgarri ez dauden tresnak ▴"
 messageNoFallback = "Tresnak ez daude erabilgarri zure zerbitzaria linean egon arte."
 messageWithFallback = "Zenbait tresnek zerbitzariarekiko konexioa behar dute."
 showTools = "Ikusi erabilgarri ez dauden tresnak ▾"
-title = "Ezin da atzitu zure Stirling-PDF zerbitzaria"
-toolNotAvailableLocally = "Zure Stirling-PDF zerbitzaria lineaz kanpo dago eta \"{{endpoint}}\" ez dago erabilgarri tokiko backend-ean."
+title = "Ezin da atzitu zure Morphe PDF zerbitzaria"
+toolNotAvailableLocally = "Zure Morphe PDF zerbitzaria lineaz kanpo dago eta \"{{endpoint}}\" ez dago erabilgarri tokiko backend-ean."
 
 [session]
 expired = "Zure saioa iraungi da. Freskatu orria eta saiatu berriro."
@@ -9732,7 +9732,7 @@ user = "Saioa hasita:"
 
 [settings.connection.mode]
 local = "Tokikoa bakarrik"
-saas = "Stirling Cloud"
+saas = "Morphe Cloud"
 selfhosted = "Auto-ostatua"
 
 [settings.developer]
@@ -9747,11 +9747,11 @@ autoUnzipFileLimitDescription = "Gehienez zenbat fitxategi atera ZIPetik"
 autoUnzipFileLimitTooltip = "Deskonprimitu soilik ZIPak hainbeste fitxategi edo gutxiago baditu. Ezarri handiagoa ZIP handiagoak erauzteko."
 autoUnzipTooltip = "Automatikoki deskonprimitu API eragiketek itzultzen dituzten ZIP fitxategiak. Desgaitu ZIP fitxategiak bere horretan mantentzeko. Honek ez du eraginik automatizazio-fluxuetan."
 defaultPdfEditor = "PDF editore lehenetsia"
-defaultPdfEditorActive = "Stirling PDF zure PDF editore lehenetsia da"
+defaultPdfEditorActive = "Morphe PDF zure PDF editore lehenetsia da"
 defaultPdfEditorChecking = "Egiaztatzen..."
 defaultPdfEditorInactive = "Beste aplikazio bat dago lehenetsi gisa"
 defaultPdfEditorRemind = "Gogorarazi lehenetsi gisa ezartzea"
-defaultPdfEditorRemindDescription = "Erakutsi banner bat Stirling PDF zure PDF aplikazio lehenetsia ez denean."
+defaultPdfEditorRemindDescription = "Erakutsi banner bat Morphe PDF zure PDF aplikazio lehenetsia ez denean."
 defaultPdfEditorSet = "Dagoeneko lehenetsia"
 defaultStartupView = "Abioan ikuspegi lehenetsia"
 defaultStartupViewDescription = "Aukeratu aplikazioa abiatzean ezkerreko zutabeko zein fitxa egongo den aktibo"
@@ -9795,7 +9795,7 @@ learnMore = "Ikasi gehiago dokumentazioan"
 title = "Sistemako administratzaileentzat"
 
 [settings.general.loginLanding]
-description = "Aukeratu zein aplikazio irekitzen den Stirling Cloud-en saioa hasten duzunean."
+description = "Aukeratu zein aplikazio irekitzen den Morphe Cloud-en saioa hasten duzunean."
 editor = "Editorea"
 processor = "Prozesadorea"
 title = "Saioa hasi ondoren"
@@ -9825,7 +9825,7 @@ updateBehavior = "Eguneratzeen portaera"
 updateBehaviorDescription = "Aukeratu eguneratzeak instalatu aurretik galdetzea, automatikoki instalatzea edo eguneratzeen egiaztapenak erabat saltatzea."
 updateBehaviorError = "Ezin izan da eguneratzeen portaera aldatu"
 updateBehaviorErrorLocked = "Ezarpen hau administratzaileak blokeatu du."
-updateBehaviorLockedDescription = "Zure administratzaileak konfiguratu du Stirling-PDF nola kudeatzen duen eguneratzeak makina honetan. Jarri harekin harremanetan aldatzeko."
+updateBehaviorLockedDescription = "Zure administratzaileak konfiguratu du Morphe PDF nola kudeatzen duen eguneratzeak makina honetan. Jarri harekin harremanetan aldatzeko."
 updateBehaviorSaved = "Eguneratzeen portaera gordeta."
 versionMismatch = "Warning: A mismatch has been detected between the client version and the AppConfig version. Using different versions can lead to compatibility issues, errors, and security risks. Please ensure that server and client are using the same version."
 viewDetails = "Xehetasunak ikusi"
@@ -9909,7 +9909,7 @@ usageAnalytics = "Erabilera-analitika"
 [settings.planBilling]
 currentPlan = "Uneko plana"
 loading = "Fakturazio-informazioa kargatzen..."
-notAvailable = "Planak eta Fakturazioa erabilgarri daude soilik Stirling Cloud-era konektatuta dagoenean (SaaS modua)."
+notAvailable = "Planak eta Fakturazioa erabilgarri daude soilik Morphe Cloud-era konektatuta dagoenean (SaaS modua)."
 title = "Plana eta Fakturazioa"
 
 [settings.planBilling.billing]
@@ -10078,7 +10078,7 @@ step3 = "Berrabiarazi zerbitzaria"
 title = "Saio-hasiera ez dago gaituta"
 
 [setup.server.url]
-description = "Sartu zure auto-ostatuko Stirling PDF zerbitzariaren URLa osoa"
+description = "Sartu zure auto-ostatuko Morphe PDF zerbitzariaren URLa osoa"
 label = "Zerbitzariaren URLa"
 
 [sharedSign]
@@ -10314,7 +10314,7 @@ pleaseFillAllFields = "Bete eremu guztiak, mesedez"
 signUp = "Eman izena"
 signUpWith = "Sign up with"
 skip = "Skip"
-subtitle = "Batu Stirling PDFra hasteko"
+subtitle = "Batu Morphe PDFra hasteko"
 title = "Sortu kontu bat"
 unexpectedError = "Ustekabeko errorea: {{message}}"
 
@@ -10541,7 +10541,7 @@ download = "Deskargatu"
 downloaded = "Deskargatuta"
 downloadFailed = "Ezin da fitxategi hau deskargatu."
 downloadsCount = "Deskargak: {{count}}"
-emailWarningBody = "Honek helbide elektroniko baten itxura du. Pertsona hau Stirling PDF erabiltzailea ez bada, ezin izango du fitxategia atzitu."
+emailWarningBody = "Honek helbide elektroniko baten itxura du. Pertsona hau Morphe PDF erabiltzailea ez bada, ezin izango du fitxategia atzitu."
 emailWarningConfirm = "Partekatu hala ere"
 emailWarningTitle = "Helbide elektronikoa"
 errorTitle = "Partekatzea huts egin du"
@@ -10572,7 +10572,7 @@ manageTitle = "Partekatzea kudeatu"
 noActivity = "Oraindik ez dago jarduerarik."
 noLinks = "Ez dago partekatzeko esteka aktiborik oraindik."
 noSharedUsers = "Oraindik ez du inork atzipenik."
-openInApp = "Ireki Stirling PDF"
+openInApp = "Ireki Morphe PDF"
 ownerLabel = "Jabea"
 ownerUnknown = "Ezezaguna"
 removeLink = "Kendu esteka"
@@ -10626,7 +10626,7 @@ updateButton = "Eguneratu zerbitzarian"
 uploadButton = "Igo zerbitzarira"
 
 [survey]
-title = "Stirling-PDF Survey"
+title = "Morphe PDF Survey"
 
 [swagger]
 clickHere = "egin klik hemen"
@@ -10785,7 +10785,7 @@ favorites = "Gogokoak"
 heading = "Tresna guztiak (pantaila osoko ikuspegia)"
 noResults = "Saiatu bilaketa moldatzen edo deskribapenak txandakatzen behar duzuna aurkitzeko."
 recommended = "Gomendatua"
-selfHostedOffline = "Zure Stirling-PDF zerbitzaria behar da (unean lineaz kanpo):"
+selfHostedOffline = "Zure Morphe PDF zerbitzaria behar da (unean lineaz kanpo):"
 showDetails = "Erakutsi xehetasunak"
 unavailable = "Zerbitzariaren administratzaileak desgaituta:"
 unavailableDependency = "Ez dago eskuragarri - beharrezko tresna falta da zerbitzarian:"
@@ -10794,7 +10794,7 @@ unfavorite = "Kendu gogokoetatik"
 [toolPanel.modePrompt]
 chooseFullscreen = "Erabili pantaila osoko modua"
 chooseSidebar = "Erabili alboko barra modua"
-description = "Aurrebista bi diseinuak eta erabaki nola arakatu nahi dituzun Stirling PDF tresnak."
+description = "Aurrebista bi diseinuak eta erabaki nola arakatu nahi dituzun Morphe PDF tresnak."
 dismiss = "Agian geroago"
 fullscreenDescription = "Arakatu tresna guztiak katalogo batean, tresna bat aukeratu arte lan-eremua estaltzen duena."
 fullscreenTitle = "Pantaila osoko modua - (ondarea)"
@@ -10857,7 +10857,7 @@ loadingDetailedInfo = "Informazio zehatza kargatzen..."
 migrationGuide = "Migrazio-gida"
 migrationGuides = "Migrazio-gidak"
 migrationGuidesDesc = "Berrikusi aldaketa garrantzitsuak eguneratu aurretik."
-modalSubtitle = "Stirling PDFren bertsio berria instalatzeko prest dago."
+modalSubtitle = "Morphe PDFren bertsio berria instalatzeko prest dago."
 modalTitle = "Eguneratzea eskuragarri"
 notes = "Oharrak"
 releaseNotes = "Argitalpen-oharrak"
@@ -10881,7 +10881,7 @@ urgent = "Premiazko"
 attentionBody = "Zure administratzaileak saioa hasi behar du informazio gehiago ikusteko. Jarri harekin harremanetan berehala."
 attentionBodyAdmin = "Berrikusi lizentzia-eskakizunak zerbitzari hau betean mantentzeko."
 attentionTitle = "Zerbitzari honek admin arreta behar du"
-message = "Atera etekinik handiena Stirling PDF-i erabiltzaile mugagabeekin eta funtzio aurreratuekin"
+message = "Atera etekinik handiena Morphe PDF-i erabiltzaile mugagabeekin eta funtzio aurreratuekin"
 seeInfo = "Ikusi informazioa"
 title = "Eguneratu Zerbitzari Planera"
 upgradeButton = "Eguneratu orain"
@@ -11016,7 +11016,7 @@ authWeb = "Pasahitza"
 create = "Sortu kontua"
 createSubtitle = "Sortu self-hosted kontu bat pasahitzarekin edo SSOrekin."
 createTitle = "Sortu kontua"
-editorDesc = "Editatu PDFak Stirling PDF Editor-en. Denek jasotzen dute hau."
+editorDesc = "Editatu PDFak Morphe PDF Editor-en. Denek jasotzen dute hau."
 email = "Email helbidea"
 emailError = "Sartu baliozko email helbide bat"
 emailPlaceholder2 = "name@company.com"
@@ -11031,7 +11031,7 @@ processorDeferred = "Gonbidapena bidalita, baina Processor sarbidea oraindik ezi
 processorDesc = "Gobernantza-azalera, pipelineak, agenteak eta API exekutatzeko."
 role = "Rola"
 send2 = "Bidali gonbidapena"
-subtitle2 = "Mezu elektroniko bat jasoko dute zure Stirling lan-eremura sartzeko."
+subtitle2 = "Mezu elektroniko bat jasoko dute zure Morphe lan-eremura sartzeko."
 team = "Taldea"
 title = "Gonbidatu pertsonak"
 username = "Erabiltzaile-izena"
@@ -11164,7 +11164,7 @@ downloads = "Deskargak"
 entryLabel = "Sinaduraren laburpena"
 filesEvaluated_one = "{{count}} fitxategi ebaluatu da"
 filesEvaluated_other = "{{count}} fitxategi ebaluatu dira"
-footer = "Balidatua Stirling PDF bidez"
+footer = "Balidatua Morphe PDF bidez"
 generatedAt = "Sortuta"
 noPdf = "PDF txostena erabilgarri egongo da balidazio arrakastatsu baten ostean."
 page = "Orria"

@@ -158,7 +158,7 @@ export default function McpSection() {
           <Text size="sm" c="dimmed" mt={6}>
             {t(
               "config.mcp.description",
-              "Model Context Protocol (MCP) lets AI assistants like Claude use your Stirling PDF tools directly. Connect a client once and your assistant can convert, edit, secure and process documents on your behalf.",
+              "Model Context Protocol (MCP) lets AI assistants like Claude use your Morphe PDF tools directly. Connect a client once and your assistant can convert, edit, secure and process documents on your behalf.",
             )}
           </Text>
         </div>
@@ -175,7 +175,7 @@ export default function McpSection() {
                 <Text size="sm" c="dimmed" style={{ flex: 1 }}>
                   {t(
                     "config.mcp.guestInfo",
-                    "Guest users can't connect MCP clients. Create an account to use the MCP server and let your AI assistant run Stirling PDF tools on your behalf.",
+                    "Guest users can't connect MCP clients. Create an account to use the MCP server and let your AI assistant run Morphe PDF tools on your behalf.",
                   )}
                 </Text>
                 <Button
@@ -274,7 +274,7 @@ export default function McpSection() {
                 <Text size="sm">
                   {t(
                     "config.mcp.tip",
-                    "Every action your assistant runs is performed as your account and counts towards your usage, just like using the Stirling PDF API and Automation.",
+                    "Every action your assistant runs is performed as your account and counts towards your usage, just like using the Morphe PDF API and Automation.",
                   )}
                 </Text>
                 <Button

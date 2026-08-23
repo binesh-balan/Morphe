@@ -288,7 +288,7 @@ export const procurementSaasHandlers = [
       markdown: [
         "# Stirling Enterprise Agreement",
         "## Part A — Master Services Agreement",
-        "Provider will provide the Stirling PDF Processor and Editor as described in the Order Form.",
+        "Provider will provide the Morphe PDF Processor and Editor as described in the Order Form.",
         `## Part B — Order Form · ${q.quoteNumber ?? "Q-MOCK"}`,
         "| Term | Value |",
         "| --- | --- |",

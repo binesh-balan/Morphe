@@ -17,7 +17,7 @@ function notifyPromptDismissedListeners(): void {
  */
 export const defaultAppService = {
   /**
-   * Check if Stirling PDF is the default PDF handler
+   * Check if Morphe PDF is the default PDF handler
    */
   async isDefaultPdfHandler(): Promise<boolean> {
     try {
@@ -30,7 +30,7 @@ export const defaultAppService = {
   },
 
   /**
-   * Set or prompt to set Stirling PDF as default PDF handler
+   * Set or prompt to set Morphe PDF as default PDF handler
    * Returns a status string indicating what happened
    */
   async setAsDefaultPdfHandler(): Promise<

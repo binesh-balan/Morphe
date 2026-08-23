@@ -1,6 +1,6 @@
-# Stirling PDF Audit System
+# Morphe PDF Audit System
 
-This document provides guidance on how to use the audit system in Stirling PDF.
+This document provides guidance on how to use the audit system in Morphe PDF.
 
 ## Overview
 

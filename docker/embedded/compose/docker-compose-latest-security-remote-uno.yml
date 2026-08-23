@@ -1,6 +1,6 @@
 services:
   stirling-pdf:
-    container_name: Stirling-PDF-Security-Remote-UNO
+    container_name: Morphe PDF-Security-Remote-UNO
     image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
     build:
       context: ../../..
@@ -39,9 +39,9 @@ services:
       PGID: 1002
       UMASK: "022"
       SYSTEM_DEFAULTLOCALE: en-US
-      UI_APPNAME: Stirling-PDF
-      UI_HOMEDESCRIPTION: Demo site for Stirling-PDF Latest with Security + Remote UNO Servers
-      UI_APPNAMENAVBAR: Stirling-PDF Latest
+      UI_APPNAME: Morphe PDF
+      UI_HOMEDESCRIPTION: Demo site for Morphe PDF Latest with Security + Remote UNO Servers
+      UI_APPNAMENAVBAR: Morphe PDF Latest
       SYSTEM_MAXFILESIZE: "100"
       METRICS_ENABLED: "true"
       SYSTEM_GOOGLEVISIBILITY: "true"

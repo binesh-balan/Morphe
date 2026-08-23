@@ -6,7 +6,7 @@ import java.util.Set;
  * Which side owns each table in the SaaS database.
  *
  * <p>The SaaS schema has two writers and always has: the Supabase migrations in the
- * Stirling-PDF-SaaS repo, and Hibernate's {@code ddl-auto}. That was a convention rather than a
+ * Morphe PDF-SaaS repo, and Hibernate's {@code ddl-auto}. That was a convention rather than a
  * rule, and it leaked twice. An older {@code ddl-auto} run widened {@code team_memberships.role} to
  * varchar(255), which needed a dedicated migration to repair because RLS policies depended on the
  * column. Separately {@code payg_instance_usage} went months with an entity and no migration, so it
@@ -25,7 +25,7 @@ import java.util.Set;
  * <p><b>What this does not catch.</b> The register is a hand-maintained copy of what lives in
  * another repository, and only one direction is enforced. The test fails when a *new* entity
  * appears with no owner. It cannot notice a table changing sides: write a migration for {@code
- * folders} in Stirling-PDF-SaaS and nothing here changes, the test still passes, and Hibernate
+ * folders} in Morphe PDF-SaaS and nothing here changes, the test still passes, and Hibernate
  * carries on managing a table the migrations now own — which is precisely how {@code
  * team_memberships.role} got widened. Adding a migration for anything in {@link #HIBERNATE_MANAGED}
  * therefore means moving it to {@link #MIGRATION_OWNED} in the same change; nothing will remind

@@ -8,7 +8,7 @@ import { CONFIG_STALE_TIME } from "@app/query/staleTime";
 import type { GroupEnabledResult } from "@app/types/groupEnabled";
 
 const OFFLINE_REASON_FALLBACK =
-  "Requires your Stirling-PDF server (currently offline)";
+  "Requires your Morphe PDF server (currently offline)";
 
 // A boolean, not the monitor's state object — that is reassigned every poll.
 const subscribeToMonitor = (onChange: () => void) =>

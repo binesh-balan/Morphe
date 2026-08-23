@@ -97,12 +97,12 @@ export default function Signup() {
 
   // Set document meta
   useDocumentMeta({
-    title: `${t("signup.title", "Create an account")} - Stirling PDF`,
+    title: `${t("signup.title", "Create an account")} - Morphe PDF`,
     description: t(
       "app.description",
       "The Free Adobe Acrobat alternative (10M+ Downloads)",
     ),
-    ogTitle: `${t("signup.title", "Create an account")} - Stirling PDF`,
+    ogTitle: `${t("signup.title", "Create an account")} - Morphe PDF`,
     ogDescription: t(
       "app.description",
       "The Free Adobe Acrobat alternative (10M+ Downloads)",
@@ -186,12 +186,12 @@ export default function Signup() {
       <div className="auth-logo-block">
         <img
           src={loginHeader}
-          alt="Stirling PDF"
+          alt="Morphe PDF"
           className="auth-logo-header auth-logo-header--light"
         />
         <img
           src={withBasePath("/modern-logo/LoginDarkModeHeader.svg")}
-          alt="Stirling PDF"
+          alt="Morphe PDF"
           className="auth-logo-header auth-logo-header--dark"
         />
       </div>

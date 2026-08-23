@@ -7,7 +7,7 @@ export interface AppSwitcherProps {
 
 /**
  * Sidebar brand header. Core has no admin portal to switch to, so it just
- * shows the Stirling logo. Builds that bundle the portal (proprietary/saas)
+ * shows the Morphe logo. Builds that bundle the portal (proprietary/saas)
  * shadow this with a version whose logo doubles as the editor⇄processor
  * switcher.
  */

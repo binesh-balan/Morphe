@@ -94,7 +94,7 @@ public class PaygOutputExtractor {
         if (ZIP_CONTENT_TYPE.equalsIgnoreCase(mediaType)) {
             return extractZip(bodyPath);
         }
-        // Stirling-PDF tool endpoints sometimes set Content-Type to application/octet-stream (or
+        // Morphe PDF tool endpoints sometimes set Content-Type to application/octet-stream (or
         // no header at all) even when the body is a real PDF or ZIP — Spring's default
         // StreamingResponseBody path doesn't always negotiate content type. When the declared
         // Content-Type is missing or generic, sniff magic bytes in a single head-read so we don't

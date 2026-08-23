@@ -1,6 +1,6 @@
 name: DB migration smoke test
 
-# Boots the current Stirling-PDF JAR against H2 fixtures captured from past
+# Boots the current Morphe PDF JAR against H2 fixtures captured from past
 # releases (v2.0.0 / v2.5.0 / v2.10.0) and verifies admin login still works.
 # Catches schema changes that would break existing user databases under
 # Hibernate's `ddl-auto=update` upgrade path.
@@ -43,7 +43,7 @@ jobs:
 
       # Keep the normal formatting path here so this smoke test exercises the
       # same Gradle configuration as the backend build.
-      - name: Build Stirling-PDF JAR
+      - name: Build Morphe PDF JAR
         env:
           MAVEN_USER: ${{ secrets.MAVEN_USER }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
@@ -53,7 +53,7 @@ jobs:
       - name: Locate built JAR
         id: jar
         run: |
-          jar=$(find app/core/build/libs -maxdepth 1 -name 'Stirling-PDF*.jar' -o -name 'stirling-pdf*.jar' 2>/dev/null \
+          jar=$(find app/core/build/libs -maxdepth 1 -name 'Morphe PDF*.jar' -o -name 'stirling-pdf*.jar' 2>/dev/null \
               | grep -vE '(-plain|-sources)\.jar$' | head -n 1)
           if [[ -z "$jar" ]]; then
             echo "::error::No JAR under app/core/build/libs"

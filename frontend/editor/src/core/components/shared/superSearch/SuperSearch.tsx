@@ -627,7 +627,7 @@ export default function SuperSearch({
           ref={inputRef}
           value={query}
           onChange={setQuery}
-          placeholder={t("superSearch.placeholder", "Search Stirling")}
+          placeholder={t("superSearch.placeholder", "Search Morphe")}
           icon={
             <LocalIcon icon="search-rounded" width="1.1rem" height="1.1rem" />
           }

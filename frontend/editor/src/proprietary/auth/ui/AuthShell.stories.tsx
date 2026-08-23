@@ -33,7 +33,7 @@ export const WithRightPanel: Story = {
           <p>Enter your credentials to continue.</p>
         </div>
         <div style={{ padding: "2rem" }}>
-          <h3>Why Stirling PDF?</h3>
+          <h3>Why Morphe PDF?</h3>
           <p>Fast, secure, self-hostable PDF tooling.</p>
         </div>
       </div>
@@ -50,9 +50,7 @@ export const WithFooter: Story = {
       </div>
     ),
     footer: (
-      <div style={{ padding: "0.5rem", textAlign: "center" }}>
-        © Stirling PDF
-      </div>
+      <div style={{ padding: "0.5rem", textAlign: "center" }}>© Morphe PDF</div>
     ),
   },
 };

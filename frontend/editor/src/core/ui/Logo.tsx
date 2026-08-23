@@ -4,7 +4,7 @@ import wordmarkLightUrl from "@app/assets/brand/branding-logo/wordmark-light.svg
 import wordmarkDarkUrl from "@app/assets/brand/branding-logo/wordmark-dark.svg";
 import "@app/ui/Logo.css";
 
-/** iconOnly = mark; textOnly = "Stirling" wordmark; iconAndText = both. */
+/** iconOnly = mark; textOnly = "Morphe" wordmark; iconAndText = both. */
 export type LogoVariant = "iconOnly" | "iconAndText" | "textOnly";
 
 interface LogoProps {
@@ -36,7 +36,7 @@ export function Logo({
   gap = "0.5rem",
   className,
   style,
-  alt = "Stirling",
+  alt = "Morphe",
 }: LogoProps) {
   const showIcon = variant === "iconOnly" || variant === "iconAndText";
   const showText = variant === "textOnly" || variant === "iconAndText";

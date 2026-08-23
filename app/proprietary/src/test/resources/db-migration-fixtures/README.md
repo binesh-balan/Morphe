@@ -1,6 +1,6 @@
 # DB migration test fixtures
 
-These `.mv.db` files are H2 databases captured from past Stirling-PDF releases.
+These `.mv.db` files are H2 databases captured from past Morphe PDF releases.
 They feed the CI smoke test that verifies a fresh build can still boot and
 authenticate against a database created by an older version.
 
@@ -55,10 +55,10 @@ manual steps are short. For each version you want to capture:
 
 ```bash
 # 1. Download the JAR for that release (requires `gh` authenticated against
-#    github.com/Stirling-Tools/Stirling-PDF).
+#    github.com/Stirling-Tools/Morphe PDF).
 gh release download v2.10.0 \
-  --repo Stirling-Tools/Stirling-PDF \
-  --pattern 'Stirling-PDF-with-login.jar' \
+  --repo Stirling-Tools/Morphe PDF \
+  --pattern 'Morphe PDF-with-login.jar' \
   --output /tmp/stirling-v2.10.0.jar
 
 # 2. Boot the JAR in a clean working directory. DB_CLOSE_ON_EXIT=TRUE is
