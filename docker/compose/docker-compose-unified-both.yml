@@ -3,7 +3,7 @@
 
 services:
   stirling-pdf-unified:
-    container_name: Morphe PDF-Unified-Both
+    container_name: Morphe-PDF-Unified-Both
     build:
       context: ../..
       dockerfile: docker/Dockerfile.unified

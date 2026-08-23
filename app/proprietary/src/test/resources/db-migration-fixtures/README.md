@@ -58,7 +58,7 @@ manual steps are short. For each version you want to capture:
 #    github.com/Stirling-Tools/Morphe PDF).
 gh release download v2.10.0 \
   --repo Stirling-Tools/Morphe PDF \
-  --pattern 'Morphe PDF-with-login.jar' \
+  --pattern 'Stirling-PDF-with-login.jar' \
   --output /tmp/stirling-v2.10.0.jar
 
 # 2. Boot the JAR in a clean working directory. DB_CLOSE_ON_EXIT=TRUE is

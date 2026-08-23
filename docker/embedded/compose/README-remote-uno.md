@@ -80,7 +80,7 @@ docker compose -f docker-compose-latest-security-remote-uno.yml ps
 Should show all services healthy:
 ```
 NAME                           STATUS
-Morphe PDF-Security-Remote-UNO   Up (healthy)
+Morphe-PDF-Security-Remote-UNO   Up (healthy)
 UNO-Server-1                       Up (healthy)
 UNO-Server-2                       Up (healthy)
 ```

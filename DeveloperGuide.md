@@ -214,7 +214,7 @@ These files provide pre-configured setups for different scenarios. For example, 
 ```yaml
 services:
   stirling-pdf:
-    container_name: Morphe PDF-Security
+    container_name: Morphe-PDF-Security
     image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
     deploy:
       resources:

@@ -82,8 +82,8 @@ export class UpdateService {
       return (
         DOWNLOAD_BASE_URL +
         (machineInfo.activeSecurity
-          ? "Morphe PDF-with-login.jar"
-          : "Morphe PDF.jar")
+          ? "Stirling-PDF-with-login.jar"
+          : "Stirling-PDF.jar")
       );
     }
 

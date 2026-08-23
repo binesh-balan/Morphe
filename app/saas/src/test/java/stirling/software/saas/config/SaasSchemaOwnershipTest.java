@@ -117,7 +117,7 @@ class SaasSchemaOwnershipTest {
                         """
                         These entity tables are not declared in SaasSchemaOwnership, so nobody owns \
                         them. Decide and add each to exactly one set:
-                          - MIGRATION_OWNED: also add a migration in Morphe PDF-SaaS, or the table \
+                          - MIGRATION_OWNED: also add a migration in Stirling-PDF-SaaS, or the table \
                         will not exist on a fresh preview branch.
                           - HIBERNATE_MANAGED: only correct for a table inherited from the \
                         self-hosted app that no Supabase migration creates.

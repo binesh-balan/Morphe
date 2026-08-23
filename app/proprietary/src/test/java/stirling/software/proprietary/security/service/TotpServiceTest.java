@@ -40,12 +40,12 @@ class TotpServiceTest {
 
     @Test
     void buildOtpAuthUriIncludesIssuerAndUsername() {
-        TotpService service = buildService("Stirling Test");
+        TotpService service = buildService("Morphe Test");
 
         String uri = service.buildOtpAuthUri("user@example.com", "SECRET");
 
-        assertTrue(uri.contains("issuer=Stirling%20Test"));
-        assertTrue(uri.contains("Stirling%20Test%3Auser%40example.com"));
+        assertTrue(uri.contains("issuer=Morphe%20Test"));
+        assertTrue(uri.contains("Morphe%20Test%3Auser%40example.com"));
     }
 
     @Test
@@ -86,7 +86,7 @@ class TotpServiceTest {
 
         String uri = service.buildOtpAuthUri("user@example.com", "SECRET");
 
-        assertTrue(uri.contains("issuer=Stirling%20PDF"));
+        assertTrue(uri.contains("issuer=Morphe%20PDF"));
     }
 
     private String generateCode(TotpService service, byte[] secretBytes, long timeStep)

@@ -1,7 +1,7 @@
 
 services:
   stirling-pdf:
-    container_name: Morphe PDF-Fat-Disable-Endpoints
+    container_name: Morphe-PDF-Fat-Disable-Endpoints
     image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:fat
     build:
       context: ../../../
