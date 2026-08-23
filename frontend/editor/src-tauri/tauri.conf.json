@@ -1,9 +1,9 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "Stirling PDF",
-  "mainBinaryName": "Stirling-PDF",
+  "productName": "Morphe PDF",
+  "mainBinaryName": "Morphe-PDF",
   "version": "2.14.3",
-  "identifier": "stirling.pdf.dev",
+  "identifier": "morphe.pdf.dev",
   "build": {
     "frontendDist": "../dist",
     "devUrl": "http://localhost:5173",
@@ -13,7 +13,7 @@
   "app": {
     "windows": [
       {
-        "title": "Stirling PDF",
+        "title": "Morphe PDF",
         "width": 1280,
         "height": 800,
         "resizable": true,
@@ -26,7 +26,7 @@
   "bundle": {
     "active": true,
     "createUpdaterArtifacts": true,
-    "publisher": "Stirling PDF Inc.",
+    "publisher": "Morphe PDF",
     "targets": ["deb", "rpm", "appimage", "dmg", "app", "msi"],
     "icon": [
       "icons/icon.png",
@@ -53,7 +53,10 @@
       },
       "rpm": {
         "desktopTemplate": "stirling-pdf.desktop",
-        "compression": { "type": "zstd", "level": 3 }
+        "compression": {
+          "type": "zstd",
+          "level": 3
+        }
       },
       "appimage": {
         "bundleMediaFramework": false
@@ -88,17 +91,7 @@
     },
     "deep-link": {
       "desktop": {
-        "schemes": ["stirlingpdf"]
-      }
-    },
-    "updater": {
-      "endpoints": [
-        "https://github.com/Stirling-Tools/Stirling-PDF/releases/latest/download/latest.json"
-      ],
-      "dialog": false,
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDZEREM2QTgwNjdGNzdCOUQKUldTZGUvZG5nR3JjYmZ4TlZ3YVpHTVIzd2hBT2c4c000RDNIN2tLZENEblE4ZXFhU3J5V0lQanEK",
-      "windows": {
-        "installMode": "passive"
+        "schemes": ["morphepdf"]
       }
     }
   }

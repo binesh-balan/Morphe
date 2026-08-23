@@ -10,7 +10,7 @@
  * The one substantive difference from the web impl is the return URL: web uses
  * window.location.origin, but in the desktop webview that is a localhost dev
  * server / tauri:// origin Stripe can't return to. We pass the app's deep-link
- * scheme (stirlingpdf://) so Stripe can bring the user back into the app.
+ * scheme (morphepdf://) so Stripe can bring the user back into the app.
  */
 import { supabase } from "@app/auth/supabase";
 import { authService } from "@app/services/authService";
@@ -33,7 +33,7 @@ export type {
  * URL on desktop. The OS routes it back to the running app, which the deep-link
  * handler picks up to refresh the wallet after checkout/portal.
  */
-const DESKTOP_BILLING_RETURN_URL = "stirlingpdf://billing/return";
+const DESKTOP_BILLING_RETURN_URL = "morphepdf://billing/return";
 
 /** Resolve the desktop JWT, throwing a friendly error when signed out. */
 async function requireToken(): Promise<string> {
