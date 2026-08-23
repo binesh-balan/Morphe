@@ -18,7 +18,7 @@ const baseSignature: SignatureValidationSignature = {
   signatureDate: "2026-06-01T12:00:00Z",
   reason: "Document approval",
   location: "London, UK",
-  issuerDN: "CN=Stirling PDF CA",
+  issuerDN: "CN=Morphe PDF CA",
   subjectDN: "CN=Jane Doe",
   serialNumber: "0123456789ABCDEF",
   validFrom: "2025-01-01T00:00:00Z",

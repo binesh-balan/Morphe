@@ -1,6 +1,6 @@
 # Windows Code Signing Setup Guide
 
-This guide explains how to set up Windows code signing for Stirling-PDF desktop application builds.
+This guide explains how to set up Windows code signing for Morphe PDF desktop application builds.
 
 ## Overview
 
@@ -127,7 +127,7 @@ cd frontend
 npm run tauri build
 
 # Verify the signature
-Get-AuthenticodeSignature "./src-tauri/target/release/bundle/msi/Stirling-PDF_*.msi"
+Get-AuthenticodeSignature "./src-tauri/target/release/bundle/msi/Morphe PDF_*.msi"
 ```
 
 ### 2. GitHub Actions Testing

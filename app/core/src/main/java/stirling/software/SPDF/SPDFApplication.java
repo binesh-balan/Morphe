@@ -183,11 +183,11 @@ public class SPDFApplication {
             serverPortStatic = port;
         }
         // Log the actual runtime port for Tauri to parse
-        log.info("Stirling-PDF running on port: {}", serverPortStatic);
+        log.info("Morphe PDF running on port: {}", serverPortStatic);
     }
 
     private static void printStartupLogs() {
-        log.info("Stirling-PDF Started.");
+        log.info("Morphe PDF Started.");
         String url = buildFullUrl(baseUrlStatic, serverPortStatic, contextPathStatic);
         log.info("Navigate to {}", url);
     }

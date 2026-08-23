@@ -15,11 +15,11 @@ const filledData: PdfInfoReportData = {
       data: {
         Metadata: {
           Title: "Annual Report 2025",
-          Author: "Stirling PDF",
+          Author: "Morphe PDF",
           Subject: "Financials",
           Keywords: "annual, report, finance",
-          Creator: "Stirling PDF",
-          Producer: "Stirling PDF",
+          Creator: "Morphe PDF",
+          Producer: "Morphe PDF",
           CreationDate: "2025-01-15T10:00:00Z",
           ModificationDate: "2025-02-01T08:30:00Z",
         },

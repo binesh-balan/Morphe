@@ -20,9 +20,9 @@ services:
       DISABLE_ADDITIONAL_FEATURES: "true"
       SECURITY_ENABLELOGIN: "false"
       SYSTEM_DEFAULTLOCALE: en-US
-      UI_APPNAME: Stirling-PDF
-      UI_HOMEDESCRIPTION: Demo site for Stirling-PDF Latest
-      UI_APPNAMENAVBAR: Stirling-PDF Latest
+      UI_APPNAME: Morphe PDF
+      UI_HOMEDESCRIPTION: Demo site for Morphe PDF Latest
+      UI_APPNAMENAVBAR: Morphe PDF Latest
       SYSTEM_MAXFILESIZE: "100"
       METRICS_ENABLED: "true"
       SYSTEM_GOOGLEVISIBILITY: "true"

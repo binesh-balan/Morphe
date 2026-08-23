@@ -2230,7 +2230,7 @@ public class ConvertPDFToPDFA {
             }
         }
 
-        info.setProducer("Stirling-PDF Sanitizer");
+        info.setProducer("Morphe PDF Sanitizer");
     }
 
     private void removeForbiddenActions(PDDocument doc) {

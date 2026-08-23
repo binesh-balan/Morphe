@@ -198,7 +198,7 @@ public class AgreementAssembler {
                         + " their Party. Signatures delivered electronically or in counterparts are"
                         + " effective as originals.\n\n");
         sb.append("| Provider | Customer |\n| --- | --- |\n");
-        sb.append("| Stirling PDF, Inc. | {{customer_legal_name}} |\n");
+        sb.append("| Morphe PDF, Inc. | {{customer_legal_name}} |\n");
         sb.append("| Name: Matt Joseph | Name: ").append(signatory).append(" |\n");
         sb.append("| Title: CEO | Title: ").append(signatoryTitle).append(" |\n");
         sb.append("| Date: ").append(date).append(" | Date: ").append(date).append(" |\n");

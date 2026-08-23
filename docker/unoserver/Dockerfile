@@ -1,5 +1,5 @@
-# Standalone unoserver image for Stirling-PDF remote UNO mode.
-# Pinned to unoserver 3.6 to match Stirling-PDF's client (avoids 3.4/3.6 wire mismatch).
+# Standalone unoserver image for Morphe PDF remote UNO mode.
+# Pinned to unoserver 3.6 to match Morphe PDF's client (avoids 3.4/3.6 wire mismatch).
 
 FROM ubuntu:noble@sha256:561618e2c15bf2397621dd04f96926663a3b5616c189cf7e38db7e82f5c538ea
 
@@ -99,8 +99,8 @@ HEALTHCHECK --interval=15s --timeout=5s --retries=4 --start-period=45s \
 
 ENTRYPOINT ["/usr/bin/tini", "--", "/usr/local/bin/entrypoint.sh"]
 
-LABEL org.opencontainers.image.title="Stirling-PDF Unoserver" \
-      org.opencontainers.image.description="Pinned unoserver build for Stirling-PDF remote UNO mode" \
+LABEL org.opencontainers.image.title="Morphe PDF Unoserver" \
+      org.opencontainers.image.description="Pinned unoserver build for Morphe PDF remote UNO mode" \
       org.opencontainers.image.source="https://github.com/Stirling-Tools/Stirling-PDF" \
       org.opencontainers.image.licenses="MIT" \
       org.opencontainers.image.vendor="Stirling-Tools"

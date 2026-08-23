@@ -1,27 +1,30 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Stirling-Tools/Stirling-PDF/main/docs/stirling.png" width="80" alt="Stirling PDF logo">
+  <img src="docs/brand/morphe-mark.svg" width="72" alt="Morphe PDF logo">
 </p>
 
-<h1 align="center">Stirling PDF - The Open-Source PDF Platform</h1>
-
-Stirling PDF is a powerful, open-source PDF editing platform. Run it as a personal desktop app, in the browser, or deploy it on your own servers with a private API. Edit, sign, redact, convert, and automate PDFs without sending documents to external services.
+<h1 align="center">Morphe PDF</h1>
 
 <p align="center">
-  <a href="https://hub.docker.com/r/stirlingtools/stirling-pdf">
-    <img src="https://img.shields.io/docker/pulls/frooodle/s-pdf" alt="Docker Pulls">
-  </a>
-  <a href="https://discord.gg/HYmhKj45pU">
-    <img src="https://img.shields.io/discord/1068636748814483718?label=Discord" alt="Discord">
-  </a>
-  <a href="https://scorecard.dev/viewer/?uri=github.com/Stirling-Tools/Stirling-PDF">
-    <img src="https://api.scorecard.dev/projects/github.com/Stirling-Tools/Stirling-PDF/badge" alt="OpenSSF Scorecard">
-  </a>
-  <a href="https://github.com/Stirling-Tools/stirling-pdf">
-    <img src="https://img.shields.io/github/stars/stirling-tools/stirling-pdf?style=social" alt="GitHub Repo stars">
-  </a>
+  A self-hosted PDF platform - edit, sign, redact, convert and automate PDFs without sending documents to anyone else's servers.
 </p>
 
-![Stirling PDF - Dashboard](images/home-light.png)
+<p align="center">
+  <em>Built on <a href="https://github.com/Stirling-Tools/Stirling-PDF">Morphe PDF</a>, with thanks.</em>
+</p>
+
+![Morphe PDF - Dashboard](images/home-light.png)
+
+## Credits
+
+Morphe PDF is a fork of **[Morphe PDF](https://github.com/Stirling-Tools/Stirling-PDF)** by Stirling PDF Inc.,
+used under the MIT Licence. Essentially all of the PDF tooling, the editor, and the
+50+ tools are their work; this fork adds security hardening and a different name and
+mark on top of it. The original copyright notice is retained in [LICENSE](LICENSE), and
+their documentation at <https://docs.stirlingpdf.com> remains the best reference for
+what the tools do.
+
+If Morphe PDF is useful to you, the upstream project is the place to send stars,
+[contributions](https://github.com/Stirling-Tools/Stirling-PDF), and support.
 
 ## Key Capabilities
 
@@ -36,15 +39,21 @@ For a full feature list, see the docs: **https://docs.stirlingpdf.com**
 
 ## Quick Start
 
+Morphe PDF does not publish its own container image yet, so the command below pulls
+**upstream Stirling PDF** - useful for trying the tooling, but it does not include this
+fork's changes. To run Morphe PDF, build from source (see the [Developer Guide](DeveloperGuide.md)).
+
 ```bash
 docker run -p 8080:8080 docker.stirlingpdf.com/stirlingtools/stirling-pdf
 ```
 
 Then open: http://localhost:8080
 
-For full installation options (including desktop and Kubernetes), see our [Documentation Guide](https://docs.stirlingpdf.com/#documentation-guide).
+For full installation options (including desktop and Kubernetes), see upstream's [Documentation Guide](https://docs.stirlingpdf.com/#documentation-guide).
 
 ## Resources
+
+These belong to upstream Stirling PDF and describe the tooling Morphe PDF inherits:
 
 - [**Documentation**](https://docs.stirlingpdf.com)
 - [**Homepage**](https://stirling.com)
@@ -53,8 +62,9 @@ For full installation options (including desktop and Kubernetes), see our [Docum
 
 ## Support
 
-- **Community**: [Discord](https://discord.gg/HYmhKj45pU)
-- **Bug Reports**: [GitHub Issues](https://github.com/Stirling-Tools/Stirling-PDF/issues)
+- **Issues with this fork**: [Morphe PDF issues](https://github.com/binesh-balan/Morphe/issues)
+- **Issues with the underlying tools**: [upstream issues](https://github.com/Stirling-Tools/Stirling-PDF/issues) - please confirm the problem reproduces on upstream Stirling PDF before reporting it there.
+- **Community**: upstream's [Discord](https://discord.gg/HYmhKj45pU) (a Morphe PDF community, not a Morphe PDF one)
 
 ## Contributing
 
@@ -66,4 +76,6 @@ For adding translations, see the [Translation Guide](devGuide/HowToAddNewLanguag
 
 ## License
 
-Stirling PDF is open-core. See [LICENSE](LICENSE) for details.
+MIT, inherited from Morphe PDF - copyright (c) 2025 Stirling PDF Inc. See [LICENSE](LICENSE).
+Upstream is open-core: some enterprise features live under a separate proprietary licence,
+and that split carries over to this fork unchanged.

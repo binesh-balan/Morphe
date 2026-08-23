@@ -727,7 +727,7 @@ description = "每次搜索检索的最相关片段数量。"
 label = "Top K"
 
 [admin.settings.ai.general]
-description = "将 Stirling 连接到 Python AI 引擎，并选择公开哪些 AI 能力。更改将在重启后生效。"
+description = "将 Morphe 连接到 Python AI 引擎，并选择公开哪些 AI 能力。更改将在重启后生效。"
 title = "AI 引擎"
 
 [admin.settings.ai.general.capabilities]
@@ -1075,11 +1075,11 @@ description = "配置可选功能与特性。"
 title = "功能"
 
 [admin.settings.features.serverCertificate]
-description = "配置“使用 Stirling-PDF 签名”功能的服务端证书生成"
+description = "配置“使用 Morphe PDF 签名”功能的服务端证书生成"
 label = "服务器证书"
 
 [admin.settings.features.serverCertificate.enabled]
-description = "为“使用 Stirling-PDF 签名”选项启用服务端证书"
+description = "为“使用 Morphe PDF 签名”选项启用服务端证书"
 label = "启用服务器证书"
 
 [admin.settings.features.serverCertificate.organizationName]
@@ -1096,11 +1096,11 @@ label = "证书有效期（天）"
 
 [admin.settings.folderAccess]
 description = "允许文件夹源和文件夹输出读取与写入的目录。这是一个安全边界：自动化绝不能指向此列表之外的服务器路径。"
-securityNote = "留空可完全禁用文件夹源和输出。Stirling 自身的配置目录始终禁止访问。"
+securityNote = "留空可完全禁用文件夹源和输出。Morphe 自身的配置目录始终禁止访问。"
 title = "文件夹访问"
 
 [admin.settings.folderAccess.implied]
-description = "这些由 Stirling 管理的目录始终允许访问，且不能在此处更改。"
+description = "这些由 Morphe 管理的目录始终允许访问，且不能在此处更改。"
 serverStorage = "服务器文件存储"
 title = "始终允许"
 watchedFolder = "流水线监视文件夹"
@@ -1246,7 +1246,7 @@ description = "Cookie 政策的 URL 或文件名"
 label = "Cookie 政策"
 
 [admin.settings.legal.disclaimer]
-message = "通过自定义这些法律文档，您将对确保遵守所有适用的法律法规承担全部责任，包括但不限于 GDPR 及其他欧盟数据保护要求。仅在以下情况修改这些设置：（1）您运行的是个人/私有实例，（2）您不在欧盟管辖范围内并了解当地法律义务，或（3）您已获得适当的法律咨询，并接受对所有用户数据和法律合规承担全部责任。Stirling-PDF 及其开发者不对您的法律义务承担任何责任。"
+message = "通过自定义这些法律文档，您将对确保遵守所有适用的法律法规承担全部责任，包括但不限于 GDPR 及其他欧盟数据保护要求。仅在以下情况修改这些设置：（1）您运行的是个人/私有实例，（2）您不在欧盟管辖范围内并了解当地法律义务，或（3）您已获得适当的法律咨询，并接受对所有用户数据和法律合规承担全部责任。Morphe PDF 及其开发者不对您的法律义务承担任何责任。"
 title = "法律责任警告"
 
 [admin.settings.legal.impressum]
@@ -1333,8 +1333,8 @@ description = "SMTP 身份验证用户名"
 label = "SMTP 用户名"
 
 [admin.settings.mcp]
-apikeyNote = "Clients send a Stirling API key in the X-API-KEY header (or Authorization: Bearer <key>). The key maps to its owning Stirling user - only provisioned accounts get in, and actions are audited as that user. Manage keys under Account > API Keys."
-description = "Expose Stirling's PDF tools and AI agents to MCP clients over an OAuth-protected endpoint."
+apikeyNote = "Clients send a Morphe API key in the X-API-KEY header (or Authorization: Bearer <key>). The key maps to its owning Morphe user - only provisioned accounts get in, and actions are audited as that user. Manage keys under Account > API Keys."
+description = "Expose Morphe's PDF tools and AI agents to MCP clients over an OAuth-protected endpoint."
 title = "MCP Server"
 
 [admin.settings.mcp.acceptedAudiences]
@@ -1364,7 +1364,7 @@ step3ApiKeyb = "header (or Authorization: Bearer <key>). No OAuth or metadata di
 step4 = "Approve the sign-in; the client retries with a token. Tools appear grouped: convert, pages, misc, security, ai."
 step4ApiKey = "Tools appear grouped: convert, pages, misc, security, ai - and every call is audited as the key's owner."
 tip = "Tip: register the resource ID as an allowed audience in your IdP. Tested with MCP Inspector and Claude Desktop."
-tipApiKey = "Tip: API-key mode needs no external IdP - simplest for self-host. The key maps to its owning Stirling user."
+tipApiKey = "Tip: API-key mode needs no external IdP - simplest for self-host. The key maps to its owning Morphe user."
 title = "Connect an MCP client"
 
 [admin.settings.mcp.issuerUri]
@@ -1377,12 +1377,12 @@ label = "JWKS URL (optional)"
 placeholder = "Auto-discovered from issuer"
 
 [admin.settings.mcp.mode]
-description = "OAuth needs an external IdP. API key uses a Stirling per-user API key (X-API-KEY) - simplest for self-host."
+description = "OAuth needs an external IdP. API key uses a Morphe per-user API key (X-API-KEY) - simplest for self-host."
 label = "Authentication mode"
 
 [admin.settings.mcp.requireAccount]
-description = "Only let tokens through if their subject maps to a provisioned, enabled Stirling user."
-label = "Require an existing Stirling account"
+description = "Only let tokens through if their subject maps to a provisioned, enabled Morphe user."
+label = "Require an existing Morphe account"
 
 [admin.settings.mcp.resourceId]
 description = "This server's public /mcp URL. Tokens must list it in their audience (RFC 8707) or they are rejected."
@@ -1393,7 +1393,7 @@ description = "Require mcp.tools.read for read ops and mcp.tools.write for write
 label = "Enforce OAuth scopes"
 
 [admin.settings.mcp.usernameClaim]
-description = "JWT claim matched against a Stirling username (e.g. sub, email, preferred_username)."
+description = "JWT claim matched against a Morphe username (e.g. sub, email, preferred_username)."
 label = "Username claim"
 
 [admin.settings.plan.noData]
@@ -1714,7 +1714,7 @@ description = "启用后，仅列出的用户 ID 可使用机器人。"
 label = "仅允许特定用户 ID"
 
 [admin.settings.telegram.enabled]
-description = "允许用户通过您配置的 Telegram 机器人与 Stirling PDF 交互。"
+description = "允许用户通过您配置的 Telegram 机器人与 Morphe PDF 交互。"
 label = "启用 Telegram 机器人"
 
 [admin.settings.telegram.feedback]
@@ -1787,20 +1787,20 @@ settingsOverview = "这是 <strong>设置面板</strong>。管理员设置按类
 systemCustomization = "我们提供丰富的界面自定义方式：<strong>系统设置</strong>可更改应用名称和语言，<strong>功能</strong>用于服务器证书管理，<strong>端点</strong>可为您的用户启用或禁用特定工具。"
 teamsAndUsers = "在此管理 <strong>团队</strong> 和个人用户。您可以通过电子邮件、可共享链接邀请新用户，或自行为他们创建自定义账户。"
 welcome = "欢迎使用 <strong>管理员引导</strong>！让我们一起探索提供给系统管理员的强大企业功能和设置。"
-wrapUp = "这就是管理员导览！您已看到让 Stirling PDF 成为强大且可定制解决方案的企业功能。可随时从 <strong>帮助</strong> 菜单访问本导览。"
+wrapUp = "这就是管理员导览！您已看到让 Morphe PDF 成为强大且可定制解决方案的企业功能。可随时从 <strong>帮助</strong> 菜单访问本导览。"
 
 [adminUserSettings]
 admin = "管理员"
 title = "用户控制设置"
 
 [agents]
-stirling_name = "Stirling"
+stirling_name = "Morphe"
 
 [analytics]
 learnMore = "了解详情"
-paragraph1 = "Stirling PDF有选择性分析功能，可以帮助我们改进产品。我们不跟踪任何个人信息或文件内容。"
-paragraph2 = "请考虑启用分析来帮助Stirling-PDF的发展，并让我们更好地了解我们的用户。"
-title = "你想协助改善Stirling PDF吗"
+paragraph1 = "Morphe PDF有选择性分析功能，可以帮助我们改进产品。我们不跟踪任何个人信息或文件内容。"
+paragraph2 = "请考虑启用分析来帮助Morphe PDF的发展，并让我们更好地了解我们的用户。"
+title = "你想协助改善Morphe PDF吗"
 
 [annotate]
 tags = "annotate,highlight,draw,markup,comment,notes,review,redline,feedback,markup tools,sticky notes,shapes,arrows,text box,freehand"
@@ -2935,10 +2935,10 @@ copy = "复制消息"
 
 [chat.fab]
 close = "Close chat"
-open = "Open Stirling AI assistant"
+open = "Open Morphe AI assistant"
 
 [chat.header]
-agentMenu = "Stirling 代理选项"
+agentMenu = "Morphe 代理选项"
 clearChat = "清空聊天"
 
 [chat.input]
@@ -3269,14 +3269,14 @@ upgradeButton = "升级账户"
 
 [config.apiKeys]
 copyKeyAriaLabel = "复制 API 密钥"
-description = "用于访问 Stirling 一系列 PDF 工具的 API 密钥。可复制到您的项目，或刷新以生成新密钥。"
-docsDescription = "了解如何与 Stirling PDF 集成："
+description = "用于访问 Morphe 一系列 PDF 工具的 API 密钥。可复制到您的项目，或刷新以生成新密钥。"
+docsDescription = "了解如何与 Morphe PDF 集成："
 docsLink = "API 文档"
 docsTitle = "API 文档"
 generateError = "我们无法生成您的 API 密钥。"
 goToAccount = "前往账户"
 guestInfo = "访客用户不提供 API 密钥。创建账户以获取可在应用中使用的密钥。"
-intro = "使用您的 API 密钥以编程方式访问 Stirling PDF 的处理能力。"
+intro = "使用您的 API 密钥以编程方式访问 Morphe PDF 的处理能力。"
 label = "API 密钥"
 publicKeyAriaLabel = "公共 API 密钥"
 refreshAriaLabel = "刷新 API 密钥"
@@ -3300,10 +3300,10 @@ title = "刷新 API 密钥"
 warning = "⚠️ 警告：此操作将生成新的 API 密钥并使之前的密钥失效。"
 
 [config.mcp]
-description = "Model Context Protocol (MCP) lets AI assistants like Claude use your Stirling PDF tools directly. Connect a client once and your assistant can convert, edit, secure and process documents on your behalf."
-guestInfo = "Guest users can't connect MCP clients. Create an account to use the MCP server and let your AI assistant run Stirling PDF tools on your behalf."
+description = "Model Context Protocol (MCP) lets AI assistants like Claude use your Morphe PDF tools directly. Connect a client once and your assistant can convert, edit, secure and process documents on your behalf."
+guestInfo = "Guest users can't connect MCP clients. Create an account to use the MCP server and let your AI assistant run Morphe PDF tools on your behalf."
 navLabel = "MCP Server"
-tip = "Every action your assistant runs is performed as your account and counts towards your usage, just like using Stirling PDF directly."
+tip = "Every action your assistant runs is performed as your account and counts towards your usage, just like using Morphe PDF directly."
 title = "MCP Server"
 viewApiKeys = "View API keys"
 
@@ -3320,7 +3320,7 @@ label = "Your MCP endpoint"
 
 [config.mcp.setup]
 addTo = "Add to"
-hint = "Pick your client, paste the snippet into the file shown, then restart it. You'll sign in with your Stirling account on first use - no keys to copy."
+hint = "Pick your client, paste the snippet into the file shown, then restart it. You'll sign in with your Morphe account on first use - no keys to copy."
 title = "Connect your AI assistant"
 
 [config.overview]
@@ -3429,7 +3429,7 @@ showPreferencesBtn = "管理偏好设置"
 title = "我们如何使用 Cookie"
 
 [cookieBanner.popUp.description]
-1 = "我们使用 Cookie 和其他技术来使 Stirling PDF 更好地为您服务——帮助我们改进工具并构建您喜爱的功能。"
+1 = "我们使用 Cookie 和其他技术来使 Morphe PDF 更好地为您服务——帮助我们改进工具并构建您喜爱的功能。"
 2 = "If you’d rather not, clicking 'No Thanks' will only enable the essential cookies needed to keep things running smoothly."
 
 [cookieBanner.preferencesModal]
@@ -3442,12 +3442,12 @@ subtitle = "Cookie使用说明"
 title = "隐私偏好设置中心"
 
 [cookieBanner.preferencesModal.analytics]
-description = "这些Cookie帮助我们分析工具使用情况，以便聚焦开发用户最需要的功能。再次强调：Stirling PDF绝不会追踪您处理的文档内容。"
+description = "这些Cookie帮助我们分析工具使用情况，以便聚焦开发用户最需要的功能。再次强调：Morphe PDF绝不会追踪您处理的文档内容。"
 title = "分析统计"
 
 [cookieBanner.preferencesModal.description]
-1 = "Stirling PDF通过Cookie及类似技术优化用户体验并分析工具使用情况，帮助我们提升性能、开发实用功能并提供持续支持。"
-2 = "我们承诺：Stirling PDF永远不会追踪或访问您使用的文档内容。"
+1 = "Morphe PDF通过Cookie及类似技术优化用户体验并分析工具使用情况，帮助我们提升性能、开发实用功能并提供持续支持。"
+2 = "我们承诺：Morphe PDF永远不会追踪或访问您使用的文档内容。"
 3 = "用户隐私与信任是我们一切工作的核心。"
 
 [cookieBanner.preferencesModal.necessary]
@@ -3526,14 +3526,14 @@ title = "错误"
 
 [defaultApp.prompt]
 dontRemind = "不再提醒我"
-message = "将 Stirling PDF 设为打开 PDF 文件的默认应用。"
+message = "将 Morphe PDF 设为打开 PDF 文件的默认应用。"
 
 [defaultApp.settingsOpened]
-message = "请在系统设置中选择 Stirling PDF"
+message = "请在系统设置中选择 Morphe PDF"
 title = "已打开设置"
 
 [defaultApp.success]
-message = "Stirling PDF 现为您的默认 PDF 编辑器"
+message = "Morphe PDF 现为您的默认 PDF 编辑器"
 title = "已设为默认应用"
 
 [desktopUpdate]
@@ -3549,7 +3549,7 @@ updateFailedMessage = "下载或安装更新失败。"
 
 [desktopUpdate.blocked]
 docsLink = "查看安装文档"
-message = "Stirling-PDF 无权在此设备上自行更新。"
+message = "Morphe PDF 无权在此设备上自行更新。"
 title = "需要管理员权限"
 
 [devAirgapped]
@@ -4107,7 +4107,7 @@ title = "移动到文件夹"
 [filesPage.origin]
 all = "所有来源"
 cloud = "云端"
-cloudHint = "存储在 Stirling 服务器上"
+cloudHint = "存储在 Morphe 服务器上"
 local = "本地"
 localHint = "仅存储在此浏览器中"
 shared = "共享"
@@ -4378,7 +4378,7 @@ invisible = "不可见（仅元数据）"
 location = "位置："
 logo = "Logo："
 logoHidden = "无 Logo"
-logoShown = "显示 Stirling PDF Logo"
+logoShown = "显示 Morphe PDF Logo"
 participantCount_one = "{{count}} participant will sign in order"
 participantCount_other = "{{count}} participants will sign in order"
 participants = "参与者"
@@ -4432,7 +4432,7 @@ title = "顺序签署"
 dismiss = "关闭横幅"
 message = "创建免费账户以保存您的工作、获取更多功能并支持项目。"
 signUp = "免费注册"
-title = "您正在以访客身份使用 Stirling PDF！"
+title = "您正在以访客身份使用 Morphe PDF！"
 
 [home.addAttachments]
 desc = "向 PDF 添加或移除嵌入文件（附件）"
@@ -4596,7 +4596,7 @@ tags = "组合,合并,联合"
 title = "合并"
 
 [home.mobile]
-brandAlt = "Stirling PDF 标志"
+brandAlt = "Morphe PDF 标志"
 openFiles = "打开文件"
 swipeHint = "左右滑动以切换视图"
 tools = "工具"
@@ -4635,7 +4635,7 @@ tags = "组织,重新排列,重新排序"
 title = "整理"
 
 [home.pdfTextEditor]
-desc = "审阅并编辑 Stirling PDF 导出的 JSON，支持分组文本编辑并重新生成 PDF"
+desc = "审阅并编辑 Morphe PDF 导出的 JSON，支持分组文本编辑并重新生成 PDF"
 tags = "edit text,modify text,change text,edit content,update text,rewrite,correct,amend,redline,revise,text editor,content editor"
 title = "PDF 文本编辑器"
 
@@ -4821,7 +4821,7 @@ passwordRequired = "必须填写密码"
 signIn = "登录"
 validating = "正在验证邀请..."
 validationError = "验证邀请链接失败"
-welcome = "欢迎使用 Stirling PDF"
+welcome = "欢迎使用 Morphe PDF"
 welcomeSubtitle = "完成账户设置即可开始使用"
 welcomeTitle = "您已被邀请！"
 
@@ -4847,7 +4847,7 @@ terms = "服务条款"
 title = "第三方许可证"
 
 [localMode]
-toolUnavailable = "此工具需要账户。登录到 Stirling Cloud 或连接到自托管服务器以使用。"
+toolUnavailable = "此工具需要账户。登录到 Morphe Cloud 或连接到自托管服务器以使用。"
 
 [localMode.toolPicker]
 message = "登录以解锁全部工具。"
@@ -5005,7 +5005,7 @@ message = "认证未成功。您可以关闭此窗口后重试。"
 title = "认证失败"
 
 [oauth.success]
-message = "您可以关闭此窗口并返回 Stirling PDF。"
+message = "您可以关闭此窗口并返回 Morphe PDF。"
 title = "认证成功"
 
 [oauthConsent]
@@ -5018,17 +5018,17 @@ loadFailed = "This authorisation request is invalid or has expired. Close this t
 loading = "Loading authorisation request..."
 missingId = "Missing authorisation request. Start the connection from your app and try again."
 redirecting = "Returning you to the app..."
-requesting = "{{app}} wants to access your Stirling PDF account"
+requesting = "{{app}} wants to access your Morphe PDF account"
 scopesIntro = "This will allow {{app}} to:"
 signedInAs = "Signed in as {{name}}"
 signInButton = "Sign in to continue"
-signInPrompt = "Sign in to your Stirling PDF account to continue connecting the app."
+signInPrompt = "Sign in to your Morphe PDF account to continue connecting the app."
 title = "Authorise access"
 unknownApp = "A third-party application"
 
 [oauthConsent.access]
 actAsYou = "Act as you - everything {{app}} does runs under your account and counts towards your usage"
-tools = "Use your Stirling PDF tools on your behalf - convert, edit, sign, secure and process your documents"
+tools = "Use your Morphe PDF tools on your behalf - convert, edit, sign, secure and process your documents"
 
 [oauthConsent.scope]
 email = "See your email address"
@@ -5152,26 +5152,26 @@ skipTheTour = "跳过导览"
 
 [onboarding.checklist]
 dismiss = "关闭"
-title = "设置 Stirling PDF"
+title = "设置 Morphe PDF"
 
 [onboarding.checklist.downloadDesktop]
-description = "在您的计算机上原生运行 Stirling"
-title = "下载 Stirling 桌面版"
+description = "在您的计算机上原生运行 Morphe"
+title = "下载 Morphe 桌面版"
 
 [onboarding.checklist.inviteTeam]
 description = "与您的团队协作"
 title = "邀请团队成员"
 
 [onboarding.checklist.shareAnalytics]
-description = "帮助改进 Stirling"
+description = "帮助改进 Morphe"
 title = "共享匿名使用数据"
 
 [onboarding.checklist.takeTour]
-description = "通过快速导览了解 Stirling 的工作方式"
+description = "通过快速导览了解 Morphe 的工作方式"
 title = "开始导览"
 
 [onboarding.desktopInstall]
-body = "Stirling 作为桌面应用效果最佳。可离线使用、更快访问文档，并在电脑本地进行编辑。"
+body = "Morphe 作为桌面应用效果最佳。可离线使用、更快访问文档，并在电脑本地进行编辑。"
 selectOs = "选择操作系统"
 title = "下载"
 titleWithOs = "为 {{osLabel}} 下载"
@@ -5195,21 +5195,21 @@ success = "MFA 已启用。您现在可以继续。"
 title = "多因素身份验证设置"
 
 [onboarding.planOverview]
-adminBodyLoginDisabled = "启用登录模式后，您可以管理用户、配置设置并监控服务器健康。服务器上的前 <strong>{{freeTierLimit}}</strong> 位用户可免费使用 Stirling。"
-adminBodyLoginEnabled = "作为管理员，您可以管理用户、配置设置并监控服务器健康。服务器上的前 <strong>{{freeTierLimit}}</strong> 位用户可免费使用 Stirling。"
+adminBodyLoginDisabled = "启用登录模式后，您可以管理用户、配置设置并监控服务器健康。服务器上的前 <strong>{{freeTierLimit}}</strong> 位用户可免费使用 Morphe。"
+adminBodyLoginEnabled = "作为管理员，您可以管理用户、配置设置并监控服务器健康。服务器上的前 <strong>{{freeTierLimit}}</strong> 位用户可免费使用 Morphe。"
 adminTitle = "管理员概览"
 userBody = "邀请队友、分配角色，并在一个安全的工作区中整理文档。准备好从单人使用扩展时，可随时启用登录模式。"
 userTitle = "方案概览"
 
 [onboarding.processorIntro]
-body = "Stirling 现在运行 <strong>策略</strong> — 自动规则会在每个文档到达时对其进行分类、保护和处理。在 <strong>Processor</strong> 中设置并监控运行。"
+body = "Morphe 现在运行 <strong>策略</strong> — 自动规则会在每个文档到达时对其进行分类、保护和处理。在 <strong>Processor</strong> 中设置并监控运行。"
 cta = "查看 Processor"
-title = "查看 Stirling Processor"
+title = "查看 Morphe Processor"
 
 [onboarding.saas.freeEditor]
 freeLine = "The editor is now <free>completely free</free>."
 premium = "We've added loads of new features, including <strong>Policies</strong> and <strong>Agent Chat</strong>."
-title = "Welcome to Stirling"
+title = "Welcome to Morphe"
 
 [onboarding.saas.team]
 addButton = "Add"
@@ -5229,20 +5229,20 @@ rolePlaceholder = "确认您的角色"
 roleUser = "用户"
 
 [onboarding.serverLicense]
-freeBody = "我们的 <strong>Open-Core</strong> 许可允许每台服务器最多免费 <strong>{{freeTierLimit}}</strong> 名用户。为无缝扩展并抢先体验全新的 <strong>PDF 文本编辑工具</strong>，推荐 Stirling Server 方案 - 完整编辑与 <strong>无限席位</strong>，$99/server/mo。"
+freeBody = "我们的 <strong>Open-Core</strong> 许可允许每台服务器最多免费 <strong>{{freeTierLimit}}</strong> 名用户。为无缝扩展并抢先体验全新的 <strong>PDF 文本编辑工具</strong>，推荐 Morphe Server 方案 - 完整编辑与 <strong>无限席位</strong>，$99/server/mo。"
 freeTitle = "服务器许可证"
-overLimitBody = "我们的许可允许每台服务器最多免费 <strong>{{freeTierLimit}}</strong> 名用户。您有 <strong>{{overLimitUserCopy}}</strong> 名 Stirling 用户。为不间断使用，请升级至 Stirling Server 方案 - <strong>无限席位</strong>、PDF 文本编辑，以及 $99/server/mo 的完整管理员控制。"
+overLimitBody = "我们的许可允许每台服务器最多免费 <strong>{{freeTierLimit}}</strong> 名用户。您有 <strong>{{overLimitUserCopy}}</strong> 名 Morphe 用户。为不间断使用，请升级至 Morphe Server 方案 - <strong>无限席位</strong>、PDF 文本编辑，以及 $99/server/mo 的完整管理员控制。"
 overLimitTitle = "需要服务器许可证"
 seePlans = "查看方案 →"
 upgrade = "立即升级 →"
 
 [onboarding.tourOverview]
-body = "Stirling PDF V2 提供数十种工具和焕新的布局。快速导览，了解变化以及如何找到所需功能。"
+body = "Morphe PDF V2 提供数十种工具和焕新的布局。快速导览，了解变化以及如何找到所需功能。"
 title = "导览概述"
 
 [onboarding.welcomeSlide]
-body = "Stirling PDF 现已准备好为各类规模的团队服务。本次更新包含全新布局、强大的新管理功能，以及呼声最高的功能 - <strong>编辑文本</strong>。"
-title = "欢迎使用 Stirling"
+body = "Morphe PDF 现已准备好为各类规模的团队服务。本次更新包含全新布局、强大的新管理功能，以及呼声最高的功能 - <strong>编辑文本</strong>。"
+title = "欢迎使用 Morphe"
 
 [onboarding.whatsNew]
 activeFilesView = "使用活动文件查看所有已打开内容并选择要处理的对象。"
@@ -5548,7 +5548,7 @@ benefit1Body = "chain tools, schedule runs, batch process"
 benefit1Title = "Automation pipelines"
 benefit2Body = "summarise, classify, redact, AI-OCR"
 benefit2Title = "AI tools"
-benefit3Body = "call any Stirling endpoint programmatically"
+benefit3Body = "call any Morphe endpoint programmatically"
 benefit3Title = "API access"
 button = "Turn on Processor →"
 reassurance = "No minimum · Set a $0 cap to test · Cancel anytime"
@@ -5629,7 +5629,7 @@ leader = "Team owner"
 member = "Member"
 
 [payg.signupRequired]
-body = "Stirling PDF gives every signed-up account 500 free operations, enough to keep most workflows humming without paying a cent. You're currently using Stirling as a guest, which doesn't include billable tools like AI, automations, or hosted processing."
+body = "Morphe PDF gives every signed-up account 500 free operations, enough to keep most workflows humming without paying a cent. You're currently using Morphe as a guest, which doesn't include billable tools like AI, automations, or hosted processing."
 cancel = "Not now"
 cta = "Sign up free"
 subtext = "Creating an account is free and takes a few seconds. No credit card required."
@@ -5677,7 +5677,7 @@ usdNote = "Estimated in USD. You can adjust your cap any time after subscribing,
 [payg.upgrade.checkout]
 capValue = "{{symbol}}{{amount}} / month"
 edit = "Edit"
-help = "Stripe handles your card details. Stirling never sees them."
+help = "Stripe handles your card details. Morphe never sees them."
 loading = "Loading checkout…"
 noCap = "No cap"
 title = "Add your payment method"
@@ -5685,7 +5685,7 @@ title = "Add your payment method"
 [payg.upgrade.help]
 aiBody = "summarise, classify, redact, AI-OCR"
 aiTitle = "AI tools"
-apiBody = "programmatic access to any Stirling endpoint"
+apiBody = "programmatic access to any Morphe endpoint"
 apiTitle = "API calls"
 automationBody = "chained tools or scheduled runs that don't need clicks"
 automationTitle = "Automation pipelines"
@@ -6116,7 +6116,7 @@ upToFiveUsers = "最多 5 位用户"
 usageTrackingPrometheus = "使用跟踪与 Prometheus"
 
 [plan.licenseWarning]
-body = "您有 {{total}} 位用户，但免费层每台服务器仅支持 {{limit}} 位。升级以保持 Stirling PDF 顺畅运行。"
+body = "您有 {{total}} 位用户，但免费层每台服务器仅支持 {{limit}} 位。升级以保持 Morphe PDF 顺畅运行。"
 cta = "查看方案"
 overLimit = "超过 {{limit}}"
 title = "已达自托管免费上限"
@@ -6251,25 +6251,25 @@ comingSoon = "即将推出"
 [portal.accountLink.card]
 billingNote = "无人值守处理会从您的组织钱包扣费。"
 eyebrow = "账户关联"
-linkButton = "关联您的 Stirling 账户"
+linkButton = "关联您的 Morphe 账户"
 linked = "已关联"
 linkedAs = "已关联为 {{name}}。"
 linkedGeneric = "此实例已关联。"
 notLinked = "未关联"
-title = "将此组织关联到其 Stirling 账户"
+title = "将此组织关联到其 Morphe 账户"
 unlink = "取消关联"
 
 [portal.accountLink.card.error]
 title = "无法关联"
 
 [portal.accountLink.card.loginNotConfigured]
-after = "以启用与托管 Stirling 账户的账户关联。在开发环境中，您可以从关联对话框模拟登录。"
+after = "以启用与托管 Morphe 账户的账户关联。在开发环境中，您可以从关联对话框模拟登录。"
 before = "设置"
 title = "SaaS 登录未配置"
 
 [portal.accountLink.gate]
 action = "关联账户"
-description = "关联此组织的 Stirling 账户以使用可计费功能。"
+description = "关联此组织的 Morphe 账户以使用可计费功能。"
 title = "关联以解锁"
 titleFeature = "关联以解锁 {{feature}}"
 
@@ -6301,13 +6301,13 @@ never = "从未"
 
 [portal.accountLink.modal]
 linkSubtitle = "登录应由此服务器计费的账户。"
-linkTitle = "关联您的 Stirling 账户"
-reauthSubtitle = "您的会话已过期——请重新登录您的 Stirling 账户。您的实例仍保持关联。"
+linkTitle = "关联您的 Morphe 账户"
+reauthSubtitle = "您的会话已过期——请重新登录您的 Morphe 账户。您的实例仍保持关联。"
 reauthTitle = "重新登录"
 simulateSignIn = "模拟登录（开发）"
 
 [portal.accountLink.modal.loginNotConfigured]
-after = "以启用与托管 Stirling 账户的应用内关联。"
+after = "以启用与托管 Morphe 账户的应用内关联。"
 and = "和"
 before = "设置"
 title = "SaaS 登录未配置"
@@ -6316,7 +6316,7 @@ title = "SaaS 登录未配置"
 instancesSub = "注册到此组织的每个自托管实例。撤销凭据可立即切断其无人值守访问。"
 instancesTitle = "已关联实例"
 revokeError = "无法撤销实例"
-sub = "将此自托管组织关联到其 Stirling 账户，以便无人值守处理从您的组织钱包扣费。"
+sub = "将此自托管组织关联到其 Morphe 账户，以便无人值守处理从您的组织钱包扣费。"
 
 [portal.accountLink.panel.loadError]
 forbidden = "只有团队所有者可以查看组织的已关联实例。"
@@ -6333,7 +6333,7 @@ close = "关闭助手"
 error = "无法连接助手。"
 errorWithDetail = "无法连接助手：{{detail}}"
 inputAriaLabel = "询问助手"
-inputPlaceholder = "询问有关 Stirling 的问题…"
+inputPlaceholder = "询问有关 Morphe 的问题…"
 open = "打开助手"
 send = "发送"
 title = "助手"
@@ -6380,7 +6380,7 @@ title = "设置您的支出限额"
 [portal.billing.checkout.card]
 fields = "卡号 · MM / YY · CVC · ZIP"
 label = "银行卡详情"
-note = "银行卡详情由 Stripe 收集。Stirling 从不存储 PAN 或 CVC。"
+note = "银行卡详情由 Stripe 收集。Morphe 从不存储 PAN 或 CVC。"
 
 [portal.billing.checkout.error]
 title = "无法开始结账"
@@ -6398,7 +6398,7 @@ limitNoCap = "无支出限额。处理不会暂停。发票按月生成。"
 cta = "生成您的 Enterprise 报价"
 description = "承诺用量折扣、隔离网络部署、自定义 MSA 和安全审查，以及第三方分销商合作伙伴关系。"
 eyebrow = "用量折扣 · 100 万+ PDFs"
-title = "Stirling Enterprise"
+title = "Morphe Enterprise"
 
 [portal.billing.freeEditors]
 activeThisMonth = "本月活跃"
@@ -6447,9 +6447,9 @@ viewAriaLabel = "在 Stripe 中查看发票 {{number}}"
 viewLink = "查看 ↗"
 
 [portal.billing.linkPrompt]
-cta = "关联 Stirling 账户"
+cta = "关联 Morphe 账户"
 description = "手动 PDF 编辑——查看、签名、合并、拆分、水印、压缩、转换、手动 OCR——无论是否关联，始终免费。关联后可领取 500 个免费 PDFs 的按量计费处理额度（自动化、AI 和 API）；需要更多时，启用 Processor 计划，并且只为实际使用量付费。"
-title = "关联您的 Stirling 账户"
+title = "关联您的 Morphe 账户"
 
 [portal.billing.paymentMethod]
 billedMonthly = "按月计费"
@@ -6523,9 +6523,9 @@ usersLabel = "用户总数"
 label = "我理解，当我的预付容量用完或 12 个月后过期时，除非我取消，否则处理会自动按标准按量付费费率继续（最高到我的支出限额），并且我可以随时从计费门户取消。"
 
 [portal.billing.prepaid.deploy]
-cloud = "Stirling Cloud"
-cloudDesc = "由 Stirling 管理。几分钟内上线。"
-cloudValue = "Stirling Cloud · 托管"
+cloud = "Morphe Cloud"
+cloudDesc = "由 Morphe 管理。几分钟内上线。"
+cloudValue = "Morphe Cloud · 托管"
 selfhost = "自托管"
 selfhostDesc = "运行在私有基础设施上。费率相同。"
 selfhostValue = "自托管 · 私有基础设施"
@@ -6681,7 +6681,7 @@ description = "处理后的文档最终到达的位置 - 存储桶、网盘、�
 label = "文件与附件"
 
 [portal.connections.commonFields.accessToken]
-helperText = "Stirling 会加密存储此信息，且不会再次显示。"
+helperText = "Morphe 会加密存储此信息，且不会再次显示。"
 label = "Access token"
 
 [portal.connections.commonFields.apiKey]
@@ -7191,7 +7191,7 @@ time = "时间"
 user = "用户"
 
 [portal.editorAdmin]
-subtitle = "部署 Stirling PDF Editor，将自托管实例配对到您的组织，并在一处管理运行中的集群 — 目标、健康状况、凭据和离线激活。"
+subtitle = "部署 Morphe PDF Editor，将自托管实例配对到您的组织，并在一处管理运行中的集群 — 目标、健康状况、凭据和离线激活。"
 title = "编辑器部署"
 
 [portal.editorAdmin.health.columns]
@@ -7282,7 +7282,7 @@ guide = "打开 {{name}} 指南"
 openInBrowser = "改为在浏览器中打开"
 sectionDesktop = "桌面应用"
 sectionSelfHosted = "自托管"
-title = "安装 Stirling PDF Editor"
+title = "安装 Morphe PDF Editor"
 
 [portal.home.download.docker]
 detailBody = "在您的服务器上运行官方镜像。"
@@ -7330,7 +7330,7 @@ title = "Windows"
 
 [portal.home.editor]
 activeOfDeployed = "本月 {{total}} 个中有 {{active}} 个处于活跃状态"
-name = "Stirling PDF Editor"
+name = "Morphe PDF Editor"
 open = "在浏览器中打开"
 updated = "已更新 {{time}}"
 
@@ -7352,7 +7352,7 @@ morning = "早上好"
 [portal.infrastructure]
 manageEditorDeployment = "管理 Editor 部署"
 sectionsAriaLabel = "基础设施部分"
-subtitle = "Stirling 工作区的部署、凭据、安全态势、存储和审计跟踪。"
+subtitle = "Morphe 工作区的部署、凭据、安全态势、存储和审计跟踪。"
 title = "基础设施"
 
 [portal.infrastructure.apiKeys]
@@ -7368,7 +7368,7 @@ usageMonth = "本月用量"
 usageToday = "今日用量"
 
 [portal.infrastructure.apiKeys.empty]
-description = "创建作用域密钥以开始调用 Stirling API。"
+description = "创建作用域密钥以开始调用 Morphe API。"
 title = "还没有 API 密钥"
 
 [portal.infrastructure.apiKeys.error]
@@ -7468,7 +7468,7 @@ done = "完成"
 keyNameLabel = "密钥名称"
 keyNamePlaceholder = "例如：生产 · 摄取"
 secretKeyCaption = "密钥"
-secretWarning = "请将其存储在密钥管理器中。Stirling 只会存储哈希 — 之后无法恢复。"
+secretWarning = "请将其存储在密钥管理器中。Morphe 只会存储哈希 — 之后无法恢复。"
 subtitle = "将密钥的作用域限定为所需的最小范围。您可以随时轮换或撤销。"
 subtitleCreated = "立即复制此密钥 — 它不会再次显示。"
 title = "创建 API 密钥"
@@ -7509,7 +7509,7 @@ version = "版本"
 
 [portal.infrastructure.deployments.regions]
 heading = "区域"
-subheading = "每个已部署 Stirling 区域的实时健康状况 — 延迟、负载和发布版本。"
+subheading = "每个已部署 Morphe 区域的实时健康状况 — 延迟、负载和发布版本。"
 
 [portal.infrastructure.deployments.regions.empty]
 description = "工作区完成预配后，已部署区域会显示在此处。"
@@ -7590,16 +7590,16 @@ down = "停机"
 healthy = "健康"
 
 [portal.infrastructure.security.access.byok]
-description = "从您自己的 KMS 提供密钥。Stirling 使用它进行加密，但仍可读取。"
+description = "从您自己的 KMS 提供密钥。Morphe 使用它进行加密，但仍可读取。"
 label = "自带密钥 (BYOK)"
 
 [portal.infrastructure.security.access.hyok]
-description = "密钥永不离开您的 KMS。Stirling 只持有密文。"
+description = "密钥永不离开您的 KMS。Morphe 只持有密文。"
 label = "自持密钥 (HYOK)"
 
 [portal.infrastructure.security.access.stirling]
-description = "Stirling 管理加密密钥。最简单 — 您这边无需密钥运维。"
-label = "Stirling 持有的密钥"
+description = "Morphe 管理加密密钥。最简单 — 您这边无需密钥运维。"
+label = "Morphe 持有的密钥"
 
 [portal.infrastructure.security.accessPolicy]
 heading = "文档访问策略"
@@ -7613,15 +7613,15 @@ viewReport = "查看报告 →"
 
 [portal.infrastructure.security.compliance]
 heading = "合规"
-subheading = "覆盖 Stirling 平台的证明和认证。"
+subheading = "覆盖 Morphe 平台的证明和认证。"
 
 [portal.infrastructure.security.empty]
 description = "工作区的安全配置会显示在此处。"
 title = "安全态势不可用"
 
 [portal.infrastructure.security.hyokBanner]
-description = "使用 HYOK 时，加密密钥永不离开您的 KMS。Stirling 仅存储和处理密文，您可以随时撤销。"
-title = "Stirling 无法解密您的文档"
+description = "使用 HYOK 时，加密密钥永不离开您的 KMS。Morphe 仅存储和处理密文，您可以随时撤销。"
+title = "Morphe 无法解密您的文档"
 
 [portal.infrastructure.security.ipAllowlist]
 empty = "未配置 IP 范围 — 允许所有 IP。"
@@ -7650,7 +7650,7 @@ subheading = "用于加密静态文档的密钥托管 — 谁可以解密，以�
 
 [portal.infrastructure.security.managedBanner]
 description = "自带密钥 (BYOK) 和自持密钥 (HYOK) 托管在企业版中可用。升级后可从您自己的 KMS 提供密钥。"
-title = "在您的套餐中，密钥由 Stirling 管理"
+title = "在您的套餐中，密钥由 Morphe 管理"
 
 [portal.infrastructure.security.residency.apac]
 description = "ap-southeast-1"
@@ -7724,7 +7724,7 @@ connectionCount_one = "{{count}} 个连接"
 connectionCount_other = "{{count}} 个连接"
 customApi = "自定义 API"
 searchPlaceholder = "搜索集成"
-subtitle = "Stirling 可以通信的一切。凭据在此处创建一次，然后由源、策略和管道引用。"
+subtitle = "Morphe 可以通信的一切。凭据在此处创建一次，然后由源、策略和管道引用。"
 title = "集成"
 typedName = "{{tool}} 名称"
 
@@ -8405,7 +8405,7 @@ title = "暂无流"
 
 [portal.processorFlow.sources]
 comingSoonTag = "连接"
-editor = "Stirling PDF 编辑器"
+editor = "Morphe PDF 编辑器"
 heading = "源"
 perDay = "{{n}} / 24h"
 
@@ -8421,8 +8421,8 @@ title = "采购"
 [portal.procurement.agreement]
 agreeCta = "同意并订阅"
 confidential = "机密"
-confirm = "我已阅读并同意 Stirling Enterprise Agreement。"
-docName = "Stirling 企业协议"
+confirm = "我已阅读并同意 Morphe Enterprise Agreement。"
+docName = "Morphe 企业协议"
 docSub = "MSA、订单表、EULA 和 DPA，合并为一次签名。"
 download = "下载"
 downloadDraftError = "无法生成协议 PDF - 文档渲染器不可用。请稍后重试或联系支持。"
@@ -8458,7 +8458,7 @@ contactName = "联系人姓名"
 contactNamePlaceholder = "Jane Doe"
 continue = "继续"
 done = "完成"
-eula = "我已阅读并同意 Stirling Enterprise EULA。它管理由此报价生成的协议。"
+eula = "我已阅读并同意 Morphe Enterprise EULA。它管理由此报价生成的协议。"
 generate = "生成报价"
 indemnification = "IP 赔偿"
 indemnificationSub = "我们会根据 EULA 为符合条件的 IP 索赔提供抗辩"
@@ -8556,7 +8556,7 @@ eyebrowCompany = "{{company}} 企业版"
 inviteTeammates = "邀请队友"
 licenseKey = "许可证密钥"
 liveSub = "你的组织已预配，许可证已激活。"
-liveTitle = "你已在 Stirling Enterprise 上线"
+liveTitle = "你已在 Morphe Enterprise 上线"
 next = "下一步：{{stage}}"
 open = "打开采购"
 scheduleCall = "安排通话"
@@ -8591,7 +8591,7 @@ gatingAction = "接受你的报价"
 label = "报价"
 
 [portal.procurement.journeySteps.trial]
-blurb = "用你的文档和工作流评估 Stirling。"
+blurb = "用你的文档和工作流评估 Morphe。"
 gatingAction = "构建你的报价"
 label = "试用"
 
@@ -8608,14 +8608,14 @@ trialFileHint = "这是你的试用许可证文件。协议就位后，请回来
 
 [portal.procurement.link]
 cta = "关联账户"
-description = "采购基于你关联的 Stirling 账户运行：我们通过它配置试用、为报价定价并开始计费。关联账户即可开始。"
+description = "采购基于你关联的 Morphe 账户运行：我们通过它配置试用、为报价定价并开始计费。关联账户即可开始。"
 eyebrow = "Enterprise"
 title = "关联你的账户以开始"
 
 [portal.procurement.live]
 description = "你的订阅已激活，许可证已签发。你的团队已配置完成，计费已开始。"
 eyebrow = "已上线"
-title = "你已在 Stirling Enterprise 上线"
+title = "你已在 Morphe Enterprise 上线"
 
 [portal.procurement.milestone]
 downloadError = "暂时无法下载报价 PDF——请稍后重试。"
@@ -8650,11 +8650,11 @@ airgapSub = "封闭，无出站连接"
 back = "返回"
 businessName = "企业名称"
 businessNamePlaceholder = "Acme Corp"
-cloud = "Stirling Cloud"
+cloud = "Morphe Cloud"
 cloudSub = "托管，最快开始"
 continue = "继续"
 deployment = "应部署在哪里？"
-eula = "我同意 Stirling EULA 和商业条款。"
+eula = "我同意 Morphe EULA 和商业条款。"
 fullName = "全名"
 fullNamePlaceholder = "你的姓名"
 invites = "邀请队友 · 可选"
@@ -8685,7 +8685,7 @@ title = "Enterprise 试用"
 
 [portal.search]
 ariaLabel = "搜索"
-placeholder = "搜索 Stirling — 端点、流水线、文档…"
+placeholder = "搜索 Morphe — 端点、流水线、文档…"
 
 [portal.search.empty]
 noActionsDescription = "可用后，快捷操作将显示在这里。"
@@ -8702,7 +8702,7 @@ account-link = "账户关联"
 [portal.shell.sidebar]
 appEditor = "编辑器"
 appProcessor = "处理器"
-linkAccount = "关联 Stirling 账户"
+linkAccount = "关联 Morphe 账户"
 primaryNav = "主导航"
 switchApp = "切换应用"
 
@@ -8712,7 +8712,7 @@ openNav = "打开导航"
 search = "搜索"
 
 [portal.sources]
-subtitle = "可复用的输入连接，用于将文档送入 Stirling。配置一次连接，然后可在任意数量的策略中引用它。点击一行查看其配置以及使用它的策略。"
+subtitle = "可复用的输入连接，用于将文档送入 Morphe。配置一次连接，然后可在任意数量的策略中引用它。点击一行查看其配置以及使用它的策略。"
 title = "源"
 
 [portal.sources.actions]
@@ -8809,7 +8809,7 @@ description = "监视服务器上的目录以发现新文档。"
 label = "文件夹"
 
 [portal.sources.types.folder.fields.directory]
-helperText = "Stirling 监视并处理文件的绝对路径。"
+helperText = "Morphe 监视并处理文件的绝对路径。"
 label = "目录路径"
 placeholder = "/data/incoming"
 
@@ -8896,7 +8896,7 @@ secretNote = "签名密钥仅在创建 webhook 时显示一次。重新创建源
 copy = "复制"
 done = "完成"
 secret = "签名密钥"
-secretHelp = "使用此密钥（HMAC-SHA256）签署每次投递的原始正文，并将其作为 X-Stirling-Signature 标头发送。"
+secretHelp = "使用此密钥（HMAC-SHA256）签署每次投递的原始正文，并将其作为 X-Morphe-Signature 标头发送。"
 secretWarning = "立即复制签名密钥。为保障你的安全，它只显示一次，以后无法检索。"
 title = "Webhook 已创建"
 url = "投递 URL"
@@ -8912,7 +8912,7 @@ close = "关闭"
 
 [portal.usage]
 managePayment = "管理付款"
-subtitle = "在一个控制台中管理 Stirling 计费过的每个 PDF 的用量、发票和方案。"
+subtitle = "在一个控制台中管理 Morphe 计费过的每个 PDF 的用量、发票和方案。"
 title = "用量与账单"
 
 [portal.usage.error]
@@ -8922,7 +8922,7 @@ walletUnavailable = "钱包不可用：{{status}} {{statusText}}"
 
 [portal.usage.sessionExpired]
 action = "重新登录"
-body = "你的 Stirling 账户会话已过期。重新登录以查看账单——你的实例仍保持关联。"
+body = "你的 Morphe 账户会话已过期。重新登录以查看账单——你的实例仍保持关联。"
 title = "会话已过期"
 
 [portal.users]
@@ -9695,8 +9695,8 @@ hideTools = "隐藏不可用工具 ▴"
 messageNoFallback = "在服务器恢复联机之前，工具不可用。"
 messageWithFallback = "某些工具需要服务器连接。"
 showTools = "查看不可用工具 ▾"
-title = "无法访问您的 Stirling-PDF 服务器"
-toolNotAvailableLocally = "您的 Stirling-PDF 服务器处于离线状态，且本地后端不提供 \"{{endpoint}}\"。"
+title = "无法访问您的 Morphe PDF 服务器"
+toolNotAvailableLocally = "您的 Morphe PDF 服务器处于离线状态，且本地后端不提供 \"{{endpoint}}\"。"
 
 [session]
 expired = "您的会话已过期。请刷新页面并重试。"
@@ -9732,7 +9732,7 @@ user = "登录身份"
 
 [settings.connection.mode]
 local = "仅本地"
-saas = "Stirling Cloud"
+saas = "Morphe Cloud"
 selfhosted = "自托管"
 
 [settings.developer]
@@ -9747,11 +9747,11 @@ autoUnzipFileLimitDescription = "从 ZIP 中提取的最大文件数"
 autoUnzipFileLimitTooltip = "仅当 ZIP 包含不超过此数量的文件时才解压。调高以提取更大的 ZIP。"
 autoUnzipTooltip = "自动解压 API 操作返回的 ZIP 文件。禁用以保持 ZIP 文件不变。这不会影响自动化工作流。"
 defaultPdfEditor = "默认 PDF 编辑器"
-defaultPdfEditorActive = "Stirling PDF 是您的默认 PDF 编辑器"
+defaultPdfEditorActive = "Morphe PDF 是您的默认 PDF 编辑器"
 defaultPdfEditorChecking = "正在检查..."
 defaultPdfEditorInactive = "其他应用被设为默认"
 defaultPdfEditorRemind = "提醒我设置为默认"
-defaultPdfEditorRemindDescription = "当 Stirling PDF 不是你的默认 PDF 应用程序时显示横幅。"
+defaultPdfEditorRemindDescription = "当 Morphe PDF 不是你的默认 PDF 应用程序时显示横幅。"
 defaultPdfEditorSet = "已为默认"
 defaultStartupView = "启动时的默认视图"
 defaultStartupViewDescription = "选择应用启动时左侧栏中激活的选项卡"
@@ -9795,7 +9795,7 @@ learnMore = "在文档中了解更多"
 title = "面向系统管理员"
 
 [settings.general.loginLanding]
-description = "选择登录 Stirling Cloud 后打开的应用。"
+description = "选择登录 Morphe Cloud 后打开的应用。"
 editor = "编辑器"
 processor = "处理器"
 title = "登录后"
@@ -9825,7 +9825,7 @@ updateBehavior = "更新行为"
 updateBehaviorDescription = "选择在安装更新前是否提示、自动安装，或完全跳过更新检查。"
 updateBehaviorError = "无法更改更新行为"
 updateBehaviorErrorLocked = "此设置已被管理员锁定。"
-updateBehaviorLockedDescription = "您的管理员已配置此计算机上 Stirling-PDF 的更新处理方式。请联系他们进行更改。"
+updateBehaviorLockedDescription = "您的管理员已配置此计算机上 Morphe PDF 的更新处理方式。请联系他们进行更改。"
 updateBehaviorSaved = "已保存更新行为。"
 versionMismatch = "Warning: A mismatch has been detected between the client version and the AppConfig version. Using different versions can lead to compatibility issues, errors, and security risks. Please ensure that server and client are using the same version."
 viewDetails = "查看详情"
@@ -9909,7 +9909,7 @@ usageAnalytics = "使用分析"
 [settings.planBilling]
 currentPlan = "当前方案"
 loading = "正在加载账单信息..."
-notAvailable = "连接 Stirling Cloud（SaaS 模式）后才可使用“方案与账单”。"
+notAvailable = "连接 Morphe Cloud（SaaS 模式）后才可使用“方案与账单”。"
 title = "方案与账单"
 
 [settings.planBilling.billing]
@@ -10040,7 +10040,7 @@ emptyUsername = "请输入用户名"
 oauthFailed = "OAuth 登录失败。请重试。"
 
 [setup.saas]
-title = "登录 Stirling"
+title = "登录 Morphe"
 
 [setup.selfhosted]
 changeServerLocked = "您的组织已将此应用限制为连接到特定服务器"
@@ -10078,7 +10078,7 @@ step3 = "重启服务器"
 title = "未启用登录"
 
 [setup.server.url]
-description = "输入您自托管 Stirling PDF 服务器的完整 URL"
+description = "输入您自托管 Morphe PDF 服务器的完整 URL"
 label = "服务器 URL"
 
 [sharedSign]
@@ -10314,7 +10314,7 @@ pleaseFillAllFields = "请填写所有字段"
 signUp = "注册"
 signUpWith = "Sign up with"
 skip = "Skip"
-subtitle = "加入 Stirling PDF 开始使用"
+subtitle = "加入 Morphe PDF 开始使用"
 title = "创建账户"
 unexpectedError = "意外错误：{{message}}"
 
@@ -10541,7 +10541,7 @@ download = "下载"
 downloaded = "已下载"
 downloadFailed = "无法下载此文件。"
 downloadsCount = "下载次数：{{count}}"
-emailWarningBody = "这看起来像是一个电子邮件地址。若此人尚未成为 Stirling PDF 用户，则无法访问该文件。"
+emailWarningBody = "这看起来像是一个电子邮件地址。若此人尚未成为 Morphe PDF 用户，则无法访问该文件。"
 emailWarningConfirm = "仍要共享"
 emailWarningTitle = "电子邮件地址"
 errorTitle = "共享失败"
@@ -10572,7 +10572,7 @@ manageTitle = "管理共享"
 noActivity = "尚无活动。"
 noLinks = "尚无活动的共享链接。"
 noSharedUsers = "尚无用户具有访问权限。"
-openInApp = "在 Stirling PDF 中打开"
+openInApp = "在 Morphe PDF 中打开"
 ownerLabel = "所有者"
 ownerUnknown = "未知"
 removeLink = "移除链接"
@@ -10626,7 +10626,7 @@ updateButton = "在服务器上更新"
 uploadButton = "上传到服务器"
 
 [survey]
-title = "Stirling-PDF Survey"
+title = "Morphe PDF Survey"
 
 [swagger]
 clickHere = "点击这里"
@@ -10785,7 +10785,7 @@ favorites = "收藏"
 heading = "所有工具（全屏视图）"
 noResults = "尝试调整搜索或切换描述显示以找到所需内容。"
 recommended = "推荐"
-selfHostedOffline = "需要您的 Stirling-PDF 服务器（当前离线）："
+selfHostedOffline = "需要您的 Morphe PDF 服务器（当前离线）："
 showDetails = "显示详情"
 unavailable = "由服务器管理员禁用："
 unavailableDependency = "不可用 - 服务器缺少所需工具："
@@ -10794,7 +10794,7 @@ unfavorite = "从收藏中移除"
 [toolPanel.modePrompt]
 chooseFullscreen = "使用全屏模式"
 chooseSidebar = "使用侧边栏模式"
-description = "预览两种布局并决定如何探索 Stirling PDF 工具。"
+description = "预览两种布局并决定如何探索 Morphe PDF 工具。"
 dismiss = "稍后再说"
 fullscreenDescription = "在覆盖工作区的目录中浏览每个工具，直到您选定一个。"
 fullscreenTitle = "全屏模式 -（旧版）"
@@ -10857,7 +10857,7 @@ loadingDetailedInfo = "正在加载详细信息..."
 migrationGuide = "迁移指南"
 migrationGuides = "迁移指南"
 migrationGuidesDesc = "在更新前查看重要变更。"
-modalSubtitle = "新版 Stirling PDF 已准备好安装。"
+modalSubtitle = "新版 Morphe PDF 已准备好安装。"
 modalTitle = "有可用更新"
 notes = "说明"
 releaseNotes = "发行说明"
@@ -10881,7 +10881,7 @@ urgent = "紧急"
 attentionBody = "您的管理员需要登录以查看更多信息。请立即联系他们。"
 attentionBodyAdmin = "审核许可要求以保持此服务器合规。"
 attentionTitle = "此服务器需要管理员关注"
-message = "充分利用 Stirling PDF，享受无限用户与高级功能"
+message = "充分利用 Morphe PDF，享受无限用户与高级功能"
 seeInfo = "查看信息"
 title = "升级到服务器方案"
 upgradeButton = "立即升级"
@@ -11016,7 +11016,7 @@ authWeb = "密码"
 create = "创建账户"
 createSubtitle = "使用密码或 SSO 创建自托管账户。"
 createTitle = "创建账户"
-editorDesc = "在 Stirling PDF Editor 中编辑 PDFs。每个人都会获得此权限。"
+editorDesc = "在 Morphe PDF Editor 中编辑 PDFs。每个人都会获得此权限。"
 email = "Email 地址"
 emailError = "请输入有效的 email 地址"
 emailPlaceholder2 = "name@company.com"
@@ -11031,7 +11031,7 @@ processorDeferred = "邀请已发送，但暂时无法授予 Processor 访问权
 processorDesc = "治理界面、运行流水线、代理和 API。"
 role = "角色"
 send2 = "发送邀请"
-subtitle2 = "他们将收到一封电子邮件，用于加入你的 Stirling 工作区。"
+subtitle2 = "他们将收到一封电子邮件，用于加入你的 Morphe 工作区。"
 team = "团队"
 title = "邀请成员"
 username = "用户名"
@@ -11164,7 +11164,7 @@ downloads = "下载"
 entryLabel = "签名摘要"
 filesEvaluated_one = "已评估 {{count}} 个文件"
 filesEvaluated_other = "已评估 {{count}} 个文件"
-footer = "通过 Stirling PDF 验证"
+footer = "通过 Morphe PDF 验证"
 generatedAt = "生成时间"
 noPdf = "成功验证后将提供 PDF 报告。"
 page = "页"

@@ -10,12 +10,10 @@ test.describe("1. Authentication and Login", () => {
       await page.goto("/editor");
       await expect(page).toHaveURL(/\/login/);
 
-      // Step 2: Confirm the login page displays the Stirling PDF logo
+      // Step 2: Confirm the login page displays the Morphe PDF logo
       await expect(
         page
-          .locator(
-            'img[alt*="Stirling"], img[src*="stirling"], img[src*="logo"]',
-          )
+          .locator('img[alt*="Morphe"], img[src*="stirling"], img[src*="logo"]')
           .first(),
       ).toBeVisible();
 

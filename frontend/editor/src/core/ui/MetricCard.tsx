@@ -34,7 +34,7 @@ function formatDelta(delta: number) {
 }
 
 /**
- * Stirling's standard KPI card. Used on Home, Sources, Documents, Audit and
+ * Morphe's standard KPI card. Used on Home, Sources, Documents, Audit and
  * every Infrastructure tab — the prototype calls these the metric strip.
  */
 export function MetricCard({

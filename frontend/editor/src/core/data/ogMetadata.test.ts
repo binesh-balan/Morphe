@@ -15,7 +15,7 @@ const TEMPLATE = `<!doctype html>
 <html lang="en-US">
   <head>
     <base href="./" />
-    <title>Stirling PDF</title>
+    <title>Morphe PDF</title>
     <meta
       name="description"
       content="The Free Adobe Acrobat alternative (10M+ Downloads)"
@@ -55,13 +55,13 @@ describe("getToolOgImage (client resolver)", () => {
 describe("injectOg (build-time prerender)", () => {
   const entry = {
     image: "/og_images/compress.png",
-    title: "Compress - Stirling PDF",
+    title: "Compress - Morphe PDF",
     description: "Compress PDFs to reduce their file size.",
   };
 
   it("replaces title + description and injects exactly one of each", () => {
     const out = injectOg(TEMPLATE, entry, {});
-    expect(out).toContain("<title>Compress - Stirling PDF</title>");
+    expect(out).toContain("<title>Compress - Morphe PDF</title>");
     expect(out).toContain(
       '<meta name="description" content="Compress PDFs to reduce their file size." />',
     );
@@ -108,14 +108,14 @@ describe("injectOg (build-time prerender)", () => {
       TEMPLATE,
       {
         image: "/og_images/saas/app.png",
-        title: "Stirling - Edit any PDF. Govern every PDF.",
+        title: "Morphe - Edit any PDF. Govern every PDF.",
         ogTitle: "Edit any PDF. Govern every PDF.",
         description: "d",
       },
       {},
     );
     expect(out).toContain(
-      "<title>Stirling - Edit any PDF. Govern every PDF.</title>",
+      "<title>Morphe - Edit any PDF. Govern every PDF.</title>",
     );
     expect(out).toContain(
       '<meta property="og:title" content="Edit any PDF. Govern every PDF." />',
@@ -133,18 +133,18 @@ describe("prerenderOg (flat + nested route files)", () => {
     const manifest = {
       default: {
         image: "/og_images/home.png",
-        title: "Stirling PDF",
+        title: "Morphe PDF",
         description: "d",
       },
       byTool: {
         compress: {
           image: "/og_images/compress.png",
-          title: "Compress - Stirling PDF",
+          title: "Compress - Morphe PDF",
           description: "c",
         },
         "/settings/people": {
           image: "/og_images/home.png",
-          title: "People Settings - Stirling PDF",
+          title: "People Settings - Morphe PDF",
           description: "p",
         },
       },
@@ -172,7 +172,7 @@ describe("prerenderOg (flat + nested route files)", () => {
       path.join(dir, "settings", "people.html"),
       "utf8",
     );
-    expect(nested).toContain("<title>People Settings - Stirling PDF</title>");
+    expect(nested).toContain("<title>People Settings - Morphe PDF</title>");
     expect(nested).toContain('<base href="/"'); // nested base rewritten to absolute
 
     await fs.rm(dir, { recursive: true, force: true });

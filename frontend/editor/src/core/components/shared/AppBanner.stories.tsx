@@ -24,7 +24,7 @@ export const Promo: Story = {
     icon: "stars-rounded",
     title: "Upgrade to Server Plan",
     message:
-      "Get the most out of Stirling PDF with unlimited users and advanced features.",
+      "Get the most out of Morphe PDF with unlimited users and advanced features.",
     buttonText: "Upgrade Now",
     buttonIcon: "upgrade-rounded",
     onButtonClick: () => {},
@@ -69,8 +69,7 @@ export const Compact: Story = {
 export const MessageOnly: Story = {
   args: {
     icon: "picture-as-pdf-rounded",
-    message:
-      "Make Stirling PDF your default application for opening PDF files.",
+    message: "Make Morphe PDF your default application for opening PDF files.",
     buttonText: "Set Default",
     onButtonClick: () => {},
     secondaryButtonText: "Don't remind me again",
@@ -122,7 +121,7 @@ export const AllTopBars: StoryObj = {
           compact
           icon="stars-rounded"
           title="Upgrade to Server Plan"
-          message="Get the most out of Stirling PDF with unlimited users and advanced features."
+          message="Get the most out of Morphe PDF with unlimited users and advanced features."
           buttonText="Upgrade Now"
           buttonIcon="upgrade-rounded"
           onButtonClick={() => {}}
@@ -170,7 +169,7 @@ export const AllTopBars: StoryObj = {
       <Row caption="Set as default app · DefaultAppBanner (desktop)">
         <AppBanner
           icon="picture-as-pdf-rounded"
-          message="Make Stirling PDF your default application for opening PDF files."
+          message="Make Morphe PDF your default application for opening PDF files."
           buttonText="Set Default"
           onButtonClick={() => {}}
           secondaryButtonText="Don't remind me again"

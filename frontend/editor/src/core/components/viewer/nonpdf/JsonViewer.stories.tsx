@@ -20,7 +20,7 @@ export const Default: Story = {
       "config.json",
       JSON.stringify(
         {
-          name: "Stirling PDF",
+          name: "Morphe PDF",
           version: "2.0.0",
           features: ["merge", "split", "compress"],
           settings: { theme: "dark", locale: "en-US" },

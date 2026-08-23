@@ -1,9 +1,9 @@
-# Example Docker Compose for Unified Stirling-PDF Container
+# Example Docker Compose for Unified Morphe PDF Container
 # MODE=BACKEND: Backend API only (no frontend)
 
 services:
   stirling-pdf-backend-only:
-    container_name: Stirling-PDF-Backend-Only
+    container_name: Morphe-PDF-Backend-Only
     build:
       context: ../..
       dockerfile: docker/Dockerfile.unified
@@ -19,7 +19,7 @@ services:
       # MODE parameter: BACKEND only
       MODE: BACKEND
 
-      # Standard Stirling-PDF configuration
+      # Standard Morphe PDF configuration
       DISABLE_ADDITIONAL_FEATURES: "false"
       DOCKER_ENABLE_SECURITY: "false"
       PUID: 1000
@@ -28,7 +28,7 @@ services:
 
       # Application settings
       SYSTEM_DEFAULTLOCALE: en-US
-      UI_APPNAME: Stirling-PDF
+      UI_APPNAME: Morphe PDF
       SYSTEM_MAXFILESIZE: "100"
       METRICS_ENABLED: "true"
 

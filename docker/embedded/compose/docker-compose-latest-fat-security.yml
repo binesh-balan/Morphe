@@ -1,6 +1,6 @@
 services:
   stirling-pdf:
-    container_name: Stirling-PDF-Security-Fat
+    container_name: Morphe-PDF-Security-Fat
     image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:fat
     build:
       context: ../../../
@@ -30,9 +30,9 @@ services:
       PGID: 1002
       UMASK: "022"
       SYSTEM_DEFAULTLOCALE: en-US
-      UI_APPNAME: Stirling-PDF
-      UI_HOMEDESCRIPTION: Demo site for Stirling-PDF Latest-fat with Security
-      UI_APPNAMENAVBAR: Stirling-PDF Latest-fat
+      UI_APPNAME: Morphe PDF
+      UI_HOMEDESCRIPTION: Demo site for Morphe PDF Latest-fat with Security
+      UI_APPNAMENAVBAR: Morphe PDF Latest-fat
       SYSTEM_MAXFILESIZE: "100"
       METRICS_ENABLED: "true"
       SYSTEM_GOOGLEVISIBILITY: "true"

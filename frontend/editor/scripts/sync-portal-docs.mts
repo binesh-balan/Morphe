@@ -1,5 +1,5 @@
 /**
- * Sync the portal Developer Docs from the Stirling docs repo.
+ * Sync the portal Developer Docs from the Morphe docs repo.
  *
  * Fetches the docs repo tarball, extracts `docs/**` in-process (no external tar
  * binary, no per-file GitHub rate limits), shapes it with the pure transforms in

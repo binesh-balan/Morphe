@@ -58,7 +58,7 @@ class SpringDocConfigTest {
 
             OpenAPI openApi = applyCustomizers(api);
 
-            assertThat(openApi.getInfo().getTitle()).isEqualTo("Stirling PDF - Processing API");
+            assertThat(openApi.getInfo().getTitle()).isEqualTo("Morphe PDF - Processing API");
             assertThat(openApi.getInfo().getDescription()).contains("PDF");
         }
     }
@@ -85,7 +85,7 @@ class SpringDocConfigTest {
 
             OpenAPI openApi = applyCustomizers(api);
 
-            assertThat(openApi.getInfo().getTitle()).isEqualTo("Stirling PDF - Management API");
+            assertThat(openApi.getInfo().getTitle()).isEqualTo("Morphe PDF - Management API");
             assertThat(openApi.getInfo().getDescription()).isNotBlank();
         }
     }
@@ -112,7 +112,7 @@ class SpringDocConfigTest {
 
             OpenAPI openApi = applyCustomizers(api);
 
-            assertThat(openApi.getInfo().getTitle()).isEqualTo("Stirling PDF - System API");
+            assertThat(openApi.getInfo().getTitle()).isEqualTo("Morphe PDF - System API");
             assertThat(openApi.getInfo().getDescription()).isNotBlank();
         }
     }

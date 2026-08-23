@@ -11,7 +11,7 @@ import "@app/components/onboarding/OnboardingTour.css";
 const SAMPLE_STEPS: StepType[] = [
   {
     selector: "body",
-    content: "Welcome to Stirling PDF! Let's take a quick look around.",
+    content: "Welcome to Morphe PDF! Let's take a quick look around.",
   },
   {
     selector: "body",

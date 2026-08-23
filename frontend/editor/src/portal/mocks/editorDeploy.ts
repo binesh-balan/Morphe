@@ -1,7 +1,7 @@
 /**
  * Editor deployment fixtures and the types api/editorDeploy.ts shares with them.
  *
- * This surface manages the org's deployment of the Stirling PDF *Editor* product
+ * This surface manages the org's deployment of the Morphe PDF *Editor* product
  * from the portal — where it runs (Managed Cloud / Docker / Kubernetes), how
  * self-hosted instances pair back to the org, the health of each running
  * instance, and the service credential / offline-activation lifecycle.

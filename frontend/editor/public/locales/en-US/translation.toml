@@ -727,7 +727,7 @@ description = "Number of most-relevant chunks retrieved per search."
 label = "Top K"
 
 [admin.settings.ai.general]
-description = "Connect Stirling to the Python AI engine and choose which AI capabilities are exposed. Changes apply on restart."
+description = "Connect Morphe to the Python AI engine and choose which AI capabilities are exposed. Changes apply on restart."
 title = "AI Engine"
 
 [admin.settings.ai.general.capabilities]
@@ -1075,11 +1075,11 @@ description = "Configure optional features and functionality."
 title = "Features"
 
 [admin.settings.features.serverCertificate]
-description = "Configure server-side certificate generation for \"Sign with Stirling-PDF\" functionality"
+description = "Configure server-side certificate generation for \"Sign with Morphe PDF\" functionality"
 label = "Server Certificate"
 
 [admin.settings.features.serverCertificate.enabled]
-description = "Enable server-side certificate for \"Sign with Stirling-PDF\" option"
+description = "Enable server-side certificate for \"Sign with Morphe PDF\" option"
 label = "Enable Server Certificate"
 
 [admin.settings.features.serverCertificate.organizationName]
@@ -1096,11 +1096,11 @@ label = "Certificate Validity (days)"
 
 [admin.settings.folderAccess]
 description = "Directories that folder sources and folder outputs are allowed to read from and write to. This is a security boundary: automations can never be pointed at a server path outside this list."
-securityNote = "Leave this empty to disable folder sources and outputs entirely. Stirling's own configuration directory is always off-limits."
+securityNote = "Leave this empty to disable folder sources and outputs entirely. Morphe's own configuration directory is always off-limits."
 title = "Folder Access"
 
 [admin.settings.folderAccess.implied]
-description = "These Stirling-managed directories are always permitted and can't be changed here."
+description = "These Morphe-managed directories are always permitted and can't be changed here."
 serverStorage = "Server file storage"
 title = "Always allowed"
 watchedFolder = "Pipeline watched folder"
@@ -1246,7 +1246,7 @@ description = "URL or filename to cookie policy"
 label = "Cookie Policy"
 
 [admin.settings.legal.disclaimer]
-message = "By customizing these legal documents, you assume full responsibility for ensuring compliance with all applicable laws and regulations, including but not limited to GDPR and other EU data protection requirements. Only modify these settings if: (1) you are operating a personal/private instance, (2) you are outside EU jurisdiction and understand your local legal obligations, or (3) you have obtained proper legal counsel and accept sole responsibility for all user data and legal compliance. Stirling-PDF and its developers assume no liability for your legal obligations."
+message = "By customizing these legal documents, you assume full responsibility for ensuring compliance with all applicable laws and regulations, including but not limited to GDPR and other EU data protection requirements. Only modify these settings if: (1) you are operating a personal/private instance, (2) you are outside EU jurisdiction and understand your local legal obligations, or (3) you have obtained proper legal counsel and accept sole responsibility for all user data and legal compliance. Morphe PDF and its developers assume no liability for your legal obligations."
 title = "Legal Responsibility Warning"
 
 [admin.settings.legal.impressum]
@@ -1333,8 +1333,8 @@ description = "Username for SMTP authentication"
 label = "SMTP Username"
 
 [admin.settings.mcp]
-apikeyNote = "Clients send a Stirling API key in the X-API-KEY header (or Authorization: Bearer <key>). The key maps to its owning Stirling user - only provisioned accounts get in, and actions are audited as that user. Manage keys under Account > API Keys."
-description = "Expose Stirling's PDF tools and AI agents to MCP clients over an OAuth-protected endpoint."
+apikeyNote = "Clients send a Morphe API key in the X-API-KEY header (or Authorization: Bearer <key>). The key maps to its owning Morphe user - only provisioned accounts get in, and actions are audited as that user. Manage keys under Account > API Keys."
+description = "Expose Morphe's PDF tools and AI agents to MCP clients over an OAuth-protected endpoint."
 title = "MCP Server"
 
 [admin.settings.mcp.acceptedAudiences]
@@ -1364,7 +1364,7 @@ step3ApiKeyb = "header (or Authorization: Bearer <key>). No OAuth or metadata di
 step4 = "Approve the sign-in; the client retries with a token. Tools appear grouped: convert, pages, misc, security, ai."
 step4ApiKey = "Tools appear grouped: convert, pages, misc, security, ai - and every call is audited as the key's owner."
 tip = "Tip: register the resource ID as an allowed audience in your IdP. Tested with MCP Inspector and Claude Desktop."
-tipApiKey = "Tip: API-key mode needs no external IdP - simplest for self-host. The key maps to its owning Stirling user."
+tipApiKey = "Tip: API-key mode needs no external IdP - simplest for self-host. The key maps to its owning Morphe user."
 title = "Connect an MCP client"
 
 [admin.settings.mcp.issuerUri]
@@ -1377,12 +1377,12 @@ label = "JWKS URL (optional)"
 placeholder = "Auto-discovered from issuer"
 
 [admin.settings.mcp.mode]
-description = "OAuth needs an external IdP. API key uses a Stirling per-user API key (X-API-KEY) - simplest for self-host."
+description = "OAuth needs an external IdP. API key uses a Morphe per-user API key (X-API-KEY) - simplest for self-host."
 label = "Authentication mode"
 
 [admin.settings.mcp.requireAccount]
-description = "Only let tokens through if their subject maps to a provisioned, enabled Stirling user."
-label = "Require an existing Stirling account"
+description = "Only let tokens through if their subject maps to a provisioned, enabled Morphe user."
+label = "Require an existing Morphe account"
 
 [admin.settings.mcp.resourceId]
 description = "This server's public /mcp URL. Tokens must list it in their audience (RFC 8707) or they are rejected."
@@ -1393,7 +1393,7 @@ description = "Require mcp.tools.read for read ops and mcp.tools.write for write
 label = "Enforce OAuth scopes"
 
 [admin.settings.mcp.usernameClaim]
-description = "JWT claim matched against a Stirling username (e.g. sub, email, preferred_username)."
+description = "JWT claim matched against a Morphe username (e.g. sub, email, preferred_username)."
 label = "Username claim"
 
 [admin.settings.plan.noData]
@@ -1714,7 +1714,7 @@ description = "When enabled, only listed user IDs can use the bot."
 label = "Allow Specific User IDs"
 
 [admin.settings.telegram.enabled]
-description = "Allow users to interact with Stirling PDF through your configured Telegram bot."
+description = "Allow users to interact with Morphe PDF through your configured Telegram bot."
 label = "Enable Telegram Bot"
 
 [admin.settings.telegram.feedback]
@@ -1787,20 +1787,20 @@ settingsOverview = "This is the <strong>Settings Panel</strong>. Admin settings 
 systemCustomization = "We have extensive ways to customize the UI: <strong>System Settings</strong> let you change the app name and languages, <strong>Features</strong> allows server certificate management, and <strong>Endpoints</strong> lets you enable or disable specific tools for your users."
 teamsAndUsers = "Manage <strong>Teams</strong> and individual users here. You can invite new users via email, shareable links, or create custom accounts for them yourself."
 welcome = "Welcome to the <strong>Admin Tour</strong>! Let's explore the powerful enterprise features and settings available to system administrators."
-wrapUp = "That's the admin tour! You've seen the enterprise features that make Stirling PDF a powerful, customizable solution for organizations. You can replay it anytime - just open <strong>Settings</strong> and find it here in the <strong>Tours</strong> section under Help."
+wrapUp = "That's the admin tour! You've seen the enterprise features that make Morphe PDF a powerful, customizable solution for organizations. You can replay it anytime - just open <strong>Settings</strong> and find it here in the <strong>Tours</strong> section under Help."
 
 [adminUserSettings]
 admin = "Admin"
 title = "User Control Settings"
 
 [agents]
-stirling_name = "Stirling"
+stirling_name = "Morphe"
 
 [analytics]
 learnMore = "Learn more about our analytics"
-paragraph1 = "Stirling PDF has opt-in analytics to help us improve the product. We do not track any personal information or file contents."
-paragraph2 = "Please consider enabling analytics to help Stirling-PDF grow and to allow us to understand our users better."
-title = "Do you want to help make Stirling PDF better?"
+paragraph1 = "Morphe PDF has opt-in analytics to help us improve the product. We do not track any personal information or file contents."
+paragraph2 = "Please consider enabling analytics to help Morphe PDF grow and to allow us to understand our users better."
+title = "Do you want to help make Morphe PDF better?"
 
 [annotate]
 tags = "annotate,highlight,draw,markup,comment,notes,review,redline,feedback,markup tools,sticky notes,shapes,arrows,text box,freehand"
@@ -2941,10 +2941,10 @@ text = "Ask a question about your documents or get help with PDF tools."
 
 [chat.fab]
 close = "Close chat"
-open = "Open Stirling AI assistant"
+open = "Open Morphe AI assistant"
 
 [chat.header]
-agentMenu = "Stirling agent options"
+agentMenu = "Morphe agent options"
 assistant = "AI Assistant"
 clearChat = "Clear chat"
 
@@ -3284,14 +3284,14 @@ upgradeButton = "Upgrade Account"
 
 [config.apiKeys]
 copyKeyAriaLabel = "Copy API key"
-description = "Your API key for accessing Stirling's suite of PDF tools. Copy it to your project or refresh to generate a new one."
-docsDescription = "Learn more about integrating with Stirling PDF:"
+description = "Your API key for accessing Morphe's suite of PDF tools. Copy it to your project or refresh to generate a new one."
+docsDescription = "Learn more about integrating with Morphe PDF:"
 docsLink = "API Documentation"
 docsTitle = "API Documentation"
 generateError = "We couldn't generate your API key."
 goToAccount = "Go to Account"
 guestInfo = "Guest users do not receive API keys. Create an account to get an API key you can use in your applications."
-intro = "Use your API key to programmatically access Stirling PDF's processing capabilities."
+intro = "Use your API key to programmatically access Morphe PDF's processing capabilities."
 label = "API Key"
 publicKeyAriaLabel = "Public API key"
 refreshAriaLabel = "Refresh API key"
@@ -3315,10 +3315,10 @@ title = "Refresh API Keys"
 warning = "⚠️ Warning: This action will generate new API keys and make your previous keys invalid."
 
 [config.mcp]
-description = "Model Context Protocol (MCP) lets AI assistants like Claude use your Stirling PDF tools directly. Connect a client once and your assistant can convert, edit, secure and process documents on your behalf."
-guestInfo = "Guest users can't connect MCP clients. Create an account to use the MCP server and let your AI assistant run Stirling PDF tools on your behalf."
+description = "Model Context Protocol (MCP) lets AI assistants like Claude use your Morphe PDF tools directly. Connect a client once and your assistant can convert, edit, secure and process documents on your behalf."
+guestInfo = "Guest users can't connect MCP clients. Create an account to use the MCP server and let your AI assistant run Morphe PDF tools on your behalf."
 navLabel = "MCP Server"
-tip = "Every action your assistant runs is performed as your account and counts toward your usage, just like using Stirling PDF directly."
+tip = "Every action your assistant runs is performed as your account and counts toward your usage, just like using Morphe PDF directly."
 title = "MCP Server"
 viewApiKeys = "View API keys"
 
@@ -3335,7 +3335,7 @@ label = "Your MCP endpoint"
 
 [config.mcp.setup]
 addTo = "Add to"
-hint = "Pick your client, paste the snippet into the file shown, then restart it. You'll sign in with your Stirling account on first use - no keys to copy."
+hint = "Pick your client, paste the snippet into the file shown, then restart it. You'll sign in with your Morphe account on first use - no keys to copy."
 title = "Connect your AI assistant"
 
 [config.overview]
@@ -3444,7 +3444,7 @@ showPreferencesBtn = "Manage preferences"
 title = "How we use Cookies"
 
 [cookieBanner.popUp.description]
-1 = "We use cookies and other technologies to make Stirling PDF work better for you-helping us improve our tools and keep building features you'll love."
+1 = "We use cookies and other technologies to make Morphe PDF work better for you-helping us improve our tools and keep building features you'll love."
 2 = "If you'd rather not, clicking 'No Thanks' will only enable the essential cookies needed to keep things running smoothly."
 
 [cookieBanner.preferencesModal]
@@ -3457,12 +3457,12 @@ subtitle = "Cookie Usage"
 title = "Consent Preferences Center"
 
 [cookieBanner.preferencesModal.analytics]
-description = "These cookies help us understand how our tools are being used, so we can focus on building the features our community values most. Rest assured-Stirling PDF cannot and will never track the content of the documents you work with."
+description = "These cookies help us understand how our tools are being used, so we can focus on building the features our community values most. Rest assured-Morphe PDF cannot and will never track the content of the documents you work with."
 title = "Analytics"
 
 [cookieBanner.preferencesModal.description]
-1 = "Stirling PDF uses cookies and similar technologies to enhance your experience and understand how our tools are used. This helps us improve performance, develop the features you care about, and provide ongoing support to our users."
-2 = "Stirling PDF cannot-and will never-track or access the content of the documents you use."
+1 = "Morphe PDF uses cookies and similar technologies to enhance your experience and understand how our tools are used. This helps us improve performance, develop the features you care about, and provide ongoing support to our users."
+2 = "Morphe PDF cannot-and will never-track or access the content of the documents you use."
 3 = "Your privacy and trust are at the core of what we do."
 
 [cookieBanner.preferencesModal.necessary]
@@ -3541,14 +3541,14 @@ title = "Error"
 
 [defaultApp.prompt]
 dontRemind = "Don't remind me again"
-message = "Make Stirling PDF your default application for opening PDF files."
+message = "Make Morphe PDF your default application for opening PDF files."
 
 [defaultApp.settingsOpened]
-message = "In Windows Settings, search for 'PDF' and select Stirling PDF as your default app"
+message = "In Windows Settings, search for 'PDF' and select Morphe PDF as your default app"
 title = "Settings Opened"
 
 [defaultApp.success]
-message = "Stirling PDF is now your default PDF editor"
+message = "Morphe PDF is now your default PDF editor"
 title = "Default App Set"
 
 [desktopUpdate]
@@ -3564,7 +3564,7 @@ updateFailedMessage = "Failed to download or install the update."
 
 [desktopUpdate.blocked]
 docsLink = "View installation documentation"
-message = "Stirling-PDF does not have permission to update itself on this machine."
+message = "Morphe PDF does not have permission to update itself on this machine."
 title = "Administrator permissions required"
 
 [devAirgapped]
@@ -4146,7 +4146,7 @@ title = "Move to folder"
 [filesPage.origin]
 all = "All sources"
 cloud = "Cloud"
-cloudHint = "Stored on the Stirling server"
+cloudHint = "Stored on the Morphe server"
 local = "Local"
 localHint = "Only stored in this browser"
 shared = "Shared"
@@ -4428,7 +4428,7 @@ invisible = "Invisible (metadata only)"
 location = "Location:"
 logo = "Logo:"
 logoHidden = "No logo"
-logoShown = "Stirling PDF logo shown"
+logoShown = "Morphe PDF logo shown"
 participantCount_one = "{{count}} participant will sign in order"
 participantCount_other = "{{count}} participants will sign in order"
 participants = "Participants"
@@ -4482,7 +4482,7 @@ title = "Sequential Signing"
 dismiss = "Dismiss banner"
 message = "Create a free account to save your work, access more features, and support the project."
 signUp = "Sign Up Free"
-title = "You're using Stirling PDF as a guest!"
+title = "You're using Morphe PDF as a guest!"
 
 [home.addAttachments]
 desc = "Add or remove embedded files (attachments) to/from a PDF"
@@ -4646,7 +4646,7 @@ tags = "combine,join,unite,merge,merge PDFs,combine PDFs,join PDFs,concatenate,a
 title = "Merge"
 
 [home.mobile]
-brandAlt = "Stirling PDF logo"
+brandAlt = "Morphe PDF logo"
 openFiles = "Open files"
 swipeHint = "Swipe left or right to switch views"
 tools = "Tools"
@@ -4868,7 +4868,7 @@ passwordRequired = "Password is required"
 signIn = "Sign in"
 validating = "Validating invitation..."
 validationError = "Failed to validate invitation link"
-welcome = "Welcome to Stirling PDF"
+welcome = "Welcome to Morphe PDF"
 welcomeSubtitle = "Complete your account setup to get started"
 welcomeTitle = "You've been invited!"
 
@@ -4894,7 +4894,7 @@ terms = "Terms and Conditions"
 title = "3rd Party Licenses"
 
 [localMode]
-toolUnavailable = "This tool requires an account. Sign in to Stirling Cloud or connect to a self-hosted server to use it."
+toolUnavailable = "This tool requires an account. Sign in to Morphe Cloud or connect to a self-hosted server to use it."
 
 [localMode.toolPicker]
 message = "Sign in to unlock all tools."
@@ -5085,7 +5085,7 @@ message = "Authentication was not successful. You can close this window and try 
 title = "Authentication Failed"
 
 [oauth.success]
-message = "You can close this window and return to Stirling PDF."
+message = "You can close this window and return to Morphe PDF."
 title = "Authentication Successful"
 
 [oauthConsent]
@@ -5098,17 +5098,17 @@ loadFailed = "This authorization request is invalid or has expired. Close this t
 loading = "Loading authorization request..."
 missingId = "Missing authorization request. Start the connection from your app and try again."
 redirecting = "Returning you to the app..."
-requesting = "{{app}} wants to access your Stirling PDF account"
+requesting = "{{app}} wants to access your Morphe PDF account"
 scopesIntro = "This will allow {{app}} to:"
 signedInAs = "Signed in as {{name}}"
 signInButton = "Sign in to continue"
-signInPrompt = "Sign in to your Stirling PDF account to continue connecting the app."
+signInPrompt = "Sign in to your Morphe PDF account to continue connecting the app."
 title = "Authorize access"
 unknownApp = "A third-party application"
 
 [oauthConsent.access]
 actAsYou = "Act as you - everything {{app}} does runs under your account and counts towards your usage"
-tools = "Use your Stirling PDF tools on your behalf - convert, edit, sign, secure and process your documents"
+tools = "Use your Morphe PDF tools on your behalf - convert, edit, sign, secure and process your documents"
 
 [oauthConsent.scope]
 email = "See your email address"
@@ -5233,26 +5233,26 @@ skipTheTour = "Skip the tour"
 
 [onboarding.checklist]
 dismiss = "Dismiss"
-title = "Set up Stirling PDF"
+title = "Set up Morphe PDF"
 
 [onboarding.checklist.downloadDesktop]
-description = "Run Stirling natively on your machine"
-title = "Download Stirling for Desktop"
+description = "Run Morphe natively on your machine"
+title = "Download Morphe for Desktop"
 
 [onboarding.checklist.inviteTeam]
 description = "Collaborate with your team"
 title = "Invite team members"
 
 [onboarding.checklist.shareAnalytics]
-description = "Help improve Stirling"
+description = "Help improve Morphe"
 title = "Share anonymous usage data"
 
 [onboarding.checklist.takeTour]
-description = "See how Stirling works in a quick walkthrough"
+description = "See how Morphe works in a quick walkthrough"
 title = "Take the tour"
 
 [onboarding.desktopInstall]
-body = "Stirling works best as a desktop app. You can use it offline, access documents faster, and make edits locally on your computer."
+body = "Morphe works best as a desktop app. You can use it offline, access documents faster, and make edits locally on your computer."
 selectOs = "Select operating system"
 title = "Download"
 titleWithOs = "Download for {{osLabel}}"
@@ -5276,21 +5276,21 @@ success = "MFA has been enabled. You can now continue."
 title = "Multi-Factor Authentication Setup"
 
 [onboarding.planOverview]
-adminBodyLoginDisabled = "Once you enable login mode, you can manage users, configure settings, and monitor server health. The first <strong>{{freeTierLimit}}</strong> people on your server get to use Stirling free of charge."
-adminBodyLoginEnabled = "As an admin, you can manage users, configure settings, and monitor server health. The first <strong>{{freeTierLimit}}</strong> people on your server get to use Stirling free of charge."
+adminBodyLoginDisabled = "Once you enable login mode, you can manage users, configure settings, and monitor server health. The first <strong>{{freeTierLimit}}</strong> people on your server get to use Morphe free of charge."
+adminBodyLoginEnabled = "As an admin, you can manage users, configure settings, and monitor server health. The first <strong>{{freeTierLimit}}</strong> people on your server get to use Morphe free of charge."
 adminTitle = "Admin Overview"
 userBody = "Invite teammates, assign roles, and keep your documents organized in one secure workspace. Enable login mode whenever you're ready to grow beyond solo use."
 userTitle = "Plan Overview"
 
 [onboarding.processorIntro]
-body = "Stirling now runs <strong>Policies</strong> — automated rules that classify, secure, and process every document as it arrives. Set them up and monitor runs in the <strong>Processor</strong>."
+body = "Morphe now runs <strong>Policies</strong> — automated rules that classify, secure, and process every document as it arrives. Set them up and monitor runs in the <strong>Processor</strong>."
 cta = "Check out the Processor"
-title = "Check out the Stirling Processor"
+title = "Check out the Morphe Processor"
 
 [onboarding.saas.freeEditor]
 freeLine = "The editor is now <free>completely free</free>."
 premium = "We've added loads of new features, including <strong>Policies</strong> and <strong>Agent Chat</strong>."
-title = "Welcome to Stirling"
+title = "Welcome to Morphe"
 
 [onboarding.saas.team]
 addButton = "Add"
@@ -5310,20 +5310,20 @@ rolePlaceholder = "Confirm your role"
 roleUser = "User"
 
 [onboarding.serverLicense]
-freeBody = "Our <strong>Open-Core</strong> licensing permits up to <strong>{{freeTierLimit}}</strong> users for free per server. To scale uninterrupted, we recommend the Stirling Server plan - <strong>unlimited seats</strong> and <strong>SSO support</strong> for $99/server/mo."
+freeBody = "Our <strong>Open-Core</strong> licensing permits up to <strong>{{freeTierLimit}}</strong> users for free per server. To scale uninterrupted, we recommend the Morphe Server plan - <strong>unlimited seats</strong> and <strong>SSO support</strong> for $99/server/mo."
 freeTitle = "Server License"
-overLimitBody = "Our licensing permits up to <strong>{{freeTierLimit}}</strong> users for free per server. You have <strong>{{overLimitUserCopy}}</strong> Stirling users. To continue uninterrupted, upgrade to the Stirling Server plan - <strong>unlimited seats</strong>, PDF text editing, and full admin control for $99/server/mo."
+overLimitBody = "Our licensing permits up to <strong>{{freeTierLimit}}</strong> users for free per server. You have <strong>{{overLimitUserCopy}}</strong> Morphe users. To continue uninterrupted, upgrade to the Morphe Server plan - <strong>unlimited seats</strong>, PDF text editing, and full admin control for $99/server/mo."
 overLimitTitle = "Server License Needed"
 seePlans = "See Plans →"
 upgrade = "Upgrade now →"
 
 [onboarding.tourOverview]
-body = "Stirling PDF V2 ships with dozens of tools and a refreshed layout. Take a quick tour to see what changed and where to find the features you need."
+body = "Morphe PDF V2 ships with dozens of tools and a refreshed layout. Take a quick tour to see what changed and where to find the features you need."
 title = "Tour Overview"
 
 [onboarding.welcomeSlide]
-body = "Stirling PDF is now ready for teams of all sizes. This update includes a new layout, powerful new admin capabilities, and our most requested feature - <strong>Edit Text</strong>."
-title = "Welcome to Stirling"
+body = "Morphe PDF is now ready for teams of all sizes. This update includes a new layout, powerful new admin capabilities, and our most requested feature - <strong>Edit Text</strong>."
+title = "Welcome to Morphe"
 
 [onboarding.whatsNew]
 activeFilesView = "Use Active Files to see everything you have open and pick what to work on."
@@ -5629,7 +5629,7 @@ benefit1Body = "chain tools, schedule runs, batch process"
 benefit1Title = "Automation pipelines"
 benefit2Body = "summarize, classify, redact, AI-OCR"
 benefit2Title = "AI tools"
-benefit3Body = "call any Stirling endpoint programmatically"
+benefit3Body = "call any Morphe endpoint programmatically"
 benefit3Title = "API access"
 button = "Turn on Processor →"
 reassurance = "No minimum · Set a $0 cap to test · Cancel anytime"
@@ -5711,7 +5711,7 @@ leader = "Team owner"
 member = "Member"
 
 [payg.signupRequired]
-body = "Stirling PDF gives every signed-up account 500 free operations, enough to keep most workflows humming without paying a cent. You're currently using Stirling as a guest, which doesn't include billable tools like AI, automations, or hosted processing."
+body = "Morphe PDF gives every signed-up account 500 free operations, enough to keep most workflows humming without paying a cent. You're currently using Morphe as a guest, which doesn't include billable tools like AI, automations, or hosted processing."
 cancel = "Not now"
 cta = "Sign up free"
 subtext = "Creating an account is free and takes a few seconds. No credit card required."
@@ -5760,7 +5760,7 @@ usdNote = "Estimated in USD. You can adjust your cap any time after subscribing,
 [payg.upgrade.checkout]
 capValue = "{{symbol}}{{amount}} / month"
 edit = "Edit"
-help = "Stripe handles your card details. Stirling never sees them."
+help = "Stripe handles your card details. Morphe never sees them."
 loading = "Loading checkout…"
 noCap = "No cap"
 title = "Add your payment method"
@@ -5768,7 +5768,7 @@ title = "Add your payment method"
 [payg.upgrade.help]
 aiBody = "summarize, classify, redact, AI-OCR"
 aiTitle = "AI tools"
-apiBody = "programmatic access to any Stirling endpoint"
+apiBody = "programmatic access to any Morphe endpoint"
 apiTitle = "API calls"
 automationBody = "chained tools or scheduled runs that don't need clicks"
 automationTitle = "Automation pipelines"
@@ -6200,7 +6200,7 @@ upToFiveUsers = "Up to 5 users"
 usageTrackingPrometheus = "Usage tracking & Prometheus"
 
 [plan.licenseWarning]
-body = "You have {{total}} users but the free tier only supports {{limit}} per server. Upgrade to keep Stirling PDF running smoothly."
+body = "You have {{total}} users but the free tier only supports {{limit}} per server. Upgrade to keep Morphe PDF running smoothly."
 cta = "See plans"
 overLimit = "more than {{limit}}"
 title = "Free self-hosted limit reached"
@@ -6335,25 +6335,25 @@ comingSoon = "Coming soon"
 [portal.accountLink.card]
 billingNote = "Unattended processing bills against your org wallet."
 eyebrow = "Account link"
-linkButton = "Link your Stirling account"
+linkButton = "Link your Morphe account"
 linked = "Linked"
 linkedAs = "Linked as {{name}}."
 linkedGeneric = "This instance is linked."
 notLinked = "Not linked"
-title = "Link this org to its Stirling account"
+title = "Link this org to its Morphe account"
 unlink = "Unlink"
 
 [portal.accountLink.card.error]
 title = "Couldn't link"
 
 [portal.accountLink.card.loginNotConfigured]
-after = "to enable account linking against the hosted Stirling account. In dev you can simulate sign-in from the link dialog."
+after = "to enable account linking against the hosted Morphe account. In dev you can simulate sign-in from the link dialog."
 before = "Set"
 title = "SaaS login not configured"
 
 [portal.accountLink.gate]
 action = "Link account"
-description = "Link this org's Stirling account to use billable features."
+description = "Link this org's Morphe account to use billable features."
 title = "Link to unlock"
 titleFeature = "Link to unlock {{feature}}"
 
@@ -6385,13 +6385,13 @@ never = "never"
 
 [portal.accountLink.modal]
 linkSubtitle = "Sign in to the account this server should bill against."
-linkTitle = "Link your Stirling account"
-reauthSubtitle = "Your session expired — sign back in to your Stirling account. Your instance stays linked."
+linkTitle = "Link your Morphe account"
+reauthSubtitle = "Your session expired — sign back in to your Morphe account. Your instance stays linked."
 reauthTitle = "Sign in again"
 simulateSignIn = "Simulate sign-in (dev)"
 
 [portal.accountLink.modal.loginNotConfigured]
-after = "to enable in-app linking against the hosted Stirling account."
+after = "to enable in-app linking against the hosted Morphe account."
 and = "and"
 before = "Set"
 title = "SaaS login not configured"
@@ -6400,7 +6400,7 @@ title = "SaaS login not configured"
 instancesSub = "Every self-hosted instance registered to this org. Revoke a credential to immediately cut off its unattended access."
 instancesTitle = "Linked instances"
 revokeError = "Couldn't revoke instance"
-sub = "Link this self-hosted org to its Stirling account so unattended processing bills against your org wallet."
+sub = "Link this self-hosted org to its Morphe account so unattended processing bills against your org wallet."
 
 [portal.accountLink.panel.loadError]
 forbidden = "Only the team owner can view the org's linked instances."
@@ -6417,7 +6417,7 @@ close = "Close assistant"
 error = "Couldn't reach the assistant."
 errorWithDetail = "Couldn't reach the assistant: {{detail}}"
 inputAriaLabel = "Ask the assistant"
-inputPlaceholder = "Ask about Stirling…"
+inputPlaceholder = "Ask about Morphe…"
 open = "Open assistant"
 send = "Send"
 title = "Assistant"
@@ -6464,7 +6464,7 @@ title = "Set your spend limit"
 [portal.billing.checkout.card]
 fields = "Card number · MM / YY · CVC · ZIP"
 label = "Card details"
-note = "Card details collected by Stripe. Stirling never stores PAN or CVC."
+note = "Card details collected by Stripe. Morphe never stores PAN or CVC."
 
 [portal.billing.checkout.error]
 title = "Couldn't start checkout"
@@ -6482,7 +6482,7 @@ limitNoCap = "No spend limit. Processing won't pause. Invoices post monthly."
 cta = "Explore Enterprise"
 description = "Committed volume discounts, air-gapped deployment, custom MSA and security reviews, and 3rd-party distributor partnerships."
 eyebrow = "Volume discount · 1M+ PDFs"
-title = "Stirling Enterprise"
+title = "Morphe Enterprise"
 
 [portal.billing.freeEditors]
 activeThisMonth = "Active this month"
@@ -6531,9 +6531,9 @@ viewAriaLabel = "View invoice {{number}} in Stripe"
 viewLink = "View ↗"
 
 [portal.billing.linkPrompt]
-cta = "Link Stirling account"
+cta = "Link Morphe account"
 description = "Manual PDF editing — view, sign, merge, split, watermark, compress, convert, manual OCR — is always free, linked or not. Link to claim 500 free PDFs of metered processing (automation, AI, and the API); when you need more, turn on the Processor plan and only pay for what you use."
-title = "Link your Stirling account"
+title = "Link your Morphe account"
 
 [portal.billing.paymentMethod]
 billedMonthly = "Billed monthly"
@@ -6607,9 +6607,9 @@ usersLabel = "Total users"
 label = "I understand that when my prepaid capacity is used up or expires after 12 months, processing automatically continues at the standard metered pay-as-you-go rate (up to my spend limit) unless I cancel, and that I can cancel anytime from the billing portal."
 
 [portal.billing.prepaid.deploy]
-cloud = "Stirling Cloud"
-cloudDesc = "Managed by Stirling. Live in minutes."
-cloudValue = "Stirling Cloud · Managed"
+cloud = "Morphe Cloud"
+cloudDesc = "Managed by Morphe. Live in minutes."
+cloudValue = "Morphe Cloud · Managed"
 selfhost = "Self-hosted"
 selfhostDesc = "Runs on private infrastructure. Same rate."
 selfhostValue = "Self-hosted · Private infrastructure"
@@ -6766,7 +6766,7 @@ description = "Where processed documents end up - a bucket, a drive, a ticket or
 label = "File & attach"
 
 [portal.connections.commonFields.accessToken]
-helperText = "Stirling stores this encrypted and never shows it again."
+helperText = "Morphe stores this encrypted and never shows it again."
 label = "Access token"
 
 [portal.connections.commonFields.apiKey]
@@ -7297,7 +7297,7 @@ time = "Time"
 user = "User"
 
 [portal.editorAdmin]
-subtitle = "Deploy the Stirling PDF Editor, pair self-hosted instances to your org, and operate the running fleet — targets, health, credentials, and offline activation in one place."
+subtitle = "Deploy the Morphe PDF Editor, pair self-hosted instances to your org, and operate the running fleet — targets, health, credentials, and offline activation in one place."
 title = "Editor deployment"
 
 [portal.editorAdmin.health.columns]
@@ -7416,7 +7416,7 @@ description = "The pipeline could not open the document because it is password-p
 title = "Password-protected document"
 
 [portal.failures.kind.unknown]
-description = "This run failed for a reason Stirling does not yet recognise. The raw message is shown below."
+description = "This run failed for a reason Morphe does not yet recognise. The raw message is shown below."
 title = "Unrecognised failure"
 
 [portal.failures.origin]
@@ -7439,7 +7439,7 @@ guide = "Open the {{name}} guide"
 openInBrowser = "Open in browser instead"
 sectionDesktop = "Desktop app"
 sectionSelfHosted = "Self-hosted"
-title = "Install the Stirling PDF Editor"
+title = "Install the Morphe PDF Editor"
 
 [portal.home.download.docker]
 detailBody = "Run the official image on your server."
@@ -7509,7 +7509,7 @@ morning = "Good morning"
 [portal.infrastructure]
 manageEditorDeployment = "Manage Editor deployment"
 sectionsAriaLabel = "Infrastructure sections"
-subtitle = "API credentials and the audit trail for your Stirling workspace."
+subtitle = "API credentials and the audit trail for your Morphe workspace."
 title = "Infrastructure"
 
 [portal.infrastructure.apiKeys]
@@ -7525,7 +7525,7 @@ usageMonth = "Usage this month"
 usageToday = "Usage today"
 
 [portal.infrastructure.apiKeys.empty]
-description = "Create a key to start calling the Stirling API."
+description = "Create a key to start calling the Morphe API."
 title = "No API keys yet"
 
 [portal.infrastructure.apiKeys.error]
@@ -7615,7 +7615,7 @@ done = "Done"
 keyNameLabel = "Key name"
 keyNamePlaceholder = "e.g. Production ingest"
 secretKeyCaption = "Secret key"
-secretWarning = "Store this in a secrets manager. Stirling only ever stores a hash, so there is no way to recover it later."
+secretWarning = "Store this in a secrets manager. Morphe only ever stores a hash, so there is no way to recover it later."
 subtitle = "Give the key a name so you can recognise it later. You can revoke it at any time."
 subtitleCreated = "Copy this secret now — it won't be shown again."
 title = "Create API key"
@@ -7641,7 +7641,7 @@ connectionCount_one = "{{count}} connection"
 connectionCount_other = "{{count}} connections"
 customApi = "Custom API"
 searchPlaceholder = "Search integrations"
-subtitle = "Everything Stirling can talk to. Credentials are created once here, then referenced by sources, policies and pipelines."
+subtitle = "Everything Morphe can talk to. Credentials are created once here, then referenced by sources, policies and pipelines."
 title = "Integrations"
 typedName = "{{tool}} name"
 
@@ -8389,7 +8389,7 @@ title = "No flow yet"
 
 [portal.processorFlow.sources]
 comingSoonTag = "Connect"
-editor = "Stirling PDF Editor"
+editor = "Morphe PDF Editor"
 heading = "Sources"
 perDay = "{{n}} / 24h"
 
@@ -8406,7 +8406,7 @@ title = "Procurement"
 agreeCta = "Sign agreement"
 confidential = "Confidential"
 confirm = "I have read and agree to this Agreement, and I represent that I am authorized to sign it on behalf of the organization named above."
-docName = "Stirling Enterprise Agreement"
+docName = "Morphe Enterprise Agreement"
 docSub = "MSA, Order Form, EULA and DPA, combined into one signature."
 download = "Download"
 downloadDraftError = "Could not generate the agreement PDF - the document renderer is unavailable. Please try again shortly or contact support."
@@ -8442,7 +8442,7 @@ contactName = "Contact name"
 contactNamePlaceholder = "Jane Doe"
 continue = "Continue"
 done = "Done"
-eula = "I have read and agree to the Stirling Enterprise EULA. It governs the agreement generated from this quote."
+eula = "I have read and agree to the Morphe Enterprise EULA. It governs the agreement generated from this quote."
 generate = "Generate quote"
 indemnification = "Enhanced IP Protection"
 indemnificationSub = "Extends our IP defense to patent claims. Baseline copyright, trademark and trade-secret indemnification is included free."
@@ -8540,7 +8540,7 @@ eyebrowCompany = "{{company}} Enterprise"
 inviteTeammates = "Invite teammates"
 licenseKey = "Licence key"
 liveSub = "Your organization is provisioned and your licence is active."
-liveTitle = "You are live on Stirling Enterprise"
+liveTitle = "You are live on Morphe Enterprise"
 next = "Next: {{stage}}"
 open = "Open procurement"
 scheduleCall = "Schedule a call"
@@ -8575,7 +8575,7 @@ gatingAction = "Accept your quote"
 label = "Quote"
 
 [portal.procurement.journeySteps.trial]
-blurb = "Evaluate Stirling against your documents and workflows."
+blurb = "Evaluate Morphe against your documents and workflows."
 gatingAction = "Build your quote"
 label = "Trial"
 
@@ -8592,14 +8592,14 @@ trialFileHint = "This is your trial licence file. Once your agreement is in plac
 
 [portal.procurement.link]
 cta = "Link account"
-description = "Procurement runs on your linked Stirling account: it's how we provision the trial, price your quote, and start billing. Link an account to start."
+description = "Procurement runs on your linked Morphe account: it's how we provision the trial, price your quote, and start billing. Link an account to start."
 eyebrow = "Enterprise"
 title = "Link your account to begin"
 
 [portal.procurement.live]
 description = "Your subscription is active and your licence is issued. Your team is provisioned and billing has started."
 eyebrow = "Live"
-title = "You're live on Stirling Enterprise"
+title = "You're live on Morphe Enterprise"
 
 [portal.procurement.milestone]
 downloadError = "Could not download the quote PDF just yet — please try again in a moment."
@@ -8634,11 +8634,11 @@ airgapSub = "Sealed, no outbound"
 back = "Back"
 businessName = "Business name"
 businessNamePlaceholder = "Acme Corp"
-cloud = "Stirling Cloud"
+cloud = "Morphe Cloud"
 cloudSub = "Managed, fastest start"
 continue = "Continue"
 deployment = "Where should it deploy?"
-eula = "I agree to the Stirling EULA & Commercial Terms."
+eula = "I agree to the Morphe EULA & Commercial Terms."
 fullName = "Full name"
 fullNamePlaceholder = "Your name"
 invites = "Invite teammates · optional"
@@ -8676,7 +8676,7 @@ account-link = "Account link"
 [portal.shell.sidebar]
 appEditor = "Editor"
 appProcessor = "Processor"
-linkAccount = "Link Stirling account"
+linkAccount = "Link Morphe account"
 primaryNav = "Primary navigation"
 switchApp = "Switch app"
 
@@ -8686,7 +8686,7 @@ openNav = "Open navigation"
 search = "Search"
 
 [portal.sources]
-subtitle = "Reusable input connections that feed documents into Stirling. Configure a source once, then reference it from any number of pipelines."
+subtitle = "Reusable input connections that feed documents into Morphe. Configure a source once, then reference it from any number of pipelines."
 title = "Sources"
 
 [portal.sources.actions]
@@ -8780,7 +8780,7 @@ description = "Watch a directory on the server for new documents."
 label = "Folder"
 
 [portal.sources.types.folder.fields.directory]
-helperText = "Absolute path Stirling watches for files to process."
+helperText = "Absolute path Morphe watches for files to process."
 label = "Directory path"
 placeholder = "/data/incoming"
 
@@ -8867,7 +8867,7 @@ secretNote = "The signing secret is shown once, when the webhook is created. Rec
 copy = "Copy"
 done = "Done"
 secret = "Signing secret"
-secretHelp = "Sign each delivery's raw body with this key (HMAC-SHA256) and send it as the X-Stirling-Signature header."
+secretHelp = "Sign each delivery's raw body with this key (HMAC-SHA256) and send it as the X-Morphe-Signature header."
 secretWarning = "Copy the signing secret now. For your security it is shown only once and cannot be retrieved later."
 title = "Webhook created"
 url = "Delivery URL"
@@ -8883,7 +8883,7 @@ close = "Close"
 
 [portal.usage]
 managePayment = "Manage Payment"
-subtitle = "Consumption, invoices, and plan management for every PDF Stirling has billed, in one console."
+subtitle = "Consumption, invoices, and plan management for every PDF Morphe has billed, in one console."
 title = "Usage & billing"
 
 [portal.usage.error]
@@ -8893,7 +8893,7 @@ walletUnavailable = "Wallet unavailable: {{status}} {{statusText}}"
 
 [portal.usage.sessionExpired]
 action = "Sign in again"
-body = "Your Stirling account session has expired. Sign in again to view billing — your instance stays linked."
+body = "Your Morphe account session has expired. Sign in again to view billing — your instance stays linked."
 title = "Session expired"
 
 [portal.users]
@@ -9666,8 +9666,8 @@ hideTools = "Hide unavailable tools ▴"
 messageNoFallback = "Tools are unavailable until your server comes back online."
 messageWithFallback = "Some tools require a server connection."
 showTools = "View unavailable tools ▾"
-title = "Your Stirling-PDF server is unreachable"
-toolNotAvailableLocally = "Your Stirling-PDF server is offline and \"{{endpoint}}\" is not available on the local backend."
+title = "Your Morphe PDF server is unreachable"
+toolNotAvailableLocally = "Your Morphe PDF server is offline and \"{{endpoint}}\" is not available on the local backend."
 
 [session]
 expired = "Your session has expired. Please refresh the page and try again."
@@ -9703,7 +9703,7 @@ user = "Logged in as"
 
 [settings.connection.mode]
 local = "Local Only"
-saas = "Stirling Cloud"
+saas = "Morphe Cloud"
 selfhosted = "Self-Hosted"
 
 [settings.developer]
@@ -9718,11 +9718,11 @@ autoUnzipFileLimitDescription = "Maximum number of files to extract from ZIP"
 autoUnzipFileLimitTooltip = "Only unzip if the ZIP contains this many files or fewer. Set higher to extract larger ZIPs."
 autoUnzipTooltip = "Automatically extract ZIP files returned from API operations. Disable to keep ZIP files intact. This does not affect automation workflows."
 defaultPdfEditor = "Default PDF editor"
-defaultPdfEditorActive = "Stirling PDF is your default PDF editor"
+defaultPdfEditorActive = "Morphe PDF is your default PDF editor"
 defaultPdfEditorChecking = "Checking..."
 defaultPdfEditorInactive = "Another application is set as default"
 defaultPdfEditorRemind = "Remind me to set as default"
-defaultPdfEditorRemindDescription = "Show a banner when Stirling PDF is not your default PDF application."
+defaultPdfEditorRemindDescription = "Show a banner when Morphe PDF is not your default PDF application."
 defaultPdfEditorSet = "Already Default"
 defaultStartupView = "Default view on launch"
 defaultStartupViewDescription = "Choose which view is active when the app starts"
@@ -9766,7 +9766,7 @@ learnMore = "Learn more in documentation"
 title = "For System Administrators"
 
 [settings.general.loginLanding]
-description = "Choose which app opens when you sign in to Stirling Cloud."
+description = "Choose which app opens when you sign in to Morphe Cloud."
 editor = "Editor"
 processor = "Processor"
 title = "After signing in"
@@ -9796,7 +9796,7 @@ updateBehavior = "Update behavior"
 updateBehaviorDescription = "Choose whether to prompt before installing updates, install them automatically, or skip update checks entirely."
 updateBehaviorError = "Could not change update behavior"
 updateBehaviorErrorLocked = "This setting is locked by your administrator."
-updateBehaviorLockedDescription = "Your administrator has configured how Stirling-PDF handles updates on this machine. Contact them to change this."
+updateBehaviorLockedDescription = "Your administrator has configured how Morphe PDF handles updates on this machine. Contact them to change this."
 updateBehaviorSaved = "Update behavior saved."
 versionMismatch = "Warning: A mismatch has been detected between the client version and the AppConfig version. Using different versions can lead to compatibility issues, errors, and security risks. Please ensure that server and client are using the same version."
 viewDetails = "View Details"
@@ -9880,7 +9880,7 @@ usageAnalytics = "Usage Analytics"
 [settings.planBilling]
 currentPlan = "Current Plan"
 loading = "Loading billing information..."
-notAvailable = "Plan & Billing is only available when connected to Stirling Cloud (SaaS mode)."
+notAvailable = "Plan & Billing is only available when connected to Morphe Cloud (SaaS mode)."
 title = "Plan & Billing"
 
 [settings.planBilling.billing]
@@ -10008,7 +10008,7 @@ emptyUsername = "Please enter your username"
 oauthFailed = "OAuth login failed. Please try again."
 
 [setup.saas]
-title = "Sign in to Stirling"
+title = "Sign in to Morphe"
 
 [setup.selfhosted]
 changeServerLocked = "Your organization has restricted this app to a specific server"
@@ -10046,7 +10046,7 @@ step3 = "Restart the server"
 title = "Login Not Enabled"
 
 [setup.server.url]
-description = "Enter the full URL of your self-hosted Stirling PDF server"
+description = "Enter the full URL of your self-hosted Morphe PDF server"
 label = "Server URL"
 
 [sharedSign]
@@ -10295,7 +10295,7 @@ pleaseFillAllFields = "Please fill in all fields"
 signUp = "Sign Up"
 signUpWith = "Sign up with"
 skip = "Skip"
-subtitle = "Join Stirling PDF to get started"
+subtitle = "Join Morphe PDF to get started"
 title = "Create an account"
 unexpectedError = "Unexpected error: {{message}}"
 
@@ -10522,7 +10522,7 @@ download = "Download"
 downloaded = "Downloaded"
 downloadFailed = "Unable to download this file."
 downloadsCount = "Downloads: {{count}}"
-emailWarningBody = "This looks like an email address. If this person is not already a Stirling PDF user, they will not be able to access the file."
+emailWarningBody = "This looks like an email address. If this person is not already a Morphe PDF user, they will not be able to access the file."
 emailWarningConfirm = "Share anyway"
 emailWarningTitle = "Email address"
 errorTitle = "Share failed"
@@ -10553,7 +10553,7 @@ manageTitle = "Manage Sharing"
 noActivity = "No activity yet."
 noLinks = "No active share links yet."
 noSharedUsers = "No users have access yet."
-openInApp = "Open in Stirling PDF"
+openInApp = "Open in Morphe PDF"
 ownerLabel = "Owner"
 ownerUnknown = "Unknown"
 removeLink = "Remove link"
@@ -10611,7 +10611,7 @@ all = "All"
 ariaLabel = "Super search"
 filtersAriaLabel = "Search filters"
 hint = "Type to search"
-placeholder = "Search Stirling"
+placeholder = "Search Morphe"
 showLess = "Show less"
 showMore = "Show {{count}} more"
 
@@ -10624,7 +10624,7 @@ settings = "Settings"
 tools = "Tools"
 
 [survey]
-title = "Stirling-PDF Survey"
+title = "Morphe PDF Survey"
 
 [swagger]
 clickHere = "click here"
@@ -10782,7 +10782,7 @@ favorites = "Favorites"
 heading = "All tools (fullscreen view)"
 noResults = "Try adjusting your search or toggle descriptions to find what you need."
 recommended = "Recommended"
-selfHostedOffline = "Requires your Stirling-PDF server (currently offline):"
+selfHostedOffline = "Requires your Morphe PDF server (currently offline):"
 showDetails = "Show Details"
 unavailable = "Disabled by server administrator:"
 unavailableDependency = "Unavailable - required tool missing on server:"
@@ -10791,7 +10791,7 @@ unfavorite = "Remove from favorites"
 [toolPanel.modePrompt]
 chooseFullscreen = "Use fullscreen mode"
 chooseSidebar = "Use sidebar mode"
-description = "Preview both layouts and decide how you want to explore Stirling PDF tools."
+description = "Preview both layouts and decide how you want to explore Morphe PDF tools."
 dismiss = "Maybe later"
 fullscreenDescription = "Browse every tool in a catalog that covers the workspace until you pick one."
 fullscreenTitle = "Fullscreen mode - (legacy)"
@@ -10857,7 +10857,7 @@ loadingDetailedInfo = "Loading detailed information..."
 migrationGuide = "Migration Guide"
 migrationGuides = "Migration Guides"
 migrationGuidesDesc = "Review important changes before updating."
-modalSubtitle = "A new version of Stirling PDF is ready to install."
+modalSubtitle = "A new version of Morphe PDF is ready to install."
 modalTitle = "Update Available"
 notes = "Notes"
 releaseNotes = "Release Notes"
@@ -10881,7 +10881,7 @@ urgent = "Urgent"
 attentionBody = "Your admin needs to sign in to see more info. Please contact them immediately."
 attentionBodyAdmin = "Review the license requirements to keep this server compliant."
 attentionTitle = "This server needs admin attention"
-message = "Get the most out of Stirling PDF with unlimited users and advanced features"
+message = "Get the most out of Morphe PDF with unlimited users and advanced features"
 seeInfo = "See info"
 title = "Upgrade to Server Plan"
 upgradeButton = "Upgrade Now"
@@ -11021,7 +11021,7 @@ authWeb = "Password"
 create = "Create account"
 createSubtitle = "Create a self-hosted account with a password or SSO."
 createTitle = "Create account"
-editorDesc = "Edit PDFs in the Stirling PDF Editor. Everyone gets this."
+editorDesc = "Edit PDFs in the Morphe PDF Editor. Everyone gets this."
 email = "Email address"
 emailError = "Enter a valid email address"
 emailPlaceholder2 = "name@company.com"
@@ -11036,7 +11036,7 @@ processorDeferred = "Invite sent, but Processor access couldn't be granted yet -
 processorDesc = "The governance surface, run pipelines, agents, and the API."
 role = "Role"
 send2 = "Send invite"
-subtitle2 = "They'll get an email to join your Stirling workspace."
+subtitle2 = "They'll get an email to join your Morphe workspace."
 team = "Team"
 title = "Invite people"
 username = "Username"
@@ -11171,7 +11171,7 @@ downloads = "Downloads"
 entryLabel = "Signature Summary"
 filesEvaluated_one = "{{count}} file evaluated"
 filesEvaluated_other = "{{count}} files evaluated"
-footer = "Validated via Stirling PDF"
+footer = "Validated via Morphe PDF"
 generatedAt = "Generated"
 noPdf = "PDF report will be available after a successful validation."
 page = "Page"

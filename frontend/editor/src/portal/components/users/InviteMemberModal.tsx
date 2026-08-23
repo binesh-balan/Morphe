@@ -425,7 +425,7 @@ export function InviteMemberModal({
             label={t("users.cap.editor", "Editor")}
             description={t(
               "users.invite.editorDesc",
-              "Edit PDFs in the Stirling PDF Editor. Everyone gets this.",
+              "Edit PDFs in the Morphe PDF Editor. Everyone gets this.",
             )}
           />
           {manageGrants && (

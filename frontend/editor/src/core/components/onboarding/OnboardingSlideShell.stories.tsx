@@ -24,7 +24,7 @@ export const Default: Story = {
   args: {
     hero: <ShellHero appIcon />,
     slideKey: "default",
-    title: "Welcome to Stirling PDF",
+    title: "Welcome to Morphe PDF",
     body: "Everything you need to view, edit and manage your PDFs in one place.",
     stepIndex: 0,
     stepCount: 1,

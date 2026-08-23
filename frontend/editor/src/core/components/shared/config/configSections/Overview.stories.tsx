@@ -23,7 +23,7 @@ export const Loaded: Story = {
         autoFetch={false}
         bootstrapMode="non-blocking"
         initialConfig={{
-          appNameNavbar: "Stirling PDF",
+          appNameNavbar: "Morphe PDF",
           baseUrl: "https://stirlingpdf.example.com",
           contextPath: "/",
           serverPort: 8080,
@@ -47,7 +47,7 @@ export const WithWarning: Story = {
         autoFetch={false}
         bootstrapMode="non-blocking"
         initialConfig={{
-          appNameNavbar: "Stirling PDF",
+          appNameNavbar: "Morphe PDF",
           enableLogin: true,
           error: "Failed to load some settings from disk; using defaults.",
         }}

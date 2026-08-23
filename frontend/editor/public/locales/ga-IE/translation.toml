@@ -727,7 +727,7 @@ description = "Líon na míreanna is ábhartha a aisghabhtar in aghaidh an chuar
 label = "Top K"
 
 [admin.settings.ai.general]
-description = "Ceangail Stirling leis an inneall Python AI agus roghnaigh cé na cumais AI atá le nochtadh. Cuirtear athruithe i bhfeidhm ar atosú."
+description = "Ceangail Morphe leis an inneall Python AI agus roghnaigh cé na cumais AI atá le nochtadh. Cuirtear athruithe i bhfeidhm ar atosú."
 title = "Inneall AI"
 
 [admin.settings.ai.general.capabilities]
@@ -1075,11 +1075,11 @@ description = "Cumraigh gnéithe roghnacha agus feidhmiúlacht."
 title = "Gnéithe"
 
 [admin.settings.features.serverCertificate]
-description = "Cumraigh giniúint deimhnithe ar thaobh an fhreastalaí don fheidhmiúlacht \"Sínigh le Stirling-PDF\""
+description = "Cumraigh giniúint deimhnithe ar thaobh an fhreastalaí don fheidhmiúlacht \"Sínigh le Morphe PDF\""
 label = "Deimhniú Freastalaí"
 
 [admin.settings.features.serverCertificate.enabled]
-description = "Cumasaigh deimhniú taobh an fhreastalaí don rogha \"Sínigh le Stirling-PDF\""
+description = "Cumasaigh deimhniú taobh an fhreastalaí don rogha \"Sínigh le Morphe PDF\""
 label = "Cumasaigh Deimhniú Freastalaí"
 
 [admin.settings.features.serverCertificate.organizationName]
@@ -1096,11 +1096,11 @@ label = "Bailíocht an Deimhnithe (laethanta)"
 
 [admin.settings.folderAccess]
 description = "Comhadlanna a bhfuil cead ag foinsí fillteáin agus aschuir fillteáin léamh uathu agus scríobh chucu. Is teorainn slándála í seo: ní féidir uathoibrithe a dhíriú riamh ar chonair freastalaí lasmuigh den liosta seo."
-securityNote = "Fág folamh é seo chun foinsí agus aschuir fillteáin a dhíchumasú go hiomlán. Bíonn comhadlann chumraíochta Stirling féin i gcónaí as teorainn."
+securityNote = "Fág folamh é seo chun foinsí agus aschuir fillteáin a dhíchumasú go hiomlán. Bíonn comhadlann chumraíochta Morphe féin i gcónaí as teorainn."
 title = "Rochtain Fillteáin"
 
 [admin.settings.folderAccess.implied]
-description = "Ceadaítear na comhadlanna seo atá á mbainistiú ag Stirling i gcónaí agus ní féidir iad a athrú anseo."
+description = "Ceadaítear na comhadlanna seo atá á mbainistiú ag Morphe i gcónaí agus ní féidir iad a athrú anseo."
 serverStorage = "Stóráil comhad freastalaí"
 title = "Ceadaithe i gcónaí"
 watchedFolder = "Fillteán faire Pipeline"
@@ -1246,7 +1246,7 @@ description = "URL nó ainm comhaid do bheartas fianán"
 label = "Beartas Fianán"
 
 [admin.settings.legal.disclaimer]
-message = "Trí na doiciméid dhlíthiúla seo a shaincheapadh, glacann tú freagracht iomlán as comhlíonadh a chinntiú le gach dlí agus rialachán i bhfeidhm, lena n‑áirítear ach gan a bheith teoranta do GDPR agus ceanglais chosanta sonraí AE eile. Ná modhnaigh na socruithe seo ach amháin má: (1) tá cás pearsanta/príobháideach á rith agat, (2) tá tú lasmuigh de dhlínse an AE agus tuigeann tú do chuid dualgas dlíthiúil áitiúil, nó (3) tá comhairle dhlí chuí faighte agat agus glacann tú leat freagracht iomlán as sonraí úsáideoirí agus comhlíonadh dlíthiúil. Ní ghlacann Stirling-PDF ná a fhorbróirí aon dliteanas as do chuid dualgas dlíthiúil."
+message = "Trí na doiciméid dhlíthiúla seo a shaincheapadh, glacann tú freagracht iomlán as comhlíonadh a chinntiú le gach dlí agus rialachán i bhfeidhm, lena n‑áirítear ach gan a bheith teoranta do GDPR agus ceanglais chosanta sonraí AE eile. Ná modhnaigh na socruithe seo ach amháin má: (1) tá cás pearsanta/príobháideach á rith agat, (2) tá tú lasmuigh de dhlínse an AE agus tuigeann tú do chuid dualgas dlíthiúil áitiúil, nó (3) tá comhairle dhlí chuí faighte agat agus glacann tú leat freagracht iomlán as sonraí úsáideoirí agus comhlíonadh dlíthiúil. Ní ghlacann Morphe PDF ná a fhorbróirí aon dliteanas as do chuid dualgas dlíthiúil."
 title = "Rabhadh Freagrachta Dlí"
 
 [admin.settings.legal.impressum]
@@ -1333,8 +1333,8 @@ description = "Ainm úsáideora le haghaidh fíordheimhnithe SMTP"
 label = "Ainm Úsáideora SMTP"
 
 [admin.settings.mcp]
-apikeyNote = "Clients send a Stirling API key in the X-API-KEY header (or Authorization: Bearer <key>). The key maps to its owning Stirling user - only provisioned accounts get in, and actions are audited as that user. Manage keys under Account > API Keys."
-description = "Expose Stirling's PDF tools and AI agents to MCP clients over an OAuth-protected endpoint."
+apikeyNote = "Clients send a Morphe API key in the X-API-KEY header (or Authorization: Bearer <key>). The key maps to its owning Morphe user - only provisioned accounts get in, and actions are audited as that user. Manage keys under Account > API Keys."
+description = "Expose Morphe's PDF tools and AI agents to MCP clients over an OAuth-protected endpoint."
 title = "MCP Server"
 
 [admin.settings.mcp.acceptedAudiences]
@@ -1364,7 +1364,7 @@ step3ApiKeyb = "header (or Authorization: Bearer <key>). No OAuth or metadata di
 step4 = "Approve the sign-in; the client retries with a token. Tools appear grouped: convert, pages, misc, security, ai."
 step4ApiKey = "Tools appear grouped: convert, pages, misc, security, ai - and every call is audited as the key's owner."
 tip = "Tip: register the resource ID as an allowed audience in your IdP. Tested with MCP Inspector and Claude Desktop."
-tipApiKey = "Tip: API-key mode needs no external IdP - simplest for self-host. The key maps to its owning Stirling user."
+tipApiKey = "Tip: API-key mode needs no external IdP - simplest for self-host. The key maps to its owning Morphe user."
 title = "Connect an MCP client"
 
 [admin.settings.mcp.issuerUri]
@@ -1377,12 +1377,12 @@ label = "JWKS URL (optional)"
 placeholder = "Auto-discovered from issuer"
 
 [admin.settings.mcp.mode]
-description = "OAuth needs an external IdP. API key uses a Stirling per-user API key (X-API-KEY) - simplest for self-host."
+description = "OAuth needs an external IdP. API key uses a Morphe per-user API key (X-API-KEY) - simplest for self-host."
 label = "Authentication mode"
 
 [admin.settings.mcp.requireAccount]
-description = "Only let tokens through if their subject maps to a provisioned, enabled Stirling user."
-label = "Require an existing Stirling account"
+description = "Only let tokens through if their subject maps to a provisioned, enabled Morphe user."
+label = "Require an existing Morphe account"
 
 [admin.settings.mcp.resourceId]
 description = "This server's public /mcp URL. Tokens must list it in their audience (RFC 8707) or they are rejected."
@@ -1393,7 +1393,7 @@ description = "Require mcp.tools.read for read ops and mcp.tools.write for write
 label = "Enforce OAuth scopes"
 
 [admin.settings.mcp.usernameClaim]
-description = "JWT claim matched against a Stirling username (e.g. sub, email, preferred_username)."
+description = "JWT claim matched against a Morphe username (e.g. sub, email, preferred_username)."
 label = "Username claim"
 
 [admin.settings.plan.noData]
@@ -1714,7 +1714,7 @@ description = "Nuair a chumasaítear é, ní féidir ach leis na IDanna úsáide
 label = "Ceadaigh IDanna Úsáideora Sonracha"
 
 [admin.settings.telegram.enabled]
-description = "Ceadaigh d’úsáideoirí idirghníomhú le Stirling PDF tríd do bot Telegram cumraithe."
+description = "Ceadaigh d’úsáideoirí idirghníomhú le Morphe PDF tríd do bot Telegram cumraithe."
 label = "Cumasaigh Bot Telegram"
 
 [admin.settings.telegram.feedback]
@@ -1787,20 +1787,20 @@ settingsOverview = "Seo é an <strong>Painéal Socruithe</strong>. Tá socruithe
 systemCustomization = "Tá bealaí fairsinge againn chun an comhéadan úsáideora a shaincheapadh: Ligeann <strong>Socruithe Córais</strong> duit ainm agus teangacha an aip a athrú, ceadaíonn <strong>Gnéithe</strong> bainistíocht teastais freastalaí, agus ligeann <strong>Deireadhphointí</strong> duit uirlisí sonracha a chumasú nó a dhíchumasú do d'úsáideoirí."
 teamsAndUsers = "Bainistigh <strong>Foirne</strong> agus úsáideoirí aonair anseo. Is féidir leat úsáideoirí nua a thabhairt isteach trí r-phost, naisc inroinnte, nó cuntais shaincheaptha a chruthú dóibh tú féin."
 welcome = "Fáilte go dtí an <strong>Turas Riaracháin</strong>! Déanaimis iniúchadh ar na gnéithe agus na socruithe cumhachtacha fiontraíochta atá ar fáil do riarthóirí córais."
-wrapUp = "Sin é an turas riaracháin! Chonaic tú na gnéithe fiontraíochta a dhéanann Stirling PDF ina réiteach cumhachtach, saincheaptha d’eagraíochtaí. Is féidir an turas seo a rochtain am ar bith ón roghchlár <strong>Cabhair</strong>."
+wrapUp = "Sin é an turas riaracháin! Chonaic tú na gnéithe fiontraíochta a dhéanann Morphe PDF ina réiteach cumhachtach, saincheaptha d’eagraíochtaí. Is féidir an turas seo a rochtain am ar bith ón roghchlár <strong>Cabhair</strong>."
 
 [adminUserSettings]
 admin = "Riarachán"
 title = "Socruithe Rialaithe Úsáideora"
 
 [agents]
-stirling_name = "Stirling"
+stirling_name = "Morphe"
 
 [analytics]
 learnMore = "Tuilleadh eolais"
-paragraph1 = "Tá rogha an diúltaithe ag PDF Stirling chun cabhrú linn an táirge a fheabhsú. Ní rianaimid aon fhaisnéis phearsanta nó ábhar comhaid."
-paragraph2 = "Smaoinigh le do thoil ar anailísíocht a chumasú chun cabhrú le Stirling-PDF fás agus chun ligean dúinn ár n-úsáideoirí a thuiscint níos fearr."
-title = "An bhfuil fonn ort PDF Stirling a fheabhsú?"
+paragraph1 = "Tá rogha an diúltaithe ag PDF Morphe chun cabhrú linn an táirge a fheabhsú. Ní rianaimid aon fhaisnéis phearsanta nó ábhar comhaid."
+paragraph2 = "Smaoinigh le do thoil ar anailísíocht a chumasú chun cabhrú le Morphe PDF fás agus chun ligean dúinn ár n-úsáideoirí a thuiscint níos fearr."
+title = "An bhfuil fonn ort PDF Morphe a fheabhsú?"
 
 [annotate]
 tags = "annotate,highlight,draw,markup,comment,notes,review,redline,feedback,markup tools,sticky notes,shapes,arrows,text box,freehand"
@@ -2935,10 +2935,10 @@ copy = "Cóipeáil teachtaireacht"
 
 [chat.fab]
 close = "Close chat"
-open = "Open Stirling AI assistant"
+open = "Open Morphe AI assistant"
 
 [chat.header]
-agentMenu = "Roghanna gníomhaire Stirling"
+agentMenu = "Roghanna gníomhaire Morphe"
 clearChat = "Glan comhrá"
 
 [chat.input]
@@ -3269,14 +3269,14 @@ upgradeButton = "Uasghrádaigh an Cuntas"
 
 [config.apiKeys]
 copyKeyAriaLabel = "Cóipeáil eochair API"
-description = "Do eochair API chun rochtain a fháil ar shraith uirlisí PDF Stirling. Cóipeáil chuig do thionscadal í nó déan athnuachan chun ceann nua a ghiniúint."
-docsDescription = "Tuilleadh eolais faoi chomhtháthú le Stirling PDF:"
+description = "Do eochair API chun rochtain a fháil ar shraith uirlisí PDF Morphe. Cóipeáil chuig do thionscadal í nó déan athnuachan chun ceann nua a ghiniúint."
+docsDescription = "Tuilleadh eolais faoi chomhtháthú le Morphe PDF:"
 docsLink = "Doiciméadú API"
 docsTitle = "Doiciméadú API"
 generateError = "Níor éirigh linn d’eochair API a ghiniúint."
 goToAccount = "Téigh chuig an gCuntas"
 guestInfo = "Ní fhaigheann úsáideoirí aíochta eochracha API. Cruthaigh cuntas chun eochair API a fháil is féidir leat a úsáid i d’fheidhmchláir."
-intro = "Úsáid do eochair API chun rochtain ríomhchláraithe a fháil ar chumais phróiseála Stirling PDF."
+intro = "Úsáid do eochair API chun rochtain ríomhchláraithe a fháil ar chumais phróiseála Morphe PDF."
 label = "Eochair API"
 publicKeyAriaLabel = "Eochair API phoiblí"
 refreshAriaLabel = "Athnuaigh eochair API"
@@ -3300,10 +3300,10 @@ title = "Athnuaigh Eochracha API"
 warning = "⚠️ Rabhadh: Ginfidh an gníomh seo eochracha API nua agus déanfaidh sé do chuid eochracha roimhe seo neamhbhailí."
 
 [config.mcp]
-description = "Model Context Protocol (MCP) lets AI assistants like Claude use your Stirling PDF tools directly. Connect a client once and your assistant can convert, edit, secure and process documents on your behalf."
-guestInfo = "Guest users can't connect MCP clients. Create an account to use the MCP server and let your AI assistant run Stirling PDF tools on your behalf."
+description = "Model Context Protocol (MCP) lets AI assistants like Claude use your Morphe PDF tools directly. Connect a client once and your assistant can convert, edit, secure and process documents on your behalf."
+guestInfo = "Guest users can't connect MCP clients. Create an account to use the MCP server and let your AI assistant run Morphe PDF tools on your behalf."
 navLabel = "MCP Server"
-tip = "Every action your assistant runs is performed as your account and counts towards your usage, just like using Stirling PDF directly."
+tip = "Every action your assistant runs is performed as your account and counts towards your usage, just like using Morphe PDF directly."
 title = "MCP Server"
 viewApiKeys = "View API keys"
 
@@ -3320,7 +3320,7 @@ label = "Your MCP endpoint"
 
 [config.mcp.setup]
 addTo = "Add to"
-hint = "Pick your client, paste the snippet into the file shown, then restart it. You'll sign in with your Stirling account on first use - no keys to copy."
+hint = "Pick your client, paste the snippet into the file shown, then restart it. You'll sign in with your Morphe account on first use - no keys to copy."
 title = "Connect your AI assistant"
 
 [config.overview]
@@ -3429,7 +3429,7 @@ showPreferencesBtn = "Bainistigh sainroghanna"
 title = "Conas a Úsáidimid Fianáin"
 
 [cookieBanner.popUp.description]
-1 = "Úsáidimid fianáin agus teicneolaíochtaí eile chun Stirling PDF a dhéanamh níos fearr duit—ag cabhrú linn ár n-uirlisí a fheabhsú agus gnéithe a thógáil a thaitneoidh leat."
+1 = "Úsáidimid fianáin agus teicneolaíochtaí eile chun Morphe PDF a dhéanamh níos fearr duit—ag cabhrú linn ár n-uirlisí a fheabhsú agus gnéithe a thógáil a thaitneoidh leat."
 2 = "Mura mian leat, ní chuirfear ar chumas ach na fianáin riachtanacha atá riachtanach chun go n-oibreoidh rudaí go réidh má chliceálann tú ar 'Níl Go raibh maith agat'."
 
 [cookieBanner.preferencesModal]
@@ -3442,12 +3442,12 @@ subtitle = "Úsáid Fianáin"
 title = "Lárionad Sainroghanna Toilithe"
 
 [cookieBanner.preferencesModal.analytics]
-description = "Cuidíonn na fianáin seo linn a thuiscint conas a úsáidtear ár n-uirlisí, ionas gur féidir linn díriú ar na gnéithe is tábhachtaí dár bpobal a thógáil. Bí cinnte—ní féidir le Stirling PDF agus ní dhéanfaidh sé riamh ábhar na ndoiciméad a n-oibríonn tú leo a rianú."
+description = "Cuidíonn na fianáin seo linn a thuiscint conas a úsáidtear ár n-uirlisí, ionas gur féidir linn díriú ar na gnéithe is tábhachtaí dár bpobal a thógáil. Bí cinnte—ní féidir le Morphe PDF agus ní dhéanfaidh sé riamh ábhar na ndoiciméad a n-oibríonn tú leo a rianú."
 title = "Anailísíocht"
 
 [cookieBanner.preferencesModal.description]
-1 = "Úsáideann Stirling PDF fianáin agus teicneolaíochtaí cosúil leo chun do thaithí a fheabhsú agus chun tuiscint a fháil ar conas a úsáidtear ár n-uirlisí. Cabhraíonn sé seo linn feidhmíocht a fheabhsú, na gnéithe a bhfuil cúram agat fúthu a fhorbairt, agus tacaíocht leanúnach a sholáthar dár n-úsáideoirí."
-2 = "Ní féidir le Stirling PDF—agus ní dhéanfaidh sé riamh—ábhar na ndoiciméad a úsáideann tú a rianú ná a rochtain."
+1 = "Úsáideann Morphe PDF fianáin agus teicneolaíochtaí cosúil leo chun do thaithí a fheabhsú agus chun tuiscint a fháil ar conas a úsáidtear ár n-uirlisí. Cabhraíonn sé seo linn feidhmíocht a fheabhsú, na gnéithe a bhfuil cúram agat fúthu a fhorbairt, agus tacaíocht leanúnach a sholáthar dár n-úsáideoirí."
+2 = "Ní féidir le Morphe PDF—agus ní dhéanfaidh sé riamh—ábhar na ndoiciméad a úsáideann tú a rianú ná a rochtain."
 3 = "Tá do phríobháideachas agus do mhuinín i gcroílár ár gcuid oibre."
 
 [cookieBanner.preferencesModal.necessary]
@@ -3526,14 +3526,14 @@ title = "Earráid"
 
 [defaultApp.prompt]
 dontRemind = "Ná cuir i gcuimhne dom arís"
-message = "Déan Stirling PDF mar d’fheidhmchlár réamhshocraithe chun comhaid PDF a oscailt."
+message = "Déan Morphe PDF mar d’fheidhmchlár réamhshocraithe chun comhaid PDF a oscailt."
 
 [defaultApp.settingsOpened]
-message = "Roghnaigh Stirling PDF i socruithe do chórais"
+message = "Roghnaigh Morphe PDF i socruithe do chórais"
 title = "Socruithe Oscailte"
 
 [defaultApp.success]
-message = "Is é Stirling PDF d’eagarthóir PDF réamhshocraithe anois"
+message = "Is é Morphe PDF d’eagarthóir PDF réamhshocraithe anois"
 title = "Aip Réamhshocraithe Socraithe"
 
 [desktopUpdate]
@@ -3549,7 +3549,7 @@ updateFailedMessage = "Theip ar íoslódáil nó ar shuiteáil an nuashonraithe.
 
 [desktopUpdate.blocked]
 docsLink = "Féach ar dhoiciméadú suiteála"
-message = "Níl cead ag Stirling-PDF é féin a nuashonrú ar an meaisín seo."
+message = "Níl cead ag Morphe PDF é féin a nuashonrú ar an meaisín seo."
 title = "Teastaíonn ceadanna riarthóra"
 
 [devAirgapped]
@@ -4107,7 +4107,7 @@ title = "Bog go fillteán"
 [filesPage.origin]
 all = "Gach foinse"
 cloud = "Scamall"
-cloudHint = "Stóráilte ar fhreastalaí Stirling"
+cloudHint = "Stóráilte ar fhreastalaí Morphe"
 local = "Áitiúil"
 localHint = "Stóráilte sa bhrabhsálaí seo amháin"
 shared = "Roinnte"
@@ -4378,7 +4378,7 @@ invisible = "Dofheicthe (meiteashonraí amháin)"
 location = "Suíomh:"
 logo = "Lógó:"
 logoHidden = "Gan lógó"
-logoShown = "Lógó Stirling PDF le feiceáil"
+logoShown = "Lógó Morphe PDF le feiceáil"
 participantCount_one = "{{count}} participant will sign in order"
 participantCount_other = "{{count}} participants will sign in order"
 participants = "Rannpháirtithe"
@@ -4432,7 +4432,7 @@ title = "Sínithe Seicheamhach"
 dismiss = "Dún an meirge"
 message = "Cruthaigh cuntas saor in aisce chun do chuid oibre a shábháil, rochtain a fháil ar níos mó gnéithe, agus tacú leis an tionscadal."
 signUp = "Cláraigh saor in aisce"
-title = "Tá tú ag úsáid Stirling PDF mar aoi!"
+title = "Tá tú ag úsáid Morphe PDF mar aoi!"
 
 [home.addAttachments]
 desc = "Cuir comhaid leabaithe (iatáin) le PDF nó bain iad"
@@ -4596,7 +4596,7 @@ tags = "cumaisc,ceangail,aontaigh"
 title = "Cumaisc"
 
 [home.mobile]
-brandAlt = "Lógó Stirling PDF"
+brandAlt = "Lógó Morphe PDF"
 openFiles = "Oscail comhaid"
 swipeHint = "Svaidhpeáil ar chlé nó ar dheis chun radhairc a athrú"
 tools = "Uirlisí"
@@ -4821,7 +4821,7 @@ passwordRequired = "Tá focal faire riachtanach"
 signIn = "Sínigh isteach"
 validating = "Cuireadh á bhailíochtú..."
 validationError = "Theip ar bhailíochtú an naisc chuireadh"
-welcome = "Fáilte go Stirling PDF"
+welcome = "Fáilte go Morphe PDF"
 welcomeSubtitle = "Críochnaigh socrú do chuntais chun tosú"
 welcomeTitle = "Tugadh cuireadh duit!"
 
@@ -4847,7 +4847,7 @@ terms = "Téarmaí agus Coinníollacha"
 title = "Ceadúnais 3ú Páirtí"
 
 [localMode]
-toolUnavailable = "Teastaíonn cuntas ón uirlis seo. Sínigh isteach le Stirling Cloud nó ceangail le freastalaí féinóstáilte chun é a úsáid."
+toolUnavailable = "Teastaíonn cuntas ón uirlis seo. Sínigh isteach le Morphe Cloud nó ceangail le freastalaí féinóstáilte chun é a úsáid."
 
 [localMode.toolPicker]
 message = "Sínigh isteach chun na huirlisí go léir a dhíghlasáil."
@@ -5005,7 +5005,7 @@ message = "Níor éirigh leis an bhfíordheimhniú. Is féidir leat an fhuinneog
 title = "Theip ar an bhfíordheimhniú"
 
 [oauth.success]
-message = "Is féidir leat an fhuinneog seo a dhúnadh agus filleadh ar Stirling PDF."
+message = "Is féidir leat an fhuinneog seo a dhúnadh agus filleadh ar Morphe PDF."
 title = "Fíordheimhniú Rathúil"
 
 [oauthConsent]
@@ -5018,17 +5018,17 @@ loadFailed = "This authorisation request is invalid or has expired. Close this t
 loading = "Loading authorisation request..."
 missingId = "Missing authorisation request. Start the connection from your app and try again."
 redirecting = "Returning you to the app..."
-requesting = "{{app}} wants to access your Stirling PDF account"
+requesting = "{{app}} wants to access your Morphe PDF account"
 scopesIntro = "This will allow {{app}} to:"
 signedInAs = "Signed in as {{name}}"
 signInButton = "Sign in to continue"
-signInPrompt = "Sign in to your Stirling PDF account to continue connecting the app."
+signInPrompt = "Sign in to your Morphe PDF account to continue connecting the app."
 title = "Authorise access"
 unknownApp = "A third-party application"
 
 [oauthConsent.access]
 actAsYou = "Act as you - everything {{app}} does runs under your account and counts towards your usage"
-tools = "Use your Stirling PDF tools on your behalf - convert, edit, sign, secure and process your documents"
+tools = "Use your Morphe PDF tools on your behalf - convert, edit, sign, secure and process your documents"
 
 [oauthConsent.scope]
 email = "See your email address"
@@ -5152,26 +5152,26 @@ skipTheTour = "Scipeáil an turas"
 
 [onboarding.checklist]
 dismiss = "Ruaig"
-title = "Socraigh Stirling PDF"
+title = "Socraigh Morphe PDF"
 
 [onboarding.checklist.downloadDesktop]
-description = "Rith Stirling go dúchasach ar do mheaisín"
-title = "Íoslódáil Stirling don Deasc"
+description = "Rith Morphe go dúchasach ar do mheaisín"
+title = "Íoslódáil Morphe don Deasc"
 
 [onboarding.checklist.inviteTeam]
 description = "Comhoibrigh le do fhoireann"
 title = "Tabhair cuireadh do bhaill foirne"
 
 [onboarding.checklist.shareAnalytics]
-description = "Cuidigh le Stirling a fheabhsú"
+description = "Cuidigh le Morphe a fheabhsú"
 title = "Comhroinn sonraí úsáide anaithnide"
 
 [onboarding.checklist.takeTour]
-description = "Féach conas a oibríonn Stirling i dtreoir thapa"
+description = "Féach conas a oibríonn Morphe i dtreoir thapa"
 title = "Tóg an turas"
 
 [onboarding.desktopInstall]
-body = "Oibríonn Stirling is fearr mar aip deisce. Is féidir leat é a úsáid as líne, rochtain níos tapúla a fháil ar dhoiciméid, agus eagarthóireacht a dhéanamh go háitiúil ar do ríomhaire."
+body = "Oibríonn Morphe is fearr mar aip deisce. Is féidir leat é a úsáid as líne, rochtain níos tapúla a fháil ar dhoiciméid, agus eagarthóireacht a dhéanamh go háitiúil ar do ríomhaire."
 selectOs = "Roghnaigh córas oibriúcháin"
 title = "Íoslódáil"
 titleWithOs = "Íoslódáil do {{osLabel}}"
@@ -5195,21 +5195,21 @@ success = "Cumasaíodh MFA. Is féidir leat leanúint ar aghaidh anois."
 title = "Socrú Fíordheimhnithe Ilfhachtóra"
 
 [onboarding.planOverview]
-adminBodyLoginDisabled = "Nuair a chumasaíonn tú mód logála isteach, is féidir leat úsáideoirí a bhainistiú, socruithe a chumrú, agus sláinte an fhreastalaí a mheas. Faigheann an chéad <strong>{{freeTierLimit}}</strong> duine ar do fhreastalaí Stirling saor in aisce."
-adminBodyLoginEnabled = "Mar riarthóir, is féidir leat úsáideoirí a bhainistiú, socruithe a chumrú, agus sláinte an fhreastalaí a mheas. Faigheann an chéad <strong>{{freeTierLimit}}</strong> duine ar do fhreastalaí Stirling saor in aisce."
+adminBodyLoginDisabled = "Nuair a chumasaíonn tú mód logála isteach, is féidir leat úsáideoirí a bhainistiú, socruithe a chumrú, agus sláinte an fhreastalaí a mheas. Faigheann an chéad <strong>{{freeTierLimit}}</strong> duine ar do fhreastalaí Morphe saor in aisce."
+adminBodyLoginEnabled = "Mar riarthóir, is féidir leat úsáideoirí a bhainistiú, socruithe a chumrú, agus sláinte an fhreastalaí a mheas. Faigheann an chéad <strong>{{freeTierLimit}}</strong> duine ar do fhreastalaí Morphe saor in aisce."
 adminTitle = "Forbhreathnú Riarthóra"
 userBody = "Tabhair cuireadh do chomhoibrithe, sann róil, agus coinnigh do dhoiciméid eagraithe in aon spás oibre slán amháin. Cumasaigh mód logála isteach aon uair is mian leat dul thar úsáid aonair."
 userTitle = "Forbhreathnú Plean"
 
 [onboarding.processorIntro]
-body = "Ritheann Stirling <strong>Polasaithe</strong> anois — rialacha uathoibrithe a aicmíonn, a dhaingníonn agus a phróiseálann gach doiciméad de réir mar a thagann sé isteach. Socraigh iad agus déan monatóireacht ar rith sa <strong>Processor</strong>."
+body = "Ritheann Morphe <strong>Polasaithe</strong> anois — rialacha uathoibrithe a aicmíonn, a dhaingníonn agus a phróiseálann gach doiciméad de réir mar a thagann sé isteach. Socraigh iad agus déan monatóireacht ar rith sa <strong>Processor</strong>."
 cta = "Féach ar an Processor"
-title = "Féach ar an Stirling Processor"
+title = "Féach ar an Morphe Processor"
 
 [onboarding.saas.freeEditor]
 freeLine = "The editor is now <free>completely free</free>."
 premium = "We've added loads of new features, including <strong>Policies</strong> and <strong>Agent Chat</strong>."
-title = "Welcome to Stirling"
+title = "Welcome to Morphe"
 
 [onboarding.saas.team]
 addButton = "Add"
@@ -5229,20 +5229,20 @@ rolePlaceholder = "Deimhnigh do ról"
 roleUser = "Úsáideoir"
 
 [onboarding.serverLicense]
-freeBody = "Ceadaíonn ár gceadúnú <strong>Open-Core</strong> suas le <strong>{{freeTierLimit}}</strong> úsáideoirí saor in aisce in aghaidh an fhreastalaí. Chun scálú gan bhriseadh, molaimid an plean Stirling Server - <strong>suíocháin neamhtheoranta</strong> agus <strong>tacaíocht SSO</strong> ar $99/server/mo."
+freeBody = "Ceadaíonn ár gceadúnú <strong>Open-Core</strong> suas le <strong>{{freeTierLimit}}</strong> úsáideoirí saor in aisce in aghaidh an fhreastalaí. Chun scálú gan bhriseadh, molaimid an plean Morphe Server - <strong>suíocháin neamhtheoranta</strong> agus <strong>tacaíocht SSO</strong> ar $99/server/mo."
 freeTitle = "Ceadúnas Freastalaí"
-overLimitBody = "Ceadaíonn ár gceadúnú suas le <strong>{{freeTierLimit}}</strong> úsáideoir in aisce in aghaidh freastalaí. Tá <strong>{{overLimitUserCopy}}</strong> úsáideoir Stirling agat. Chun leanúint gan bhriseadh, uasghrádaigh go plean Freastalaí Stirling - <strong>suíocháin neamhtheoranta</strong>, eagarthóireacht téacs PDF, agus lánrialú riaracháin ar $99/freastalaí/mí."
+overLimitBody = "Ceadaíonn ár gceadúnú suas le <strong>{{freeTierLimit}}</strong> úsáideoir in aisce in aghaidh freastalaí. Tá <strong>{{overLimitUserCopy}}</strong> úsáideoir Morphe agat. Chun leanúint gan bhriseadh, uasghrádaigh go plean Freastalaí Morphe - <strong>suíocháin neamhtheoranta</strong>, eagarthóireacht téacs PDF, agus lánrialú riaracháin ar $99/freastalaí/mí."
 overLimitTitle = "Ceadúnas Freastalaí de dhíth"
 seePlans = "Féach ar Phleananna →"
 upgrade = "Uasghrádaigh anois →"
 
 [onboarding.tourOverview]
-body = "Tagann Stirling PDF V2 le mórán uirlisí agus leagan amach athnuaite. Tabhair cuairt ghearr chun a fheiceáil cad a d'athraigh agus cá háit le fáil na gnéithe atá uait."
+body = "Tagann Morphe PDF V2 le mórán uirlisí agus leagan amach athnuaite. Tabhair cuairt ghearr chun a fheiceáil cad a d'athraigh agus cá háit le fáil na gnéithe atá uait."
 title = "Forbhreathnú ar an Turas"
 
 [onboarding.welcomeSlide]
-body = "Tá Stirling PDF réidh anois do fhoirne de gach méid. Cuimsíonn an nuashonrú seo leagan amach nua, cumais riaracháin chumhachtacha nua, agus ár ngné is mó a iarradh - <strong>Cuir Téacs in Eagar</strong>."
-title = "Fáilte go Stirling"
+body = "Tá Morphe PDF réidh anois do fhoirne de gach méid. Cuimsíonn an nuashonrú seo leagan amach nua, cumais riaracháin chumhachtacha nua, agus ár ngné is mó a iarradh - <strong>Cuir Téacs in Eagar</strong>."
+title = "Fáilte go Morphe"
 
 [onboarding.whatsNew]
 activeFilesView = "Bain úsáid as Comhaid Ghníomhacha chun gach rud atá oscailte agat a fheiceáil agus chun a roghnú cad atá le hoibriú air."
@@ -5548,7 +5548,7 @@ benefit1Body = "chain tools, schedule runs, batch process"
 benefit1Title = "Automation pipelines"
 benefit2Body = "summarise, classify, redact, AI-OCR"
 benefit2Title = "AI tools"
-benefit3Body = "call any Stirling endpoint programmatically"
+benefit3Body = "call any Morphe endpoint programmatically"
 benefit3Title = "API access"
 button = "Turn on Processor →"
 reassurance = "No minimum · Set a $0 cap to test · Cancel anytime"
@@ -5629,7 +5629,7 @@ leader = "Team owner"
 member = "Member"
 
 [payg.signupRequired]
-body = "Stirling PDF gives every signed-up account 500 free operations, enough to keep most workflows humming without paying a cent. You're currently using Stirling as a guest, which doesn't include billable tools like AI, automations, or hosted processing."
+body = "Morphe PDF gives every signed-up account 500 free operations, enough to keep most workflows humming without paying a cent. You're currently using Morphe as a guest, which doesn't include billable tools like AI, automations, or hosted processing."
 cancel = "Not now"
 cta = "Sign up free"
 subtext = "Creating an account is free and takes a few seconds. No credit card required."
@@ -5677,7 +5677,7 @@ usdNote = "Estimated in USD. You can adjust your cap any time after subscribing,
 [payg.upgrade.checkout]
 capValue = "{{symbol}}{{amount}} / month"
 edit = "Edit"
-help = "Stripe handles your card details. Stirling never sees them."
+help = "Stripe handles your card details. Morphe never sees them."
 loading = "Loading checkout…"
 noCap = "No cap"
 title = "Add your payment method"
@@ -5685,7 +5685,7 @@ title = "Add your payment method"
 [payg.upgrade.help]
 aiBody = "summarise, classify, redact, AI-OCR"
 aiTitle = "AI tools"
-apiBody = "programmatic access to any Stirling endpoint"
+apiBody = "programmatic access to any Morphe endpoint"
 apiTitle = "API calls"
 automationBody = "chained tools or scheduled runs that don't need clicks"
 automationTitle = "Automation pipelines"
@@ -6116,7 +6116,7 @@ upToFiveUsers = "Suas le 5 úsáideoir"
 usageTrackingPrometheus = "Rianú úsáide & Prometheus"
 
 [plan.licenseWarning]
-body = "Tá {{total}} úsáideoir agat ach ní thacaíonn an sraith saor in aisce ach le {{limit}} in aghaidh an fhreastalaí. Uasghrádaigh chun Stirling PDF a choinneáil ag rith go réidh."
+body = "Tá {{total}} úsáideoir agat ach ní thacaíonn an sraith saor in aisce ach le {{limit}} in aghaidh an fhreastalaí. Uasghrádaigh chun Morphe PDF a choinneáil ag rith go réidh."
 cta = "Féach ar phleananna"
 overLimit = "níos mó ná {{limit}}"
 title = "Sroichtear teorainn féin-óstáilte saor in aisce"
@@ -6251,25 +6251,25 @@ comingSoon = "Ag teacht go luath"
 [portal.accountLink.card]
 billingNote = "Billeálann próiseáil gan freastal ar sparán d’eagraíochta."
 eyebrow = "Nasc cuntais"
-linkButton = "Nasc do chuntas Stirling"
+linkButton = "Nasc do chuntas Morphe"
 linked = "Nasctha"
 linkedAs = "Nasctha mar {{name}}."
 linkedGeneric = "Tá an t-áis seo nasctha."
 notLinked = "Gan nascadh"
-title = "Nasc an eagraíocht seo lena cuntas Stirling"
+title = "Nasc an eagraíocht seo lena cuntas Morphe"
 unlink = "Dínasc"
 
 [portal.accountLink.card.error]
 title = "Níorbh fhéidir nascadh"
 
 [portal.accountLink.card.loginNotConfigured]
-after = "chun nascadh cuntais leis an gcuntas Stirling óstáilte a chumasú. In dev is féidir leat síniú isteach a insamhladh ón dialóg naisc."
+after = "chun nascadh cuntais leis an gcuntas Morphe óstáilte a chumasú. In dev is féidir leat síniú isteach a insamhladh ón dialóg naisc."
 before = "Socraigh"
 title = "Níl logáil isteach SaaS cumraithe"
 
 [portal.accountLink.gate]
 action = "Nasc cuntas"
-description = "Nasc cuntas Stirling na heagraíochta seo chun gnéithe inbhilleáilte a úsáid."
+description = "Nasc cuntas Morphe na heagraíochta seo chun gnéithe inbhilleáilte a úsáid."
 title = "Nasc chun díghlasáil"
 titleFeature = "Nasc chun {{feature}} a dhíghlasáil"
 
@@ -6301,13 +6301,13 @@ never = "riamh"
 
 [portal.accountLink.modal]
 linkSubtitle = "Sínigh isteach sa chuntas ar cheart don fhreastalaí seo billeáil ina aghaidh."
-linkTitle = "Nasc do chuntas Stirling"
-reauthSubtitle = "Chuaigh do sheisiún in éag — sínigh isteach arís i do chuntas Stirling. Fanann d’áis nasctha."
+linkTitle = "Nasc do chuntas Morphe"
+reauthSubtitle = "Chuaigh do sheisiún in éag — sínigh isteach arís i do chuntas Morphe. Fanann d’áis nasctha."
 reauthTitle = "Sínigh isteach arís"
 simulateSignIn = "Insamhail síniú isteach (dev)"
 
 [portal.accountLink.modal.loginNotConfigured]
-after = "chun nascadh in-app leis an gcuntas Stirling óstáilte a chumasú."
+after = "chun nascadh in-app leis an gcuntas Morphe óstáilte a chumasú."
 and = "agus"
 before = "Socraigh"
 title = "Níl logáil isteach SaaS cumraithe"
@@ -6316,7 +6316,7 @@ title = "Níl logáil isteach SaaS cumraithe"
 instancesSub = "Gach áis féin-óstáilte atá cláraithe leis an eagraíocht seo. Cúlghair dintiúr chun a rochtain gan freastal a ghearradh láithreach."
 instancesTitle = "Áiseanna nasctha"
 revokeError = "Níorbh fhéidir an áis a chúlghairm"
-sub = "Nasc an eagraíocht féin-óstáilte seo lena cuntas Stirling ionas go mbilleálfaidh próiseáil gan freastal ar sparán d’eagraíochta."
+sub = "Nasc an eagraíocht féin-óstáilte seo lena cuntas Morphe ionas go mbilleálfaidh próiseáil gan freastal ar sparán d’eagraíochta."
 
 [portal.accountLink.panel.loadError]
 forbidden = "Ní féidir ach le húinéir na foirne áiseanna nasctha na heagraíochta a fheiceáil."
@@ -6333,7 +6333,7 @@ close = "Dún cúntóir"
 error = "Níorbh fhéidir an cúntóir a bhaint amach."
 errorWithDetail = "Níorbh fhéidir an cúntóir a bhaint amach: {{detail}}"
 inputAriaLabel = "Cuir ceist ar an gcúntóir"
-inputPlaceholder = "Fiafraigh faoi Stirling…"
+inputPlaceholder = "Fiafraigh faoi Morphe…"
 open = "Oscail cúntóir"
 send = "Seol"
 title = "Cúntóir"
@@ -6380,7 +6380,7 @@ title = "Socraigh do theorainn chaiteachais"
 [portal.billing.checkout.card]
 fields = "Uimhir chárta · MM / YY · CVC · ZIP"
 label = "Sonraí cárta"
-note = "Bailíonn Stripe sonraí cárta. Ní stórálann Stirling PAN ná CVC riamh."
+note = "Bailíonn Stripe sonraí cárta. Ní stórálann Morphe PAN ná CVC riamh."
 
 [portal.billing.checkout.error]
 title = "Níorbh fhéidir checkout a thosú"
@@ -6398,7 +6398,7 @@ limitNoCap = "Gan teorainn chaiteachais. Ní stadfaidh próiseáil. Eisítear so
 cta = "Tóg do luachan Enterprise"
 description = "Lascainí toirte tiomanta, imscaradh air-gapped, MSA saincheaptha agus athbhreithnithe slándála, agus comhpháirtíochtaí dáileoirí 3rd-party."
 eyebrow = "Lascaine toirte · 1M+ PDFs"
-title = "Stirling Enterprise"
+title = "Morphe Enterprise"
 
 [portal.billing.freeEditors]
 activeThisMonth = "Gníomhach an mhí seo"
@@ -6447,9 +6447,9 @@ viewAriaLabel = "Amharc ar shonrasc {{number}} in Stripe"
 viewLink = "Amharc ↗"
 
 [portal.billing.linkPrompt]
-cta = "Nasc cuntas Stirling"
+cta = "Nasc cuntas Morphe"
 description = "Tá eagarthóireacht PDF de láimh — amharc, síniú, cumasc, scoilt, comhartha uisce, comhbhrú, tiontú, OCR de láimh — saor in aisce i gcónaí, bíodh sé nasctha nó ná bíodh. Nasc chun 500 PDFs próiseála méadraithe saor in aisce a éileamh (uathoibriú, AI, agus an API); nuair a bheidh níos mó uait, cuir an plean Processor ar siúl agus íoc as an méid a úsáideann tú amháin."
-title = "Nasc do chuntas Stirling"
+title = "Nasc do chuntas Morphe"
 
 [portal.billing.paymentMethod]
 billedMonthly = "Billeáilte go míosúil"
@@ -6523,9 +6523,9 @@ usersLabel = "Úsáideoirí iomlána"
 label = "Tuigim nuair a ídítear mo chumas réamhíoctha nó nuair a théann sé in éag tar éis 12 mhí, go leanann próiseáil ar aghaidh go huathoibríoch ag an ráta caighdeánach méadraithe íoc-mar-a-úsáideann-tú (suas go dtí mo theorainn chaiteachais) mura gcealaím, agus gur féidir liom cealú am ar bith ón tairseach billeála."
 
 [portal.billing.prepaid.deploy]
-cloud = "Stirling Cloud"
-cloudDesc = "Bainistithe ag Stirling. Beo i gceann cúpla nóiméad."
-cloudValue = "Stirling Cloud · Bainistithe"
+cloud = "Morphe Cloud"
+cloudDesc = "Bainistithe ag Morphe. Beo i gceann cúpla nóiméad."
+cloudValue = "Morphe Cloud · Bainistithe"
 selfhost = "Féin-óstáilte"
 selfhostDesc = "Ritheann ar bhonneagar príobháideach. An ráta céanna."
 selfhostValue = "Féin-óstáilte · Bonneagar príobháideach"
@@ -6681,7 +6681,7 @@ description = "Áit a gcríochnaíonn doiciméid phróiseáilte - buicéad, tiom
 label = "Comhad & ceangail"
 
 [portal.connections.commonFields.accessToken]
-helperText = "Stórálann Stirling é seo criptithe agus ní thaispeánann sé arís é riamh."
+helperText = "Stórálann Morphe é seo criptithe agus ní thaispeánann sé arís é riamh."
 label = "Access token"
 
 [portal.connections.commonFields.apiKey]
@@ -7191,7 +7191,7 @@ time = "Am"
 user = "Úsáideoir"
 
 [portal.editorAdmin]
-subtitle = "Imscar Stirling PDF Editor, péireáil insteansanna féin-óstáilte le d’eagraíocht, agus oibrigh an flít atá ag rith — spriocanna, sláinte, dintiúir, agus gníomhachtú as líne in aon áit amháin."
+subtitle = "Imscar Morphe PDF Editor, péireáil insteansanna féin-óstáilte le d’eagraíocht, agus oibrigh an flít atá ag rith — spriocanna, sláinte, dintiúir, agus gníomhachtú as líne in aon áit amháin."
 title = "Imscaradh an Eagarthóra"
 
 [portal.editorAdmin.health.columns]
@@ -7282,7 +7282,7 @@ guide = "Oscail treoir {{name}}"
 openInBrowser = "Oscail sa bhrabhsálaí ina ionad"
 sectionDesktop = "Aip deisce"
 sectionSelfHosted = "Féin-óstáilte"
-title = "Suiteáil an Stirling PDF Editor"
+title = "Suiteáil an Morphe PDF Editor"
 
 [portal.home.download.docker]
 detailBody = "Rith an íomhá oifigiúil ar do fhreastalaí."
@@ -7330,7 +7330,7 @@ title = "Windows"
 
 [portal.home.editor]
 activeOfDeployed = "{{active}} as {{total}} gníomhach an mhí seo"
-name = "Stirling PDF Editor"
+name = "Morphe PDF Editor"
 open = "Oscail sa bhrabhsálaí"
 updated = "nuashonraithe {{time}}"
 
@@ -7352,7 +7352,7 @@ morning = "Maidin mhaith"
 [portal.infrastructure]
 manageEditorDeployment = "Bainistigh imscaradh an Eagarthóra"
 sectionsAriaLabel = "Rannáin bhonneagair"
-subtitle = "Imscarthaí, dintiúir, seasamh slándála, stóráil, agus an rian iniúchta do do spás oibre Stirling."
+subtitle = "Imscarthaí, dintiúir, seasamh slándála, stóráil, agus an rian iniúchta do do spás oibre Morphe."
 title = "Bonneagar"
 
 [portal.infrastructure.apiKeys]
@@ -7368,7 +7368,7 @@ usageMonth = "Úsáid an mhí seo"
 usageToday = "Úsáid inniu"
 
 [portal.infrastructure.apiKeys.empty]
-description = "Cruthaigh eochair scóipithe chun tosú ag glaoch ar an Stirling API."
+description = "Cruthaigh eochair scóipithe chun tosú ag glaoch ar an Morphe API."
 title = "Níl aon eochracha API fós"
 
 [portal.infrastructure.apiKeys.error]
@@ -7468,7 +7468,7 @@ done = "Déanta"
 keyNameLabel = "Ainm eochrach"
 keyNamePlaceholder = "m.sh. Táirgeadh · ionghabháil"
 secretKeyCaption = "Eochair rúnda"
-secretWarning = "Stóráil é seo i mbainisteoir rúin. Ní stórálann Stirling ach hash riamh — níl aon bhealach ann é a aisghabháil níos déanaí."
+secretWarning = "Stóráil é seo i mbainisteoir rúin. Ní stórálann Morphe ach hash riamh — níl aon bhealach ann é a aisghabháil níos déanaí."
 subtitle = "Scóipigh an eochair chuig an íosmhéid a theastaíonn uaithi. Is féidir leat í a rothlú nó a chúlghairm am ar bith."
 subtitleCreated = "Cóipeáil an rún seo anois — ní thaispeánfar arís é."
 title = "Cruthaigh eochair API"
@@ -7509,7 +7509,7 @@ version = "Leagan"
 
 [portal.infrastructure.deployments.regions]
 heading = "Réigiúin"
-subheading = "Sláinte bheo do gach réigiún Stirling imscartha — foighne, ualach, agus leagan rollout."
+subheading = "Sláinte bheo do gach réigiún Morphe imscartha — foighne, ualach, agus leagan rollout."
 
 [portal.infrastructure.deployments.regions.empty]
 description = "Taispeánfar réigiúin imscartha anseo nuair a bheidh do spás oibre soláthraithe."
@@ -7590,16 +7590,16 @@ down = "As feidhm"
 healthy = "Sláintiúil"
 
 [portal.infrastructure.security.access.byok]
-description = "Soláthair eochair ó do KMS féin. Criptíonn Stirling léi ach is féidir leis léamh fós."
+description = "Soláthair eochair ó do KMS féin. Criptíonn Morphe léi ach is féidir leis léamh fós."
 label = "Tabhair leat d’eochair féin (BYOK)"
 
 [portal.infrastructure.security.access.hyok]
-description = "Ní fhágann eochracha do KMS riamh. Ní choinníonn Stirling ach ciphertext."
+description = "Ní fhágann eochracha do KMS riamh. Ní choinníonn Morphe ach ciphertext."
 label = "Coinnigh d’eochair féin (HYOK)"
 
 [portal.infrastructure.security.access.stirling]
-description = "Bainistíonn Stirling eochracha criptithe. Is simplí é — gan aon ops eochrach ar do thaobh."
-label = "Eochracha á gcoinneáil ag Stirling"
+description = "Bainistíonn Morphe eochracha criptithe. Is simplí é — gan aon ops eochrach ar do thaobh."
+label = "Eochracha á gcoinneáil ag Morphe"
 
 [portal.infrastructure.security.accessPolicy]
 heading = "Beartas rochtana doiciméad"
@@ -7613,15 +7613,15 @@ viewReport = "Féach ar thuairisc →"
 
 [portal.infrastructure.security.compliance]
 heading = "Comhlíonadh"
-subheading = "Fianuithe agus deimhnithe a chlúdaíonn ardán Stirling."
+subheading = "Fianuithe agus deimhnithe a chlúdaíonn ardán Morphe."
 
 [portal.infrastructure.security.empty]
 description = "Taispeánfar cumraíocht slándála do spáis oibre anseo."
 title = "Níl seasamh slándála ar fáil"
 
 [portal.infrastructure.security.hyokBanner]
-description = "Le HYOK, ní fhágann eochracha criptithe do KMS riamh. Ní stórálann ná ní phróiseálann Stirling ach ciphertext ar féidir leat a chúlghairm am ar bith."
-title = "Ní féidir le Stirling do dhoiciméid a dhíchriptiú"
+description = "Le HYOK, ní fhágann eochracha criptithe do KMS riamh. Ní stórálann ná ní phróiseálann Morphe ach ciphertext ar féidir leat a chúlghairm am ar bith."
+title = "Ní féidir le Morphe do dhoiciméid a dhíchriptiú"
 
 [portal.infrastructure.security.ipAllowlist]
 empty = "Níl aon raonta IP cumraithe — ceadaítear gach IP."
@@ -7650,7 +7650,7 @@ subheading = "Coimeád na n-eochracha a chriptíonn doiciméid atá ar fos — c
 
 [portal.infrastructure.security.managedBanner]
 description = "Tá coimeád tabhair-leat-d’eochair-féin (BYOK) agus coimeád coinnigh-d’eochair-féin (HYOK) ar fáil ar Enterprise. Uasghrádaigh chun eochracha a sholáthar ó do KMS féin."
-title = "Tá eochracha á mbainistiú ag Stirling ar do phlean"
+title = "Tá eochracha á mbainistiú ag Morphe ar do phlean"
 
 [portal.infrastructure.security.residency.apac]
 description = "ap-southeast-1"
@@ -7724,7 +7724,7 @@ connectionCount_one = "{{count}} nasc"
 connectionCount_other = "{{count}} nasc"
 customApi = "API saincheaptha"
 searchPlaceholder = "Cuardaigh comhtháthuithe"
-subtitle = "Gach rud ar féidir le Stirling labhairt leis. Cruthaítear dintiúir uair amháin anseo, ansin tagraíonn foinsí, polasaithe agus píblínte dóibh."
+subtitle = "Gach rud ar féidir le Morphe labhairt leis. Cruthaítear dintiúir uair amháin anseo, ansin tagraíonn foinsí, polasaithe agus píblínte dóibh."
 title = "Comhtháthuithe"
 typedName = "Ainm {{tool}}"
 
@@ -8405,7 +8405,7 @@ title = "Níl aon sreabhadh fós"
 
 [portal.processorFlow.sources]
 comingSoonTag = "Ceangail"
-editor = "Eagarthóir Stirling PDF"
+editor = "Eagarthóir Morphe PDF"
 heading = "Foinsí"
 perDay = "{{n}} / 24h"
 
@@ -8421,8 +8421,8 @@ title = "Soláthar"
 [portal.procurement.agreement]
 agreeCta = "Aontaigh & liostáil"
 confidential = "Rúnda"
-confirm = "Tá Comhaontú Stirling Enterprise léite agam agus aontaím leis."
-docName = "Comhaontú Fiontair Stirling"
+confirm = "Tá Comhaontú Morphe Enterprise léite agam agus aontaím leis."
+docName = "Comhaontú Fiontair Morphe"
 docSub = "MSA, Foirm Ordaithe, EULA agus DPA, comhcheangailte in aon síniú amháin."
 download = "Íoslódáil"
 downloadDraftError = "Níorbh fhéidir PDF an chomhaontaithe a ghiniúint - níl rindreálaí an doiciméid ar fáil. Bain triail eile as go gairid nó déan teagmháil le tacaíocht."
@@ -8458,7 +8458,7 @@ contactName = "Ainm teagmhála"
 contactNamePlaceholder = "Jane Doe"
 continue = "Lean ar aghaidh"
 done = "Déanta"
-eula = "Tá Stirling Enterprise EULA léite agam agus aontaím leis. Rialaíonn sé an comhaontú a ghintear ón luachan seo."
+eula = "Tá Morphe Enterprise EULA léite agam agus aontaím leis. Rialaíonn sé an comhaontú a ghintear ón luachan seo."
 generate = "Gin luachan"
 indemnification = "Slánaíocht IP"
 indemnificationSub = "Cosnaímid éilimh cháilitheacha IP, de réir an EULA"
@@ -8556,7 +8556,7 @@ eyebrowCompany = "{{company}} Enterprise"
 inviteTeammates = "Tabhair cuireadh do chomhpháirtithe foirne"
 licenseKey = "Eochair cheadúnais"
 liveSub = "Tá d'eagraíocht soláthraithe agus tá do cheadúnas gníomhach."
-liveTitle = "Tá tú beo ar Stirling Enterprise"
+liveTitle = "Tá tú beo ar Morphe Enterprise"
 next = "Ar aghaidh: {{stage}}"
 open = "Oscail soláthar"
 scheduleCall = "Sceideal glao"
@@ -8591,7 +8591,7 @@ gatingAction = "Glac le do luachan"
 label = "Luachan"
 
 [portal.procurement.journeySteps.trial]
-blurb = "Déan Stirling a mheas i gcoinne do cháipéisí agus sreafaí oibre."
+blurb = "Déan Morphe a mheas i gcoinne do cháipéisí agus sreafaí oibre."
 gatingAction = "Tóg do luachan"
 label = "Triail"
 
@@ -8608,14 +8608,14 @@ trialFileHint = "Seo do chomhad ceadúnais trialach. Nuair a bheidh do chomhaont
 
 [portal.procurement.link]
 cta = "Nasc cuntas"
-description = "Ritheann soláthar ar do chuntas Stirling nasctha: sin mar a sholáthraímid an triail, a phraghsálaimid do luachan, agus a thosaímid billeáil. Nasc cuntas chun tosú."
+description = "Ritheann soláthar ar do chuntas Morphe nasctha: sin mar a sholáthraímid an triail, a phraghsálaimid do luachan, agus a thosaímid billeáil. Nasc cuntas chun tosú."
 eyebrow = "Enterprise"
 title = "Nasc do chuntas chun tosú"
 
 [portal.procurement.live]
 description = "Tá do shíntiús gníomhach agus tá do cheadúnas eisithe. Tá d’fhoireann soláthraithe agus tá billeáil tosaithe."
 eyebrow = "Beo"
-title = "Tá tú beo ar Stirling Enterprise"
+title = "Tá tú beo ar Morphe Enterprise"
 
 [portal.procurement.milestone]
 downloadError = "Níorbh fhéidir an PDF luachana a íoslódáil fós — bain triail eile as ar ball."
@@ -8650,11 +8650,11 @@ airgapSub = "Séalaithe, gan aon aschur"
 back = "Siar"
 businessName = "Ainm gnó"
 businessNamePlaceholder = "Acme Corp"
-cloud = "Stirling Cloud"
+cloud = "Morphe Cloud"
 cloudSub = "Bainistithe, tosú is tapúla"
 continue = "Lean ar aghaidh"
 deployment = "Cá háit ar cheart é a imscaradh?"
-eula = "Aontaím le Stirling EULA & Téarmaí Tráchtála."
+eula = "Aontaím le Morphe EULA & Téarmaí Tráchtála."
 fullName = "Ainm iomlán"
 fullNamePlaceholder = "D'ainm"
 invites = "Tabhair cuireadh do chomhghleacaithe · roghnach"
@@ -8685,7 +8685,7 @@ title = "Triail Enterprise"
 
 [portal.search]
 ariaLabel = "Cuardaigh"
-placeholder = "Cuardaigh Stirling — endpoints, píblínte, cáipéisí…"
+placeholder = "Cuardaigh Morphe — endpoints, píblínte, cáipéisí…"
 
 [portal.search.empty]
 noActionsDescription = "Beidh gníomhartha tapa le feiceáil anseo nuair a bheidh siad ar fáil."
@@ -8702,7 +8702,7 @@ account-link = "Nasc cuntais"
 [portal.shell.sidebar]
 appEditor = "Eagarthóir"
 appProcessor = "Próiseálaí"
-linkAccount = "Nasc cuntas Stirling"
+linkAccount = "Nasc cuntas Morphe"
 primaryNav = "Príomh-nascleanúint"
 switchApp = "Athraigh aip"
 
@@ -8712,7 +8712,7 @@ openNav = "Oscail nascleanúint"
 search = "Cuardaigh"
 
 [portal.sources]
-subtitle = "Naisc ionchuir in-athúsáidte a chuireann cáipéisí isteach i Stirling. Cumraigh ceangal uair amháin, ansin tagair dó ó aon líon beartas. Cliceáil ró dá chumraíocht agus na beartais a úsáideann é."
+subtitle = "Naisc ionchuir in-athúsáidte a chuireann cáipéisí isteach i Morphe. Cumraigh ceangal uair amháin, ansin tagair dó ó aon líon beartas. Cliceáil ró dá chumraíocht agus na beartais a úsáideann é."
 title = "Foinsí"
 
 [portal.sources.actions]
@@ -8809,7 +8809,7 @@ description = "Faire ar chomhadlann ar an bhfreastalaí le haghaidh cáipéisí 
 label = "Fillteán"
 
 [portal.sources.types.folder.fields.directory]
-helperText = "Cosán absalóideach a bhféachann Stirling air le haghaidh comhad le próiseáil."
+helperText = "Cosán absalóideach a bhféachann Morphe air le haghaidh comhad le próiseáil."
 label = "Cosán comhadlainne"
 placeholder = "/data/incoming"
 
@@ -8896,7 +8896,7 @@ secretNote = "Taispeántar an rún sínithe uair amháin, nuair a chruthaítear 
 copy = "Cóipeáil"
 done = "Déanta"
 secret = "Rún sínithe"
-secretHelp = "Sínigh corp amh gach seachadta leis an eochair seo (HMAC-SHA256) agus seol é mar cheanntásc X-Stirling-Signature."
+secretHelp = "Sínigh corp amh gach seachadta leis an eochair seo (HMAC-SHA256) agus seol é mar cheanntásc X-Morphe-Signature."
 secretWarning = "Cóipeáil an rún sínithe anois. Ar mhaithe le do shlándáil, ní thaispeántar é ach uair amháin agus ní féidir é a aisghabháil níos déanaí."
 title = "Webhook cruthaithe"
 url = "URL seachadta"
@@ -8912,7 +8912,7 @@ close = "Dún"
 
 [portal.usage]
 managePayment = "Bainistigh Íocaíocht"
-subtitle = "Tomhaltas, sonraisc, agus bainistíocht pleananna do gach PDF a bhilligh Stirling, in aon chonsól amháin."
+subtitle = "Tomhaltas, sonraisc, agus bainistíocht pleananna do gach PDF a bhilligh Morphe, in aon chonsól amháin."
 title = "Úsáid & billeáil"
 
 [portal.usage.error]
@@ -8922,7 +8922,7 @@ walletUnavailable = "Níl sparán ar fáil: {{status}} {{statusText}}"
 
 [portal.usage.sessionExpired]
 action = "Sínigh isteach arís"
-body = "Tá seisiún do chuntais Stirling imithe in éag. Sínigh isteach arís chun billeáil a fheiceáil — fanann d’instance nasctha."
+body = "Tá seisiún do chuntais Morphe imithe in éag. Sínigh isteach arís chun billeáil a fheiceáil — fanann d’instance nasctha."
 title = "Seisiún imithe in éag"
 
 [portal.users]
@@ -9695,8 +9695,8 @@ hideTools = "Folaigh uirlisí nach bhfuil ar fáil ▴"
 messageNoFallback = "Ní bheidh uirlisí ar fáil go dtí go mbeidh do fhreastalaí ar líne arís."
 messageWithFallback = "Teastaíonn ceangal le freastalaí ó chuid d’uirlisí."
 showTools = "Féach uirlisí nach bhfuil ar fáil ▾"
-title = "Ní féidir do fhreastalaí Stirling-PDF a bhaint amach"
-toolNotAvailableLocally = "Tá do fhreastalaí Stirling-PDF as líne agus níl \"{{endpoint}}\" ar fáil ar an gcúlcheann áitiúil."
+title = "Ní féidir do fhreastalaí Morphe PDF a bhaint amach"
+toolNotAvailableLocally = "Tá do fhreastalaí Morphe PDF as líne agus níl \"{{endpoint}}\" ar fáil ar an gcúlcheann áitiúil."
 
 [session]
 expired = "Tá do sheisiún imithe in éag. Athnuaigh an leathanach agus bain triail eile as."
@@ -9732,7 +9732,7 @@ user = "Logáilte isteach mar"
 
 [settings.connection.mode]
 local = "Áitiúil Amháin"
-saas = "Stirling Cloud"
+saas = "Morphe Cloud"
 selfhosted = "Féin-óstáilte"
 
 [settings.developer]
@@ -9747,11 +9747,11 @@ autoUnzipFileLimitDescription = "Uasmhéid comhad le baint as ZIP"
 autoUnzipFileLimitTooltip = "Dífhuascail ach amháin má tá an oiread seo comhad sa ZIP nó níos lú. Socraigh níos airde chun ZIPanna níos mó a bhaint."
 autoUnzipTooltip = "Baineann sé comhaid ZIP a fhilleann ó oibríochtaí API go huathoibríoch. Díchumasaigh chun comhaid ZIP a choinneáil slán. Ní théann sé seo i bhfeidhm ar shreafaí oibre uathoibrithe."
 defaultPdfEditor = "Eagarthóir PDF réamhshocraithe"
-defaultPdfEditorActive = "Is é Stirling PDF d’eagarthóir PDF réamhshocraithe"
+defaultPdfEditorActive = "Is é Morphe PDF d’eagarthóir PDF réamhshocraithe"
 defaultPdfEditorChecking = "Á sheiceáil..."
 defaultPdfEditorInactive = "Tá feidhmchlár eile socraithe mar réamhshocrú"
 defaultPdfEditorRemind = "Cuir i gcuimhne dom é a shocrú mar réamhshocrú"
-defaultPdfEditorRemindDescription = "Taispeáin meirge nuair nach é Stirling PDF d'fheidhmchlár PDF réamhshocraithe."
+defaultPdfEditorRemindDescription = "Taispeáin meirge nuair nach é Morphe PDF d'fheidhmchlár PDF réamhshocraithe."
 defaultPdfEditorSet = "Réamhshocraithe Cheana"
 defaultStartupView = "Amharc réamhshocraithe ar thosú"
 defaultStartupViewDescription = "Roghnaigh cén cluaisín a bheidh gníomhach sa cholún clé nuair a thosaíonn an aip"
@@ -9795,7 +9795,7 @@ learnMore = "Tuilleadh eolais sa doiciméadú"
 title = "Do Riarthóirí Córais"
 
 [settings.general.loginLanding]
-description = "Roghnaigh cén aip a osclaítear nuair a shíníonn tú isteach i Stirling Cloud."
+description = "Roghnaigh cén aip a osclaítear nuair a shíníonn tú isteach i Morphe Cloud."
 editor = "Eagarthóir"
 processor = "Próiseálaí"
 title = "Tar éis síniú isteach"
@@ -9825,7 +9825,7 @@ updateBehavior = "Iompar nuashonruithe"
 updateBehaviorDescription = "Roghnaigh an dtabharfar leid roimh shuiteáil nuashonruithe, an suiteálfar go huathoibríoch iad, nó an scipeálfar seiceálacha nuashonraithe go hiomlán."
 updateBehaviorError = "Níorbh fhéidir iompar an nuashonraithe a athrú"
 updateBehaviorErrorLocked = "Tá an socrú seo faoi ghlas ag do riarthóir."
-updateBehaviorLockedDescription = "Tá do riarthóir tar éis a chumrú conas a láimhseálann Stirling-PDF nuashonruithe ar an meaisín seo. Déan teagmháil leo chun é seo a athrú."
+updateBehaviorLockedDescription = "Tá do riarthóir tar éis a chumrú conas a láimhseálann Morphe PDF nuashonruithe ar an meaisín seo. Déan teagmháil leo chun é seo a athrú."
 updateBehaviorSaved = "Sábháladh iompar an nuashonraithe."
 versionMismatch = "Warning: A mismatch has been detected between the client version and the AppConfig version. Using different versions can lead to compatibility issues, errors, and security risks. Please ensure that server and client are using the same version."
 viewDetails = "Féach Sonraí"
@@ -9909,7 +9909,7 @@ usageAnalytics = "Anailísíocht Úsáide"
 [settings.planBilling]
 currentPlan = "Plean Reatha"
 loading = "Eolas billeála á lódáil..."
-notAvailable = "Tá Plean & Billeáil ar fáil ach amháin nuair a bhíonn ceangal le Stirling Cloud (mód SaaS)."
+notAvailable = "Tá Plean & Billeáil ar fáil ach amháin nuair a bhíonn ceangal le Morphe Cloud (mód SaaS)."
 title = "Plean & Billeáil"
 
 [settings.planBilling.billing]
@@ -10040,7 +10040,7 @@ emptyUsername = "Cuir isteach d’ainm úsáideora"
 oauthFailed = "Theip ar logáil isteach OAuth. Bain triail eile as."
 
 [setup.saas]
-title = "Sínigh isteach i Stirling"
+title = "Sínigh isteach i Morphe"
 
 [setup.selfhosted]
 changeServerLocked = "Tá do eagraíocht tar éis an aip seo a shrianadh le freastalaí ar leith"
@@ -10078,7 +10078,7 @@ step3 = "Atosaigh an freastalaí"
 title = "Níl an Logáil Isteach Cumasaithe"
 
 [setup.server.url]
-description = "Cuir isteach URL iomlán do fhreastalaí Stirling PDF féin-óstáilte"
+description = "Cuir isteach URL iomlán do fhreastalaí Morphe PDF féin-óstáilte"
 label = "URL an fhreastalaí"
 
 [sharedSign]
@@ -10314,7 +10314,7 @@ pleaseFillAllFields = "Líon isteach na réimsí go léir, le do thoil"
 signUp = "Cláraigh"
 signUpWith = "Sign up with"
 skip = "Skip"
-subtitle = "Bí le Stirling PDF chun tosú"
+subtitle = "Bí le Morphe PDF chun tosú"
 title = "Cruthaigh cuntas"
 unexpectedError = "Earráid gan choinne: {{message}}"
 
@@ -10541,7 +10541,7 @@ download = "Íoslódáil"
 downloaded = "Íosluchtaithe"
 downloadFailed = "Níorbh fhéidir an comhad seo a íoslódáil."
 downloadsCount = "Íoslódálacha: {{count}}"
-emailWarningBody = "Is cosúil gur seoladh ríomhphoist é seo. Mura bhfuil an duine seo ina úsáideoir Stirling PDF cheana, ní bheidh sé in ann rochtain a fháil ar an gcomhad."
+emailWarningBody = "Is cosúil gur seoladh ríomhphoist é seo. Mura bhfuil an duine seo ina úsáideoir Morphe PDF cheana, ní bheidh sé in ann rochtain a fháil ar an gcomhad."
 emailWarningConfirm = "Comhroinn mar sin féin"
 emailWarningTitle = "Seoladh ríomhphoist"
 errorTitle = "Theip ar chomhroinnt"
@@ -10572,7 +10572,7 @@ manageTitle = "Bainistigh Comhroinnt"
 noActivity = "Níl aon ghníomhaíocht fós."
 noLinks = "Níl aon naisc chomhroinnte gníomhacha fós."
 noSharedUsers = "Níl aon úsáideoirí le rochtain fós."
-openInApp = "Oscail i Stirling PDF"
+openInApp = "Oscail i Morphe PDF"
 ownerLabel = "Úinéir"
 ownerUnknown = "Anaithnid"
 removeLink = "Bain nasc"
@@ -10626,7 +10626,7 @@ updateButton = "Nuashonraigh ar an bhfreastalaí"
 uploadButton = "Uaslódáil chuig an bhfreastalaí"
 
 [survey]
-title = "Stirling-PDF Survey"
+title = "Morphe PDF Survey"
 
 [swagger]
 clickHere = "cliceáil anseo"
@@ -10785,7 +10785,7 @@ favorites = "Ceanáin"
 heading = "Gach uirlis (radharc lánscáileáin)"
 noResults = "Bain triail as do chuardach a choigeartú nó tuairiscí a scoránaigh chun an rud atá uait a aimsiú."
 recommended = "Molta"
-selfHostedOffline = "Teastaíonn do fhreastalaí Stirling-PDF uaidh (faoi láthair as líne):"
+selfHostedOffline = "Teastaíonn do fhreastalaí Morphe PDF uaidh (faoi láthair as líne):"
 showDetails = "Taispeáin Sonraí"
 unavailable = "Díchumasaithe ag riarthóir freastalaí:"
 unavailableDependency = "Níl ar fáil - uirlis riachtanach ar iarraidh ar an bhfreastalaí:"
@@ -10794,7 +10794,7 @@ unfavorite = "Bain den Cheanáin"
 [toolPanel.modePrompt]
 chooseFullscreen = "Úsáid mód lánscáileáin"
 chooseSidebar = "Úsáid mód barra taoibh"
-description = "Réamhamharc ar an dá leagan amach agus socraigh conas is mian leat uirlisí Stirling PDF a iniúchadh."
+description = "Réamhamharc ar an dá leagan amach agus socraigh conas is mian leat uirlisí Morphe PDF a iniúchadh."
 dismiss = "B'fhéidir níos déanaí"
 fullscreenDescription = "Brabhsáil gach uirlis i gcatalóg a chlúdaíonn an spás oibre go dtí go roghnaíonn tú ceann."
 fullscreenTitle = "Mód lánscáileáin - (oidhreachta)"
@@ -10857,7 +10857,7 @@ loadingDetailedInfo = "Ag lódáil eolas mionsonraithe..."
 migrationGuide = "Treoir Imirce"
 migrationGuides = "Treoracha Imirce"
 migrationGuidesDesc = "Athbhreithnigh na hathruithe tábhachtacha sula nuashonraítear."
-modalSubtitle = "Tá leagan nua de Stirling PDF réidh le suiteáil."
+modalSubtitle = "Tá leagan nua de Morphe PDF réidh le suiteáil."
 modalTitle = "Nuashonrú ar Fáil"
 notes = "Nótaí"
 releaseNotes = "Nótaí Eisiúna"
@@ -10881,7 +10881,7 @@ urgent = "Práinneach"
 attentionBody = "Ní mór do d’riarthóir síniú isteach chun tuilleadh eolais a fheiceáil. Déan teagmháil leo láithreach."
 attentionBodyAdmin = "Athbhreithnigh na riachtanais ceadúnais chun an freastalaí seo a choinneáil comhlíontach."
 attentionTitle = "Teastaíonn aird riarthóra ón bhfreastalaí seo"
-message = "Bain an leas is fearr as Stirling PDF le húsáideoirí neamhtheoranta agus gnéithe ardleibhéil"
+message = "Bain an leas is fearr as Morphe PDF le húsáideoirí neamhtheoranta agus gnéithe ardleibhéil"
 seeInfo = "Féach eolas"
 title = "Uasghrádaigh go Plean Freastalaí"
 upgradeButton = "Uasghrádaigh Anois"
@@ -11016,7 +11016,7 @@ authWeb = "Pasfhocal"
 create = "Cruthaigh cuntas"
 createSubtitle = "Cruthaigh cuntas self-hosted le pasfhocal nó SSO."
 createTitle = "Cruthaigh cuntas"
-editorDesc = "Cuir PDFs in eagar san Eagarthóir Stirling PDF. Faigheann gach duine é seo."
+editorDesc = "Cuir PDFs in eagar san Eagarthóir Morphe PDF. Faigheann gach duine é seo."
 email = "Seoladh ríomhphoist"
 emailError = "Cuir isteach seoladh ríomhphoist bailí"
 emailPlaceholder2 = "name@company.com"
@@ -11031,7 +11031,7 @@ processorDeferred = "Seoladh cuireadh, ach níorbh fhéidir rochtain Processor a
 processorDesc = "An dromchla rialachais, píblínte a rith, gníomhairí, agus an API."
 role = "Ról"
 send2 = "Seol cuireadh"
-subtitle2 = "Gheobhaidh siad ríomhphost chun dul isteach i do spás oibre Stirling."
+subtitle2 = "Gheobhaidh siad ríomhphost chun dul isteach i do spás oibre Morphe."
 team = "Foireann"
 title = "Tabhair cuireadh do dhaoine"
 username = "Ainm úsáideora"
@@ -11164,7 +11164,7 @@ downloads = "Íoslódálacha"
 entryLabel = "Achoimre ar Shínithe"
 filesEvaluated_one = "Measadh {{count}} comhad"
 filesEvaluated_other = "Measadh {{count}} comhad"
-footer = "Bailíochtaithe trí Stirling PDF"
+footer = "Bailíochtaithe trí Morphe PDF"
 generatedAt = "Ginte"
 noPdf = "Beidh tuarascáil PDF ar fáil tar éis bailíochtaithe rathúla."
 page = "Leathanach"

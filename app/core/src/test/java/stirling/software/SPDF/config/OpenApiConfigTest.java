@@ -39,7 +39,7 @@ class OpenApiConfigTest {
             assertThat(openAPI).isNotNull();
             assertThat(openAPI.getOpenapi()).isEqualTo("3.0.3");
             assertThat(openAPI.getInfo()).isNotNull();
-            assertThat(openAPI.getInfo().getTitle()).isEqualTo("Stirling PDF API");
+            assertThat(openAPI.getInfo().getTitle()).isEqualTo("Morphe PDF API");
             // Version falls back to 1.0.0 when no implementation version on the package.
             assertThat(openAPI.getInfo().getVersion()).isNotBlank();
         }

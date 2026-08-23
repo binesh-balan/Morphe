@@ -112,7 +112,7 @@ export default meta;
 
 type Story = StoryObj<typeof SlideStage>;
 
-/** "Welcome to Stirling" — the V2 intro slide (rocket hero). */
+/** "Welcome to Morphe" — the V2 intro slide (rocket hero). */
 export const Welcome: Story = { args: { slideId: "welcome" } };
 
 /** The only stepped example: a multi-step flow shows the step pill + progress

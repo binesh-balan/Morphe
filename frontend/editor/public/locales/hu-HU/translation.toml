@@ -1075,11 +1075,11 @@ description = "Választható funkciók és képességek konfigurálása."
 title = "Funkciók"
 
 [admin.settings.features.serverCertificate]
-description = "Szerveroldali tanúsítvány létrehozásának konfigurálása a \"Sign with Stirling-PDF\" funkcióhoz"
+description = "Szerveroldali tanúsítvány létrehozásának konfigurálása a \"Sign with Morphe PDF\" funkcióhoz"
 label = "Szerver tanúsítvány"
 
 [admin.settings.features.serverCertificate.enabled]
-description = "Szerveroldali tanúsítvány engedélyezése a \"Sign with Stirling-PDF\" opcióhoz"
+description = "Szerveroldali tanúsítvány engedélyezése a \"Sign with Morphe PDF\" opcióhoz"
 label = "Szerver tanúsítvány engedélyezése"
 
 [admin.settings.features.serverCertificate.organizationName]
@@ -1096,11 +1096,11 @@ label = "Tanúsítvány érvényessége (nap)"
 
 [admin.settings.folderAccess]
 description = "Könyvtárak, amelyekből a mappaforrások és mappakimenetek olvashatnak, illetve amelyekbe írhatnak. Ez biztonsági határ: az automatizálások soha nem mutathatnak a listán kívüli szerverútvonalra."
-securityNote = "Hagyja üresen a mappaforrások és -kimenetek teljes letiltásához. A Stirling saját konfigurációs könyvtára mindig tiltott."
+securityNote = "Hagyja üresen a mappaforrások és -kimenetek teljes letiltásához. A Morphe saját konfigurációs könyvtára mindig tiltott."
 title = "Mappahozzáférés"
 
 [admin.settings.folderAccess.implied]
-description = "Ezek a Stirling által kezelt könyvtárak mindig engedélyezettek, és itt nem módosíthatók."
+description = "Ezek a Morphe által kezelt könyvtárak mindig engedélyezettek, és itt nem módosíthatók."
 serverStorage = "Szerver fájltárolója"
 title = "Mindig engedélyezett"
 watchedFolder = "Pipeline figyelt mappája"
@@ -1246,7 +1246,7 @@ description = "URL vagy fájlnév a cookie-szabályzathoz"
 label = "Cookie-szabályzat"
 
 [admin.settings.legal.disclaimer]
-message = "Ezen jogi dokumentumok testreszabásával teljes felelősséget vállal a vonatkozó jogszabályoknak és előírásoknak való megfelelés biztosításáért, beleértve, de nem kizárólag a GDPR-t és más EU-s adatvédelmi követelményeket. Csak akkor módosítsa ezeket a beállításokat, ha: (1) személyes/privát példányt üzemeltet, (2) az EU joghatóságán kívül van és tisztában van helyi jogi kötelezettségeivel, vagy (3) megfelelő jogi tanácsot szerzett, és elfogadja az egyedüli felelősséget minden felhasználói adatért és a jogszabályoknak való megfelelésért. A Stirling-PDF és fejlesztői nem vállalnak felelősséget az Ön jogi kötelezettségeiért."
+message = "Ezen jogi dokumentumok testreszabásával teljes felelősséget vállal a vonatkozó jogszabályoknak és előírásoknak való megfelelés biztosításáért, beleértve, de nem kizárólag a GDPR-t és más EU-s adatvédelmi követelményeket. Csak akkor módosítsa ezeket a beállításokat, ha: (1) személyes/privát példányt üzemeltet, (2) az EU joghatóságán kívül van és tisztában van helyi jogi kötelezettségeivel, vagy (3) megfelelő jogi tanácsot szerzett, és elfogadja az egyedüli felelősséget minden felhasználói adatért és a jogszabályoknak való megfelelésért. A Morphe PDF és fejlesztői nem vállalnak felelősséget az Ön jogi kötelezettségeiért."
 title = "Jogi felelősségi figyelmeztetés"
 
 [admin.settings.legal.impressum]
@@ -1333,8 +1333,8 @@ description = "Felhasználónév az SMTP hitelesítéshez"
 label = "SMTP felhasználónév"
 
 [admin.settings.mcp]
-apikeyNote = "Clients send a Stirling API key in the X-API-KEY header (or Authorization: Bearer <key>). The key maps to its owning Stirling user - only provisioned accounts get in, and actions are audited as that user. Manage keys under Account > API Keys."
-description = "Expose Stirling's PDF tools and AI agents to MCP clients over an OAuth-protected endpoint."
+apikeyNote = "Clients send a Morphe API key in the X-API-KEY header (or Authorization: Bearer <key>). The key maps to its owning Morphe user - only provisioned accounts get in, and actions are audited as that user. Manage keys under Account > API Keys."
+description = "Expose Morphe's PDF tools and AI agents to MCP clients over an OAuth-protected endpoint."
 title = "MCP Server"
 
 [admin.settings.mcp.acceptedAudiences]
@@ -1364,7 +1364,7 @@ step3ApiKeyb = "header (or Authorization: Bearer <key>). No OAuth or metadata di
 step4 = "Approve the sign-in; the client retries with a token. Tools appear grouped: convert, pages, misc, security, ai."
 step4ApiKey = "Tools appear grouped: convert, pages, misc, security, ai - and every call is audited as the key's owner."
 tip = "Tip: register the resource ID as an allowed audience in your IdP. Tested with MCP Inspector and Claude Desktop."
-tipApiKey = "Tip: API-key mode needs no external IdP - simplest for self-host. The key maps to its owning Stirling user."
+tipApiKey = "Tip: API-key mode needs no external IdP - simplest for self-host. The key maps to its owning Morphe user."
 title = "Connect an MCP client"
 
 [admin.settings.mcp.issuerUri]
@@ -1377,12 +1377,12 @@ label = "JWKS URL (optional)"
 placeholder = "Auto-discovered from issuer"
 
 [admin.settings.mcp.mode]
-description = "OAuth needs an external IdP. API key uses a Stirling per-user API key (X-API-KEY) - simplest for self-host."
+description = "OAuth needs an external IdP. API key uses a Morphe per-user API key (X-API-KEY) - simplest for self-host."
 label = "Authentication mode"
 
 [admin.settings.mcp.requireAccount]
-description = "Only let tokens through if their subject maps to a provisioned, enabled Stirling user."
-label = "Require an existing Stirling account"
+description = "Only let tokens through if their subject maps to a provisioned, enabled Morphe user."
+label = "Require an existing Morphe account"
 
 [admin.settings.mcp.resourceId]
 description = "This server's public /mcp URL. Tokens must list it in their audience (RFC 8707) or they are rejected."
@@ -1393,7 +1393,7 @@ description = "Require mcp.tools.read for read ops and mcp.tools.write for write
 label = "Enforce OAuth scopes"
 
 [admin.settings.mcp.usernameClaim]
-description = "JWT claim matched against a Stirling username (e.g. sub, email, preferred_username)."
+description = "JWT claim matched against a Morphe username (e.g. sub, email, preferred_username)."
 label = "Username claim"
 
 [admin.settings.plan.noData]
@@ -1714,7 +1714,7 @@ description = "Bekapcsolva csak a listában szereplő felhasználóazonosítók 
 label = "Csak megadott felhasználóazonosítók engedélyezése"
 
 [admin.settings.telegram.enabled]
-description = "Lehetővé teszi a felhasználóknak a Stirling PDF használatát a beállított Telegram botján keresztül."
+description = "Lehetővé teszi a felhasználóknak a Morphe PDF használatát a beállított Telegram botján keresztül."
 label = "Telegram bot engedélyezése"
 
 [admin.settings.telegram.feedback]
@@ -1787,20 +1787,20 @@ settingsOverview = "Ez a <strong>Beállítások panel</strong>. Az adminisztrát
 systemCustomization = "Számos módon testre szabhatja a felületet: a <strong>Rendszerbeállítások</strong> lehetővé teszik az alkalmazás nevének és nyelveinek módosítását, a <strong>Funkciók</strong> a kiszolgáló tanúsítványainak kezelését, a <strong>Végpontok</strong> pedig az egyes eszközök engedélyezését vagy letiltását a felhasználói számára."
 teamsAndUsers = "Itt kezelheti a <strong>csapatokat</strong> és az egyes felhasználókat. Meghívhat új felhasználókat e-mailben, megosztható hivatkozásokkal, vagy saját maga hozhat létre egyéni fiókokat számukra."
 welcome = "Üdvözöljük az <strong>Admin túrában</strong>! Fedezzük fel a rendszeradminisztrátorok számára elérhető, hatékony vállalati funkciókat és beállításokat."
-wrapUp = "Ez volt az admin túra! Megismerte azokat a vállalati funkciókat, amelyek a Stirling PDF-et hatékony, testre szabható megoldássá teszik szervezetek számára. Ezt a túrát bármikor elérheti a <strong>Súgó</strong> menüből."
+wrapUp = "Ez volt az admin túra! Megismerte azokat a vállalati funkciókat, amelyek a Morphe PDF-et hatékony, testre szabható megoldássá teszik szervezetek számára. Ezt a túrát bármikor elérheti a <strong>Súgó</strong> menüből."
 
 [adminUserSettings]
 admin = "Rendszergazda"
 title = "Felhasználókezelés"
 
 [agents]
-stirling_name = "Stirling"
+stirling_name = "Morphe"
 
 [analytics]
 learnMore = "További információ"
-paragraph1 = "A Stirling PDF opcionális analitikai adatgyűjtést kínál a termék fejlesztésének támogatásához. Nem gyűjtünk személyes információkat vagy fájltartalmakat."
-paragraph2 = "Kérjük, fontolja meg az analitika engedélyezését, hogy segítse a Stirling-PDF növekedését és jobban megérthessük felhasználóink igényeit."
-title = "Szeretne hozzájárulni a Stirling PDF fejlesztéséhez?"
+paragraph1 = "A Morphe PDF opcionális analitikai adatgyűjtést kínál a termék fejlesztésének támogatásához. Nem gyűjtünk személyes információkat vagy fájltartalmakat."
+paragraph2 = "Kérjük, fontolja meg az analitika engedélyezését, hogy segítse a Morphe PDF növekedését és jobban megérthessük felhasználóink igényeit."
+title = "Szeretne hozzájárulni a Morphe PDF fejlesztéséhez?"
 
 [annotate]
 tags = "annotate,highlight,draw,markup,comment,notes,review,redline,feedback,markup tools,sticky notes,shapes,arrows,text box,freehand"
@@ -2935,10 +2935,10 @@ copy = "Üzenet másolása"
 
 [chat.fab]
 close = "Close chat"
-open = "Open Stirling AI assistant"
+open = "Open Morphe AI assistant"
 
 [chat.header]
-agentMenu = "Stirling ügynök beállításai"
+agentMenu = "Morphe ügynök beállításai"
 clearChat = "Csevegés törlése"
 
 [chat.input]
@@ -3269,14 +3269,14 @@ upgradeButton = "Fiók frissítése"
 
 [config.apiKeys]
 copyKeyAriaLabel = "API-kulcs másolása"
-description = "Az API-kulcsa a Stirling PDF eszközkészletének eléréséhez. Másolja a projektjébe, vagy frissítse, hogy újat generáljon."
-docsDescription = "További információ a Stirling PDF integrálásáról:"
+description = "Az API-kulcsa a Morphe PDF eszközkészletének eléréséhez. Másolja a projektjébe, vagy frissítse, hogy újat generáljon."
+docsDescription = "További információ a Morphe PDF integrálásáról:"
 docsLink = "API-dokumentáció"
 docsTitle = "API-dokumentáció"
 generateError = "Nem sikerült API-kulcsot létrehozni."
 goToAccount = "Ugrás a fiókhoz"
 guestInfo = "A vendégek nem kapnak API-kulcsot. Hozzon létre egy fiókot, hogy API-kulcsot kapjon az alkalmazásaihoz."
-intro = "API-kulcsát használhatja a Stirling PDF feldolgozási képességeinek programozott eléréséhez."
+intro = "API-kulcsát használhatja a Morphe PDF feldolgozási képességeinek programozott eléréséhez."
 label = "API-kulcs"
 publicKeyAriaLabel = "Nyilvános API-kulcs"
 refreshAriaLabel = "API-kulcs frissítése"
@@ -3300,10 +3300,10 @@ title = "API-kulcsok frissítése"
 warning = "⚠️ Figyelmeztetés: Ez a művelet új API-kulcsokat hoz létre, és a korábbi kulcsokat érvényteleníti."
 
 [config.mcp]
-description = "Model Context Protocol (MCP) lets AI assistants like Claude use your Stirling PDF tools directly. Connect a client once and your assistant can convert, edit, secure and process documents on your behalf."
-guestInfo = "Guest users can't connect MCP clients. Create an account to use the MCP server and let your AI assistant run Stirling PDF tools on your behalf."
+description = "Model Context Protocol (MCP) lets AI assistants like Claude use your Morphe PDF tools directly. Connect a client once and your assistant can convert, edit, secure and process documents on your behalf."
+guestInfo = "Guest users can't connect MCP clients. Create an account to use the MCP server and let your AI assistant run Morphe PDF tools on your behalf."
 navLabel = "MCP Server"
-tip = "Every action your assistant runs is performed as your account and counts towards your usage, just like using Stirling PDF directly."
+tip = "Every action your assistant runs is performed as your account and counts towards your usage, just like using Morphe PDF directly."
 title = "MCP Server"
 viewApiKeys = "View API keys"
 
@@ -3320,7 +3320,7 @@ label = "Your MCP endpoint"
 
 [config.mcp.setup]
 addTo = "Add to"
-hint = "Pick your client, paste the snippet into the file shown, then restart it. You'll sign in with your Stirling account on first use - no keys to copy."
+hint = "Pick your client, paste the snippet into the file shown, then restart it. You'll sign in with your Morphe account on first use - no keys to copy."
 title = "Connect your AI assistant"
 
 [config.overview]
@@ -3429,7 +3429,7 @@ showPreferencesBtn = "Preferenciák kezelése"
 title = "Hogy használjuk a sütiket"
 
 [cookieBanner.popUp.description]
-1 = "Sütiket és egyéb technológiákat használunk, hogy a Stirling PDF jobban működjön az Ön számára, segítve minket abban, hogy javítsuk eszközeinket és olyan funkciókat fejlesszünk, amelyeket szeretni fog"
+1 = "Sütiket és egyéb technológiákat használunk, hogy a Morphe PDF jobban működjön az Ön számára, segítve minket abban, hogy javítsuk eszközeinket és olyan funkciókat fejlesszünk, amelyeket szeretni fog"
 2 = "Ha inkább nem szeretné, a 'Nem, köszönöm' gombra kattintva csak azok az alapvető sütik lesznek engedélyezve, amelyek a zavartalan működéshez szükségesek."
 
 [cookieBanner.preferencesModal]
@@ -3442,12 +3442,12 @@ subtitle = "Süti használat"
 title = "Beleegyezési preferenciák központja"
 
 [cookieBanner.preferencesModal.analytics]
-description = "Ezek a sütik segítenek megérteni, hogyan használják eszközeinket, így a közösségünk által leginkább értékelt funkciókra összpontosíthatunk. Nyugodt lehet-a Stirling PDF nem képes és soha nem is fog nyomon követni az Ön által használt dokumentumok tartalmát."
+description = "Ezek a sütik segítenek megérteni, hogyan használják eszközeinket, így a közösségünk által leginkább értékelt funkciókra összpontosíthatunk. Nyugodt lehet-a Morphe PDF nem képes és soha nem is fog nyomon követni az Ön által használt dokumentumok tartalmát."
 title = "Adatelemzések"
 
 [cookieBanner.preferencesModal.description]
-1 = "A Stirling PDF sütiket és hasonló technológiákat használ az Ön élményének javítása, valamint eszközeink használatának megértése érdekében. Ez segít nekünk abban, hogy javítsuk a teljesítményt, fejlesszük az Ön számára fontos funkciókat, és folyamatos támogatást nyújtsunk felhasználóinknak."
-2 = "A Stirling PDF nem képes-és soha nem is fog-nyomon követni vagy hozzáférni az Ön által használt dokumentumok tartalmához."
+1 = "A Morphe PDF sütiket és hasonló technológiákat használ az Ön élményének javítása, valamint eszközeink használatának megértése érdekében. Ez segít nekünk abban, hogy javítsuk a teljesítményt, fejlesszük az Ön számára fontos funkciókat, és folyamatos támogatást nyújtsunk felhasználóinknak."
+2 = "A Morphe PDF nem képes-és soha nem is fog-nyomon követni vagy hozzáférni az Ön által használt dokumentumok tartalmához."
 3 = "Az Ön bizalma és adatainak védelme a tevékenységünk középpontjában áll."
 
 [cookieBanner.preferencesModal.necessary]
@@ -3526,14 +3526,14 @@ title = "Hiba"
 
 [defaultApp.prompt]
 dontRemind = "Ne emlékeztessen újra"
-message = "Állítsa a Stirling PDF-et a PDF-fájlok megnyitásának alapértelmezett alkalmazásává."
+message = "Állítsa a Morphe PDF-et a PDF-fájlok megnyitásának alapértelmezett alkalmazásává."
 
 [defaultApp.settingsOpened]
-message = "Válassza a rendszerbeállításokban a Stirling PDF-et"
+message = "Válassza a rendszerbeállításokban a Morphe PDF-et"
 title = "Beállítások megnyitva"
 
 [defaultApp.success]
-message = "A Stirling PDF mostantól az alapértelmezett PDF-szerkesztő"
+message = "A Morphe PDF mostantól az alapértelmezett PDF-szerkesztő"
 title = "Alapértelmezett alkalmazás beállítva"
 
 [desktopUpdate]
@@ -3549,7 +3549,7 @@ updateFailedMessage = "A frissítés letöltése vagy telepítése nem sikerült
 
 [desktopUpdate.blocked]
 docsLink = "Telepítési dokumentáció megtekintése"
-message = "A Stirling-PDF-nek nincs jogosultsága saját magát frissíteni ezen a gépen."
+message = "A Morphe PDF-nek nincs jogosultsága saját magát frissíteni ezen a gépen."
 title = "Rendszergazdai jogosultság szükséges"
 
 [devAirgapped]
@@ -4107,7 +4107,7 @@ title = "Áthelyezés mappába"
 [filesPage.origin]
 all = "Összes forrás"
 cloud = "Felhő"
-cloudHint = "A Stirling szerveren tárolva"
+cloudHint = "A Morphe szerveren tárolva"
 local = "Helyi"
 localHint = "Csak ebben a böngészőben tárolva"
 shared = "Megosztott"
@@ -4378,7 +4378,7 @@ invisible = "Láthatatlan (csak metaadat)"
 location = "Hely:"
 logo = "Logó:"
 logoHidden = "Nincs logó"
-logoShown = "Stirling PDF logó megjelenítve"
+logoShown = "Morphe PDF logó megjelenítve"
 participantCount_one = "{{count}} participant will sign in order"
 participantCount_other = "{{count}} participants will sign in order"
 participants = "Résztvevők"
@@ -4432,7 +4432,7 @@ title = "Szekvenciális aláírás"
 dismiss = "Banner elrejtése"
 message = "Hozzon létre ingyenes fiókot, hogy menthesse munkáját, több funkcióhoz férjen hozzá és támogassa a projektet."
 signUp = "Ingyenes regisztráció"
-title = "A Stirling PDF-et vendégként használja!"
+title = "A Morphe PDF-et vendégként használja!"
 
 [home.addAttachments]
 desc = "Beágyazott fájlok (mellékletek) hozzáadása vagy eltávolítása egy PDF-hez/-ből"
@@ -4596,7 +4596,7 @@ tags = "összevon,összekapcsol,egyesít"
 title = "Egyesítés"
 
 [home.mobile]
-brandAlt = "Stirling PDF logó"
+brandAlt = "Morphe PDF logó"
 openFiles = "Fájlok megnyitása"
 swipeHint = "Húzza balra vagy jobbra a nézetek váltásához"
 tools = "Eszközök"
@@ -4635,7 +4635,7 @@ tags = "rendez,átrendez,újrarendez"
 title = "Rendszerezés"
 
 [home.pdfTextEditor]
-desc = "Nézze át és szerkessze a Stirling PDF JSON exportokat csoportosított szövegszerkesztéssel és PDF-újragenerálással"
+desc = "Nézze át és szerkessze a Morphe PDF JSON exportokat csoportosított szövegszerkesztéssel és PDF-újragenerálással"
 tags = "edit text,modify text,change text,edit content,update text,rewrite,correct,amend,redline,revise,text editor,content editor"
 title = "PDF szövegszerkesztő"
 
@@ -4821,7 +4821,7 @@ passwordRequired = "A jelszó megadása kötelező"
 signIn = "Bejelentkezés"
 validating = "Meghívó ellenőrzése..."
 validationError = "Nem sikerült ellenőrizni a meghívó linket"
-welcome = "Üdvözli a Stirling PDF"
+welcome = "Üdvözli a Morphe PDF"
 welcomeSubtitle = "Fejezze be a fiók beállítását a kezdéshez"
 welcomeTitle = "Meghívták!"
 
@@ -4847,7 +4847,7 @@ terms = "Felhasználási feltételek"
 title = "Külső licencek"
 
 [localMode]
-toolUnavailable = "Ehhez az eszközhöz fiók szükséges. Jelentkezzen be a Stirling Cloudba, vagy csatlakozzon egy önhosztolt szerverhez a használatához."
+toolUnavailable = "Ehhez az eszközhöz fiók szükséges. Jelentkezzen be a Morphe Cloudba, vagy csatlakozzon egy önhosztolt szerverhez a használatához."
 
 [localMode.toolPicker]
 message = "Jelentkezzen be az összes eszköz feloldásához."
@@ -5005,7 +5005,7 @@ message = "A hitelesítés nem volt sikeres. Bezárhatja ezt az ablakot, és meg
 title = "Sikertelen hitelesítés"
 
 [oauth.success]
-message = "Bezárhatja ezt az ablakot, és visszatérhet a Stirling PDF-hez."
+message = "Bezárhatja ezt az ablakot, és visszatérhet a Morphe PDF-hez."
 title = "Sikeres hitelesítés"
 
 [oauthConsent]
@@ -5018,17 +5018,17 @@ loadFailed = "This authorisation request is invalid or has expired. Close this t
 loading = "Loading authorisation request..."
 missingId = "Missing authorisation request. Start the connection from your app and try again."
 redirecting = "Returning you to the app..."
-requesting = "{{app}} wants to access your Stirling PDF account"
+requesting = "{{app}} wants to access your Morphe PDF account"
 scopesIntro = "This will allow {{app}} to:"
 signedInAs = "Signed in as {{name}}"
 signInButton = "Sign in to continue"
-signInPrompt = "Sign in to your Stirling PDF account to continue connecting the app."
+signInPrompt = "Sign in to your Morphe PDF account to continue connecting the app."
 title = "Authorise access"
 unknownApp = "A third-party application"
 
 [oauthConsent.access]
 actAsYou = "Act as you - everything {{app}} does runs under your account and counts towards your usage"
-tools = "Use your Stirling PDF tools on your behalf - convert, edit, sign, secure and process your documents"
+tools = "Use your Morphe PDF tools on your behalf - convert, edit, sign, secure and process your documents"
 
 [oauthConsent.scope]
 email = "See your email address"
@@ -5152,26 +5152,26 @@ skipTheTour = "Körbevezetés kihagyása"
 
 [onboarding.checklist]
 dismiss = "Elvetés"
-title = "Stirling PDF beállítása"
+title = "Morphe PDF beállítása"
 
 [onboarding.checklist.downloadDesktop]
 description = "Futtassa a Stirlinget natívan a gépén"
-title = "Stirling letöltése asztali gépre"
+title = "Morphe letöltése asztali gépre"
 
 [onboarding.checklist.inviteTeam]
 description = "Működjön együtt a csapatával"
 title = "Csapattagok meghívása"
 
 [onboarding.checklist.shareAnalytics]
-description = "Segítsen a Stirling fejlesztésében"
+description = "Segítsen a Morphe fejlesztésében"
 title = "Anonim használati adatok megosztása"
 
 [onboarding.checklist.takeTour]
-description = "Nézze meg egy gyors bemutatóban, hogyan működik a Stirling"
+description = "Nézze meg egy gyors bemutatóban, hogyan működik a Morphe"
 title = "Bemutató megtekintése"
 
 [onboarding.desktopInstall]
-body = "A Stirling asztali alkalmazásként működik a legjobban. Használhatja offline, gyorsabban érheti el a dokumentumokat, és helyben szerkeszthet a gépén."
+body = "A Morphe asztali alkalmazásként működik a legjobban. Használhatja offline, gyorsabban érheti el a dokumentumokat, és helyben szerkeszthet a gépén."
 selectOs = "Operációs rendszer kiválasztása"
 title = "Letöltés"
 titleWithOs = "Letöltés: {{osLabel}}"
@@ -5202,14 +5202,14 @@ userBody = "Hívja meg a csapattagokat, rendeljen szerepköröket, és tartsa re
 userTitle = "Csomag áttekintése"
 
 [onboarding.processorIntro]
-body = "A Stirling mostantól <strong>Szabályokat</strong> futtat — automatizált szabályokat, amelyek érkezéskor minden dokumentumot osztályoznak, védenek és feldolgoznak. Állítsa be őket, és kövesse a futásokat a <strong>Processor</strong> felületén."
+body = "A Morphe mostantól <strong>Szabályokat</strong> futtat — automatizált szabályokat, amelyek érkezéskor minden dokumentumot osztályoznak, védenek és feldolgoznak. Állítsa be őket, és kövesse a futásokat a <strong>Processor</strong> felületén."
 cta = "A Processor megtekintése"
-title = "Ismerje meg a Stirling Processort"
+title = "Ismerje meg a Morphe Processort"
 
 [onboarding.saas.freeEditor]
 freeLine = "The editor is now <free>completely free</free>."
 premium = "We've added loads of new features, including <strong>Policies</strong> and <strong>Agent Chat</strong>."
-title = "Welcome to Stirling"
+title = "Welcome to Morphe"
 
 [onboarding.saas.team]
 addButton = "Add"
@@ -5229,19 +5229,19 @@ rolePlaceholder = "Erősítse meg a szerepkörét"
 roleUser = "Felhasználó"
 
 [onboarding.serverLicense]
-freeBody = "Az <strong>Open-Core</strong> licencelésünk szerverenként legfeljebb <strong>{{freeTierLimit}}</strong> felhasználót enged ingyen. A zavartalan bővüléshez és az új <strong>PDF szövegszerkesztő eszköz</strong> korai eléréséhez a Stirling Server csomagot ajánljuk – teljes szerkesztés és <strong>korlátlan hely</strong> $99/szerver/hó áron."
+freeBody = "Az <strong>Open-Core</strong> licencelésünk szerverenként legfeljebb <strong>{{freeTierLimit}}</strong> felhasználót enged ingyen. A zavartalan bővüléshez és az új <strong>PDF szövegszerkesztő eszköz</strong> korai eléréséhez a Morphe Server csomagot ajánljuk – teljes szerkesztés és <strong>korlátlan hely</strong> $99/szerver/hó áron."
 freeTitle = "Szerverlicenc"
-overLimitBody = "Licencelésünk szerverenként legfeljebb <strong>{{freeTierLimit}}</strong> felhasználót enged ingyen. Önnek <strong>{{overLimitUserCopy}}</strong> Stirling felhasználója van. A zavartalan használathoz váltson a Stirling Server csomagra – <strong>korlátlan hely</strong>, PDF szövegszerkesztés és teljes adminisztrátori vezérlés $99/szerver/hó áron."
+overLimitBody = "Licencelésünk szerverenként legfeljebb <strong>{{freeTierLimit}}</strong> felhasználót enged ingyen. Önnek <strong>{{overLimitUserCopy}}</strong> Morphe felhasználója van. A zavartalan használathoz váltson a Morphe Server csomagra – <strong>korlátlan hely</strong>, PDF szövegszerkesztés és teljes adminisztrátori vezérlés $99/szerver/hó áron."
 overLimitTitle = "Szerverlicenc szükséges"
 seePlans = "Csomagok megtekintése →"
 upgrade = "Frissítés most →"
 
 [onboarding.tourOverview]
-body = "A Stirling PDF V2 tucatnyi eszközzel és megújult elrendezéssel érkezik. Tegyen egy gyors túrát, hogy lássa, mi változott és hol találja a szükséges funkciókat."
+body = "A Morphe PDF V2 tucatnyi eszközzel és megújult elrendezéssel érkezik. Tegyen egy gyors túrát, hogy lássa, mi változott és hol találja a szükséges funkciókat."
 title = "Bemutató áttekintése"
 
 [onboarding.welcomeSlide]
-body = "A Stirling PDF mostantól minden méretű csapat számára készen áll. Ez a frissítés új elrendezést, erőteljes új adminisztrátori képességeket és a leggyakrabban kért funkciónkat – a <strong>Szöveg szerkesztése</strong>-t tartalmazza."
+body = "A Morphe PDF mostantól minden méretű csapat számára készen áll. Ez a frissítés új elrendezést, erőteljes új adminisztrátori képességeket és a leggyakrabban kért funkciónkat – a <strong>Szöveg szerkesztése</strong>-t tartalmazza."
 title = "Üdvözöljük a Stirlingben"
 
 [onboarding.whatsNew]
@@ -5548,7 +5548,7 @@ benefit1Body = "chain tools, schedule runs, batch process"
 benefit1Title = "Automation pipelines"
 benefit2Body = "summarise, classify, redact, AI-OCR"
 benefit2Title = "AI tools"
-benefit3Body = "call any Stirling endpoint programmatically"
+benefit3Body = "call any Morphe endpoint programmatically"
 benefit3Title = "API access"
 button = "Turn on Processor →"
 reassurance = "No minimum · Set a $0 cap to test · Cancel anytime"
@@ -5629,7 +5629,7 @@ leader = "Team owner"
 member = "Member"
 
 [payg.signupRequired]
-body = "Stirling PDF gives every signed-up account 500 free operations, enough to keep most workflows humming without paying a cent. You're currently using Stirling as a guest, which doesn't include billable tools like AI, automations, or hosted processing."
+body = "Morphe PDF gives every signed-up account 500 free operations, enough to keep most workflows humming without paying a cent. You're currently using Morphe as a guest, which doesn't include billable tools like AI, automations, or hosted processing."
 cancel = "Not now"
 cta = "Sign up free"
 subtext = "Creating an account is free and takes a few seconds. No credit card required."
@@ -5677,7 +5677,7 @@ usdNote = "Estimated in USD. You can adjust your cap any time after subscribing,
 [payg.upgrade.checkout]
 capValue = "{{symbol}}{{amount}} / month"
 edit = "Edit"
-help = "Stripe handles your card details. Stirling never sees them."
+help = "Stripe handles your card details. Morphe never sees them."
 loading = "Loading checkout…"
 noCap = "No cap"
 title = "Add your payment method"
@@ -5685,7 +5685,7 @@ title = "Add your payment method"
 [payg.upgrade.help]
 aiBody = "summarise, classify, redact, AI-OCR"
 aiTitle = "AI tools"
-apiBody = "programmatic access to any Stirling endpoint"
+apiBody = "programmatic access to any Morphe endpoint"
 apiTitle = "API calls"
 automationBody = "chained tools or scheduled runs that don't need clicks"
 automationTitle = "Automation pipelines"
@@ -6116,7 +6116,7 @@ upToFiveUsers = "Legfeljebb 5 felhasználó"
 usageTrackingPrometheus = "Használatkövetés és Prometheus"
 
 [plan.licenseWarning]
-body = "{{total}} felhasználója van, de az ingyenes szint szerverenként csak {{limit}}-et támogat. Frissítsen, hogy a Stirling PDF zavartalanul működjön."
+body = "{{total}} felhasználója van, de az ingyenes szint szerverenként csak {{limit}}-et támogat. Frissítsen, hogy a Morphe PDF zavartalanul működjön."
 cta = "Csomagok megtekintése"
 overLimit = "több mint {{limit}}"
 title = "Elérte az önhostolt ingyenes korlátot"
@@ -6251,25 +6251,25 @@ comingSoon = "Hamarosan"
 [portal.accountLink.card]
 billingNote = "A felügyelet nélküli feldolgozás költsége a szervezeti tárcát terheli."
 eyebrow = "Fiók összekapcsolása"
-linkButton = "Stirling-fiók összekapcsolása"
+linkButton = "Morphe-fiók összekapcsolása"
 linked = "Összekapcsolva"
 linkedAs = "Összekapcsolva mint {{name}}."
 linkedGeneric = "Ez a példány össze van kapcsolva."
 notLinked = "Nincs összekapcsolva"
-title = "A szervezet összekapcsolása a Stirling-fiókjával"
+title = "A szervezet összekapcsolása a Morphe-fiókjával"
 unlink = "Összekapcsolás megszüntetése"
 
 [portal.accountLink.card.error]
 title = "Nem sikerült összekapcsolni"
 
 [portal.accountLink.card.loginNotConfigured]
-after = "a hosztolt Stirling-fiókkal való fiókösszekapcsolás engedélyezéséhez. Fejlesztés közben a bejelentkezést a hivatkozási párbeszédpanelen szimulálhatja."
+after = "a hosztolt Morphe-fiókkal való fiókösszekapcsolás engedélyezéséhez. Fejlesztés közben a bejelentkezést a hivatkozási párbeszédpanelen szimulálhatja."
 before = "Állítsa be:"
 title = "SaaS bejelentkezés nincs konfigurálva"
 
 [portal.accountLink.gate]
 action = "Fiók összekapcsolása"
-description = "Kapcsolja össze a szervezet Stirling-fiókját a számlázható funkciók használatához."
+description = "Kapcsolja össze a szervezet Morphe-fiókját a számlázható funkciók használatához."
 title = "Összekapcsolás a feloldáshoz"
 titleFeature = "Összekapcsolás a(z) {{feature}} feloldásához"
 
@@ -6301,13 +6301,13 @@ never = "soha"
 
 [portal.accountLink.modal]
 linkSubtitle = "Jelentkezzen be abba a fiókba, amelyre ennek a szervernek számláznia kell."
-linkTitle = "Stirling-fiók összekapcsolása"
-reauthSubtitle = "A munkamenete lejárt — jelentkezzen be újra a Stirling-fiókjába. A példánya összekapcsolva marad."
+linkTitle = "Morphe-fiók összekapcsolása"
+reauthSubtitle = "A munkamenete lejárt — jelentkezzen be újra a Morphe-fiókjába. A példánya összekapcsolva marad."
 reauthTitle = "Bejelentkezés újra"
 simulateSignIn = "Bejelentkezés szimulálása (dev)"
 
 [portal.accountLink.modal.loginNotConfigured]
-after = "az alkalmazáson belüli összekapcsolás engedélyezéséhez a hosztolt Stirling-fiókkal."
+after = "az alkalmazáson belüli összekapcsolás engedélyezéséhez a hosztolt Morphe-fiókkal."
 and = "és"
 before = "Állítsa be:"
 title = "SaaS bejelentkezés nincs konfigurálva"
@@ -6316,7 +6316,7 @@ title = "SaaS bejelentkezés nincs konfigurálva"
 instancesSub = "Minden saját üzemeltetésű példány, amely ehhez a szervezethez van regisztrálva. Vonjon vissza egy hitelesítő adatot a felügyelet nélküli hozzáférés azonnali megszüntetéséhez."
 instancesTitle = "Összekapcsolt példányok"
 revokeError = "Nem sikerült visszavonni a példányt"
-sub = "Kapcsolja össze ezt a saját üzemeltetésű szervezetet a Stirling-fiókjával, hogy a felügyelet nélküli feldolgozás költsége a szervezeti tárcát terhelje."
+sub = "Kapcsolja össze ezt a saját üzemeltetésű szervezetet a Morphe-fiókjával, hogy a felügyelet nélküli feldolgozás költsége a szervezeti tárcát terhelje."
 
 [portal.accountLink.panel.loadError]
 forbidden = "Csak a csapat tulajdonosa tekintheti meg a szervezet összekapcsolt példányait."
@@ -6380,7 +6380,7 @@ title = "Költési korlát beállítása"
 [portal.billing.checkout.card]
 fields = "Kártyaszám · HH / ÉÉ · CVC · ZIP"
 label = "Kártyaadatok"
-note = "A kártyaadatokat a Stripe gyűjti. A Stirling soha nem tárol PAN-t vagy CVC-t."
+note = "A kártyaadatokat a Stripe gyűjti. A Morphe soha nem tárol PAN-t vagy CVC-t."
 
 [portal.billing.checkout.error]
 title = "Nem sikerült elindítani a fizetést"
@@ -6398,7 +6398,7 @@ limitNoCap = "Nincs költési korlát. A feldolgozás nem szünetel. A számlák
 cta = "Enterprise ajánlat összeállítása"
 description = "Lekötött mennyiségi kedvezmények, air-gapped telepítés, egyedi MSA és biztonsági felülvizsgálatok, valamint 3rd-party disztribútor partnerségek."
 eyebrow = "Mennyiségi kedvezmény · 1M+ PDF"
-title = "Stirling Enterprise"
+title = "Morphe Enterprise"
 
 [portal.billing.freeEditors]
 activeThisMonth = "Aktív ebben a hónapban"
@@ -6447,9 +6447,9 @@ viewAriaLabel = "{{number}} számla megtekintése a Stripe-ban"
 viewLink = "Megtekintés ↗"
 
 [portal.billing.linkPrompt]
-cta = "Stirling-fiók összekapcsolása"
+cta = "Morphe-fiók összekapcsolása"
 description = "A kézi PDF-szerkesztés — megtekintés, aláírás, egyesítés, felosztás, vízjelezés, tömörítés, konvertálás, kézi OCR — mindig ingyenes, akár össze van kapcsolva a fiók, akár nem. Kapcsolja össze, hogy igénybe vegyen 500 ingyenes PDF-et mért feldolgozásra (automatizálás, AI és az API); ha többre van szüksége, kapcsolja be a Processor csomagot, és csak azért fizessen, amit használ."
-title = "Stirling-fiók összekapcsolása"
+title = "Morphe-fiók összekapcsolása"
 
 [portal.billing.paymentMethod]
 billedMonthly = "Havonta számlázva"
@@ -6523,9 +6523,9 @@ usersLabel = "Felhasználók összesen"
 label = "Tudomásul veszem, hogy amikor az előre fizetett kapacitásom elfogy vagy 12 hónap után lejár, a feldolgozás automatikusan a szokásos mért, használat alapú díjon folytatódik (a költési korlátomig), hacsak le nem mondom, és hogy bármikor lemondhatom a számlázási portálon."
 
 [portal.billing.prepaid.deploy]
-cloud = "Stirling Cloud"
-cloudDesc = "A Stirling kezeli. Percek alatt működik."
-cloudValue = "Stirling Cloud · Kezelt"
+cloud = "Morphe Cloud"
+cloudDesc = "A Morphe kezeli. Percek alatt működik."
+cloudValue = "Morphe Cloud · Kezelt"
 selfhost = "Saját üzemeltetésű"
 selfhostDesc = "Privát infrastruktúrán fut. Ugyanaz a díj."
 selfhostValue = "Saját üzemeltetésű · Privát infrastruktúra"
@@ -6681,7 +6681,7 @@ description = "Ahova a feldolgozott dokumentumok kerülnek – bucket, meghajtó
 label = "Fájl és csatolás"
 
 [portal.connections.commonFields.accessToken]
-helperText = "A Stirling ezt titkosítva tárolja, és többé nem jeleníti meg."
+helperText = "A Morphe ezt titkosítva tárolja, és többé nem jeleníti meg."
 label = "Access token"
 
 [portal.connections.commonFields.apiKey]
@@ -7191,7 +7191,7 @@ time = "Idő"
 user = "Felhasználó"
 
 [portal.editorAdmin]
-subtitle = "Telepítse a Stirling PDF Editor-t, párosítsa a self-hosted példányokat a szervezetéhez, és kezelje a futó flottát — célok, állapot, hitelesítő adatok és offline aktiválás egy helyen."
+subtitle = "Telepítse a Morphe PDF Editor-t, párosítsa a self-hosted példányokat a szervezetéhez, és kezelje a futó flottát — célok, állapot, hitelesítő adatok és offline aktiválás egy helyen."
 title = "Editor telepítése"
 
 [portal.editorAdmin.health.columns]
@@ -7282,7 +7282,7 @@ guide = "A(z) {{name}} útmutató megnyitása"
 openInBrowser = "Megnyitás inkább böngészőben"
 sectionDesktop = "Asztali alkalmazás"
 sectionSelfHosted = "Saját üzemeltetésű"
-title = "A Stirling PDF Editor telepítése"
+title = "A Morphe PDF Editor telepítése"
 
 [portal.home.download.docker]
 detailBody = "Futtassa a hivatalos image-et a szerverén."
@@ -7330,7 +7330,7 @@ title = "Windows"
 
 [portal.home.editor]
 activeOfDeployed = "{{active}} / {{total}} aktív ebben a hónapban"
-name = "Stirling PDF Editor"
+name = "Morphe PDF Editor"
 open = "Megnyitás böngészőben"
 updated = "frissítve: {{time}}"
 
@@ -7352,7 +7352,7 @@ morning = "Jó reggelt"
 [portal.infrastructure]
 manageEditorDeployment = "Editor telepítés kezelése"
 sectionsAriaLabel = "Infrastruktúra szakaszai"
-subtitle = "Telepítések, hitelesítő adatok, biztonsági állapot, tárhely és auditnapló a Stirling munkaterületéhez."
+subtitle = "Telepítések, hitelesítő adatok, biztonsági állapot, tárhely és auditnapló a Morphe munkaterületéhez."
 title = "Infrastruktúra"
 
 [portal.infrastructure.apiKeys]
@@ -7368,7 +7368,7 @@ usageMonth = "E havi használat"
 usageToday = "Mai használat"
 
 [portal.infrastructure.apiKeys.empty]
-description = "Hozzon létre egy korlátozott hatókörű kulcsot a Stirling API hívásának megkezdéséhez."
+description = "Hozzon létre egy korlátozott hatókörű kulcsot a Morphe API hívásának megkezdéséhez."
 title = "Még nincsenek API kulcsok"
 
 [portal.infrastructure.apiKeys.error]
@@ -7468,7 +7468,7 @@ done = "Kész"
 keyNameLabel = "Kulcs neve"
 keyNamePlaceholder = "pl. Production · ingest"
 secretKeyCaption = "Titkos kulcs"
-secretWarning = "Tárolja ezt secrets managerben. A Stirling csak hash-t tárol — később nincs mód a visszaállítására."
+secretWarning = "Tárolja ezt secrets managerben. A Morphe csak hash-t tárol — később nincs mód a visszaállítására."
 subtitle = "A kulcs hatókörét a szükséges minimumra korlátozza. Bármikor rotálhatja vagy visszavonhatja."
 subtitleCreated = "Másolja ki most ezt a titkot — többé nem jelenik meg."
 title = "API kulcs létrehozása"
@@ -7509,7 +7509,7 @@ version = "Verzió"
 
 [portal.infrastructure.deployments.regions]
 heading = "Régiók"
-subheading = "Élő állapot minden telepített Stirling régióhoz — késleltetés, terhelés és bevezetési verzió."
+subheading = "Élő állapot minden telepített Morphe régióhoz — késleltetés, terhelés és bevezetési verzió."
 
 [portal.infrastructure.deployments.regions.empty]
 description = "A telepített régiók itt jelennek meg, amint a munkaterülete ki van építve."
@@ -7590,16 +7590,16 @@ down = "Nem elérhető"
 healthy = "Egészséges"
 
 [portal.infrastructure.security.access.byok]
-description = "Adjon meg egy kulcsot a saját KMS-éből. A Stirling ezzel titkosít, de továbbra is olvasni tud."
+description = "Adjon meg egy kulcsot a saját KMS-éből. A Morphe ezzel titkosít, de továbbra is olvasni tud."
 label = "Bring your own key (BYOK)"
 
 [portal.infrastructure.security.access.hyok]
-description = "A kulcsok soha nem hagyják el a KMS-ét. A Stirling csak titkosított szöveget tárol."
+description = "A kulcsok soha nem hagyják el a KMS-ét. A Morphe csak titkosított szöveget tárol."
 label = "Hold your own key (HYOK)"
 
 [portal.infrastructure.security.access.stirling]
-description = "A Stirling kezeli a titkosítási kulcsokat. A legegyszerűbb — nincs kulcsművelet az Ön oldalán."
-label = "Stirling által tárolt kulcsok"
+description = "A Morphe kezeli a titkosítási kulcsokat. A legegyszerűbb — nincs kulcsművelet az Ön oldalán."
+label = "Morphe által tárolt kulcsok"
 
 [portal.infrastructure.security.accessPolicy]
 heading = "Dokumentum-hozzáférési szabályzat"
@@ -7613,15 +7613,15 @@ viewReport = "Jelentés megtekintése →"
 
 [portal.infrastructure.security.compliance]
 heading = "Megfelelőség"
-subheading = "A Stirling platformot lefedő tanúsítások és minősítések."
+subheading = "A Morphe platformot lefedő tanúsítások és minősítések."
 
 [portal.infrastructure.security.empty]
 description = "A munkaterület biztonsági konfigurációja itt fog megjelenni."
 title = "A biztonsági állapot nem érhető el"
 
 [portal.infrastructure.security.hyokBanner]
-description = "HYOK esetén a titkosítási kulcsok soha nem hagyják el a KMS-ét. A Stirling csak olyan titkosított szöveget tárol és dolgoz fel, amelyet bármikor visszavonhat."
-title = "A Stirling nem tudja visszafejteni a dokumentumait"
+description = "HYOK esetén a titkosítási kulcsok soha nem hagyják el a KMS-ét. A Morphe csak olyan titkosított szöveget tárol és dolgoz fel, amelyet bármikor visszavonhat."
+title = "A Morphe nem tudja visszafejteni a dokumentumait"
 
 [portal.infrastructure.security.ipAllowlist]
 empty = "Nincsenek konfigurált IP tartományok — minden IP engedélyezett."
@@ -7650,7 +7650,7 @@ subheading = "A dokumentumokat nyugalmi állapotban titkosító kulcsok felügye
 
 [portal.infrastructure.security.managedBanner]
 description = "A bring-your-own-key (BYOK) és hold-your-own-key (HYOK) kulcsfelügyelet Enterprise csomagban érhető el. Frissítsen, hogy kulcsokat adjon meg a saját KMS-éből."
-title = "A kulcsokat a Stirling kezeli az Ön csomagjában"
+title = "A kulcsokat a Morphe kezeli az Ön csomagjában"
 
 [portal.infrastructure.security.residency.apac]
 description = "ap-southeast-1"
@@ -7724,7 +7724,7 @@ connectionCount_one = "{{count}} kapcsolat"
 connectionCount_other = "{{count}} kapcsolat"
 customApi = "Egyéni API"
 searchPlaceholder = "Integrációk keresése"
-subtitle = "Minden, amellyel a Stirling kommunikálni tud. A hitelesítő adatok itt egyszer jönnek létre, majd források, házirendek és folyamatok hivatkoznak rájuk."
+subtitle = "Minden, amellyel a Morphe kommunikálni tud. A hitelesítő adatok itt egyszer jönnek létre, majd források, házirendek és folyamatok hivatkoznak rájuk."
 title = "Integrációk"
 typedName = "{{tool}} neve"
 
@@ -8405,7 +8405,7 @@ title = "Még nincs folyamat"
 
 [portal.processorFlow.sources]
 comingSoonTag = "Csatlakoztatás"
-editor = "Stirling PDF Editor"
+editor = "Morphe PDF Editor"
 heading = "Források"
 perDay = "{{n}} / 24 óra"
 
@@ -8421,8 +8421,8 @@ title = "Beszerzés"
 [portal.procurement.agreement]
 agreeCta = "Elfogadás és előfizetés"
 confidential = "Bizalmas"
-confirm = "Elolvastam és elfogadom a Stirling Enterprise Agreement feltételeit."
-docName = "Stirling Enterprise Agreement"
+confirm = "Elolvastam és elfogadom a Morphe Enterprise Agreement feltételeit."
+docName = "Morphe Enterprise Agreement"
 docSub = "MSA, Order Form, EULA és DPA egyetlen aláírásban egyesítve."
 download = "Letöltés"
 downloadDraftError = "Nem sikerült létrehozni a megállapodás PDF-jét – a dokumentumrenderelő nem érhető el. Kérjük, próbálja újra rövidesen, vagy lépjen kapcsolatba a támogatással."
@@ -8458,7 +8458,7 @@ contactName = "Kapcsolattartó neve"
 contactNamePlaceholder = "Jane Doe"
 continue = "Folytatás"
 done = "Kész"
-eula = "Elolvastam és elfogadom a Stirling Enterprise EULA feltételeit. Ez szabályozza az ajánlatból létrehozott megállapodást."
+eula = "Elolvastam és elfogadom a Morphe Enterprise EULA feltételeit. Ez szabályozza az ajánlatból létrehozott megállapodást."
 generate = "Ajánlat generálása"
 indemnification = "IP kártalanítás"
 indemnificationSub = "Az EULA szerint védelmet nyújtunk a jogosult IP igényekkel szemben"
@@ -8556,7 +8556,7 @@ eyebrowCompany = "{{company}} Enterprise"
 inviteTeammates = "Csapattársak meghívása"
 licenseKey = "Licenckulcs"
 liveSub = "Szervezete kiépítve, licence aktív."
-liveTitle = "Élőben van a Stirling Enterprise-on"
+liveTitle = "Élőben van a Morphe Enterprise-on"
 next = "Következő: {{stage}}"
 open = "Beszerzés megnyitása"
 scheduleCall = "Hívás ütemezése"
@@ -8608,14 +8608,14 @@ trialFileHint = "Ez az Ön próba licencfájlja. Miután a megállapodás létre
 
 [portal.procurement.link]
 cta = "Fiók összekapcsolása"
-description = "A beszerzés az összekapcsolt Stirling-fiókján fut: így hozzuk létre a próbaidőszakot, árazzuk be az ajánlatát és indítjuk el a számlázást. A kezdéshez kapcsoljon össze egy fiókot."
+description = "A beszerzés az összekapcsolt Morphe-fiókján fut: így hozzuk létre a próbaidőszakot, árazzuk be az ajánlatát és indítjuk el a számlázást. A kezdéshez kapcsoljon össze egy fiókot."
 eyebrow = "Enterprise"
 title = "Kapcsolja össze fiókját a kezdéshez"
 
 [portal.procurement.live]
 description = "Az előfizetése aktív, és a licence ki lett állítva. A csapata létrehozva, és a számlázás elindult."
 eyebrow = "Élő"
-title = "Élőben van a Stirling Enterprise-on"
+title = "Élőben van a Morphe Enterprise-on"
 
 [portal.procurement.milestone]
 downloadError = "Még nem sikerült letölteni az ajánlat PDF-et — kérjük, próbálja újra egy pillanat múlva."
@@ -8650,11 +8650,11 @@ airgapSub = "Zárt, nincs kimenő kapcsolat"
 back = "Vissza"
 businessName = "Vállalkozás neve"
 businessNamePlaceholder = "Acme Corp"
-cloud = "Stirling Cloud"
+cloud = "Morphe Cloud"
 cloudSub = "Felügyelt, leggyorsabb kezdés"
 continue = "Folytatás"
 deployment = "Hová legyen telepítve?"
-eula = "Elfogadom a Stirling EULA-t és a kereskedelmi feltételeket."
+eula = "Elfogadom a Morphe EULA-t és a kereskedelmi feltételeket."
 fullName = "Teljes név"
 fullNamePlaceholder = "Az Ön neve"
 invites = "Csapattagok meghívása · opcionális"
@@ -8702,7 +8702,7 @@ account-link = "Fiók összekapcsolása"
 [portal.shell.sidebar]
 appEditor = "Editor"
 appProcessor = "Processor"
-linkAccount = "Stirling-fiók összekapcsolása"
+linkAccount = "Morphe-fiók összekapcsolása"
 primaryNav = "Elsődleges navigáció"
 switchApp = "Alkalmazás váltása"
 
@@ -8809,7 +8809,7 @@ description = "Figyeljen egy könyvtárat a szerveren az új dokumentumokért."
 label = "Mappa"
 
 [portal.sources.types.folder.fields.directory]
-helperText = "Abszolút elérési út, amelyet a Stirling figyel a feldolgozandó fájlokhoz."
+helperText = "Abszolút elérési út, amelyet a Morphe figyel a feldolgozandó fájlokhoz."
 label = "Könyvtár elérési útja"
 placeholder = "/data/incoming"
 
@@ -8896,7 +8896,7 @@ secretNote = "Az aláírási titok egyszer jelenik meg, a webhook létrehozásak
 copy = "Másolás"
 done = "Kész"
 secret = "Aláírási titok"
-secretHelp = "Írja alá minden kézbesítés nyers törzsét ezzel a kulccsal (HMAC-SHA256), és küldje el X-Stirling-Signature headerként."
+secretHelp = "Írja alá minden kézbesítés nyers törzsét ezzel a kulccsal (HMAC-SHA256), és küldje el X-Morphe-Signature headerként."
 secretWarning = "Másolja ki most az aláírási titkot. Biztonsága érdekében csak egyszer jelenik meg, és később nem kérhető le."
 title = "Webhook létrehozva"
 url = "Delivery URL"
@@ -8912,7 +8912,7 @@ close = "Bezárás"
 
 [portal.usage]
 managePayment = "Fizetés kezelése"
-subtitle = "Fogyasztás, számlák és csomagkezelés minden PDF-hez, amelyet a Stirling kiszámlázott, egy konzolon."
+subtitle = "Fogyasztás, számlák és csomagkezelés minden PDF-hez, amelyet a Morphe kiszámlázott, egy konzolon."
 title = "Használat és számlázás"
 
 [portal.usage.error]
@@ -8922,7 +8922,7 @@ walletUnavailable = "Tárca nem érhető el: {{status}} {{statusText}}"
 
 [portal.usage.sessionExpired]
 action = "Bejelentkezés újra"
-body = "A Stirling-fiók munkamenete lejárt. Jelentkezzen be újra a számlázás megtekintéséhez — a példánya összekapcsolva marad."
+body = "A Morphe-fiók munkamenete lejárt. Jelentkezzen be újra a számlázás megtekintéséhez — a példánya összekapcsolva marad."
 title = "Munkamenet lejárt"
 
 [portal.users]
@@ -9695,8 +9695,8 @@ hideTools = "Nem elérhető eszközök elrejtése ▴"
 messageNoFallback = "Az eszközök csak akkor lesznek elérhetők, ha a szervere újra online."
 messageWithFallback = "Néhány eszközhöz szerverkapcsolat szükséges."
 showTools = "Nem elérhető eszközök megtekintése ▾"
-title = "A Stirling-PDF szervere nem érhető el"
-toolNotAvailableLocally = "A Stirling-PDF szervere offline, és a(z) \"{{endpoint}}\" nem érhető el a helyi backenden."
+title = "A Morphe PDF szervere nem érhető el"
+toolNotAvailableLocally = "A Morphe PDF szervere offline, és a(z) \"{{endpoint}}\" nem érhető el a helyi backenden."
 
 [session]
 expired = "A munkamenet lejárt. Kérjük, frissítse az oldalt és próbálja újra."
@@ -9732,7 +9732,7 @@ user = "Bejelentkezve mint"
 
 [settings.connection.mode]
 local = "Csak helyi"
-saas = "Stirling Cloud"
+saas = "Morphe Cloud"
 selfhosted = "Önhostolt"
 
 [settings.developer]
@@ -9747,11 +9747,11 @@ autoUnzipFileLimitDescription = "ZIP-ből kibontandó fájlok maximális száma"
 autoUnzipFileLimitTooltip = "Csak akkor bontsa ki, ha a ZIP legfeljebb ennyi fájlt tartalmaz. Állítsa magasabbra nagyobb ZIP-ek kibontásához."
 autoUnzipTooltip = "Az API műveletek által visszaadott ZIP fájlok automatikus kibontása. Tiltsa le, ha a ZIP fájlokat érintetlenül akarja hagyni. Ez nem érinti az automatizálási munkafolyamatokat."
 defaultPdfEditor = "Alapértelmezett PDF-szerkesztő"
-defaultPdfEditorActive = "A Stirling PDF az alapértelmezett PDF-szerkesztő"
+defaultPdfEditorActive = "A Morphe PDF az alapértelmezett PDF-szerkesztő"
 defaultPdfEditorChecking = "Ellenőrzés..."
 defaultPdfEditorInactive = "Más alkalmazás van alapértelmezettként beállítva"
 defaultPdfEditorRemind = "Emlékeztessen, hogy alapértelmezettként állítsam be"
-defaultPdfEditorRemindDescription = "Banner megjelenítése, ha a Stirling PDF nem az alapértelmezett PDF-alkalmazása."
+defaultPdfEditorRemindDescription = "Banner megjelenítése, ha a Morphe PDF nem az alapértelmezett PDF-alkalmazása."
 defaultPdfEditorSet = "Már alapértelmezett"
 defaultStartupView = "Alapértelmezett nézet indításkor"
 defaultStartupViewDescription = "Válassza ki, melyik lap legyen aktív a bal oldali oszlopban az alkalmazás indításakor"
@@ -9795,7 +9795,7 @@ learnMore = "További információ a dokumentációban"
 title = "Rendszergazdáknak"
 
 [settings.general.loginLanding]
-description = "Válassza ki, melyik alkalmazás nyíljon meg, amikor bejelentkezik a Stirling Cloudba."
+description = "Válassza ki, melyik alkalmazás nyíljon meg, amikor bejelentkezik a Morphe Cloudba."
 editor = "Szerkesztő"
 processor = "Feldolgozó"
 title = "Bejelentkezés után"
@@ -9825,7 +9825,7 @@ updateBehavior = "Frissítési viselkedés"
 updateBehaviorDescription = "Válassza ki, hogy telepítés előtt rákérdezzen, automatikusan telepítsen, vagy teljesen kihagyja a frissítésellenőrzést."
 updateBehaviorError = "Nem sikerült módosítani a frissítési viselkedést"
 updateBehaviorErrorLocked = "Ezt a beállítást az adminisztrátor zárolta."
-updateBehaviorLockedDescription = "Az adminisztrátor beállította, hogyan kezeli a Stirling-PDF a frissítéseket ezen a gépen. Változtatáshoz lépjen kapcsolatba vele."
+updateBehaviorLockedDescription = "Az adminisztrátor beállította, hogyan kezeli a Morphe PDF a frissítéseket ezen a gépen. Változtatáshoz lépjen kapcsolatba vele."
 updateBehaviorSaved = "Frissítési viselkedés elmentve."
 versionMismatch = "Warning: A mismatch has been detected between the client version and the AppConfig version. Using different versions can lead to compatibility issues, errors, and security risks. Please ensure that server and client are using the same version."
 viewDetails = "Részletek megtekintése"
@@ -9909,7 +9909,7 @@ usageAnalytics = "Használati analitika"
 [settings.planBilling]
 currentPlan = "Jelenlegi csomag"
 loading = "Számlázási információk betöltése..."
-notAvailable = "A Csomag és számlázás csak Stirling Cloud kapcsolattal érhető el (SaaS mód)."
+notAvailable = "A Csomag és számlázás csak Morphe Cloud kapcsolattal érhető el (SaaS mód)."
 title = "Csomag és számlázás"
 
 [settings.planBilling.billing]
@@ -10078,7 +10078,7 @@ step3 = "Indítsa újra a szervert"
 title = "A bejelentkezés nincs engedélyezve"
 
 [setup.server.url]
-description = "Adja meg az önhostolt Stirling PDF szerver teljes URL-jét"
+description = "Adja meg az önhostolt Morphe PDF szerver teljes URL-jét"
 label = "Szerver URL"
 
 [sharedSign]
@@ -10314,7 +10314,7 @@ pleaseFillAllFields = "Kérjük, töltsön ki minden mezőt"
 signUp = "Regisztráció"
 signUpWith = "Sign up with"
 skip = "Skip"
-subtitle = "Csatlakozzon a Stirling PDF-hez a kezdéshez"
+subtitle = "Csatlakozzon a Morphe PDF-hez a kezdéshez"
 title = "Fiók létrehozása"
 unexpectedError = "Váratlan hiba: {{message}}"
 
@@ -10541,7 +10541,7 @@ download = "Letöltés"
 downloaded = "Letöltve"
 downloadFailed = "A fájl nem tölthető le."
 downloadsCount = "Letöltések: {{count}}"
-emailWarningBody = "Ez e-mail-címnek tűnik. Ha ez a személy nem Stirling PDF felhasználó, nem fogja tudni elérni a fájlt."
+emailWarningBody = "Ez e-mail-címnek tűnik. Ha ez a személy nem Morphe PDF felhasználó, nem fogja tudni elérni a fájlt."
 emailWarningConfirm = "Megosztás mindenképp"
 emailWarningTitle = "E-mail-cím"
 errorTitle = "A megosztás sikertelen"
@@ -10572,7 +10572,7 @@ manageTitle = "Megosztás kezelése"
 noActivity = "Még nincs aktivitás."
 noLinks = "Még nincsenek aktív megosztási hivatkozások."
 noSharedUsers = "Még nincs felhasználó, aki hozzáfér."
-openInApp = "Megnyitás a Stirling PDF-ben"
+openInApp = "Megnyitás a Morphe PDF-ben"
 ownerLabel = "Tulajdonos"
 ownerUnknown = "Ismeretlen"
 removeLink = "Hivatkozás eltávolítása"
@@ -10626,7 +10626,7 @@ updateButton = "Frissítés a szerveren"
 uploadButton = "Feltöltés a szerverre"
 
 [survey]
-title = "Stirling-PDF Survey"
+title = "Morphe PDF Survey"
 
 [swagger]
 clickHere = "kattintson ide"
@@ -10785,7 +10785,7 @@ favorites = "Kedvencek"
 heading = "Minden eszköz (teljes képernyős nézet)"
 noResults = "Próbálja módosítani a keresést vagy kapcsolja be a leírásokat, hogy megtalálja, amit keres."
 recommended = "Ajánlott"
-selfHostedOffline = "A saját Stirling-PDF szerverére van szükség (jelenleg offline):"
+selfHostedOffline = "A saját Morphe PDF szerverére van szükség (jelenleg offline):"
 showDetails = "Részletek megjelenítése"
 unavailable = "Szerveradminisztrátor letiltotta:"
 unavailableDependency = "Nem érhető el – szükséges eszköz hiányzik a szerveren:"
@@ -10794,7 +10794,7 @@ unfavorite = "Eltávolítás a kedvencekből"
 [toolPanel.modePrompt]
 chooseFullscreen = "Teljes képernyős mód használata"
 chooseSidebar = "Oldalsáv mód használata"
-description = "Tekintse meg mindkét elrendezést, és döntse el, hogyan szeretné felfedezni a Stirling PDF eszközeit."
+description = "Tekintse meg mindkét elrendezést, és döntse el, hogyan szeretné felfedezni a Morphe PDF eszközeit."
 dismiss = "Talán később"
 fullscreenDescription = "Böngéssze az összes eszközt egy katalógusban, amely lefedi a munkaterületet, amíg választ egyet."
 fullscreenTitle = "Teljes képernyős mód - (örökölt)"
@@ -10857,7 +10857,7 @@ loadingDetailedInfo = "Részletes információk betöltése..."
 migrationGuide = "Átállási útmutató"
 migrationGuides = "Átállási útmutatók"
 migrationGuidesDesc = "Frissítés előtt tekintse át a fontos változásokat."
-modalSubtitle = "A Stirling PDF új verziója készen áll a telepítésre."
+modalSubtitle = "A Morphe PDF új verziója készen áll a telepítésre."
 modalTitle = "Frissítés elérhető"
 notes = "Megjegyzések"
 releaseNotes = "Kiadási megjegyzések"
@@ -10881,7 +10881,7 @@ urgent = "Sürgős"
 attentionBody = "Az adminnak be kell jelentkeznie a részletek megtekintéséhez. Kérjük, lépjen vele azonnal kapcsolatba."
 attentionBodyAdmin = "Tekintse át a licenckövetelményeket a megfelelőség fenntartásához."
 attentionTitle = "Ez a szerver adminisztrátori figyelmet igényel"
-message = "Hozza ki a legtöbbet a Stirling PDF-ből korlátlan felhasználóval és fejlett funkciókkal"
+message = "Hozza ki a legtöbbet a Morphe PDF-ből korlátlan felhasználóval és fejlett funkciókkal"
 seeInfo = "Infó megtekintése"
 title = "Váltás Server csomagra"
 upgradeButton = "Frissítés most"
@@ -11016,7 +11016,7 @@ authWeb = "Jelszó"
 create = "Fiók létrehozása"
 createSubtitle = "Hozzon létre self-hosted fiókot jelszóval vagy SSO-val."
 createTitle = "Fiók létrehozása"
-editorDesc = "PDF-ek szerkesztése a Stirling PDF Editorban. Ezt mindenki megkapja."
+editorDesc = "PDF-ek szerkesztése a Morphe PDF Editorban. Ezt mindenki megkapja."
 email = "Email-cím"
 emailError = "Adjon meg érvényes email-címet"
 emailPlaceholder2 = "name@company.com"
@@ -11031,7 +11031,7 @@ processorDeferred = "A meghívó elküldve, de a Processor hozzáférést még n
 processorDesc = "Az irányítási felület, pipeline-ok, agentek és az API futtatása."
 role = "Szerepkör"
 send2 = "Meghívó küldése"
-subtitle2 = "E-mailt kapnak, amellyel csatlakozhatnak a Stirling PDF-munkaterületedhez."
+subtitle2 = "E-mailt kapnak, amellyel csatlakozhatnak a Morphe PDF-munkaterületedhez."
 team = "Csapat"
 title = "Személyek meghívása"
 username = "Felhasználónév"
@@ -11164,7 +11164,7 @@ downloads = "Letöltések"
 entryLabel = "Aláírási összegzés"
 filesEvaluated_one = "{{count}} fájl kiértékelve"
 filesEvaluated_other = "{{count}} fájl kiértékelve"
-footer = "Ellenőrizve a Stirling PDF segítségével"
+footer = "Ellenőrizve a Morphe PDF segítségével"
 generatedAt = "Létrehozva"
 noPdf = "A PDF jelentés sikeres ellenőrzés után lesz elérhető."
 page = "Oldal"

@@ -3,17 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <base href="%BASE_URL%" />
-    <link rel="icon" href="modern-logo/favicon.ico" />
+    <!-- SVG first (Morphe mark); the .ico stays as the fallback for browsers
+         that don't support SVG favicons. -->
+    <link rel="icon" href="modern-logo/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate icon" href="modern-logo/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#4F46E5" />
     <meta
       name="description"
-      content="The Free Adobe Acrobat alternative (10M+ Downloads)"
+      content="Morphe PDF - a self-hosted toolkit for merging, splitting, converting, signing and editing PDFs. Built on Stirling PDF."
     />
     <link rel="apple-touch-icon" href="modern-logo/logo192.png" />
     <link rel="manifest" href="manifest.json" />
 
-    <title>Stirling PDF</title>
+    <title>Morphe PDF</title>
 
     <!-- Apply theme before first paint (no FOUC); mirrors ThemeProvider, which then refines it. -->
     <script>

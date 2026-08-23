@@ -17,8 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 import stirling.software.common.model.ApplicationProperties;
 
 /**
- * Service for managing temporary files in Stirling-PDF. Provides methods for creating, tracking,
- * and cleaning up temporary files.
+ * Service for managing temporary files in Morphe PDF. Provides methods for creating, tracking, and
+ * cleaning up temporary files.
  */
 @Slf4j
 @Service
@@ -40,8 +40,8 @@ public class TempFileManager {
     }
 
     /**
-     * Create a temporary file with the Stirling-PDF prefix. The file is automatically registered
-     * with the registry.
+     * Create a temporary file with the Morphe PDF prefix. The file is automatically registered with
+     * the registry.
      *
      * @param suffix The suffix for the temporary file
      * @return The created temporary file
@@ -66,7 +66,7 @@ public class TempFileManager {
     }
 
     /**
-     * Create a temporary directory with the Stirling-PDF prefix. The directory is automatically
+     * Create a temporary directory with the Morphe PDF prefix. The directory is automatically
      * registered with the registry.
      *
      * @return The created temporary directory
@@ -211,7 +211,7 @@ public class TempFileManager {
     }
 
     /**
-     * Generate a unique temporary file name with the Stirling-PDF prefix.
+     * Generate a unique temporary file name with the Morphe PDF prefix.
      *
      * @param type Type identifier for the temp file
      * @param extension File extension (without the dot)

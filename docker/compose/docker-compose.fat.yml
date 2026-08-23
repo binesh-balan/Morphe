@@ -25,9 +25,9 @@ services:
       SECURITY_ENABLELOGIN: "false"
       FAT_DOCKER: "true"
       SYSTEM_DEFAULTLOCALE: en-US
-      UI_APPNAME: Stirling-PDF
-      UI_HOMEDESCRIPTION: Full-featured Stirling-PDF with all capabilities
-      UI_APPNAMENAVBAR: Stirling-PDF Fat
+      UI_APPNAME: Morphe PDF
+      UI_HOMEDESCRIPTION: Full-featured Morphe PDF with all capabilities
+      UI_APPNAMENAVBAR: Morphe PDF Fat
       SYSTEM_MAXFILESIZE: "200"
       METRICS_ENABLED: "true"
       SYSTEM_GOOGLEVISIBILITY: "true"

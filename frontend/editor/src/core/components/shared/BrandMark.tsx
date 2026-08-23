@@ -7,11 +7,13 @@ interface BrandMarkProps {
 }
 
 /**
- * The Stirling logo mark as inline SVG so it can morph. At rest it is the
- * two-tone red brand mark; when an ancestor marked `[data-brandmark-morph]` is
- * hovered / focused / open (`.is-open`), the two parallelograms slide into a
- * smaller downward chevron in the primary text colour — a self-explaining
- * "this opens a menu" affordance. See BrandMark.css for the morph geometry.
+ * The Morphe PDF logo mark as inline SVG so it can morph. At rest the two
+ * parallelogram arms meet in an upward caret — the brand mark. When an ancestor
+ * marked `[data-brandmark-morph]` is hovered / focused / open (`.is-open`), the
+ * same two arms slide into a smaller downward chevron in the primary text
+ * colour — a self-explaining "this opens a menu" affordance, and the reason the
+ * mark is built from two parallelograms: the name made literal. See
+ * BrandMark.css for the morph geometry.
  */
 export function BrandMark({ height = "1.6rem", className }: BrandMarkProps) {
   return (
@@ -20,16 +22,13 @@ export function BrandMark({ height = "1.6rem", className }: BrandMarkProps) {
       viewBox="0 0 71 79"
       style={{ height }}
       role="img"
-      aria-label="Stirling"
+      aria-label="Morphe PDF"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path
-        className="sui-brandmark__a"
-        d="M0 39 L46.5 0 L46.5 35.5 L0 74.5 Z"
-      />
+      <path className="sui-brandmark__a" d="M4 60 L35.5 10 L35.5 26 L4 76 Z" />
       <path
         className="sui-brandmark__b"
-        d="M24 43 L70.5 4 L70.5 39.5 L24 78.5 Z"
+        d="M67 60 L35.5 10 L35.5 26 L67 76 Z"
       />
     </svg>
   );
