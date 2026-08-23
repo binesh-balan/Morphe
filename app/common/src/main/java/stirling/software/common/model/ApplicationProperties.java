@@ -1061,8 +1061,7 @@ public class ApplicationProperties {
 
         @Data
         public static class ServerCertificate {
-            private boolean enabled =
-                    true; // Enable server-side "Sign with Morphe PDF" certificate
+            private boolean enabled = true; // Enable server-side "Sign with Morphe PDF" certificate
             private String organizationName = "Stirling PDF Inc";
             private int validity = 365; // Certificate validity in days
             private boolean regenerateOnStartup =
@@ -1547,9 +1546,7 @@ public class ApplicationProperties {
                 }
 
                 public String getProducer() {
-                    return producer == null || producer.trim().isEmpty()
-                            ? "Morphe PDF"
-                            : producer;
+                    return producer == null || producer.trim().isEmpty() ? "Morphe PDF" : producer;
                 }
             }
         }

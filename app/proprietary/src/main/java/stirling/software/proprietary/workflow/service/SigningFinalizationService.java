@@ -369,8 +369,7 @@ public class SigningFinalizationService {
                 } catch (Exception e) {
                     // Fallback: just draw the name as text
                     log.debug(
-                            "Could not load Morphe PDF logo for summary page: {}",
-                            e.getMessage());
+                            "Could not load Morphe PDF logo for summary page: {}", e.getMessage());
                     cs.setNonStrokingColor(Color.WHITE);
                     cs.beginText();
                     cs.setFont(fontBold, 13);
