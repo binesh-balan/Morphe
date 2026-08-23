@@ -19,7 +19,7 @@ jobs:
           egress-policy: audit
 
       - name: "Checkout Repository"
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       # Morphe-PDF: blocking. Dependency graph is now enabled on this repository, so a PR
       # that introduces a vulnerable dependency fails here rather than being merged and
       # found later by the scheduled scan.
