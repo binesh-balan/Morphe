@@ -1,4 +1,4 @@
-# Morphe PDF Base Image
+# Stirling-PDF Base Image
 # Pre-built tools: Calibre, Ghostscript, QPDF, ImageMagick, Python venv with AI/OCR packages
 # This image is reused by Dockerfile and Dockerfile.fat to avoid rebuilding tools on every app release
 
@@ -666,7 +666,7 @@ RUN set -eux; \
     fc-cache -f
 
 # Metadata labels - base image
-LABEL org.opencontainers.image.title="Morphe PDF Base" \
+LABEL org.opencontainers.image.title="Stirling-PDF Base" \
       org.opencontainers.image.description="Pre-built base image with Calibre, Ghostscript, QPDF, ImageMagick, LibreOffice, OCRmyPDF and dependencies" \
       org.opencontainers.image.source="https://github.com/Stirling-Tools/Stirling-PDF" \
       org.opencontainers.image.licenses="MIT" \
