@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+
 from stirling.models.tool_io import ToolFormat, ToolIOSpec
 from stirling.models.tool_models import ToolEndpoint
 from stirling.services.tool_io_compat import (

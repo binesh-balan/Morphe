@@ -4,6 +4,7 @@ from collections.abc import Iterator
 from pathlib import Path
 
 import pytest
+
 from stirling.config import AppSettings, DocumentsBackend, load_settings
 from stirling.services import build_runtime
 from stirling.services.runtime import AppRuntime

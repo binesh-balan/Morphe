@@ -6,6 +6,7 @@ import pytest
 from pydantic_ai.messages import ModelMessage, ModelResponse, TextPart
 from pydantic_ai.models import Model, ModelRequestParameters
 from pydantic_ai.settings import ModelSettings
+
 from stirling.services.runtime import ConcurrencyLimitedModel
 
 

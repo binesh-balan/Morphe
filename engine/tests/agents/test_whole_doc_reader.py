@@ -11,6 +11,7 @@ from dataclasses import replace
 from unittest.mock import AsyncMock, patch
 
 import pytest
+
 from stirling.agents.shared import ChunkedReasoner, ChunkNotes, WholeDocReaderCapability
 from stirling.contracts import AiFile, PageText
 from stirling.documents import Document, DocumentService, SqliteVecStore

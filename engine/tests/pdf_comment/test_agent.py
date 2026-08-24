@@ -14,6 +14,7 @@ from unittest.mock import patch
 
 import pytest
 from pydantic_ai.exceptions import AgentRunError
+
 from stirling.agents.pdf_comment import PdfCommentAgent
 from stirling.agents.pdf_comment.agent import LlmCommentInstruction, LlmCommentOutput
 from stirling.contracts.pdf_comments import (

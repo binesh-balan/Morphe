@@ -14,6 +14,7 @@ from typing import Literal
 from unittest.mock import AsyncMock
 
 import pytest
+
 from stirling.agents.pdf_review import PdfReviewAgent
 from stirling.contracts import (
     AiFile,
@@ -153,6 +154,7 @@ def test_which_claim_rejects_non_literal_values() -> None:
     which is what the test exists to prove.
     """
     from pydantic import ValidationError
+
     from stirling.agents.pdf_review import _PairedLocalisedContradiction
 
     with pytest.raises(ValidationError):

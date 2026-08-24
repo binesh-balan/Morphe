@@ -4,6 +4,7 @@ from unittest.mock import patch
 
 from conftest import build_app_settings
 from fastapi.testclient import TestClient
+
 from stirling.api import app
 from stirling.api.dependencies import (
     get_execution_planning_agent,

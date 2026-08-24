@@ -13,6 +13,7 @@ from unittest.mock import AsyncMock
 
 import pytest
 from pydantic_ai.exceptions import AgentRunError
+
 from stirling.agents.contradiction.detector import (
     ContradictionDetector,
     _BucketContradictions,

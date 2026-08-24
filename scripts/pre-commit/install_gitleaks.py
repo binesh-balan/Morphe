@@ -61,7 +61,9 @@ def cached_version() -> str | None:
     if not BIN.exists():
         return None
     try:
-        return subprocess.run([str(BIN), "version"], capture_output=True, text=True).stdout.strip()
+        # check=False: a nonzero exit here just reads as "different version" below, which
+        # is the desired fallback (re-download) rather than a hard failure.
+        return subprocess.run([str(BIN), "version"], capture_output=True, text=True, check=False).stdout.strip()
     except OSError:
         return None
 

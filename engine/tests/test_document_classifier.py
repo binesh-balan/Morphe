@@ -5,6 +5,7 @@ from types import SimpleNamespace
 from unittest.mock import AsyncMock
 
 import pytest
+
 from stirling.agents.document_classifier import (
     MAX_ASSIGNED_LABELS,
     DocumentClassifierAgent,

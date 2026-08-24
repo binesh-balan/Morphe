@@ -15,6 +15,7 @@ Usage:
 import argparse
 import glob
 import sys
+
 import tomllib
 
 
@@ -33,7 +34,7 @@ def get_line_context(file_path, line_num, context_lines=3):
             context.append(f"{marker}{i + 1:4d}: {lines[i].rstrip()}")
 
         return "\n".join(context)
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001 - logs/handles, deliberately broad in a batch tool
         return f"Could not read context: {e}"
 
 
@@ -56,7 +57,7 @@ def get_character_context(file_path, char_pos, context_chars=100):
             "after": after,
             "display": f"{before}[{error_char}]{after}",
         }
-    except Exception:
+    except Exception:  # noqa: BLE001 - logs/handles, deliberately broad in a batch tool
         return None
 
 
@@ -90,7 +91,7 @@ def validate_toml_file(file_path):
         result["valid"] = True
         result["entry_count"] = count_keys(data)
 
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001 - logs/handles, deliberately broad in a batch tool
         error_msg = str(e)
         result["error"] = error_msg
 

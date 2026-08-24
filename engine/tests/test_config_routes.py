@@ -12,6 +12,7 @@ from unittest.mock import patch
 import pytest
 from conftest import build_app_settings
 from fastapi.testclient import TestClient
+
 from stirling.api import app
 from stirling.api.app import _adopt_cached_config_if_changed
 from stirling.config import AppSettings, config_cache, load_settings

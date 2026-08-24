@@ -14,6 +14,7 @@ from dataclasses import replace
 
 import pytest
 from pydantic_ai.toolsets import FunctionToolset
+
 from stirling.agents.pdf_questions import PdfQuestionAgent
 from stirling.contracts import (
     AiFile,

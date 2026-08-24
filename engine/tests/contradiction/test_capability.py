@@ -8,6 +8,7 @@ from unittest.mock import AsyncMock
 import pytest
 from pydantic_ai import RunContext
 from pydantic_ai.tools import ToolDefinition
+
 from stirling.agents.contradiction import ContradictionCapability, ContradictionDetector
 from stirling.contracts import AiFile
 from stirling.contracts.contradiction import (

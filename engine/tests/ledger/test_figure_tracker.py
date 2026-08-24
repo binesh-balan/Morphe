@@ -8,6 +8,7 @@ sightings (same label, different value) are surfaced as consistency warnings.
 from decimal import Decimal
 
 import pytest
+
 from stirling.agents.ledger.validators.figures import FigureTracker
 
 

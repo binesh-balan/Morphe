@@ -4,6 +4,7 @@ from collections.abc import Iterator
 from dataclasses import replace
 
 import pytest
+
 from stirling.agents import PdfQuestionAgent
 from stirling.contracts import (
     AiFile,

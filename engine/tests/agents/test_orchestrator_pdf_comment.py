@@ -21,6 +21,7 @@ from types import SimpleNamespace
 from unittest.mock import AsyncMock, patch
 
 import pytest
+
 from stirling.agents import OrchestratorAgent
 from stirling.contracts import AiFile, OrchestratorRequest
 from stirling.contracts.pdf_edit import EditPlanResponse

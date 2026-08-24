@@ -201,9 +201,7 @@ class ToolOperationStep(ApiModel):
             actual_type = type(self.parameters).__name__
             # ValueError, not TypeError: pydantic's model_validator only converts ValueError
             # (and AssertionError) into a ValidationError - a TypeError would propagate raw.
-            raise ValueError(  # noqa: TRY004
-                f"Parameters for tool {self.tool} must be {expected_type.__name__}, got {actual_type}."
-            )
+            raise ValueError(f"Parameters for tool {self.tool} must be {expected_type.__name__}, got {actual_type}.")
         return self
 
 

@@ -150,7 +150,7 @@ def download_pdf(
         output_dir.mkdir(parents=True, exist_ok=True)
         dest.write_bytes(content)
         return url, dest, None
-    except Exception as exc:  # pylint: disable=broad-except
+    except Exception as exc:  # noqa: BLE001 - logs/handles, deliberately broad in a batch tool; pylint: disable=broad-except
         return url, None, str(exc)
 
 

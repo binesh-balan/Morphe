@@ -10,6 +10,7 @@ the agent's contract.
 from __future__ import annotations
 
 import pytest
+
 from stirling.agents.contradiction.validators import ClaimLedger
 from stirling.contracts.contradiction import Claim, ClaimPolarity
 

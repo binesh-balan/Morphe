@@ -16,6 +16,7 @@ from unittest.mock import AsyncMock, patch
 import pytest
 from pydantic import BaseModel
 from pydantic_ai import Agent
+
 from stirling.agents.shared.chunked_mapper import ChunkedMapper
 from stirling.contracts.documents import Page
 from stirling.services.runtime import AppRuntime

@@ -7,8 +7,9 @@ Compares language files against en-US golden truth file.
 import argparse
 import json
 import sys
-import tomllib
 from pathlib import Path
+
+import tomllib
 
 
 class TranslationAnalyzer:
@@ -31,7 +32,7 @@ class TranslationAnalyzer:
         except FileNotFoundError:
             print(f"Error: File not found: {file_path}")
             sys.exit(1)
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001 - logs/handles, deliberately broad in a batch tool
             print(f"Error: Invalid file {file_path}: {e}")
             sys.exit(1)
 
@@ -51,7 +52,7 @@ class TranslationAnalyzer:
                 for patterns in [data.get("ignore", [])]
                 if patterns
             }
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001 - logs/handles, deliberately broad in a batch tool
             print(f"Warning: Could not load ignore file {self.ignore_file}: {e}")
             return {}
 
@@ -165,9 +166,10 @@ class TranslationAnalyzer:
         for key in relevant_keys:
             if key in target_flat:
                 value = target_flat[key]
-                if not (isinstance(value, str) and value.startswith("[UNTRANSLATED]")):
-                    if key not in untranslated:  # Not identical to en-US (unless expected)
-                        properly_translated += 1
+                if (
+                    not (isinstance(value, str) and value.startswith("[UNTRANSLATED]")) and key not in untranslated
+                ):  # Not identical to en-US (unless expected)
+                    properly_translated += 1
 
         completion_rate = (properly_translated / total_keys) * 100 if total_keys > 0 else 0
 

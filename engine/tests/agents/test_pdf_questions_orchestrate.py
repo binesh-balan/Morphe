@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from unittest.mock import AsyncMock, patch
 
 import pytest
+
 from stirling.agents.pdf_questions import _MATH_SYNTH_SYSTEM_PROMPT, PdfQuestionAgent
 from stirling.contracts import (
     AiFile,

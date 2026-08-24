@@ -13,6 +13,7 @@ from dataclasses import dataclass
 from unittest.mock import AsyncMock, patch
 
 import pytest
+
 from stirling.agents.pdf_review import (
     _LOCALISER_SYSTEM_PROMPT,
     PdfReviewAgent,

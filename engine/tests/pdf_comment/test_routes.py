@@ -13,6 +13,7 @@ from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
+
 from stirling.api import app
 from stirling.api.dependencies import get_pdf_comment_agent
 from stirling.config import AppSettings, DocumentsBackend, load_settings
