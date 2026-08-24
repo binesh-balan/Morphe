@@ -399,6 +399,9 @@ async def test_pdf_edit_selection_agent_excludes_need_content_from_schema_when_n
 
 
 def _agent_output_types(agent: object) -> list[type]:
+    # getattr, not direct access: `agent` is typed loosely as `object` so this test
+    # helper works against whatever duck-typed selector object a caller passes in;
+    # pyright cannot verify `.agent` on `object` statically.
     native = getattr(getattr(agent, "agent"), "output_type")
     return list(getattr(native, "outputs", []))
 

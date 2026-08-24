@@ -9,10 +9,10 @@ from __future__ import annotations
 
 import subprocess
 import sys
-import tomllib
 from pathlib import Path
 
 import tomli_w
+import tomllib
 
 
 class SortError(Exception):

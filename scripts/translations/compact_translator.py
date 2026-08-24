@@ -8,8 +8,9 @@ TOML format only.
 import argparse
 import json
 import sys
-import tomllib  # Python 3.11+ (stdlib)
 from pathlib import Path
+
+import tomllib  # Python 3.11+ (stdlib)
 
 
 class CompactTranslationExtractor:
@@ -38,7 +39,7 @@ class CompactTranslationExtractor:
         except FileNotFoundError:
             print(f"Error: File not found: {file_path}", file=sys.stderr)
             sys.exit(1)
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001 - logs/handles, deliberately broad in a batch tool
             print(f"Error: Invalid TOML file {file_path}: {e}", file=sys.stderr)
             sys.exit(1)
 
@@ -51,7 +52,7 @@ class CompactTranslationExtractor:
             with open(self.ignore_file, "rb") as f:
                 ignore_data = tomllib.load(f)
             return {lang: set(data.get("ignore", [])) for lang, data in ignore_data.items()}
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001 - logs/handles, deliberately broad in a batch tool
             print(
                 f"Warning: Could not load ignore file {self.ignore_file}: {e}",
                 file=sys.stderr,

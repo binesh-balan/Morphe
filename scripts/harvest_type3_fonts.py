@@ -118,7 +118,8 @@ def collect_known_signatures(signatures_dir: Path) -> dict[str, dict]:
     for json_file in signatures_dir.rglob("*.json"):
         try:
             payload = load_signature_file(json_file)
-        except Exception:
+        except Exception as exc:  # noqa: BLE001 - logs/handles, deliberately broad in a batch tool
+            print(f"[WARN] Skipping unreadable signature file {json_file}: {exc}")
             continue
         pdf = payload.get("pdf")
         for font in payload.get("fonts", []):
@@ -148,9 +149,9 @@ def run_signature_tool(gradle_cmd: str, pdf: Path, output_path: Path, pretty: bo
         cmd,
         shell=True,
         cwd=cwd,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        capture_output=True,
         text=True,
+        check=False,  # returncode checked explicitly below
     )
     if completed.returncode != 0:
         raise RuntimeError(f"Gradle Type3SignatureTool failed for {pdf}:\n{completed.stderr.strip()}")
@@ -179,7 +180,8 @@ def extract_fonts_from_payload(payload: dict) -> list[dict]:
 def write_report(report_path: Path, fonts_by_signature: dict[str, dict]) -> None:
     ordered = sorted(fonts_by_signature.values(), key=lambda entry: entry["signature"])
     report = {
-        "generatedAt": dt.datetime.utcnow().isoformat(timespec="seconds") + "Z",
+        # Local report timestamp; "Z" here is a display convention, not a UTC guarantee.
+        "generatedAt": dt.datetime.utcnow().isoformat(timespec="seconds") + "Z",  # noqa: DTZ003
         "totalSignatures": len(ordered),
         "fonts": ordered,
     }
@@ -202,13 +204,13 @@ def main() -> None:
         if signature_path.exists() and not args.force:
             try:
                 payload = load_signature_file(signature_path)
-            except Exception as exc:
+            except Exception as exc:  # noqa: BLE001 - logs/handles, deliberately broad in a batch tool
                 print(f"[WARN] Failed to parse cached signature {signature_path}: {exc}")
                 payload = None
         else:
             try:
                 run_signature_tool(args.gradle_cmd, pdf, signature_path, args.pretty, REPO_ROOT)
-            except Exception as exc:
+            except Exception as exc:  # noqa: BLE001 - logs/handles, deliberately broad in a batch tool
                 print(f"[ERROR] Harvest failed for {pdf}: {exc}", file=sys.stderr)
                 continue
             payload = load_signature_file(signature_path)

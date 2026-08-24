@@ -376,8 +376,7 @@ def test_shutdown_drains_background_tasks_instead_of_cancelling_them() -> None:
         reap_finished.set()
         return 0
 
-    with patch.object(DocumentService, "reap_expired", slow_reap):
-        with _client(build_app_settings):
-            pass
+    with patch.object(DocumentService, "reap_expired", slow_reap), _client(build_app_settings):
+        pass
 
     assert reap_finished.is_set(), "teardown cancelled the reaper mid-iteration"

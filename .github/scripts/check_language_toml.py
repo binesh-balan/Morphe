@@ -19,10 +19,10 @@ import argparse
 import glob
 import os
 import re
-import tomllib  # Python 3.11+ (stdlib)
 from pathlib import Path
 
 import tomli_w  # For writing TOML files
+import tomllib  # Python 3.11+ (stdlib)
 
 
 def find_duplicate_keys(file_path, keys=None, prefix=""):

@@ -16,8 +16,9 @@ Usage:
 import argparse
 import json
 import sys
-import tomllib  # Python 3.11+ (stdlib)
 from pathlib import Path
+
+import tomllib  # Python 3.11+ (stdlib)
 
 
 def get_all_keys(d: dict, parent_key: str = "", sep: str = ".") -> set[str]:
@@ -37,8 +38,8 @@ def validate_translation_file(file_path: Path) -> tuple[bool, str]:
         with open(file_path, "rb") as f:
             tomllib.load(f)
         return True, "Valid TOML"
-    except Exception as e:
-        return False, f"Error reading file: {str(e)}"
+    except Exception as e:  # noqa: BLE001 - logs/handles, deliberately broad in a batch tool
+        return False, f"Error reading file: {e!s}"
 
 
 def validate_structure(en_us_keys: set[str], lang_keys: set[str], lang_code: str) -> dict:
@@ -139,9 +140,8 @@ def main():
         # Validate all languages except en-US
         languages = []
         for d in locales_dir.iterdir():
-            if d.is_dir() and d.name != "en-US":
-                if (d / "translation.toml").exists():
-                    languages.append(d.name)
+            if d.is_dir() and d.name != "en-US" and (d / "translation.toml").exists():
+                languages.append(d.name)
 
     results = []
     json_errors = []

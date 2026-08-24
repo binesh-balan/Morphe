@@ -121,9 +121,11 @@ async def test_generate_propagates_agent_run_error(runtime: AppRuntime) -> None:
     agent = PdfCommentAgent(runtime)
     request = _request_with_three_chunks()
 
-    with patch.object(agent._agent, "run", side_effect=AgentRunError("boom")):
-        with pytest.raises(AgentRunError, match="boom"):
-            await agent.generate(request)
+    with (
+        patch.object(agent._agent, "run", side_effect=AgentRunError("boom")),
+        pytest.raises(AgentRunError, match="boom"),
+    ):
+        await agent.generate(request)
 
 
 # ---------------------------------------------------------------------------
