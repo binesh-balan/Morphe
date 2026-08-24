@@ -381,7 +381,7 @@ describe("PipelineBuilder", () => {
   async function pickInputSource(sourceName: string) {
     await openInput();
     fireEvent.click(
-      await screen.findByRole("textbox", {
+      await screen.findByRole("combobox", {
         name: "portal.pipelines.builder.inputSource",
       }),
     );
@@ -540,7 +540,7 @@ describe("PipelineBuilder", () => {
 
     await openInput();
     expect(
-      screen.getByRole("textbox", {
+      screen.getByRole("combobox", {
         name: "portal.pipelines.builder.inputSource",
       }),
     ).toBeInTheDocument();
@@ -721,7 +721,7 @@ describe("PipelineBuilder", () => {
     // The new source is the one the pipeline was missing, so it becomes the input.
     await waitFor(() =>
       expect(
-        screen.getByRole("textbox", {
+        screen.getByRole("combobox", {
           name: "portal.pipelines.builder.inputSource",
         }),
       ).toHaveValue("Scanner drop"),
@@ -784,7 +784,7 @@ describe("PipelineBuilder", () => {
     // ...but it did arrive, and is offered as an input, where a webhook makes sense.
     await openInput();
     fireEvent.click(
-      screen.getByRole("textbox", {
+      screen.getByRole("combobox", {
         name: "portal.pipelines.builder.inputSource",
       }),
     );

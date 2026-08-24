@@ -28,8 +28,8 @@ describe("MergeFileSorter", () => {
       </TestWrapper>,
     );
 
-    // Should have a select dropdown (Mantine Select uses textbox role)
-    expect(screen.getByRole("textbox")).toBeInTheDocument();
+    // Mantine v9 Select exposes role="combobox" (aria-haspopup="listbox"), not "textbox".
+    expect(screen.getByRole("combobox")).toBeInTheDocument();
 
     // Should have direction toggle button
     const buttons = screen.getAllByRole("button");
@@ -58,7 +58,7 @@ describe("MergeFileSorter", () => {
       </TestWrapper>,
     );
 
-    const select = screen.getByRole("textbox");
+    const select = screen.getByRole("combobox");
     expect(select).toHaveValue("mock-merge.sortBy.filename");
   });
 

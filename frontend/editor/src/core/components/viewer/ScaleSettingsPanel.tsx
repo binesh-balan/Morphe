@@ -203,7 +203,7 @@ export function ScaleSettingsPanel({
         <Text size="sm" fw={600} mb="xs">
           {t("scaleSettings.presets", "Preset Scales")}
         </Text>
-        <Grid gutter="xs">
+        <Grid gap="xs">
           {PRESET_SCALES.map((preset) => (
             <Grid.Col span={4} key={preset}>
               <Button
