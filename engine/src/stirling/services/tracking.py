@@ -20,7 +20,11 @@ from opentelemetry.semconv._incubating.attributes.gen_ai_attributes import (  # 
     GEN_AI_TOOL_DEFINITIONS,
     GEN_AI_USAGE_INPUT_TOKENS,
     GEN_AI_USAGE_OUTPUT_TOKENS,
-    GenAiOperationNameValues,
+    # Deprecated in opentelemetry-semantic-conventions>=0.65b0, moved to a
+    # not-yet-published semantic-conventions-genai package - no replacement to
+    # migrate to yet. Same _incubating/no-public-import situation as the rest
+    # of this block.
+    GenAiOperationNameValues,  # pyright: ignore[reportDeprecated]
 )
 from opentelemetry.semconv.attributes.server_attributes import SERVER_ADDRESS, SERVER_PORT
 from opentelemetry.trace import Span
@@ -128,7 +132,7 @@ class PostHogSpanProcessor(SpanProcessor):
 
     def on_end(self, span: ReadableSpan) -> None:
         attrs = dict(span.attributes or {})
-        if attrs.get(GEN_AI_OPERATION_NAME) != GenAiOperationNameValues.CHAT.value:
+        if attrs.get(GEN_AI_OPERATION_NAME) != GenAiOperationNameValues.CHAT.value:  # pyright: ignore[reportDeprecated]
             return
 
         properties = self._build_generation_properties(span, attrs)
