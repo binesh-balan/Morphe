@@ -139,7 +139,7 @@ const AvailablePlansSection: React.FC<AvailablePlansSectionProps> = ({
         </Button>
       </div>
 
-      <Collapse in={showComparison}>
+      <Collapse expanded={showComparison}>
         <FeatureComparisonTable
           plans={groupedPlans}
           currentTier={currentTier}

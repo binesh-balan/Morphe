@@ -65,3 +65,16 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: vi.fn(),
   })),
 });
+
+// Mantine v9's Textarea autosize listens for font-load-triggered reflows via
+// the CSS Font Loading API; jsdom does not implement `document.fonts` at all.
+if (!document.fonts) {
+  Object.defineProperty(document, "fonts", {
+    writable: true,
+    value: {
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      ready: Promise.resolve(),
+    },
+  });
+}

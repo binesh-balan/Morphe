@@ -220,8 +220,9 @@ test.describe("CertSign tool - hardware signing (desktop)", () => {
     ).toBeVisible({ timeout: 10_000 });
 
     // The single enumerated cert is auto-selected into the picker input.
+    // Mantine v9 Select exposes role="combobox" (aria-haspopup="listbox"), not "textbox".
     await expect(
-      page.getByRole("textbox", { name: /^certificate$/i }),
+      page.getByRole("combobox", { name: /^certificate$/i }),
     ).toHaveValue(/Anthony Stirling/, { timeout: 10_000 });
   });
 });

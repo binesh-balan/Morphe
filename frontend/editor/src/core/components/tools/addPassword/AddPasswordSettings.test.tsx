@@ -51,9 +51,10 @@ describe("AddPasswordSettings", () => {
       </TestWrapper>,
     );
 
-    // Should render key length select input
+    // Should render key length select input. Mantine's Select exposes
+    // role="combobox" (its input is aria-haspopup="listbox"), not "textbox".
     expect(
-      screen.getByRole("textbox", { name: /keyLength/i }),
+      screen.getByRole("combobox", { name: /keyLength/i }),
     ).toBeInTheDocument();
   });
 
@@ -128,7 +129,12 @@ describe("AddPasswordSettings", () => {
     );
 
     // Check password inputs are disabled
-    const passwordInputs = screen.getAllByRole("textbox");
+    const passwordInputs = [
+      // input[type="password"] has no implicit ARIA role, so role queries
+      // never matched these; query by label (both PasswordInputs set one).
+      screen.getByLabelText(mockT("addPassword.passwords.user.label")),
+      screen.getByLabelText(mockT("addPassword.passwords.owner.label")),
+    ];
     passwordInputs.forEach((input) => {
       expect(input).toBeDisabled();
     });
@@ -151,7 +157,12 @@ describe("AddPasswordSettings", () => {
     );
 
     // Check password inputs are enabled
-    const passwordInputs = screen.getAllByRole("textbox");
+    const passwordInputs = [
+      // input[type="password"] has no implicit ARIA role, so role queries
+      // never matched these; query by label (both PasswordInputs set one).
+      screen.getByLabelText(mockT("addPassword.passwords.user.label")),
+      screen.getByLabelText(mockT("addPassword.passwords.owner.label")),
+    ];
     passwordInputs.forEach((input) => {
       expect(input).not.toBeDisabled();
     });
