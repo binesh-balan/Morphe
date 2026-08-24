@@ -211,7 +211,11 @@
     var(--p-zinc-900)
   );
   --color-green-border: var(--p-green-700);
-  --color-green-dark: var(--p-green-500);
+  /* green-500 (#22c55e) only reaches ~3.2:1 against the dark, muted-green
+     surfaces this token is used on top of - green-400 gets to ~4.2:1, still
+     short of the 4.5:1 minimum, so this goes two steps lighter like the red
+     token below. */
+  --color-green-dark: var(--p-green-200);
   --color-red: var(--p-red-400);
   --color-red-light: var(--p-zinc-800);
   --color-red-border: var(--p-red-600);

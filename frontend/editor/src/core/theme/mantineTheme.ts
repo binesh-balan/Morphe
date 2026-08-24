@@ -160,6 +160,11 @@ export const editorCssVariablesResolver: CSSVariablesResolver = () => ({
     // hues take their tint from the app's own dark rungs already.
     "--mantine-color-orange-0": "var(--color-yellow-50)",
     "--mantine-color-orange-1": "var(--color-yellow-100)",
+    // Mantine's own dark-mode orange-light (#6d2408) sits at 4.33:1 against
+    // the accent link colour used inside orange alerts - just under the 4.5:1
+    // minimum. A 10% black mix clears it (4.78:1) without a visible colour shift.
+    "--mantine-color-orange-light":
+      "color-mix(in srgb, rgba(109, 36, 8, 1) 90%, black)",
     "--mantine-color-grape-0": "var(--color-purple-light)",
     "--mantine-color-indigo-0": "var(--color-primary-50)",
     "--mantine-color-cyan-0": "var(--color-primary-50)",
