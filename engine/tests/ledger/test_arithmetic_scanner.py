@@ -9,7 +9,6 @@ Tests cover the two inline arithmetic patterns the scanner targets:
 from decimal import Decimal
 
 import pytest
-
 from stirling.agents.ledger.validators.arithmetic import ArithmeticScanner
 
 

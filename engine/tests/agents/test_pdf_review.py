@@ -13,7 +13,6 @@ from dataclasses import dataclass
 from unittest.mock import AsyncMock, patch
 
 import pytest
-
 from stirling.agents.pdf_review import (
     _LOCALISER_SYSTEM_PROMPT,
     PdfReviewAgent,
@@ -197,9 +196,11 @@ async def test_orchestrate_resume_uses_verdict_without_calling_classifier(
         comments=[_LocalisedComment(discrepancy_index=0, subject="Wrong", text="Off.")],
     )
     classifier_mock = AsyncMock(return_value=False)
-    with patch.object(agent._localiser_agent, "run", return_value=_StubResult(output=canned)):
-        with patch.object(agent._math_intent_classifier, "classify", classifier_mock):
-            response = await agent.orchestrate(request)
+    with (
+        patch.object(agent._localiser_agent, "run", return_value=_StubResult(output=canned)),
+        patch.object(agent._math_intent_classifier, "classify", classifier_mock),
+    ):
+        response = await agent.orchestrate(request)
 
     assert isinstance(response, EditPlanResponse)
     assert response.resume_with is None

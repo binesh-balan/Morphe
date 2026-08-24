@@ -4,7 +4,6 @@ from unittest.mock import patch
 
 from conftest import build_app_settings
 from fastapi.testclient import TestClient
-
 from stirling.api import app
 from stirling.api.dependencies import (
     get_execution_planning_agent,
@@ -187,14 +186,16 @@ def test_orchestrator_route_emits_heartbeats_while_agent_is_busy() -> None:
 
     app.dependency_overrides[get_orchestrator_agent] = lambda: _SlowAgent()
     try:
-        with patch("stirling.api.routes.orchestrator.HEARTBEAT_INTERVAL_SECONDS", 0.03):
-            with client.stream(
+        with (
+            patch("stirling.api.routes.orchestrator.HEARTBEAT_INTERVAL_SECONDS", 0.03),
+            client.stream(
                 "POST",
                 "/api/v1/orchestrator",
                 json={"userMessage": "wait", "files": [{"id": "test-id", "name": "test.pdf"}]},
-            ) as response:
-                assert response.status_code == 200
-                events = [json.loads(line) for line in response.iter_lines() if line]
+            ) as response,
+        ):
+            assert response.status_code == 200
+            events = [json.loads(line) for line in response.iter_lines() if line]
     finally:
         app.dependency_overrides[get_orchestrator_agent] = lambda: StubOrchestratorAgent()
 

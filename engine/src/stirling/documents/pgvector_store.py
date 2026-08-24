@@ -74,11 +74,10 @@ class PgVectorStore(DocumentStore):
         # yet. Create the extension + schema on a raw, non-pool connection that hasn't
         # registered the type; _ensure_ready then opens the pool, whose configure hook
         # registers the now-existing type per connection.
-        async with await psycopg.AsyncConnection.connect(self._dsn) as conn:
-            async with conn.cursor() as cur:
-                await cur.execute("CREATE EXTENSION IF NOT EXISTS vector")
-                await cur.execute(
-                    """
+        async with await psycopg.AsyncConnection.connect(self._dsn) as conn, conn.cursor() as cur:
+            await cur.execute("CREATE EXTENSION IF NOT EXISTS vector")
+            await cur.execute(
+                """
                     CREATE TABLE IF NOT EXISTS documents_meta (
                         collection TEXT NOT NULL,
                         owner_id TEXT NOT NULL,
@@ -87,15 +86,15 @@ class PgVectorStore(DocumentStore):
                         PRIMARY KEY (collection, owner_id)
                     )
                     """
-                )
-                # Partial index over rows that can actually expire keeps the reaper
-                # scan tight even when most rows are persistent (org docs).
-                await cur.execute(
-                    "CREATE INDEX IF NOT EXISTS idx_meta_expires_at "
-                    "ON documents_meta(expires_at) WHERE expires_at IS NOT NULL"
-                )
-                await cur.execute(
-                    """
+            )
+            # Partial index over rows that can actually expire keeps the reaper
+            # scan tight even when most rows are persistent (org docs).
+            await cur.execute(
+                "CREATE INDEX IF NOT EXISTS idx_meta_expires_at "
+                "ON documents_meta(expires_at) WHERE expires_at IS NOT NULL"
+            )
+            await cur.execute(
+                """
                     CREATE TABLE IF NOT EXISTS rag_documents (
                         id TEXT NOT NULL,
                         collection TEXT NOT NULL,
@@ -108,12 +107,12 @@ class PgVectorStore(DocumentStore):
                             REFERENCES documents_meta(collection, owner_id) ON DELETE CASCADE
                     )
                     """
-                )
-                await cur.execute(
-                    "CREATE INDEX IF NOT EXISTS idx_rag_collection_owner ON rag_documents(collection, owner_id)"
-                )
-                await cur.execute(
-                    """
+            )
+            await cur.execute(
+                "CREATE INDEX IF NOT EXISTS idx_rag_collection_owner ON rag_documents(collection, owner_id)"
+            )
+            await cur.execute(
+                """
                     CREATE TABLE IF NOT EXISTS document_pages (
                         collection TEXT NOT NULL,
                         owner_id TEXT NOT NULL,
@@ -125,12 +124,12 @@ class PgVectorStore(DocumentStore):
                             REFERENCES documents_meta(collection, owner_id) ON DELETE CASCADE
                     )
                     """
-                )
-                await cur.execute(
-                    "CREATE INDEX IF NOT EXISTS idx_pages_collection_owner ON document_pages(collection, owner_id)"
-                )
-                await cur.execute(
-                    """
+            )
+            await cur.execute(
+                "CREATE INDEX IF NOT EXISTS idx_pages_collection_owner ON document_pages(collection, owner_id)"
+            )
+            await cur.execute(
+                """
                     CREATE TABLE IF NOT EXISTS document_acl (
                         collection TEXT NOT NULL,
                         owner_id TEXT NOT NULL,
@@ -141,12 +140,12 @@ class PgVectorStore(DocumentStore):
                             REFERENCES documents_meta(collection, owner_id) ON DELETE CASCADE
                     )
                     """
-                )
-                # Hot path: every read joins ``WHERE principal_id = ANY(...) AND permission = ?``.
-                await cur.execute(
-                    "CREATE INDEX IF NOT EXISTS idx_acl_principal_permission ON document_acl(principal_id, permission)"
-                )
-                await conn.commit()
+            )
+            # Hot path: every read joins ``WHERE principal_id = ANY(...) AND permission = ?``.
+            await cur.execute(
+                "CREATE INDEX IF NOT EXISTS idx_acl_principal_permission ON document_acl(principal_id, permission)"
+            )
+            await conn.commit()
 
     # ── lifecycle of the (collection, owner_id) row ────────────────────────
 
@@ -158,52 +157,48 @@ class PgVectorStore(DocumentStore):
         expires_at: datetime | None,
     ) -> None:
         await self._ensure_ready()
-        async with self._pool.connection() as conn:
-            async with conn.cursor() as cur:
-                await cur.execute(
-                    """
+        async with self._pool.connection() as conn, conn.cursor() as cur:
+            await cur.execute(
+                """
                     INSERT INTO documents_meta (collection, owner_id, source, expires_at)
                     VALUES (%s, %s, %s, %s)
                     ON CONFLICT (collection, owner_id) DO UPDATE SET
                         source = EXCLUDED.source,
                         expires_at = EXCLUDED.expires_at
                     """,
-                    (collection, owner_id, source, expires_at),
-                )
-                await conn.commit()
+                (collection, owner_id, source, expires_at),
+            )
+            await conn.commit()
 
     async def purge_owner(self, owner_id: OwnerId) -> int:
         await self._ensure_ready()
-        async with self._pool.connection() as conn:
-            async with conn.cursor() as cur:
-                await cur.execute(
-                    "DELETE FROM documents_meta WHERE owner_id = %s",
-                    (owner_id,),
-                )
-                deleted = cur.rowcount
-                await conn.commit()
+        async with self._pool.connection() as conn, conn.cursor() as cur:
+            await cur.execute(
+                "DELETE FROM documents_meta WHERE owner_id = %s",
+                (owner_id,),
+            )
+            deleted = cur.rowcount
+            await conn.commit()
         return deleted
 
     async def reap_expired(self) -> int:
         await self._ensure_ready()
-        async with self._pool.connection() as conn:
-            async with conn.cursor() as cur:
-                await cur.execute("DELETE FROM documents_meta WHERE expires_at IS NOT NULL AND expires_at < NOW()")
-                deleted = cur.rowcount
-                await conn.commit()
+        async with self._pool.connection() as conn, conn.cursor() as cur:
+            await cur.execute("DELETE FROM documents_meta WHERE expires_at IS NOT NULL AND expires_at < NOW()")
+            deleted = cur.rowcount
+            await conn.commit()
         return deleted
 
     async def delete_collection(self, collection: str, owner_id: OwnerId) -> bool:
         await self._ensure_ready()
-        async with self._pool.connection() as conn:
-            async with conn.cursor() as cur:
-                # Cascade FKs handle rag_documents, document_pages, document_acl.
-                await cur.execute(
-                    "DELETE FROM documents_meta WHERE collection = %s AND owner_id = %s",
-                    (collection, owner_id),
-                )
-                deleted = cur.rowcount > 0
-                await conn.commit()
+        async with self._pool.connection() as conn, conn.cursor() as cur:
+            # Cascade FKs handle rag_documents, document_pages, document_acl.
+            await cur.execute(
+                "DELETE FROM documents_meta WHERE collection = %s AND owner_id = %s",
+                (collection, owner_id),
+            )
+            deleted = cur.rowcount > 0
+            await conn.commit()
         return deleted
 
     # ── write paths ────────────────────────────────────────────────────────
@@ -221,11 +216,10 @@ class PgVectorStore(DocumentStore):
             return
 
         await self._ensure_ready()
-        async with self._pool.connection() as conn:
-            async with conn.cursor() as cur:
-                for doc, emb in zip(documents, embeddings):
-                    await cur.execute(
-                        """
+        async with self._pool.connection() as conn, conn.cursor() as cur:
+            for doc, emb in zip(documents, embeddings):
+                await cur.execute(
+                    """
                         INSERT INTO rag_documents (id, collection, owner_id, text, metadata, embedding)
                         VALUES (%s, %s, %s, %s, %s::jsonb, %s)
                         ON CONFLICT (id, collection, owner_id)
@@ -234,27 +228,26 @@ class PgVectorStore(DocumentStore):
                             metadata = EXCLUDED.metadata,
                             embedding = EXCLUDED.embedding
                         """,
-                        (doc.id, collection, owner_id, doc.text, json.dumps(doc.metadata), Vector(emb)),
-                    )
-                await conn.commit()
+                    (doc.id, collection, owner_id, doc.text, json.dumps(doc.metadata), Vector(emb)),
+                )
+            await conn.commit()
 
     async def add_pages(self, collection: str, pages: list[StoredPage], owner_id: OwnerId) -> None:
         await self._ensure_ready()
-        async with self._pool.connection() as conn:
-            async with conn.cursor() as cur:
-                await cur.execute(
-                    "DELETE FROM document_pages WHERE collection = %s AND owner_id = %s",
-                    (collection, owner_id),
-                )
-                if pages:
-                    await cur.executemany(
-                        """
+        async with self._pool.connection() as conn, conn.cursor() as cur:
+            await cur.execute(
+                "DELETE FROM document_pages WHERE collection = %s AND owner_id = %s",
+                (collection, owner_id),
+            )
+            if pages:
+                await cur.executemany(
+                    """
                         INSERT INTO document_pages (collection, owner_id, page_number, text, char_count)
                         VALUES (%s, %s, %s, %s, %s)
                         """,
-                        [(collection, owner_id, p.page_number, p.text, p.char_count) for p in pages],
-                    )
-                await conn.commit()
+                    [(collection, owner_id, p.page_number, p.text, p.char_count) for p in pages],
+                )
+            await conn.commit()
 
     # ── ACL management ─────────────────────────────────────────────────────
 
@@ -267,17 +260,16 @@ class PgVectorStore(DocumentStore):
         if not principals:
             return
         await self._ensure_ready()
-        async with self._pool.connection() as conn:
-            async with conn.cursor() as cur:
-                await cur.executemany(
-                    """
+        async with self._pool.connection() as conn, conn.cursor() as cur:
+            await cur.executemany(
+                """
                     INSERT INTO document_acl (collection, owner_id, principal_id, permission)
                     VALUES (%s, %s, %s, %s)
                     ON CONFLICT (collection, owner_id, principal_id, permission) DO NOTHING
                     """,
-                    [(collection, owner_id, p, _READ_PERMISSION) for p in principals],
-                )
-                await conn.commit()
+                [(collection, owner_id, p, _READ_PERMISSION) for p in principals],
+            )
+            await conn.commit()
 
     async def revoke(
         self,
@@ -286,13 +278,12 @@ class PgVectorStore(DocumentStore):
         principal: PrincipalId,
     ) -> None:
         await self._ensure_ready()
-        async with self._pool.connection() as conn:
-            async with conn.cursor() as cur:
-                await cur.execute(
-                    "DELETE FROM document_acl WHERE collection = %s AND owner_id = %s AND principal_id = %s",
-                    (collection, owner_id, principal),
-                )
-                await conn.commit()
+        async with self._pool.connection() as conn, conn.cursor() as cur:
+            await cur.execute(
+                "DELETE FROM document_acl WHERE collection = %s AND owner_id = %s AND principal_id = %s",
+                (collection, owner_id, principal),
+            )
+            await conn.commit()
 
     # ── read paths (ACL-gated) ─────────────────────────────────────────────
 
@@ -306,23 +297,22 @@ class PgVectorStore(DocumentStore):
         if not principals:
             return []
         await self._ensure_ready()
-        async with self._pool.connection() as conn:
-            async with conn.cursor() as cur:
-                owner_id = await self._readable_owner_for(cur, collection, principals)
-                if owner_id is None:
-                    return []
-                query_vec = Vector(query_embedding)
-                await cur.execute(
-                    """
+        async with self._pool.connection() as conn, conn.cursor() as cur:
+            owner_id = await self._readable_owner_for(cur, collection, principals)
+            if owner_id is None:
+                return []
+            query_vec = Vector(query_embedding)
+            await cur.execute(
+                """
                     SELECT id, text, metadata, 1 - (embedding <=> %s) AS score
                     FROM rag_documents
                     WHERE collection = %s AND owner_id = %s
                     ORDER BY embedding <=> %s
                     LIMIT %s
                     """,
-                    (query_vec, collection, owner_id, query_vec, top_k),
-                )
-                rows = await cur.fetchall()
+                (query_vec, collection, owner_id, query_vec, top_k),
+            )
+            rows = await cur.fetchall()
 
         return [
             SearchResult(
@@ -362,53 +352,50 @@ class PgVectorStore(DocumentStore):
         if not principals:
             return []
         await self._ensure_ready()
-        async with self._pool.connection() as conn:
-            async with conn.cursor() as cur:
-                owner_id = await self._readable_owner_for(cur, collection, principals)
-                if owner_id is None:
-                    return []
-                if page_range is None:
-                    await cur.execute(
-                        "SELECT page_number, text, char_count FROM document_pages "
-                        "WHERE collection = %s AND owner_id = %s ORDER BY page_number",
-                        (collection, owner_id),
-                    )
-                else:
-                    await cur.execute(
-                        "SELECT page_number, text, char_count FROM document_pages "
-                        "WHERE collection = %s AND owner_id = %s "
-                        "AND page_number BETWEEN %s AND %s "
-                        "ORDER BY page_number",
-                        (collection, owner_id, page_range.start, page_range.end),
-                    )
-                rows = await cur.fetchall()
+        async with self._pool.connection() as conn, conn.cursor() as cur:
+            owner_id = await self._readable_owner_for(cur, collection, principals)
+            if owner_id is None:
+                return []
+            if page_range is None:
+                await cur.execute(
+                    "SELECT page_number, text, char_count FROM document_pages "
+                    "WHERE collection = %s AND owner_id = %s ORDER BY page_number",
+                    (collection, owner_id),
+                )
+            else:
+                await cur.execute(
+                    "SELECT page_number, text, char_count FROM document_pages "
+                    "WHERE collection = %s AND owner_id = %s "
+                    "AND page_number BETWEEN %s AND %s "
+                    "ORDER BY page_number",
+                    (collection, owner_id, page_range.start, page_range.end),
+                )
+            rows = await cur.fetchall()
         return [Page(page_number=r[0], text=r[1], char_count=r[2]) for r in rows]
 
     async def has_collection(self, collection: str, principals: list[PrincipalId]) -> bool:
         if not principals:
             return False
         await self._ensure_ready()
-        async with self._pool.connection() as conn:
-            async with conn.cursor() as cur:
-                owner_id = await self._readable_owner_for(cur, collection, principals)
-                return owner_id is not None
+        async with self._pool.connection() as conn, conn.cursor() as cur:
+            owner_id = await self._readable_owner_for(cur, collection, principals)
+            return owner_id is not None
 
     async def list_collections(self, principals: list[PrincipalId]) -> list[str]:
         if not principals:
             return []
         await self._ensure_ready()
-        async with self._pool.connection() as conn:
-            async with conn.cursor() as cur:
-                await cur.execute(
-                    """
+        async with self._pool.connection() as conn, conn.cursor() as cur:
+            await cur.execute(
+                """
                     SELECT DISTINCT collection FROM document_acl
                     WHERE permission = %s
                       AND principal_id = ANY(%s)
                     ORDER BY collection
                     """,
-                    (_READ_PERMISSION, list(principals)),
-                )
-                rows = await cur.fetchall()
+                (_READ_PERMISSION, list(principals)),
+            )
+            rows = await cur.fetchall()
         return [r[0] for r in rows]
 
     async def close(self) -> None:

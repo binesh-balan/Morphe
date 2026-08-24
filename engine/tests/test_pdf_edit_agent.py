@@ -4,7 +4,6 @@ from collections.abc import Iterable
 from dataclasses import dataclass
 
 import pytest
-
 from stirling.agents import PdfEditAgent, PdfEditParameterSelector, PdfEditPlanSelection
 from stirling.agents.pdf_edit import PdfEditNeedContentSelection, PdfEditPlanOutput
 from stirling.contracts import (
@@ -399,7 +398,10 @@ async def test_pdf_edit_selection_agent_excludes_need_content_from_schema_when_n
 
 
 def _agent_output_types(agent: object) -> list[type]:
-    native = getattr(getattr(agent, "agent"), "output_type")
+    # getattr, not direct access: `agent` is typed loosely as `object` so this test
+    # helper works against whatever duck-typed selector object a caller passes in;
+    # pyright cannot verify `.agent` on `object` statically.
+    native = getattr(getattr(agent, "agent"), "output_type")  # noqa: B009
     return list(getattr(native, "outputs", []))
 
 

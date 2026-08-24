@@ -167,4 +167,4 @@ class _OrchestratorStream:
         except asyncio.CancelledError:
             pass
         except Exception:
-            logger.exception("background task failed during cancellation", exc_info=True)
+            logger.exception("background task failed during cancellation")

@@ -9,7 +9,6 @@ from dataclasses import dataclass
 from unittest.mock import AsyncMock, patch
 
 import pytest
-
 from stirling.agents.pdf_questions import _MATH_SYNTH_SYSTEM_PROMPT, PdfQuestionAgent
 from stirling.contracts import (
     AiFile,
@@ -87,9 +86,11 @@ async def test_orchestrate_resume_synthesises_answer_without_calling_classifier(
     )
     canned_answer = "Die Summe stimmt nicht: angegeben $215,000, erwartet $215,500."
     classifier_mock = AsyncMock(return_value=False)
-    with patch.object(agent._math_synth_agent, "run", return_value=_StubResult(output=canned_answer)):
-        with patch.object(agent._math_intent_classifier, "classify", classifier_mock):
-            response = await agent.orchestrate(request)
+    with (
+        patch.object(agent._math_synth_agent, "run", return_value=_StubResult(output=canned_answer)),
+        patch.object(agent._math_intent_classifier, "classify", classifier_mock),
+    ):
+        response = await agent.orchestrate(request)
 
     assert isinstance(response, PdfQuestionAnswerResponse)
     assert response.answer == canned_answer

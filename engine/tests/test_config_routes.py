@@ -12,7 +12,6 @@ from unittest.mock import patch
 import pytest
 from conftest import build_app_settings
 from fastapi.testclient import TestClient
-
 from stirling.api import app
 from stirling.api.app import _adopt_cached_config_if_changed
 from stirling.config import AppSettings, config_cache, load_settings
@@ -376,8 +375,7 @@ def test_shutdown_drains_background_tasks_instead_of_cancelling_them() -> None:
         reap_finished.set()
         return 0
 
-    with patch.object(DocumentService, "reap_expired", slow_reap):
-        with _client(build_app_settings):
-            pass
+    with patch.object(DocumentService, "reap_expired", slow_reap), _client(build_app_settings):
+        pass
 
     assert reap_finished.is_set(), "teardown cancelled the reaper mid-iteration"

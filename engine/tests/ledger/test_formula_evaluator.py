@@ -11,7 +11,6 @@ Tests cover:
 from decimal import Decimal
 
 import pytest
-
 from stirling.agents.ledger.validators.formula import FormulaEvaluator
 
 
@@ -26,26 +25,26 @@ def evaluator() -> FormulaEvaluator:
 
 
 def test_safe_eval_addition(evaluator: FormulaEvaluator) -> None:
-    assert evaluator._safe_eval("2 + 3") == Decimal("5")
+    assert evaluator._safe_eval("2 + 3") == Decimal(5)
 
 
 def test_safe_eval_multiplication_before_addition(evaluator: FormulaEvaluator) -> None:
     """2 + 3 * 4 should be 14, not 20."""
-    assert evaluator._safe_eval("2 + 3 * 4") == Decimal("14")
+    assert evaluator._safe_eval("2 + 3 * 4") == Decimal(14)
 
 
 def test_safe_eval_division_before_subtraction(evaluator: FormulaEvaluator) -> None:
     """10 - 6 / 2 should be 7, not 2."""
-    assert evaluator._safe_eval("10 - 6 / 2") == Decimal("7")
+    assert evaluator._safe_eval("10 - 6 / 2") == Decimal(7)
 
 
 def test_safe_eval_mixed_precedence(evaluator: FormulaEvaluator) -> None:
     """1 + 2 * 3 - 4 / 2 should be 1 + 6 - 2 = 5."""
-    assert evaluator._safe_eval("1 + 2 * 3 - 4 / 2") == Decimal("5")
+    assert evaluator._safe_eval("1 + 2 * 3 - 4 / 2") == Decimal(5)
 
 
 def test_safe_eval_all_multiplication(evaluator: FormulaEvaluator) -> None:
-    assert evaluator._safe_eval("2 * 3 * 4") == Decimal("24")
+    assert evaluator._safe_eval("2 * 3 * 4") == Decimal(24)
 
 
 def test_safe_eval_division_by_zero(evaluator: FormulaEvaluator) -> None:
@@ -53,13 +52,13 @@ def test_safe_eval_division_by_zero(evaluator: FormulaEvaluator) -> None:
 
 
 def test_safe_eval_negative_result(evaluator: FormulaEvaluator) -> None:
-    assert evaluator._safe_eval("3 - 5") == Decimal("-2")
+    assert evaluator._safe_eval("3 - 5") == Decimal(-2)
 
 
 def test_safe_eval_leading_negative(evaluator: FormulaEvaluator) -> None:
     """Expressions starting with a negative number should work."""
     result = evaluator._safe_eval("-100 + 200")
-    assert result == Decimal("100")
+    assert result == Decimal(100)
 
 
 def test_safe_eval_empty(evaluator: FormulaEvaluator) -> None:
@@ -67,7 +66,7 @@ def test_safe_eval_empty(evaluator: FormulaEvaluator) -> None:
 
 
 def test_safe_eval_single_number(evaluator: FormulaEvaluator) -> None:
-    assert evaluator._safe_eval("42") == Decimal("42")
+    assert evaluator._safe_eval("42") == Decimal(42)
 
 
 def test_safe_eval_decimal_numbers(evaluator: FormulaEvaluator) -> None:

@@ -5,7 +5,6 @@ from __future__ import annotations
 import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
-
 from stirling.api.engine_auth import EngineSharedSecretMiddleware
 
 SECRET = "s3cr3t-between-java-and-engine"

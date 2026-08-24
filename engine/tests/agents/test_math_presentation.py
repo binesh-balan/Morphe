@@ -11,7 +11,6 @@ from __future__ import annotations
 
 import pytest
 from pydantic import ValidationError
-
 from stirling.agents.math_presentation import extract_math_verdict
 from stirling.contracts import (
     AiFile,

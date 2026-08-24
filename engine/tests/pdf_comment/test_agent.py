@@ -14,7 +14,6 @@ from unittest.mock import patch
 
 import pytest
 from pydantic_ai.exceptions import AgentRunError
-
 from stirling.agents.pdf_comment import PdfCommentAgent
 from stirling.agents.pdf_comment.agent import LlmCommentInstruction, LlmCommentOutput
 from stirling.contracts.pdf_comments import (
@@ -121,9 +120,11 @@ async def test_generate_propagates_agent_run_error(runtime: AppRuntime) -> None:
     agent = PdfCommentAgent(runtime)
     request = _request_with_three_chunks()
 
-    with patch.object(agent._agent, "run", side_effect=AgentRunError("boom")):
-        with pytest.raises(AgentRunError, match="boom"):
-            await agent.generate(request)
+    with (
+        patch.object(agent._agent, "run", side_effect=AgentRunError("boom")),
+        pytest.raises(AgentRunError, match="boom"),
+    ):
+        await agent.generate(request)
 
 
 # ---------------------------------------------------------------------------

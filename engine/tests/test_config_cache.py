@@ -7,7 +7,6 @@ import stat
 from pathlib import Path
 
 import pytest
-
 from stirling.config import config_cache
 from stirling.contracts import ConfigPushRequest
 

@@ -18,7 +18,6 @@ import pytest
 from conftest import build_app_settings
 from pydantic_ai.models.test import TestModel
 from pydantic_ai.profiles import ModelProfile
-
 from stirling.agents.pdf_create.agent import (
     PdfCreateAgent,
     _make_chunks,

@@ -13,7 +13,6 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 from pydantic import BaseModel
-
 from stirling.agents.shared.chunked_mapper import _ChunkExtraction
 from stirling.agents.shared.chunked_reasoner import ChunkedReasoner, ChunkNotes
 from stirling.contracts import WholeDocSliceDone

@@ -4,7 +4,6 @@ from collections.abc import Iterator
 
 import pytest
 from fastapi.testclient import TestClient
-
 from stirling.api import app
 from stirling.api.dependencies import get_document_service
 from stirling.documents import Document, DocumentService, SqliteVecStore

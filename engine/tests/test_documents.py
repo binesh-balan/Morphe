@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import pytest
-
 from stirling.contracts import PageText
 from stirling.documents.chunker import chunk_text
 from stirling.documents.rag_capability import RagCapability
