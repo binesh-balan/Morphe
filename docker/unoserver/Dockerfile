@@ -20,8 +20,22 @@ ENV DEBIAN_FRONTEND=noninteractive \
 RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
-      software-properties-common ca-certificates curl gnupg tini; \
-    add-apt-repository -y ppa:libreoffice/ppa; \
+      ca-certificates curl gnupg dirmngr tini; \
+    # Add the LibreOffice Fresh PPA without add-apt-repository: that queries the
+    # Launchpad API, which returns HTTP 500 to GitHub-hosted runner IPs (see
+    # docker/base/Dockerfile for the same fix). Fetch the signing key from
+    # keyserver.ubuntu.com with retries and write the sources entry directly.
+    install -d -m 0755 /etc/apt/keyrings; \
+    GNUPGHOME="$(mktemp -d)"; export GNUPGHOME; \
+    for i in 1 2 3 4 5; do \
+      gpg --no-default-keyring --keyring /etc/apt/keyrings/libreoffice-ppa.gpg \
+          --keyserver hkps://keyserver.ubuntu.com \
+          --recv-keys CDDE43BA4DE3F09D7CE7016673AEE920AD55F5A0 && break; \
+      if [ "$i" = 5 ]; then exit 1; fi; sleep 10; \
+    done; \
+    . /etc/os-release; \
+    echo "deb [signed-by=/etc/apt/keyrings/libreoffice-ppa.gpg] https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu $VERSION_CODENAME main" \
+      > /etc/apt/sources.list.d/libreoffice-ppa.list; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
       python3 python3-venv python3-uno python3-packaging \
@@ -42,7 +56,7 @@ RUN set -eux; \
     if [ "${INSTALL_CJK_FONTS}" = "true" ]; then \
       apt-get install -y --no-install-recommends fonts-noto-cjk; \
     fi; \
-    apt-get remove --purge -y software-properties-common; \
+    apt-get remove --purge -y gnupg dirmngr; \
     apt-get autoremove --purge -y; \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
