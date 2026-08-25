@@ -149,7 +149,7 @@
     "postcss-preset-mantine": "^1.18.0",
     "postcss-simple-vars": "^7.0.1",
     "prettier": "^3.8.1",
-    "puppeteer": "^24.25.0",
+    "puppeteer": "^25.8.0",
     "rollup-plugin-visualizer": "^7.0.1",
     "storybook": "^10.5.10",
     "stylelint": "^17.14.1",
