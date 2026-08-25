@@ -297,6 +297,10 @@ const preview: Preview = {
   // the run. Unset — the Storybook UI — falls back to the toolbar default.
   initialGlobals: {
     theme: import.meta.env.VITE_SCAN_THEME === "dark" ? "dark" : "light",
+
+    backgrounds: {
+      value: "app",
+    },
   },
   parameters: {
     layout: "padded",
@@ -304,11 +308,10 @@ const preview: Preview = {
       matchers: { color: /(background|color)$/i, date: /Date$/i },
     },
     backgrounds: {
-      default: "app",
-      values: [
-        { name: "app", value: "var(--c-bg)" },
-        { name: "surface", value: "var(--c-surface)" },
-      ],
+      options: {
+        app: { name: "app", value: "var(--c-bg)" },
+        surface: { name: "surface", value: "var(--c-surface)" },
+      },
     },
     a11y: {
       // Run axe against the rendered story; `test: "error"` fails the scan on
