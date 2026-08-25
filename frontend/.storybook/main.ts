@@ -1,6 +1,11 @@
-import { resolve } from "node:path";
+// This file has been automatically migrated to valid ESM format by Storybook.
+import { fileURLToPath } from "node:url";
+import { resolve, dirname } from "node:path";
 import type { StorybookConfig } from "@storybook/react-vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /**
  * Storybook 9 ships essentials, interactions, and docs as built-ins, so the
@@ -31,6 +36,7 @@ const config: StorybookConfig = {
     "@storybook/addon-themes",
     "@storybook/addon-a11y",
     "@storybook/addon-vitest",
+    "@storybook/addon-mcp",
   ],
   framework: {
     name: "@storybook/react-vite",
