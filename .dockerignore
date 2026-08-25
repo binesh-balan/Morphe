@@ -96,6 +96,13 @@ configs/
 __pycache__/
 **/__pycache__/
 
+# Python virtualenvs (never needed in an image; engine/.venv alone is ~445MB
+# of small files and dominates build-context transfer time)
+.venv/
+**/.venv/
+venv/
+**/venv/
+
 # Local env
 .env
 .env.*

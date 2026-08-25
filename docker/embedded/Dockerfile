@@ -26,6 +26,16 @@ ENV JDK_JAVA_OPTIONS="--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNN
   --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED \
   --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
 
+# Registry fetches from inside the build container are fragile on some networks:
+# npm aborts with `network read ETIMEDOUT` and Maven Central drops parallel TLS
+# handshakes ("Remote host terminated the handshake"). Cap socket concurrency and
+# raise retry/timeout budgets so a flaky link retries instead of failing the build.
+ENV NPM_CONFIG_FETCH_RETRIES=5 \
+    NPM_CONFIG_FETCH_RETRY_MINTIMEOUT=20000 \
+    NPM_CONFIG_FETCH_RETRY_MAXTIMEOUT=180000 \
+    NPM_CONFIG_FETCH_TIMEOUT=600000 \
+    NPM_CONFIG_MAXSOCKETS=3
+
 WORKDIR /app
 
 COPY build.gradle settings.gradle gradlew ./
@@ -53,6 +63,11 @@ ARG TARGETARCH
 RUN JPDFIUM_PLATFORM="$([ "$TARGETARCH" = arm64 ] && echo linux-arm64 || echo linux-x64)" && \
     STIRLING_FLAVOR=${STIRLING_FLAVOR} \
     gradle clean build \
+      -Dorg.gradle.internal.http.connectionTimeout=180000 \
+      -Dorg.gradle.internal.http.socketTimeout=180000 \
+      -Dorg.gradle.internal.repository.max.tentatives=5 \
+      -Dorg.gradle.internal.repository.initial.backoff=2000 \
+      --max-workers=2 \
       -PbuildWithFrontend=true \
       -PbuildWithPortal=${BUILD_PORTAL} \
       -PjpdfiumPlatforms="$JPDFIUM_PLATFORM" \
