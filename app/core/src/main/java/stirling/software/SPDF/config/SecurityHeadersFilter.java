@@ -31,6 +31,11 @@ public class SecurityHeadersFilter extends OncePerRequestFilter {
      * Default policy. {@code 'wasm-unsafe-eval'} is required by pdf.js; {@code blob:} is required
      * for worker bootstrapping and rendered page images; {@code 'unsafe-inline'} on style-src
      * covers React inline style attributes. Note there is no {@code 'unsafe-inline'} on script-src.
+     *
+     * <p>{@code blob:} must also be present on {@code connect-src}: an opened document is held as a
+     * blob URL and read back with {@code fetch()}, which CSP governs via {@code connect-src}, not
+     * {@code img-src}/{@code media-src}. Without it the browser blocks the read, and the file
+     * appears to upload but never renders, converts, or opens in the editor.
      */
     private static final String DEFAULT_CSP =
             "default-src 'self'; "
@@ -38,7 +43,7 @@ public class SecurityHeadersFilter extends OncePerRequestFilter {
                     + "style-src 'self' 'unsafe-inline'; "
                     + "img-src 'self' data: blob:; "
                     + "font-src 'self' data:; "
-                    + "connect-src 'self'; "
+                    + "connect-src 'self' blob:; "
                     + "worker-src 'self' blob:; "
                     + "child-src 'self' blob:; "
                     + "frame-src 'self' blob:; "
