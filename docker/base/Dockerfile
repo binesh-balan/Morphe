@@ -395,9 +395,23 @@ ARG UNOSERVER_VERSION=3.6
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     set -eux; \
     apt-get update; \
-    # Add LibreOffice Fresh PPA for latest version (26.2.x)
-    apt-get install -y --no-install-recommends software-properties-common; \
-    add-apt-repository -y ppa:libreoffice/ppa; \
+    # Add LibreOffice Fresh PPA for latest version (26.2.x).
+    # Deliberately NOT via add-apt-repository: that queries the Launchpad API,
+    # which throttles GitHub-hosted runner IPs (persistent HTTP 500 in CI).
+    # Instead fetch the signing key from keyserver.ubuntu.com (with retries)
+    # and write the sources entry directly against the archive host.
+    apt-get install -y --no-install-recommends gnupg dirmngr ca-certificates; \
+    install -d -m 0755 /etc/apt/keyrings; \
+    GNUPGHOME="$(mktemp -d)"; export GNUPGHOME; \
+    for i in 1 2 3 4 5; do \
+      gpg --no-default-keyring --keyring /etc/apt/keyrings/libreoffice-ppa.gpg \
+          --keyserver hkps://keyserver.ubuntu.com \
+          --recv-keys CDDE43BA4DE3F09D7CE7016673AEE920AD55F5A0 && break; \
+      if [ "$i" = 5 ]; then exit 1; fi; sleep 10; \
+    done; \
+    . /etc/os-release; \
+    echo "deb [signed-by=/etc/apt/keyrings/libreoffice-ppa.gpg] https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu $VERSION_CODENAME main" \
+      > /etc/apt/sources.list.d/libreoffice-ppa.list; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
       # Core tools
@@ -444,8 +458,8 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     \
     # Cleanup stage.
     \
-    # Remove PPA helper, no longer needed after apt-get update
-    apt-get remove --purge -y software-properties-common || true; \
+    # Remove key-fetch helpers, no longer needed after apt-get update
+    apt-get remove --purge -y gnupg dirmngr || true; \
     apt-get autoremove --purge -y || true; \
     rm -rf /var/lib/apt/lists/*; \
     \
