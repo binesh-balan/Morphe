@@ -276,6 +276,16 @@ const PdfTextEditor = ({ onComplete, onError }: BaseToolProps) => {
     "auto" | "paragraph" | "singleLine"
   >("auto");
   const [hasVectorPreview, setHasVectorPreview] = useState(false);
+
+  // True preview renders the page from the PDF the server actually exports, instead of the
+  // original page with its text masked out and CSS text drawn on top. The overlay is an
+  // approximation by construction - different text engine, different metrics - so the two could
+  // never agree. Rendering the real export removes the divergence rather than chasing it.
+  const [truePreview, setTruePreview] = useState(false);
+  const [isRefreshingTruePreview, setIsRefreshingTruePreview] = useState(false);
+  const truePreviewRef = useRef(false);
+  const truePreviewTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const originalFileRef = useRef<File | null>(null);
   const [pagePreviews, setPagePreviews] = useState<Map<number, string>>(
     new Map(),
   );
@@ -859,8 +869,11 @@ const PdfTextEditor = ({ onComplete, onError }: BaseToolProps) => {
         );
 
         if (isPdf) {
+          // Kept so switching true preview back off can restore the editable view.
+          originalFileRef.current = file;
           initializePdfPreview(file);
         } else {
+          originalFileRef.current = null;
           clearPdfPreview();
         }
 
@@ -1230,6 +1243,54 @@ const PdfTextEditor = ({ onComplete, onError }: BaseToolProps) => {
       filename: `${baseName}.json`,
     };
   }, [fileName, forceSingleTextElement, groupsByPage, loadedDocument]);
+
+  /**
+   * Exports the current edits and points the preview renderer at the result, so what is on screen
+   * is the PDF the server produces rather than a CSS approximation of it.
+   */
+  const refreshTruePreview = useCallback(async () => {
+    const jobId = cachedJobIdRef.current;
+    if (!jobId) {
+      return;
+    }
+    const payload = buildPayload();
+    if (!payload) {
+      return;
+    }
+    setIsRefreshingTruePreview(true);
+    try {
+      const response = await apiClient.post(
+        `/api/v1/convert/pdf/text-editor/partial/${jobId}`,
+        // Every page, not just the dirty ones: the preview has to show the whole document as it
+        // will actually export, and the server resolves fonts and resources from its own cache.
+        { pages: payload.document.pages ?? [] },
+        { responseType: "blob" },
+      );
+      const exported = new File([response.data], "true-preview.pdf", {
+        type: "application/pdf",
+      });
+      await initializePdfPreview(exported);
+    } catch (error) {
+      console.warn("[PdfTextEditor] True preview refresh failed", error);
+    } finally {
+      setIsRefreshingTruePreview(false);
+    }
+  }, [buildPayload, initializePdfPreview]);
+
+  const handleTruePreviewChange = useCallback(
+    (enabled: boolean) => {
+      truePreviewRef.current = enabled;
+      setTruePreview(enabled);
+      if (enabled) {
+        void refreshTruePreview();
+      } else if (originalFileRef.current) {
+        // Back to the editable view: reload the untouched document so the masked background and
+        // the text overlay line up again.
+        void initializePdfPreview(originalFileRef.current);
+      }
+    },
+    [initializePdfPreview, refreshTruePreview],
+  );
 
   const handleDownloadJson = useCallback(() => {
     const payload = buildPayload();
@@ -1742,8 +1803,13 @@ const PdfTextEditor = ({ onComplete, onError }: BaseToolProps) => {
         }
         await page.render({ canvas, canvasContext: context, viewport }).promise;
 
+        // In true preview the raster already IS the export, text and images included, so masking
+        // them out would punch holes in the very thing being previewed.
+        const stripOverlaidContent = !truePreviewRef.current;
         try {
-          const textContent = await page.getTextContent();
+          const textContent = stripOverlaidContent
+            ? await page.getTextContent()
+            : { items: [] };
           const maskMarginX = 0;
           const maskMarginTop = 0;
           const maskMarginBottom = Math.max(3 * scale, 3);
@@ -1853,6 +1919,26 @@ const PdfTextEditor = ({ onComplete, onError }: BaseToolProps) => {
     }
   }, [groupingMode, resetToDocument]);
 
+  // Re-export after edits settle. Every keystroke would mean a round trip, so the preview lags
+  // typing by design and catches up once the user pauses.
+  useEffect(() => {
+    if (!truePreview || !hasChanges) {
+      return;
+    }
+    if (truePreviewTimerRef.current) {
+      clearTimeout(truePreviewTimerRef.current);
+    }
+    truePreviewTimerRef.current = setTimeout(() => {
+      void refreshTruePreview();
+    }, 900);
+    return () => {
+      if (truePreviewTimerRef.current) {
+        clearTimeout(truePreviewTimerRef.current);
+        truePreviewTimerRef.current = null;
+      }
+    };
+  }, [truePreview, hasChanges, groupsByPage, refreshTruePreview]);
+
   const viewData = useMemo<PdfTextEditorViewData>(
     () => ({
       document: loadedDocument,
@@ -1863,6 +1949,9 @@ const PdfTextEditor = ({ onComplete, onError }: BaseToolProps) => {
       dirtyPages,
       hasDocument,
       hasVectorPreview,
+      truePreview,
+      isRefreshingTruePreview,
+      onTruePreviewChange: handleTruePreviewChange,
       fileName,
       errorMessage,
       isGeneratingPdf,
@@ -1895,6 +1984,9 @@ const PdfTextEditor = ({ onComplete, onError }: BaseToolProps) => {
       onLoadFile: handleLoadFileFromDropzone,
     }),
     [
+      truePreview,
+      isRefreshingTruePreview,
+      handleTruePreviewChange,
       handleMergeGroups,
       handleUngroupGroup,
       handleImageTransform,

@@ -416,6 +416,7 @@ const PdfTextEditorView = ({ data }: PdfTextEditorViewProps) => {
     dirtyPages,
     hasDocument,
     hasVectorPreview,
+    truePreview,
     fileName: _fileName,
     errorMessage,
     isGeneratingPdf: _isGeneratingPdf,
@@ -1969,32 +1970,8 @@ const PdfTextEditorView = ({ data }: PdfTextEditorViewProps) => {
                   >
                     <li>
                       {t(
-                        "pdfTextEditor.welcomeBanner.issue1",
-                        "Text colour is not currently preserved (will be added soon)",
-                      )}
-                    </li>
-                    <li>
-                      {t(
-                        "pdfTextEditor.welcomeBanner.issue2",
-                        "Paragraph mode has more alignment and spacing issues - Single Line mode recommended",
-                      )}
-                    </li>
-                    <li>
-                      {t(
                         "pdfTextEditor.welcomeBanner.issue3",
                         "The preview display differs from the exported PDF - exported PDFs are closer to the original",
-                      )}
-                    </li>
-                    <li>
-                      {t(
-                        "pdfTextEditor.welcomeBanner.issue4",
-                        "Rotated text alignment may need manual adjustment",
-                      )}
-                    </li>
-                    <li>
-                      {t(
-                        "pdfTextEditor.welcomeBanner.issue5",
-                        "Transparency and layering effects may vary from original",
                       )}
                     </li>
                   </Text>
@@ -2516,7 +2493,15 @@ const PdfTextEditorView = ({ data }: PdfTextEditorViewProps) => {
                         }
 
                         // Extract styling from group
-                        const textColor = group.color || "#111827";
+                        // In true preview the background raster already contains the exported
+                        // text, so the overlay must not draw it a second time. The boxes stay in
+                        // place and stay interactive - only the glyphs are hidden. The group being
+                        // edited keeps its glyphs: it sits behind an opaque editing box, and the
+                        // raster underneath is a round trip behind what is being typed anyway.
+                        const textColor =
+                          truePreview && !isActive
+                            ? "transparent"
+                            : group.color || "#111827";
                         const fontWeight =
                           group.fontWeight ||
                           getFontWeight(effectiveFontId, group.pageIndex);

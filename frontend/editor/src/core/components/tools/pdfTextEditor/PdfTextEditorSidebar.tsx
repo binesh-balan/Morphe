@@ -84,6 +84,9 @@ const PdfTextEditorSidebar = ({ data }: PdfTextEditorSidebarProps) => {
     forceSingleTextElement,
     groupingMode: externalGroupingMode,
     autoScaleText,
+    truePreview,
+    isRefreshingTruePreview,
+    onTruePreviewChange,
     selectedPage,
     onReset,
     onGeneratePdf,
@@ -221,6 +224,55 @@ const PdfTextEditorSidebar = ({ data }: PdfTextEditorSidebarProps) => {
                     checked={autoScaleText}
                     onChange={(event) =>
                       onAutoScaleTextChange(event.currentTarget.checked)
+                    }
+                  />
+                </Group>
+
+                <Divider />
+                <Group justify="space-between" align="center">
+                  <Group
+                    gap={4}
+                    align="center"
+                    style={{ flex: 1, minWidth: 0 }}
+                  >
+                    <Tooltip
+                      sidebarTooltip={false}
+                      content={t(
+                        "pdfTextEditor.options.truePreview.description",
+                        "Shows the PDF the server actually exports, instead of an on-screen approximation of it. Updates shortly after you stop typing.",
+                      )}
+                      position="top"
+                    >
+                      <ActionIcon
+                        variant="tertiary"
+                        size="sm"
+                        aria-label={t(
+                          "pdfTextEditor.options.truePreview.title",
+                          "Match exported PDF",
+                        )}
+                        style={{ flexShrink: 0 }}
+                      >
+                        <InfoOutlinedIcon fontSize="small" />
+                      </ActionIcon>
+                    </Tooltip>
+                    <Text fw={500} size="sm" style={{ flex: 1 }}>
+                      {t(
+                        "pdfTextEditor.options.truePreview.title",
+                        "Match exported PDF",
+                      )}
+                    </Text>
+                    {isRefreshingTruePreview && (
+                      <Badge size="xs" variant="light">
+                        {t("pdfTextEditor.options.truePreview.updating", "Updating")}
+                      </Badge>
+                    )}
+                  </Group>
+                  <Switch
+                    size="md"
+                    checked={truePreview}
+                    data-testid="true-preview-toggle"
+                    onChange={(event) =>
+                      onTruePreviewChange(event.currentTarget.checked)
                     }
                   />
                 </Group>
