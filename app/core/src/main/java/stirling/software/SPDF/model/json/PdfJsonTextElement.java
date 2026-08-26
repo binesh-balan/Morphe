@@ -33,6 +33,11 @@ public class PdfJsonTextElement {
     private float[] textMatrix;
     private PdfJsonTextColor fillColor;
     private PdfJsonTextColor strokeColor;
+
+    /** Constant alpha from the graphics state, 0..1. Null means fully opaque. */
+    private Float fillAlpha;
+
+    private Float strokeAlpha;
     private Integer renderingMode;
     private Boolean fallbackUsed;
     private int[] charCodes;

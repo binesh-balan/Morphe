@@ -46,6 +46,19 @@ import javax.imageio.ImageIO;
 import org.apache.pdfbox.contentstream.PDFGraphicsStreamEngine;
 import org.apache.pdfbox.contentstream.operator.Operator;
 import org.apache.pdfbox.contentstream.operator.OperatorName;
+import org.apache.pdfbox.contentstream.operator.color.SetNonStrokingColor;
+import org.apache.pdfbox.contentstream.operator.color.SetNonStrokingColorN;
+import org.apache.pdfbox.contentstream.operator.color.SetNonStrokingColorSpace;
+import org.apache.pdfbox.contentstream.operator.color.SetNonStrokingDeviceCMYKColor;
+import org.apache.pdfbox.contentstream.operator.color.SetNonStrokingDeviceGrayColor;
+import org.apache.pdfbox.contentstream.operator.color.SetNonStrokingDeviceRGBColor;
+import org.apache.pdfbox.contentstream.operator.color.SetStrokingColor;
+import org.apache.pdfbox.contentstream.operator.color.SetStrokingColorN;
+import org.apache.pdfbox.contentstream.operator.color.SetStrokingColorSpace;
+import org.apache.pdfbox.contentstream.operator.color.SetStrokingDeviceCMYKColor;
+import org.apache.pdfbox.contentstream.operator.color.SetStrokingDeviceGrayColor;
+import org.apache.pdfbox.contentstream.operator.color.SetStrokingDeviceRGBColor;
+import org.apache.pdfbox.contentstream.operator.state.SetGraphicsStateParameters;
 import org.apache.pdfbox.cos.COSArray;
 import org.apache.pdfbox.cos.COSBase;
 import org.apache.pdfbox.cos.COSDictionary;
@@ -76,6 +89,7 @@ import org.apache.pdfbox.pdmodel.graphics.color.PDColorSpace;
 import org.apache.pdfbox.pdmodel.graphics.form.PDFormXObject;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImage;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+import org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState;
 import org.apache.pdfbox.pdmodel.graphics.state.PDGraphicsState;
 import org.apache.pdfbox.pdmodel.graphics.state.PDTextState;
 import org.apache.pdfbox.pdmodel.graphics.state.RenderingMode;
@@ -3199,6 +3213,12 @@ public class PdfJsonConversionService {
         try (PDPageContentStream contentStream =
                 new PDPageContentStream(document, page, mode, true, true)) {
             boolean textOpen = false;
+            // Transparency is carried by an ExtGState rather than the text state. Track what is
+            // currently live so alpha neither leaks onto later opaque runs nor re-emits a `gs` for
+            // every element, and cache the states so repeated alphas reuse one resource.
+            float activeFillAlpha = 1f;
+            float activeStrokeAlpha = 1f;
+            Map<Long, PDExtendedGraphicsState> alphaStates = new HashMap<>();
             for (DrawableElement drawable : drawables) {
                 switch (drawable.type()) {
                     case TEXT -> {
@@ -3222,6 +3242,16 @@ public class PdfJsonConversionService {
                         float fontScale = resolveFontMatrixSize(element);
 
                         applyTextState(contentStream, element);
+
+                        float fillAlpha = safeFloat(element.getFillAlpha(), 1f);
+                        float strokeAlpha = safeFloat(element.getStrokeAlpha(), 1f);
+                        if (fillAlpha != activeFillAlpha || strokeAlpha != activeStrokeAlpha) {
+                            contentStream.setGraphicsStateParameters(
+                                    alphaStateFor(alphaStates, fillAlpha, strokeAlpha));
+                            activeFillAlpha = fillAlpha;
+                            activeStrokeAlpha = strokeAlpha;
+                        }
+
                         applyRenderingMode(contentStream, element.getRenderingMode());
                         applyTextMatrix(contentStream, element);
 
@@ -3701,6 +3731,24 @@ public class PdfJsonConversionService {
         if (removed != null) {
             removed.close();
         }
+    }
+
+    /**
+     * Reuses one ExtGState per distinct alpha pair so a page does not accrue a resource per run.
+     */
+    private PDExtendedGraphicsState alphaStateFor(
+            Map<Long, PDExtendedGraphicsState> cache, float fillAlpha, float strokeAlpha) {
+        long key =
+                ((long) Float.floatToIntBits(fillAlpha) << 32)
+                        | (Float.floatToIntBits(strokeAlpha) & 0xFFFFFFFFL);
+        return cache.computeIfAbsent(
+                key,
+                ignored -> {
+                    PDExtendedGraphicsState state = new PDExtendedGraphicsState();
+                    state.setNonStrokingAlphaConstant(fillAlpha);
+                    state.setStrokingAlphaConstant(strokeAlpha);
+                    return state;
+                });
     }
 
     private void applyTextState(PDPageContentStream contentStream, PdfJsonTextElement element)
@@ -5543,6 +5591,29 @@ public class PdfJsonConversionService {
         private Map<PDFont, String> currentFontResources = Collections.emptyMap();
         private int currentZOrderCounter;
 
+        /**
+         * Graphics state captured per glyph while the stream is being processed.
+         *
+         * <p>PDFTextStripper buffers glyphs and only calls {@code writeString} at a flush point -
+         * with sortByPosition that is the end of the page. Reading the graphics state there returns
+         * whatever it has since become, which for a normal page is the reset default: black, fully
+         * opaque, no character spacing. That is why coloured text came back black. The state has to
+         * be sampled here, while the glyph is actually being drawn.
+         */
+        private final Map<TextPosition, GlyphStyle> glyphStyles = new IdentityHashMap<>();
+
+        private record GlyphStyle(
+                PdfJsonTextColor fillColor,
+                PdfJsonTextColor strokeColor,
+                Float fillAlpha,
+                Float strokeAlpha,
+                Float characterSpacing,
+                Float wordSpacing,
+                Float horizontalScaling,
+                Float leading,
+                Float rise,
+                Integer renderingMode) {}
+
         TextCollectingStripper(
                 PDDocument document,
                 Map<String, PdfJsonFont> fonts,
@@ -5557,6 +5628,25 @@ public class PdfJsonConversionService {
             this.pageFontResources = pageFontResources;
             this.fontCache = fontCache != null ? fontCache : new IdentityHashMap<>();
             this.jobId = jobId;
+
+            // PDFTextStripper only registers the operators it needs to place glyphs, so colour and
+            // ExtGState operators are never executed and the graphics state keeps its initial
+            // values: opaque black. Every glyph therefore reported DeviceRGB[0,0,0] no matter what
+            // the page actually said, which is exactly why edited text came back black. Registering
+            // these makes the state true while the text is walked.
+            addOperator(new SetNonStrokingColorSpace(this));
+            addOperator(new SetNonStrokingColor(this));
+            addOperator(new SetNonStrokingColorN(this));
+            addOperator(new SetNonStrokingDeviceGrayColor(this));
+            addOperator(new SetNonStrokingDeviceRGBColor(this));
+            addOperator(new SetNonStrokingDeviceCMYKColor(this));
+            addOperator(new SetStrokingColorSpace(this));
+            addOperator(new SetStrokingColor(this));
+            addOperator(new SetStrokingColorN(this));
+            addOperator(new SetStrokingDeviceGrayColor(this));
+            addOperator(new SetStrokingDeviceRGBColor(this));
+            addOperator(new SetStrokingDeviceCMYKColor(this));
+            addOperator(new SetGraphicsStateParameters(this));
         }
 
         @Override
@@ -5566,6 +5656,31 @@ public class PdfJsonConversionService {
             currentFontResources =
                     pageFontResources.getOrDefault(currentPage, Collections.emptyMap());
             currentZOrderCounter = 0;
+            glyphStyles.clear();
+        }
+
+        @Override
+        protected void processTextPosition(TextPosition text) {
+            PDGraphicsState graphicsState = getGraphicsState();
+            if (text != null && graphicsState != null) {
+                PDTextState textState = graphicsState.getTextState();
+                glyphStyles.put(
+                        text,
+                        new GlyphStyle(
+                                toTextColor(graphicsState.getNonStrokingColor()),
+                                toTextColor(graphicsState.getStrokingColor()),
+                                nonOpaque(graphicsState.getNonStrokeAlphaConstant()),
+                                nonOpaque(graphicsState.getAlphaConstant()),
+                                textState == null ? null : textState.getCharacterSpacing(),
+                                textState == null ? null : textState.getWordSpacing(),
+                                textState == null ? null : textState.getHorizontalScaling(),
+                                textState == null ? null : textState.getLeading(),
+                                textState == null ? null : textState.getRise(),
+                                textState == null || textState.getRenderingMode() == null
+                                        ? null
+                                        : textState.getRenderingMode().intValue()));
+            }
+            super.processTextPosition(text);
         }
 
         @Override
@@ -5633,21 +5748,22 @@ public class PdfJsonConversionService {
                 }
             }
 
-            PDGraphicsState graphicsState = getGraphicsState();
-            if (graphicsState != null) {
-                PDTextState textState = graphicsState.getTextState();
-                if (textState != null) {
-                    element.setCharacterSpacing(textState.getCharacterSpacing());
-                    element.setWordSpacing(textState.getWordSpacing());
-                    element.setHorizontalScaling(textState.getHorizontalScaling());
-                    element.setLeading(textState.getLeading());
-                    element.setRise(textState.getRise());
-                    if (textState.getRenderingMode() != null) {
-                        element.setRenderingMode(textState.getRenderingMode().intValue());
-                    }
-                }
-                element.setFillColor(toTextColor(graphicsState.getNonStrokingColor()));
-                element.setStrokeColor(toTextColor(graphicsState.getStrokingColor()));
+            // Sampled when the glyph was drawn, not now - see glyphStyles.
+            GlyphStyle style = glyphStyles.get(position);
+            if (style != null) {
+                element.setCharacterSpacing(style.characterSpacing());
+                element.setWordSpacing(style.wordSpacing());
+                element.setHorizontalScaling(style.horizontalScaling());
+                element.setLeading(style.leading());
+                element.setRise(style.rise());
+                element.setRenderingMode(style.renderingMode());
+                element.setFillColor(style.fillColor());
+                element.setStrokeColor(style.strokeColor());
+                // Vector graphics keep their transparency because their content streams pass
+                // through untouched, but text is re-emitted from this model - without the alpha
+                // constants it comes back fully opaque.
+                element.setFillAlpha(style.fillAlpha());
+                element.setStrokeAlpha(style.strokeAlpha());
             }
             return element;
         }
@@ -5931,6 +6047,16 @@ public class PdfJsonConversionService {
                         key, buildFontModel(document, font, fontId, currentPage, fontCache, jobId));
             }
             return fontId;
+        }
+
+        /**
+         * Returns the alpha only when it actually means transparency, so opaque text stays null.
+         */
+        private Float nonOpaque(double alpha) {
+            if (alpha >= 1d || alpha < 0d || Double.isNaN(alpha)) {
+                return null;
+            }
+            return (float) alpha;
         }
 
         private PdfJsonTextColor toTextColor(PDColor color) {
@@ -6320,8 +6446,25 @@ public class PdfJsonConversionService {
             // Create thread-local copies to prevent mutation of cached maps
             Map<String, PdfJsonFont> threadLocalFonts =
                     new java.util.concurrent.ConcurrentHashMap<>(cached.getFonts());
+
+            // The cached resource map is keyed by PDFont instance, and those instances belong to
+            // the document load that produced them. This method re-loads the PDF from the cached
+            // bytes, so every PDFont here is a different object and PDFont does not override
+            // equals - every lookup misses. The stripper then falls back to font.getName(), and
+            // text elements come back tagged "Helvetica" while the font models are keyed "F1".
+            // Nothing matches at export time, so the whole page silently regenerates in the
+            // fallback font. Rebuild the mapping against the document we actually loaded.
             Map<Integer, Map<PDFont, String>> threadLocalPageFontResources =
-                    new java.util.concurrent.ConcurrentHashMap<>(cached.getPageFontResources());
+                    new java.util.concurrent.ConcurrentHashMap<>();
+            threadLocalPageFontResources.put(
+                    pageNumber,
+                    collectFontsForPage(
+                            document,
+                            page,
+                            pageNumber,
+                            threadLocalFonts,
+                            new IdentityHashMap<>(),
+                            jobId));
 
             Map<Integer, List<PdfJsonTextElement>> textByPage = new LinkedHashMap<>();
             TextCollectingStripper stripper =
