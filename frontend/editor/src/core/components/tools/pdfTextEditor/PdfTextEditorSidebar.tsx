@@ -263,7 +263,10 @@ const PdfTextEditorSidebar = ({ data }: PdfTextEditorSidebarProps) => {
                     </Text>
                     {isRefreshingTruePreview && (
                       <Badge size="xs" variant="light">
-                        {t("pdfTextEditor.options.truePreview.updating", "Updating")}
+                        {t(
+                          "pdfTextEditor.options.truePreview.updating",
+                          "Updating",
+                        )}
                       </Badge>
                     )}
                   </Group>

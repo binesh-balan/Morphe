@@ -43,9 +43,7 @@ const splitParagraphIntoLines = (text: string | undefined | null): string[] => {
  * text matrix. Successive lines advance along its negative. Upright text yields
  * (0, 1), so callers keep their previous purely-vertical behaviour.
  */
-const textUpAxis = (
-  element: PdfJsonTextElement,
-): { x: number; y: number } => {
+const textUpAxis = (element: PdfJsonTextElement): { x: number; y: number } => {
   const matrix = element?.textMatrix;
   if (matrix && matrix.length >= 6) {
     const c = matrix[2];
@@ -67,10 +65,7 @@ const extractElementBaseline = (element: PdfJsonTextElement): number | null => {
   if (element.textMatrix && element.textMatrix.length >= 6) {
     const translationX = element.textMatrix[4];
     const translationY = element.textMatrix[5];
-    if (
-      typeof translationX !== "number" ||
-      typeof translationY !== "number"
-    ) {
+    if (typeof translationX !== "number" || typeof translationY !== "number") {
       return null;
     }
     // Measure along the line-advance axis rather than straight down the page, so

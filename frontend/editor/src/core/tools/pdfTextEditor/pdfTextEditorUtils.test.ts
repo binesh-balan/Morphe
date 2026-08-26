@@ -22,11 +22,7 @@ const FONT_SIZE = 14;
  * Mirrors what PDFBox writes for rotated text: the rotation is baked into the
  * a/b/c/d cells and scaled by the font size.
  */
-const rotatedMatrix = (
-  degrees: number,
-  x: number,
-  y: number,
-): number[] => {
+const rotatedMatrix = (degrees: number, x: number, y: number): number[] => {
   const radians = (degrees * Math.PI) / 180;
   const cos = Math.cos(radians);
   const sin = Math.sin(radians);
@@ -65,7 +61,12 @@ const editedTwoLineGroup = (matrix: number[]): TextGroup => {
     originalElements: [textElement("Line one", [...matrix])],
     text: "Line one\nLine two",
     originalText: "Line one",
-    bounds: { left: matrix[4], right: matrix[4] + 60, top: matrix[5], bottom: matrix[5] },
+    bounds: {
+      left: matrix[4],
+      right: matrix[4] + 60,
+      top: matrix[5],
+      bottom: matrix[5],
+    },
   };
 };
 
@@ -113,7 +114,10 @@ describe("paragraph re-layout geometry", () => {
     // For text rotated a quarter turn the next line sits beside the first, at
     // the same height. Shifting in Y instead would walk it off the baseline.
     expect(second.textMatrix?.[5]).toBeCloseTo(first.textMatrix?.[5] ?? 0, 5);
-    expect(second.textMatrix?.[4]).not.toBeCloseTo(first.textMatrix?.[4] ?? 0, 1);
+    expect(second.textMatrix?.[4]).not.toBeCloseTo(
+      first.textMatrix?.[4] ?? 0,
+      1,
+    );
   });
 
   it("keeps rotated line advance perpendicular to the baseline", () => {
@@ -130,7 +134,8 @@ describe("paragraph re-layout geometry", () => {
     // along the baseline direction is zero - that dot product is exactly the
     // sideways drift users had to correct by hand.
     const radians = (degrees * Math.PI) / 180;
-    const baselineDrift = deltaX * Math.cos(radians) + deltaY * Math.sin(radians);
+    const baselineDrift =
+      deltaX * Math.cos(radians) + deltaY * Math.sin(radians);
 
     expect(baselineDrift).toBeCloseTo(0, 5);
     expect(Math.hypot(deltaX, deltaY)).toBeGreaterThan(0);
@@ -142,7 +147,14 @@ const editedParagraphGroup = (newText: string): TextGroup => {
   const words = ["Alpha ", "beta ", "gamma"];
   let x = 100;
   const build = (text: string, baselineY: number) => {
-    const element = textElement(text, [FONT_SIZE, 0, 0, FONT_SIZE, x, baselineY]);
+    const element = textElement(text, [
+      FONT_SIZE,
+      0,
+      0,
+      FONT_SIZE,
+      x,
+      baselineY,
+    ]);
     x += text.length * 7;
     return element;
   };

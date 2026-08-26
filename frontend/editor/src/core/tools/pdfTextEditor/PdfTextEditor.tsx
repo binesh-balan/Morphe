@@ -284,7 +284,9 @@ const PdfTextEditor = ({ onComplete, onError }: BaseToolProps) => {
   const [truePreview, setTruePreview] = useState(false);
   const [isRefreshingTruePreview, setIsRefreshingTruePreview] = useState(false);
   const truePreviewRef = useRef(false);
-  const truePreviewTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const truePreviewTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
   const originalFileRef = useRef<File | null>(null);
   const [pagePreviews, setPagePreviews] = useState<Map<number, string>>(
     new Map(),
