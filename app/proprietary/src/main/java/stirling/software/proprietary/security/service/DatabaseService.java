@@ -588,8 +588,53 @@ public class DatabaseService implements DatabaseServiceInterface {
         return intermediateSql.trim();
     }
 
-    private String stripStringLiterals(String sql) {
-        return sql.replaceAll("'(?:[^']|'')*'", "''");
+    /**
+     * Replaces every single-quoted SQL literal with an empty literal, so the denied-pattern scan
+     * only ever sees code and never data.
+     *
+     * <p>This was {@code sql.replaceAll("'(?:[^']|'')*'", "''")}. Java compiles {@code (?:A|B)*} to
+     * a Loop/Branch node that recurses once per iteration, so the match depth grows with the length
+     * of the literal. On a default stack that overflows at roughly 1700 characters, and
+     * JWT_SIGNING_KEYS stores base64 key blobs well past that (2205 characters in the backup this
+     * was found with) - so restoring a real backup died with a StackOverflowError carrying no
+     * application frames. A single forward pass has no quantifier to recurse over and is O(n).
+     *
+     * <p>An unterminated literal is deliberately left in place rather than swallowed, matching the
+     * old regex: the trailing text stays visible to DENIED_PATTERNS instead of being hidden behind
+     * a stray quote.
+     */
+    String stripStringLiterals(String sql) {
+        StringBuilder out = new StringBuilder(sql.length());
+        int i = 0;
+        int n = sql.length();
+        while (i < n) {
+            char c = sql.charAt(i);
+            if (c != '\'') {
+                out.append(c);
+                i++;
+                continue;
+            }
+            int end = i + 1;
+            while (end < n) {
+                if (sql.charAt(end) == '\'') {
+                    // '' inside a literal is an escaped quote, not the terminator
+                    if (end + 1 < n && sql.charAt(end + 1) == '\'') {
+                        end += 2;
+                        continue;
+                    }
+                    break;
+                }
+                end++;
+            }
+            if (end < n) {
+                out.append("''");
+                i = end + 1;
+            } else {
+                out.append(sql, i, n);
+                i = n;
+            }
+        }
+        return out.toString();
     }
 
     /**

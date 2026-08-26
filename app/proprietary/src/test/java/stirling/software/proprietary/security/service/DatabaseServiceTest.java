@@ -1,6 +1,7 @@
 package stirling.software.proprietary.security.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.verify;
 
@@ -262,5 +263,85 @@ class DatabaseServiceTest {
 
         boolean result = databaseService.importDatabaseFromUI(script);
         assertThat(result).isTrue();
+    }
+
+    /**
+     * A base64-ish blob of the shape H2 writes for JWT_SIGNING_KEYS.SIGNING_KEY. Contains no quote
+     * or semicolon, so it stays a single SQL literal and a single statement.
+     */
+    private static String keyBlob(int length) {
+        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            sb.append(alphabet.charAt(i % alphabet.length()));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Regression test for the startup crash on the restore-from-backup path.
+     *
+     * <p>stripStringLiterals used to be {@code replaceAll("'(?:[^']|'')*'", "''")}. Java compiles
+     * {@code (?:A|B)*} to a Loop/Branch node that recurses once per iteration, so one long literal
+     * blew the stack with a StackOverflowError containing no application frames. Real backups hit
+     * this because JWT_SIGNING_KEYS stores multi-KB base64 key blobs.
+     *
+     * <p>The literal here is deliberately far larger than any literal that would fit on a default
+     * stack, so the test fails on the old implementation regardless of the runner's -Xss and cannot
+     * be masked by raising it.
+     */
+    @Test
+    void stripStringLiteralsHandlesHugeLiteralWithoutStackOverflow() {
+        String blob = keyBlob(1_000_000);
+
+        String stripped = databaseService.stripStringLiterals("VALUES('" + blob + "', 1)");
+
+        assertThat(stripped).isEqualTo("VALUES('', 1)");
+    }
+
+    @Test
+    void stripStringLiteralsLeavesUnterminatedLiteralVisibleToDeniedPatterns() {
+        // an unterminated literal must not swallow the rest of the script, or a stray quote would
+        // hide FILE_WRITE( and friends from the denied-pattern scan
+        String stripped = databaseService.stripStringLiterals("'a' 'oops FILE_WRITE(x)");
+
+        assertThat(stripped).isEqualTo("'' 'oops FILE_WRITE(x)");
+    }
+
+    /**
+     * Drives the same entry point InitialSecuritySetup calls at startup ({@link
+     * DatabaseService#importDatabase()}) against a backup carrying multi-KB JWT signing keys, on
+     * the JVM's default stack. Before the fix this died with a StackOverflowError during
+     * validation, surfacing as "Error creating bean with name 'initialSecuritySetup'".
+     */
+    @Test
+    void importDatabaseValidatesBackupWithLargeJwtSigningKeys() throws IOException {
+        String signingKey = keyBlob(200_000);
+        String verifyingKey = keyBlob(120_000);
+
+        String sqlContent =
+                "CREATE CACHED TABLE \"PUBLIC\".\"JWT_SIGNING_KEYS\"(\n"
+                        + "    \"KEY_ID\" CHARACTER VARYING(255) NOT NULL,\n"
+                        + "    \"SIGNING_KEY\" CHARACTER VARYING,\n"
+                        + "    \"VERIFYING_KEY\" CHARACTER VARYING\n"
+                        + ");\n"
+                        + "ALTER TABLE \"PUBLIC\".\"JWT_SIGNING_KEYS\" ADD CONSTRAINT"
+                        + " \"PUBLIC\".\"CONSTRAINT_JWT\" PRIMARY KEY(\"KEY_ID\");\n"
+                        + "INSERT INTO \"PUBLIC\".\"JWT_SIGNING_KEYS\"(\"KEY_ID\", \"SIGNING_KEY\","
+                        + " \"VERIFYING_KEY\") VALUES('jwt-key-1', '"
+                        + signingKey
+                        + "', '"
+                        + verifyingKey
+                        + "');\n";
+
+        Path backup =
+                tempDir.resolve(
+                        "backup_"
+                                + LocalDateTime.now()
+                                        .format(DateTimeFormatter.ofPattern("yyyyMMddHHmm"))
+                                + ".sql");
+        Files.writeString(backup, sqlContent);
+
+        assertThatCode(() -> databaseService.importDatabase()).doesNotThrowAnyException();
     }
 }
