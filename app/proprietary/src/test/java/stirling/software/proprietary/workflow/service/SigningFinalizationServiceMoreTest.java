@@ -40,6 +40,7 @@ import stirling.software.common.service.CustomPDFDocumentFactory;
 import stirling.software.common.service.PdfSigningService;
 import stirling.software.common.service.ServerCertificateServiceInterface;
 import stirling.software.proprietary.security.model.User;
+import stirling.software.proprietary.testutil.TestKeystores;
 import stirling.software.proprietary.workflow.model.ParticipantStatus;
 import stirling.software.proprietary.workflow.model.WorkflowParticipant;
 import stirling.software.proprietary.workflow.model.WorkflowSession;
@@ -95,14 +96,9 @@ class SigningFinalizationServiceMoreTest {
     // -------------------------------------------------------------------------
 
     private static byte[] loadCert(String filename) throws Exception {
-        try (InputStream in =
-                SigningFinalizationServiceMoreTest.class.getResourceAsStream(
-                        "/test-certs/" + filename)) {
-            if (in == null) {
-                throw new IllegalStateException("cert not found: " + filename);
-            }
-            return in.readAllBytes();
-        }
+        // Generated, not read from disk: "expired" and "not yet valid" are relative to now, so the
+        // committed fixtures both had a date on which they would start lying. See TestKeystores.
+        return TestKeystores.byFixtureName(filename);
     }
 
     /** Builds a single-page in-memory PDF and returns its bytes. */

@@ -33,6 +33,7 @@ import stirling.software.proprietary.storage.model.StoredFile;
 import stirling.software.proprietary.storage.provider.StorageProvider;
 import stirling.software.proprietary.storage.provider.StoredObject;
 import stirling.software.proprietary.storage.repository.StoredFileRepository;
+import stirling.software.proprietary.testutil.TestKeystores;
 import stirling.software.proprietary.workflow.dto.SignDocumentRequest;
 import stirling.software.proprietary.workflow.dto.WorkflowCreationRequest;
 import stirling.software.proprietary.workflow.model.ParticipantStatus;
@@ -176,11 +177,8 @@ class WorkflowSessionServiceTest {
         sessionWithParticipant("s7", participant);
         when(workflowParticipantRepository.save(any())).thenAnswer(i -> i.getArgument(0));
 
-        byte[] p12Bytes;
-        try (var in = getClass().getResourceAsStream("/test-certs/valid-test.p12")) {
-            assertThat(in).as("valid-test.p12 fixture present").isNotNull();
-            p12Bytes = in.readAllBytes();
-        }
+        // Generated rather than a committed fixture, which would eventually expire.
+        byte[] p12Bytes = TestKeystores.validPkcs12();
 
         SignDocumentRequest req = new SignDocumentRequest();
         req.setCertType("PKCS12");
