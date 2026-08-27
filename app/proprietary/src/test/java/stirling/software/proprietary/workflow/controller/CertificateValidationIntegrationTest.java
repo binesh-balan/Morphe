@@ -9,7 +9,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.io.InputStream;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import stirling.software.common.service.PdfSigningService;
+import stirling.software.proprietary.testutil.TestKeystores;
 import stirling.software.proprietary.workflow.model.WorkflowParticipant;
 import stirling.software.proprietary.workflow.repository.WorkflowParticipantRepository;
 import stirling.software.proprietary.workflow.service.CertificateSubmissionValidator;
@@ -100,12 +100,9 @@ class CertificateValidationIntegrationTest {
     // ---- helpers ----
 
     private static byte[] loadCert(String filename) throws Exception {
-        try (InputStream in =
-                CertificateValidationIntegrationTest.class.getResourceAsStream(
-                        "/test-certs/" + filename)) {
-            if (in == null) throw new IllegalStateException("cert not found: " + filename);
-            return in.readAllBytes();
-        }
+        // Generated, not read from disk: "expired" and "not yet valid" are relative to now, so the
+        // committed fixtures both had a date on which they would start lying. See TestKeystores.
+        return TestKeystores.byFixtureName(filename);
     }
 
     private static MockMultipartFile p12Part(String filename) throws Exception {

@@ -28,6 +28,7 @@ import stirling.software.common.configuration.InstallationPathConfig;
 import stirling.software.common.model.ApplicationProperties;
 import stirling.software.proprietary.security.configuration.ee.KeygenLicenseVerifier.License;
 import stirling.software.proprietary.security.configuration.ee.LicenseKeyChecker;
+import stirling.software.proprietary.testutil.TestKeystores;
 
 /**
  * Tests for {@link ServerCertificateService}. Uses a {@link TempDir} for the keystore location
@@ -376,12 +377,8 @@ class ServerCertificateServiceTest {
 
     // -------------------------------------------------------------------------
     private static byte[] loadCert(String filename) throws Exception {
-        try (InputStream in =
-                ServerCertificateServiceTest.class.getResourceAsStream("/test-certs/" + filename)) {
-            if (in == null) {
-                throw new IllegalStateException("cert not found: " + filename);
-            }
-            return in.readAllBytes();
-        }
+        // Generated, not read from disk: "expired" and "not yet valid" are relative to now, so the
+        // committed fixtures both had a date on which they would start lying. See TestKeystores.
+        return TestKeystores.byFixtureName(filename);
     }
 }
