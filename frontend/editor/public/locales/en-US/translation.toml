@@ -5971,11 +5971,6 @@ title = "Advanced Settings"
 description = "Automatically scales text horizontally to fit within its original bounding box when font rendering differs from PDF."
 title = "Auto-scale text to fit boxes"
 
-[pdfTextEditor.options.truePreview]
-description = "Shows the PDF the server actually exports, instead of an on-screen approximation of it. Updates shortly after you stop typing."
-title = "Match exported PDF"
-updating = "Updating"
-
 [pdfTextEditor.options.forceSingleElement]
 description = "When enabled, the editor exports each edited text box as one PDF text element to avoid overlapping glyphs or mixed fonts."
 title = "Lock edited text to a single PDF element"
@@ -5985,6 +5980,11 @@ autoDescription = "Automatically detects page type and groups text appropriately
 paragraphDescription = "Groups aligned lines into multi-line paragraph text boxes."
 singleLineDescription = "Keeps each PDF text line as a separate text box."
 title = "Text Grouping Mode"
+
+[pdfTextEditor.options.truePreview]
+description = "Shows the PDF the server actually exports, instead of an on-screen approximation of it. Updates shortly after you stop typing."
+title = "Match exported PDF"
+updating = "Updating"
 
 [pdfTextEditor.pageType]
 paragraph = "Paragraph page"
