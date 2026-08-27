@@ -38,13 +38,41 @@ const splitParagraphIntoLines = (text: string | undefined | null): string[] => {
   return text.replace(/\r/g, "").split("\n");
 };
 
+/**
+ * Unit vector of the text's own "up" axis, taken from the (c, d) column of the
+ * text matrix. Successive lines advance along its negative. Upright text yields
+ * (0, 1), so callers keep their previous purely-vertical behaviour.
+ */
+const textUpAxis = (element: PdfJsonTextElement): { x: number; y: number } => {
+  const matrix = element?.textMatrix;
+  if (matrix && matrix.length >= 6) {
+    const c = matrix[2];
+    const d = matrix[3];
+    if (typeof c === "number" && typeof d === "number") {
+      const length = Math.hypot(c, d);
+      if (length > 1e-9) {
+        return { x: c / length, y: d / length };
+      }
+    }
+  }
+  return { x: 0, y: 1 };
+};
+
 const extractElementBaseline = (element: PdfJsonTextElement): number | null => {
   if (!element) {
     return null;
   }
   if (element.textMatrix && element.textMatrix.length >= 6) {
-    const baseline = element.textMatrix[5];
-    return typeof baseline === "number" ? baseline : null;
+    const translationX = element.textMatrix[4];
+    const translationY = element.textMatrix[5];
+    if (typeof translationX !== "number" || typeof translationY !== "number") {
+      return null;
+    }
+    // Measure along the line-advance axis rather than straight down the page, so
+    // rotated runs report their true leading instead of its vertical projection
+    // (which collapses to zero at 90 degrees).
+    const up = textUpAxis(element);
+    return translationX * up.x + translationY * up.y;
   }
   if (typeof element.y === "number") {
     return element.y;
@@ -61,15 +89,27 @@ const shiftElementsBy = (
   }
   return elements.map((element) => {
     const clone = cloneTextElement(element);
+    // Advance along the element's own line axis. Shifting only in Y walks
+    // rotated text sideways off its baseline, which is what made rotated
+    // paragraphs drift as soon as they were edited.
+    const up = textUpAxis(clone);
+    const deltaX = delta * up.x;
+    const deltaY = delta * up.y;
     if (clone.textMatrix && clone.textMatrix.length >= 6) {
       const matrix = [...clone.textMatrix];
-      matrix[5] = (matrix[5] ?? 0) + delta;
+      matrix[4] = (matrix[4] ?? 0) + deltaX;
+      matrix[5] = (matrix[5] ?? 0) + deltaY;
       clone.textMatrix = matrix;
     }
+    if (typeof clone.x === "number") {
+      clone.x += deltaX;
+    } else if (deltaX !== 0) {
+      clone.x = deltaX;
+    }
     if (typeof clone.y === "number") {
-      clone.y += delta;
+      clone.y += deltaY;
     } else if (clone.y === null || clone.y === undefined) {
-      clone.y = delta;
+      clone.y = deltaY;
     }
     return clone;
   });
@@ -1316,7 +1356,22 @@ const rebuildParagraphLineElements = (
     const delta = shiftSteps * spacing * direction;
     const clones = shiftElementsBy(templateElements, delta);
     const normalizedLine = sanitizeParagraphText(lineTexts[index]);
-    const distributed = distributeTextAcrossElements(normalizedLine, clones);
+
+    // Each template element carries the x position of the glyph run it came from. Those positions
+    // only describe the original text: reusing them for a line whose length has changed packs the
+    // new characters into the old glyph slots, which is the overlapping and gapped spacing that
+    // made paragraph mode worse than single-line mode. When the length matches we keep the
+    // original per-run positions (which preserves any deliberate kerning); when it does not, one
+    // element carries the line and the text lays out from its start.
+    const templateGlyphCount = templateElements.reduce(
+      (sum, element) => sum + countGraphemes(element.text ?? ""),
+      0,
+    );
+    const lineGlyphCount = countGraphemes(normalizedLine);
+
+    const distributed =
+      lineGlyphCount === templateGlyphCount &&
+      distributeTextAcrossElements(normalizedLine, clones);
 
     if (!distributed) {
       const primary = clones[0];

@@ -5981,6 +5981,11 @@ paragraphDescription = "Groups aligned lines into multi-line paragraph text boxe
 singleLineDescription = "Keeps each PDF text line as a separate text box."
 title = "Text Grouping Mode"
 
+[pdfTextEditor.options.truePreview]
+description = "Shows the PDF the server actually exports, instead of an on-screen approximation of it. Updates shortly after you stop typing."
+title = "Match exported PDF"
+updating = "Updating"
+
 [pdfTextEditor.pageType]
 paragraph = "Paragraph page"
 sparse = "Sparse text"
@@ -6014,11 +6019,7 @@ experimental = "This is an experimental feature in active development. Expect so
 feedback = "This is an early access feature. Please report any issues you encounter to help us improve!"
 gotIt = "Got it"
 howItWorks = "This tool converts your PDF to an editable format where you can modify text content and reposition images. Changes are saved back as a new PDF."
-issue1 = "Text color is not currently preserved (will be added soon)"
-issue2 = "Paragraph mode has more alignment and spacing issues - Single Line mode recommended"
 issue3 = "The preview display differs from the exported PDF - exported PDFs are closer to the original"
-issue4 = "Rotated text alignment may need manual adjustment"
-issue5 = "Transparency and layering effects may vary from original"
 knownIssues = "Known Issues (Being Fixed):"
 limitation1 = "Font rendering may differ slightly from the original PDF"
 limitation2 = "Complex graphics, form fields, and annotations are preserved but not editable"

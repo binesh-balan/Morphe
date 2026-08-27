@@ -193,6 +193,10 @@ export interface PdfTextEditorViewData {
   dirtyPages: boolean[];
   hasDocument: boolean;
   hasVectorPreview: boolean;
+  /** Preview shows the server's actual exported PDF rather than the CSS text overlay. */
+  truePreview: boolean;
+  isRefreshingTruePreview: boolean;
+  onTruePreviewChange: (value: boolean) => void;
   fileName: string;
   errorMessage: string | null;
   isGeneratingPdf: boolean;
