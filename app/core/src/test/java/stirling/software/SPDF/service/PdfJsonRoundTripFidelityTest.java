@@ -1,6 +1,7 @@
 package stirling.software.SPDF.service;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
@@ -46,6 +47,7 @@ import org.apache.pdfbox.util.Matrix;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -353,6 +355,55 @@ class PdfJsonRoundTripFidelityTest {
      * <p>Everything outside the edited line must survive untouched: editing one line is not licence
      * to move the rest of the page.
      */
+    /**
+     * Measures real documents instead of constructed ones.
+     *
+     * <p>Every other fixture here is synthetic, which makes them easy to reason about and easy to
+     * flatter: they use one standard-14 font, simple layout and no subsetting. A brochure or an
+     * annual report is a harder test than anything this file builds. Drop PDFs into {@code
+     * app/core/build/fidelity-input/} and this reports the same ink-restricted score for page 1 of
+     * each, writing the usual before/after/diff PNGs alongside.
+     *
+     * <p>Skipped when that directory is empty, so it costs nothing in CI.
+     */
+    @Test
+    @DisplayName("real documents, when any are supplied")
+    void realDocumentsRoundTrip() throws IOException {
+        Path inputDir = Paths.get("build", "fidelity-input");
+        List<Path> documents =
+                Files.exists(inputDir)
+                        ? Files.list(inputDir)
+                                .filter(path -> path.toString().toLowerCase().endsWith(".pdf"))
+                                .sorted()
+                                .toList()
+                        : List.of();
+        assumeTrue(!documents.isEmpty(), "no PDFs in build/fidelity-input");
+
+        for (Path document : documents) {
+            String name =
+                    "real-" + document.getFileName().toString().replaceAll("[^A-Za-z0-9.-]", "_");
+            byte[] original = Files.readAllBytes(document);
+            try {
+                Rebuild rebuild = roundTrip(name, original);
+                BufferedImage before = renderFirstPage(original);
+                BufferedImage after = renderFirstPage(rebuild.pdf());
+                Comparison comparison = compareAndReport(name, before, after, rebuild.excluded());
+                System.out.printf(
+                        "[fidelity-real] %-46s similarity = %.4f over %6d ink px  stream %d -> %d%n",
+                        document.getFileName(),
+                        comparison.similarity(),
+                        comparison.inkPixels(),
+                        contentStreamLength(original),
+                        contentStreamLength(rebuild.pdf()));
+            } catch (Exception e) {
+                // Report rather than abort: one unusable document should not hide the others.
+                System.out.printf(
+                        "[fidelity-real] %-46s FAILED %s: %s%n",
+                        document.getFileName(), e.getClass().getSimpleName(), e.getMessage());
+            }
+        }
+    }
+
     private Rebuild roundTrip(String fixtureName, byte[] pdfBytes) throws IOException {
         String jobId = "fidelity-job-" + (++jobCounter);
 

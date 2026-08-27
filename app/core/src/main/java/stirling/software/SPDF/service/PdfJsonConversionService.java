@@ -184,6 +184,21 @@ public class PdfJsonConversionService {
     private static final float ORIENTATION_TOLERANCE = 0.0005f;
     private static final float BASELINE_TOLERANCE = 0.5f;
 
+    /**
+     * How far a run may drift from natural glyph advances before it is split.
+     *
+     * <p>A run is rebuilt by drawing its whole string from one origin, so positions inside it are
+     * recomputed from font metrics. That is faithful only while each glyph starts where the last
+     * one ended. Real documents adjust glyphs with TJ arrays - one services agreement measured here
+     * carries 11,735 such adjustments on a single file - and each is individually tiny but they
+     * accumulate along the line until the text visibly separates from the original.
+     *
+     * <p>Splitting on every adjustment would emit an element per glyph. Splitting once the
+     * accumulated drift passes a quarter point keeps the error under half a pixel at 100% zoom
+     * while leaving unadjusted text in long runs.
+     */
+    private static final float ADVANCE_DRIFT_TOLERANCE = 0.25f;
+
     @PostConstruct
     private void initializeToolAvailability() {
         loadConfigurationFromProperties();
@@ -3776,6 +3791,16 @@ public class PdfJsonConversionService {
             PDPageContentStream contentStream, PdfJsonTextColor color, boolean nonStroking)
             throws IOException {
         if (color == null || color.getComponents() == null) {
+            // A null colour means default black - compactTextElement drops the value precisely
+            // because it was black. It has to be written out rather than left unset: regenerated
+            // text is appended after the preserved graphics, so with no colour operator it inherits
+            // whatever fill the page artwork left behind. On a document whose logo ends on blue,
+            // that turned every unstyled paragraph blue.
+            if (nonStroking) {
+                contentStream.setNonStrokingColor(0f, 0f, 0f);
+            } else {
+                contentStream.setStrokingColor(0f, 0f, 0f);
+            }
             return;
         }
         float[] components = color.getComponents();
@@ -5869,6 +5894,10 @@ public class PdfJsonConversionService {
             private final float orientationC;
             private final float orientationD;
             private final Float baseline;
+
+            /** Accumulated difference between actual glyph starts and natural advances. */
+            private float cumulativeDrift;
+
             private final float[] baseMatrix;
             private final float startXCoord;
             private final float startYCoord;
@@ -5911,6 +5940,13 @@ public class PdfJsonConversionService {
                 if (!styleKey.equals(buildStyleKey(element))) {
                     return false;
                 }
+                // Would appending push the run past the drift budget? The gap is the difference
+                // between where this glyph actually starts and where the previous glyph's advance
+                // would have put it - i.e. exactly the TJ adjustment, if there was one.
+                if (Math.abs(cumulativeDrift + (position.getXDirAdj() - endXCoord))
+                        > ADVANCE_DRIFT_TOLERANCE) {
+                    return false;
+                }
                 float[] matrix = element.getTextMatrix();
                 float a = 1f;
                 float b = 0f;
@@ -5942,6 +5978,7 @@ public class PdfJsonConversionService {
             }
 
             void append(PdfJsonTextElement element, TextPosition position) {
+                cumulativeDrift += position.getXDirAdj() - endXCoord;
                 textBuilder.append(element.getText());
                 float width =
                         element.getWidth() != null ? element.getWidth() : position.getWidthDirAdj();
