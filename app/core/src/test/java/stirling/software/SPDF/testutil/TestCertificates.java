@@ -127,10 +127,7 @@ public final class TestCertificates {
     /**
      * Traditional "RSA PRIVATE KEY" (PKCS#1), matching the replaced fixture.
      *
-     * <p>Not PKCS#8: {@code CertSignController.getPrivateKeyFromPEM} casts the parsed object
-     * straight to {@code PEMKeyPair}, so an unencrypted PKCS#8 "PRIVATE KEY" - what current OpenSSL
-     * emits by default - fails there with a ClassCastException. That is a real gap in the upload
-     * path, but widening it is a behaviour change and does not belong in a build fix.
+     * <p>See {@link #privateKeyPkcs8Pem()} for the PKCS#8 form; the controller accepts both.
      */
     public static byte[] privateKeyPem() {
         try {
@@ -139,6 +136,13 @@ public final class TestCertificates {
         } catch (Exception e) {
             throw new IllegalStateException("Failed to encode test private key", e);
         }
+    }
+
+    /**
+     * Unencrypted PKCS#8, "-----BEGIN PRIVATE KEY-----" - what current OpenSSL writes by default.
+     */
+    public static byte[] privateKeyPkcs8Pem() {
+        return pem("PRIVATE KEY", KEY_PAIR.getPrivate().getEncoded());
     }
 
     private static byte[] keyStoreBytes(String type) {

@@ -348,8 +348,27 @@ public class CertSignController {
                 PEMDecryptorProvider decProv =
                         new JcePEMDecryptorProviderBuilder().build(password.toCharArray());
                 pkInfo = pemEncryptedKeyPair.decryptKeyPair(decProv).getPrivateKeyInfo();
+            } else if (pemObject instanceof PEMKeyPair pemKeyPair) {
+                // Traditional "RSA PRIVATE KEY" (PKCS#1).
+                pkInfo = pemKeyPair.getPrivateKeyInfo();
+            } else if (pemObject instanceof PrivateKeyInfo privateKeyInfo) {
+                // Unencrypted PKCS#8, "-----BEGIN PRIVATE KEY-----". This is what current OpenSSL
+                // writes by default, so it is the common case for a user-supplied key; it used to
+                // reach the PEMKeyPair cast below and fail with a ClassCastException.
+                pkInfo = privateKeyInfo;
+            } else if (pemObject == null) {
+                throw ExceptionUtils.createIllegalArgumentException(
+                        "error.pemKeyUnreadable",
+                        "The private key file could not be read as PEM. Expected a"
+                                + " '-----BEGIN PRIVATE KEY-----' or '-----BEGIN RSA PRIVATE"
+                                + " KEY-----' block.");
             } else {
-                pkInfo = ((PEMKeyPair) pemObject).getPrivateKeyInfo();
+                throw ExceptionUtils.createIllegalArgumentException(
+                        "error.pemKeyUnsupported",
+                        "The private key file contains "
+                                + pemObject.getClass().getSimpleName()
+                                + " rather than a private key. Supply a PKCS#8 or PKCS#1 private"
+                                + " key in PEM form.");
             }
             return converter.getPrivateKey(pkInfo);
         }

@@ -251,6 +251,44 @@ class CertSignControllerTest {
     }
 
     @Test
+    void testSignPdfWithPkcs8PemKey() throws Exception {
+        // "-----BEGIN PRIVATE KEY-----" is what current OpenSSL writes by default. PEMParser
+        // returns a PrivateKeyInfo for it, which used to hit the PEMKeyPair cast and throw a
+        // ClassCastException, so an ordinary user key was rejected with no usable message.
+        MockMultipartFile pdfFile =
+                new MockMultipartFile(
+                        "fileInput", "test.pdf", MediaType.APPLICATION_PDF_VALUE, pdfBytes);
+        MockMultipartFile keyFile =
+                new MockMultipartFile(
+                        "privateKeyFile",
+                        "test-key-pkcs8.pem",
+                        "application/x-pem-file",
+                        TestCertificates.privateKeyPkcs8Pem());
+        MockMultipartFile certFile =
+                new MockMultipartFile(
+                        "certFile", "test-cert.pem", "application/x-pem-file", pemCertBytes);
+
+        SignPDFWithCertRequest request = new SignPDFWithCertRequest();
+        request.setFileInput(pdfFile);
+        request.setCertType("PEM");
+        request.setPrivateKeyFile(keyFile);
+        request.setCertFile(certFile);
+        request.setPassword("password");
+        request.setShowSignature(false);
+        request.setReason("test");
+        request.setLocation("test");
+        request.setName("tester");
+        request.setPageNumber(1);
+        request.setShowLogo(false);
+
+        ResponseEntity<Resource> response =
+                certSignController.signPDFWithCert(request, httpRequest);
+
+        assertNotNull(response.getBody());
+        assertTrue(drainBody(response).length > 0);
+    }
+
+    @Test
     void testSignPdfWithCrt() throws Exception {
         MockMultipartFile pdfFile =
                 new MockMultipartFile(
