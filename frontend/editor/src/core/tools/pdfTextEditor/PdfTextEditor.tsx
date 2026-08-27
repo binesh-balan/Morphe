@@ -277,6 +277,13 @@ const PdfTextEditor = ({ onComplete, onError }: BaseToolProps) => {
   >("auto");
   const [hasVectorPreview, setHasVectorPreview] = useState(false);
 
+  // Bumped whenever the document behind the preview is swapped. initializePdfPreview clears the
+  // rendered pages, but on a refresh hasVectorPreview is already true and none of the other render
+  // effect's dependencies move - so without this the effect never re-runs, nothing re-renders into
+  // the cleared map, and the page goes blank. That is what "Match exported PDF" did on its second
+  // and subsequent refreshes.
+  const [previewEpoch, setPreviewEpoch] = useState(0);
+
   // True preview renders the page from the PDF the server actually exports, instead of the
   // original page with its text masked out and CSS text drawn on top. The overlay is an
   // approximation by construction - different text engine, different metrics - so the two could
@@ -527,6 +534,7 @@ const PdfTextEditor = ({ onComplete, onError }: BaseToolProps) => {
         pagePreviewsRef.current = empty;
         setPagePreviews(empty);
         setHasVectorPreview(true);
+        setPreviewEpoch((epoch) => epoch + 1);
       } catch (error) {
         if (previewRequestIdRef.current === requestId) {
           console.warn(
@@ -1905,7 +1913,14 @@ const PdfTextEditor = ({ onComplete, onError }: BaseToolProps) => {
           return next;
         });
       } catch (error) {
-        console.warn("[PdfTextEditor] Failed to render page preview", error);
+        // Swapping the document cancels renders in flight; the replacement render follows.
+        if (
+          (error as { name?: string })?.name === "RenderingCancelledException"
+        ) {
+          console.debug("[PdfTextEditor] Preview render superseded", error);
+        } else {
+          console.warn("[PdfTextEditor] Failed to render page preview", error);
+        }
       } finally {
         previewRenderingRef.current.delete(pageIndex);
       }
@@ -1951,6 +1966,7 @@ const PdfTextEditor = ({ onComplete, onError }: BaseToolProps) => {
       dirtyPages,
       hasDocument,
       hasVectorPreview,
+      previewEpoch,
       truePreview,
       isRefreshingTruePreview,
       onTruePreviewChange: handleTruePreviewChange,
@@ -1986,6 +2002,7 @@ const PdfTextEditor = ({ onComplete, onError }: BaseToolProps) => {
       onLoadFile: handleLoadFileFromDropzone,
     }),
     [
+      previewEpoch,
       truePreview,
       isRefreshingTruePreview,
       handleTruePreviewChange,
