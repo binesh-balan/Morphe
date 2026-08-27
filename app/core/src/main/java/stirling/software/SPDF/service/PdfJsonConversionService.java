@@ -199,6 +199,9 @@ public class PdfJsonConversionService {
      */
     private static final float ADVANCE_DRIFT_TOLERANCE = 0.25f;
 
+    private static final java.nio.charset.Charset WINDOWS_1252 =
+            java.nio.charset.Charset.forName("windows-1252");
+
     @PostConstruct
     private void initializeToolAvailability() {
         loadConfigurationFromProperties();
@@ -3346,17 +3349,13 @@ public class PdfJsonConversionService {
                                                         run.text(),
                                                         run.charCodes());
                                     } catch (IOException ex) {
-                                        log.warn(
-                                                "Failed to encode text '{}' with font {} (fontId={}, runFontModel={}) on page {}: {}",
-                                                run.text(),
-                                                run.font().getName(),
-                                                run.fontId(),
-                                                runFontModel != null
-                                                        ? runFontModel.getId()
-                                                        : "null",
-                                                pageNumber,
-                                                ex.getMessage());
-                                        continue;
+                                        // Salvage what encodes rather than dropping the run.
+                                        encoded =
+                                                encodeSalvagingUnsupported(
+                                                        run, runFontModel, pageNumber, ex);
+                                        if (encoded == null || encoded.length == 0) {
+                                            continue;
+                                        }
                                     }
                                 }
                                 if (encoded == null || encoded.length == 0) {
@@ -3368,8 +3367,7 @@ public class PdfJsonConversionService {
                                     continue;
                                 }
                                 try {
-                                    contentStream.showText(
-                                            new String(encoded, StandardCharsets.ISO_8859_1));
+                                    contentStream.showText(reinterpretEncodedBytes(encoded));
                                 } catch (IllegalArgumentException ex) {
                                     log.warn(
                                             "Failed to render text '{}' with font {} on page {}: {}",
@@ -4222,6 +4220,79 @@ public class PdfJsonConversionService {
             }
         }
         return true;
+    }
+
+    /**
+     * Encodes a run one character at a time after a whole-run failure, so an unsupported character
+     * costs that character rather than everything around it.
+     *
+     * <p>The caller used to skip the entire run on the first encoding error. On a real services
+     * agreement that silently removed 122 characters from page 1 - whole phrases such as {@code
+     * Broadcore's "Managed Business Communications Services"} disappeared because one curly
+     * apostrophe would not encode, leaving a blank gap mid-sentence with no error the user could
+     * see.
+     *
+     * <p>The root cause sits upstream: buildFontRuns picks a font using canEncode, which can
+     * disagree with what encodeTextWithFont actually accepts, so a run reaches here believing it is
+     * encodable. This keeps the damage proportional until that disagreement is resolved.
+     */
+    /**
+     * Recovers the real Unicode meaning of bytes {@code font.encode(text)} already produced, so
+     * they can be handed back to {@code showText(String)} without corrupting them.
+     *
+     * <p>{@code showText} always re-derives PDF codes from its argument by calling the font's own
+     * {@code encode()} again internally. Handing it already-encoded bytes therefore requires first
+     * converting them back to the Unicode characters that will re-encode to the same bytes.
+     *
+     * <p>This used to decode as ISO-8859-1, which is the identity mapping (byte N becomes code
+     * point N) and is silently correct for ASCII and for the Latin-1 accented range 0xA0-0xFF,
+     * where ISO-8859-1 and WinAnsiEncoding agree. It diverges exactly in 0x80-0x9F: WinAnsiEncoding
+     * (which is what font.encode() targets for the untagged/Standard-14 fonts this branch actually
+     * reaches) assigns that range to printable punctuation - curly quotes, en/em dash, bullet -
+     * while ISO-8859-1 defines it as non-printable C1 control codes. A real document's curly quote
+     * would decode to a control character with no glyph, showText's internal re-encode would find
+     * nothing to map it to, and the whole run - not just that character - was dropped. On one real
+     * services agreement this silently removed 122 characters from a single page, including whole
+     * phrases such as {@code Broadcore's "Managed Business Communications Services"}.
+     *
+     * <p>Windows-1252 is a superset of WinAnsiEncoding for exactly this range, so decoding there
+     * instead round-trips correctly through the font's own encode/re-encode. It is not guaranteed
+     * correct for a font using a genuinely different simple encoding (MacRomanEncoding, or a
+     * symbolic font with a private code-to-glyph mapping unrelated to any text encoding) - those
+     * were already failing under the old ISO-8859-1 mapping too, just for a different set of bytes,
+     * so this is strictly a widening of what already renders correctly, not a new risk.
+     */
+    private static String reinterpretEncodedBytes(byte[] encoded) {
+        return new String(encoded, WINDOWS_1252);
+    }
+
+    private byte[] encodeSalvagingUnsupported(
+            FontRun run, PdfJsonFont runFontModel, int pageNumber, IOException cause) {
+        String text = run.text();
+        ByteArrayOutputStream salvaged = new ByteArrayOutputStream();
+        StringBuilder dropped = new StringBuilder();
+        for (int offset = 0; offset < text.length(); ) {
+            int codePoint = text.codePointAt(offset);
+            offset += Character.charCount(codePoint);
+            String glyph = new String(Character.toChars(codePoint));
+            try {
+                salvaged.write(encodeTextWithFont(run.font(), runFontModel, glyph, null));
+            } catch (IOException | RuntimeException ignored) {
+                dropped.appendCodePoint(codePoint);
+            }
+        }
+        if (dropped.length() == 0) {
+            // The whole run failed but every character encodes alone; nothing was lost.
+            return salvaged.toByteArray();
+        }
+        log.warn(
+                "Dropped {} unsupported character(s) [{}] from text on page {} using font {}: {}",
+                dropped.length(),
+                dropped,
+                pageNumber,
+                run.font().getName(),
+                cause.getMessage());
+        return salvaged.toByteArray();
     }
 
     private byte[] encodeTextWithFont(

@@ -388,6 +388,10 @@ class PdfJsonRoundTripFidelityTest {
                 BufferedImage before = renderFirstPage(original);
                 BufferedImage after = renderFirstPage(rebuild.pdf());
                 Comparison comparison = compareAndReport(name, before, after, rebuild.excluded());
+                Files.write(REPORT_DIR.resolve(name).resolve("rebuilt.pdf"), rebuild.pdf());
+                Files.write(
+                        REPORT_DIR.resolve(name).resolve("page1-content.txt"),
+                        decodedPageOneContent(rebuild.pdf()));
                 System.out.printf(
                         "[fidelity-real] %-46s similarity = %.4f over %6d ink px  stream %d -> %d%n",
                         document.getFileName(),
@@ -530,6 +534,18 @@ class PdfJsonRoundTripFidelityTest {
                 }
             }
             return String.join(",", names);
+        }
+    }
+
+    /** Page 1's decoded content stream, for inspecting what the rebuild actually emitted. */
+    private static byte[] decodedPageOneContent(byte[] pdfBytes) throws IOException {
+        try (PDDocument document = Loader.loadPDF(pdfBytes);
+                ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            Iterator<PDStream> streams = document.getPage(0).getContentStreams();
+            while (streams.hasNext()) {
+                out.write(streams.next().toByteArray());
+            }
+            return out.toByteArray();
         }
     }
 
