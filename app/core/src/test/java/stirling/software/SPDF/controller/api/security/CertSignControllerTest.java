@@ -10,7 +10,6 @@ import static org.mockito.Mockito.mock;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.InputStream;
 import java.nio.file.Files;
 
 import org.apache.pdfbox.Loader;
@@ -23,7 +22,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,12 +32,14 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import stirling.software.SPDF.model.api.security.SignPDFWithCertRequest;
 import stirling.software.SPDF.service.HardwareKeyStoreService;
+import stirling.software.SPDF.testutil.TestCertificates;
 import stirling.software.common.service.CustomPDFDocumentFactory;
 import stirling.software.common.util.TempFile;
 import stirling.software.common.util.TempFileManager;
 
 @ExtendWith(MockitoExtension.class)
 class CertSignControllerTest {
+
     private static ResponseEntity<Resource> streamingOk(byte[] bytes) {
         return ResponseEntity.ok(new ByteArrayResource(bytes));
     }
@@ -90,60 +90,17 @@ class CertSignControllerTest {
             doc.save(baos);
             pdfBytes = baos.toByteArray();
         }
-        ClassPathResource pfxResource = new ClassPathResource("certs/test-cert.pfx");
-        try (InputStream is = pfxResource.getInputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            is.transferTo(baos);
-            pfxBytes = baos.toByteArray();
-        }
-        ClassPathResource p12Resource = new ClassPathResource("certs/test-cert.p12");
-        try (InputStream is = p12Resource.getInputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            is.transferTo(baos);
-            p12Bytes = baos.toByteArray();
-        }
-        ClassPathResource jksResource = new ClassPathResource("certs/test-cert.jks");
-        try (InputStream is = jksResource.getInputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            is.transferTo(baos);
-            jksBytes = baos.toByteArray();
-        }
-        ClassPathResource pemKeyResource = new ClassPathResource("certs/test-key.pem");
-        try (InputStream is = pemKeyResource.getInputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            is.transferTo(baos);
-            pemKeyBytes = baos.toByteArray();
-        }
-        ClassPathResource pemCertResource = new ClassPathResource("certs/test-cert.pem");
-        try (InputStream is = pemCertResource.getInputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            is.transferTo(baos);
-            pemCertBytes = baos.toByteArray();
-        }
-        ClassPathResource keyResource = new ClassPathResource("certs/test-key.key");
-        try (InputStream is = keyResource.getInputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            is.transferTo(baos);
-            keyBytes = baos.toByteArray();
-        }
-        ClassPathResource crtResource = new ClassPathResource("certs/test-cert.crt");
-        try (InputStream is = crtResource.getInputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            is.transferTo(baos);
-            crtCertBytes = baos.toByteArray();
-        }
-        ClassPathResource cerResource = new ClassPathResource("certs/test-cert.cer");
-        try (InputStream is = cerResource.getInputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            is.transferTo(baos);
-            cerCertBytes = baos.toByteArray();
-        }
-        ClassPathResource derCertResource = new ClassPathResource("certs/test-cert.der");
-        try (InputStream is = derCertResource.getInputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            is.transferTo(baos);
-            derCertBytes = baos.toByteArray();
-        }
+        // .pfx and .p12 are the same PKCS#12 container, and .crt/.cer/.pem the same PEM
+        // certificate - the tests only vary the filename to exercise extension handling.
+        pfxBytes = TestCertificates.pkcs12();
+        p12Bytes = TestCertificates.pkcs12();
+        jksBytes = TestCertificates.jks();
+        pemKeyBytes = TestCertificates.privateKeyPem();
+        keyBytes = TestCertificates.privateKeyPem();
+        pemCertBytes = TestCertificates.certificatePem();
+        crtCertBytes = TestCertificates.certificatePem();
+        cerCertBytes = TestCertificates.certificatePem();
+        derCertBytes = TestCertificates.certificateDer();
 
         lenient()
                 .when(pdfDocumentFactory.load(any(MultipartFile.class)))

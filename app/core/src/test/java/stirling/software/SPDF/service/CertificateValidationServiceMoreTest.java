@@ -43,6 +43,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
 
+import stirling.software.SPDF.testutil.TestCertificates;
 import stirling.software.common.model.ApplicationProperties;
 import stirling.software.common.service.ServerCertificateServiceInterface;
 
@@ -81,11 +82,8 @@ class CertificateValidationServiceMoreTest {
         }
     }
 
-    private static X509Certificate loadPemCert() throws Exception {
-        CertificateFactory cf = CertificateFactory.getInstance("X.509");
-        try (InputStream is = new ClassPathResource("certs/test-cert.pem").getInputStream()) {
-            return (X509Certificate) cf.generateCertificate(is);
-        }
+    private static X509Certificate loadPemCert() {
+        return TestCertificates.certificate();
     }
 
     private static ApplicationProperties defaultProps() {
@@ -138,15 +136,15 @@ class CertificateValidationServiceMoreTest {
             X509Certificate fromPem =
                     (X509Certificate)
                             cf.generateCertificate(
-                                    new ByteArrayInputStream(readResource("certs/test-cert.pem")));
+                                    new ByteArrayInputStream(TestCertificates.certificatePem()));
             X509Certificate fromCrt =
                     (X509Certificate)
                             cf.generateCertificate(
-                                    new ByteArrayInputStream(readResource("certs/test-cert.crt")));
+                                    new ByteArrayInputStream(TestCertificates.certificatePem()));
             X509Certificate fromCer =
                     (X509Certificate)
                             cf.generateCertificate(
-                                    new ByteArrayInputStream(readResource("certs/test-cert.cer")));
+                                    new ByteArrayInputStream(TestCertificates.certificatePem()));
 
             assertThat(fromPem).isEqualTo(fromCrt).isEqualTo(fromCer);
             assertThat(fromPem.getSubjectX500Principal().getName()).contains("CN=Test");
@@ -159,29 +157,28 @@ class CertificateValidationServiceMoreTest {
             X509Certificate fromDer =
                     (X509Certificate)
                             cf.generateCertificate(
-                                    new ByteArrayInputStream(readResource("certs/test-cert.der")));
+                                    new ByteArrayInputStream(TestCertificates.certificateDer()));
             assertThat(fromDer).isEqualTo(realCert);
         }
 
         @Test
         @DisplayName("PKCS12 (.p12 and .pfx) keystores expose the certificate and private key")
         void loadsPkcs12Keystores() throws Exception {
-            for (String name : new String[] {"certs/test-cert.p12", "certs/test-cert.pfx"}) {
-                KeyStore ks = KeyStore.getInstance("PKCS12");
-                try (InputStream is = new ClassPathResource(name).getInputStream()) {
-                    ks.load(is, PASSWORD);
-                }
-                String alias = ks.aliases().nextElement();
-                assertThat(ks.getCertificate(alias)).isInstanceOf(X509Certificate.class);
-                assertThat(ks.getKey(alias, PASSWORD)).isInstanceOf(PrivateKey.class);
+            // The .p12 and .pfx fixtures were byte-identical, so one container covers both.
+            KeyStore ks = KeyStore.getInstance("PKCS12");
+            try (InputStream is = new ByteArrayInputStream(TestCertificates.pkcs12())) {
+                ks.load(is, PASSWORD);
             }
+            String alias = ks.aliases().nextElement();
+            assertThat(ks.getCertificate(alias)).isInstanceOf(X509Certificate.class);
+            assertThat(ks.getKey(alias, PASSWORD)).isInstanceOf(PrivateKey.class);
         }
 
         @Test
         @DisplayName("JKS keystore exposes the certificate")
         void loadsJksKeystore() throws Exception {
             KeyStore ks = KeyStore.getInstance("JKS");
-            try (InputStream is = new ClassPathResource("certs/test-cert.jks").getInputStream()) {
+            try (InputStream is = new ByteArrayInputStream(TestCertificates.jks())) {
                 ks.load(is, PASSWORD);
             }
             String alias = ks.aliases().nextElement();
@@ -218,9 +215,11 @@ class CertificateValidationServiceMoreTest {
         }
 
         @Test
-        @DisplayName("Certificate is inside its validity window mid-2026 and outside it in 1990")
+        @DisplayName("Certificate is inside its validity window now and outside it in 1990")
         void realCertValidityWindow() throws Exception {
-            Date inWindow = new java.text.SimpleDateFormat("yyyy-MM-dd").parse("2026-01-15");
+            // Relative to now, not a hardcoded date: the certificate is generated per run, and
+            // pinning a calendar date here is what made the previous fixture rot.
+            Date inWindow = new Date();
             Date past = new java.text.SimpleDateFormat("yyyy-MM-dd").parse("1990-01-01");
             assertThat(svc.isOutsideValidityPeriod(realCert, inWindow)).isFalse();
             assertThat(svc.isOutsideValidityPeriod(realCert, past)).isTrue();
@@ -691,7 +690,7 @@ class CertificateValidationServiceMoreTest {
 
         private SignerInformation buildSignerWithSignedAttrs() throws Exception {
             KeyStore ks = KeyStore.getInstance("PKCS12");
-            try (InputStream is = new ClassPathResource("certs/test-cert.p12").getInputStream()) {
+            try (InputStream is = new ByteArrayInputStream(TestCertificates.pkcs12())) {
                 ks.load(is, PASSWORD);
             }
             String alias = ks.aliases().nextElement();
@@ -714,7 +713,7 @@ class CertificateValidationServiceMoreTest {
 
         private SignerInformation buildSignerWithoutSignedAttrs() throws Exception {
             KeyStore ks = KeyStore.getInstance("PKCS12");
-            try (InputStream is = new ClassPathResource("certs/test-cert.p12").getInputStream()) {
+            try (InputStream is = new ByteArrayInputStream(TestCertificates.pkcs12())) {
                 ks.load(is, PASSWORD);
             }
             String alias = ks.aliases().nextElement();
