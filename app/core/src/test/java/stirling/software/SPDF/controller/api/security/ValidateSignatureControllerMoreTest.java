@@ -9,7 +9,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.Security;
 import java.security.cert.Certificate;
@@ -37,7 +36,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +44,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import stirling.software.SPDF.model.api.security.SignatureValidationRequest;
 import stirling.software.SPDF.model.api.security.SignatureValidationResult;
 import stirling.software.SPDF.service.CertificateValidationService;
+import stirling.software.SPDF.testutil.TestCertificates;
 import stirling.software.common.model.ApplicationProperties;
 import stirling.software.common.service.CustomPDFDocumentFactory;
 
@@ -87,14 +86,12 @@ class ValidateSignatureControllerMoreTest {
 
         controller = new ValidateSignatureController(pdfDocumentFactory, certValidationService);
 
-        KeyStore ks = KeyStore.getInstance("PKCS12");
-        try (InputStream is = new ClassPathResource("certs/test-cert.p12").getInputStream()) {
-            ks.load(is, PASSWORD);
-        }
-        String alias = ks.aliases().nextElement();
-        PrivateKey privateKey = (PrivateKey) ks.getKey(alias, PASSWORD);
-        Certificate[] chain = ks.getCertificateChain(alias);
-        testCert = (X509Certificate) chain[0];
+        // Generated rather than loaded: the signing path rejects an expired certificate, and the
+        // committed fixture this replaced had expired - which showed up here as null signature
+        // metadata rather than an obvious certificate error.
+        PrivateKey privateKey = TestCertificates.privateKey();
+        Certificate[] chain = TestCertificates.chain();
+        testCert = TestCertificates.certificate();
         testCertDer = testCert.getEncoded();
 
         signedPdfBytes = createSignedPdf(privateKey, chain);
