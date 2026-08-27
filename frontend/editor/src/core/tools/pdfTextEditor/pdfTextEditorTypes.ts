@@ -193,6 +193,8 @@ export interface PdfTextEditorViewData {
   dirtyPages: boolean[];
   hasDocument: boolean;
   hasVectorPreview: boolean;
+  /** Increments when the preview's underlying document is replaced, to force a re-render. */
+  previewEpoch: number;
   /** Preview shows the server's actual exported PDF rather than the CSS text overlay. */
   truePreview: boolean;
   isRefreshingTruePreview: boolean;

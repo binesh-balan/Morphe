@@ -416,6 +416,7 @@ const PdfTextEditorView = ({ data }: PdfTextEditorViewProps) => {
     dirtyPages,
     hasDocument,
     hasVectorPreview,
+    previewEpoch,
     truePreview,
     fileName: _fileName,
     errorMessage,
@@ -1214,6 +1215,9 @@ const PdfTextEditorView = ({ data }: PdfTextEditorViewProps) => {
   }, [
     hasDocument,
     hasVectorPreview,
+    // Re-request after the underlying document is swapped, which clears the rendered pages
+    // without moving any of the other dependencies.
+    previewEpoch,
     selectedPage,
     scale,
     pages.length,
