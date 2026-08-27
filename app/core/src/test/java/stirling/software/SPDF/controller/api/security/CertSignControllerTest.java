@@ -10,12 +10,32 @@ import static org.mockito.Mockito.mock;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.InputStream;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.KeyStore;
+import java.security.PrivateKey;
+import java.security.Security;
+import java.security.cert.Certificate;
+import java.security.cert.X509Certificate;
+import java.util.Base64;
+import java.util.Date;
+
+import javax.security.auth.x500.X500Principal;
 
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
+import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
+import org.bouncycastle.cert.X509CertificateHolder;
+import org.bouncycastle.cert.jcajce.JcaX509CertificateConverter;
+import org.bouncycastle.cert.jcajce.JcaX509v3CertificateBuilder;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.operator.ContentSigner;
+import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,7 +43,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +59,84 @@ import stirling.software.common.util.TempFileManager;
 
 @ExtendWith(MockitoExtension.class)
 class CertSignControllerTest {
+
+    private static final String KEYSTORE_PASSWORD = "password";
+
+    /** A self-signed key pair rendered into every container format the controller accepts. */
+    private record CertificateMaterial(
+            byte[] pkcs12,
+            byte[] jks,
+            byte[] certificatePem,
+            byte[] certificateDer,
+            byte[] privateKeyPem) {
+
+        static CertificateMaterial generate(String password) throws Exception {
+            if (Security.getProvider("BC") == null) {
+                Security.addProvider(new BouncyCastleProvider());
+            }
+
+            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+            keyPairGenerator.initialize(2048);
+            KeyPair keyPair = keyPairGenerator.generateKeyPair();
+
+            X500Principal dn = new X500Principal("CN=Test, OU=Test, O=Test, L=SF, ST=CA, C=US");
+            long now = System.currentTimeMillis();
+            // Backdated a day so a clock skewed slightly behind the runner still sees it as valid.
+            Date notBefore = new Date(now - 24L * 60 * 60 * 1000);
+            Date notAfter = new Date(now + 3650L * 24 * 60 * 60 * 1000);
+            ContentSigner signer =
+                    new JcaContentSignerBuilder("SHA256WithRSA").build(keyPair.getPrivate());
+            X509CertificateHolder holder =
+                    new JcaX509v3CertificateBuilder(
+                                    dn,
+                                    BigInteger.valueOf(now),
+                                    notBefore,
+                                    notAfter,
+                                    dn,
+                                    keyPair.getPublic())
+                            .build(signer);
+            X509Certificate certificate =
+                    new JcaX509CertificateConverter().setProvider("BC").getCertificate(holder);
+
+            char[] pin = password.toCharArray();
+            Certificate[] chain = {certificate};
+            return new CertificateMaterial(
+                    keyStoreBytes("PKCS12", pin, keyPair.getPrivate(), chain),
+                    keyStoreBytes("JKS", pin, keyPair.getPrivate(), chain),
+                    pem("CERTIFICATE", certificate.getEncoded()),
+                    certificate.getEncoded(),
+                    pkcs1Pem(keyPair.getPrivate()));
+        }
+
+        private static byte[] keyStoreBytes(
+                String type, char[] pin, PrivateKey privateKey, Certificate[] chain)
+                throws Exception {
+            KeyStore keyStore = KeyStore.getInstance(type);
+            keyStore.load(null, pin);
+            keyStore.setKeyEntry("test", privateKey, pin, chain);
+            try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+                keyStore.store(out, pin);
+                return out.toByteArray();
+            }
+        }
+
+        /**
+         * Emits the traditional "RSA PRIVATE KEY" (PKCS#1) form, which is what the replaced fixture
+         * held. CertSignController's PEM branch casts straight to PEMKeyPair, so an unencrypted
+         * PKCS#8 "PRIVATE KEY" - the modern OpenSSL default - throws ClassCastException there.
+         */
+        private static byte[] pkcs1Pem(PrivateKey privateKey) throws Exception {
+            PrivateKeyInfo info = PrivateKeyInfo.getInstance(privateKey.getEncoded());
+            return pem("RSA PRIVATE KEY", info.parsePrivateKey().toASN1Primitive().getEncoded());
+        }
+
+        private static byte[] pem(String label, byte[] der) {
+            String body = Base64.getMimeEncoder(64, new byte[] {'\n'}).encodeToString(der);
+            return ("-----BEGIN " + label + "-----\n" + body + "\n-----END " + label + "-----\n")
+                    .getBytes(StandardCharsets.US_ASCII);
+        }
+    }
+
     private static ResponseEntity<Resource> streamingOk(byte[] bytes) {
         return ResponseEntity.ok(new ByteArrayResource(bytes));
     }
@@ -70,6 +167,22 @@ class CertSignControllerTest {
     private byte[] cerCertBytes;
     private byte[] derCertBytes;
 
+    /**
+     * Signing material generated fresh for the run.
+     *
+     * <p>These used to be committed fixtures under {@code src/test/resources/certs}. They carried a
+     * one-year validity and expired on 2026-08-26, which broke the whole build - and would have
+     * broken it again every year. The controller is right to reject an expired certificate
+     * (CreateSignatureBase calls X509Certificate.checkValidity), so the test has to supply one that
+     * is currently valid; generating it is the only way that stays true over time.
+     */
+    private static CertificateMaterial certificateMaterial;
+
+    @BeforeAll
+    static void generateCertificateMaterial() throws Exception {
+        certificateMaterial = CertificateMaterial.generate(KEYSTORE_PASSWORD);
+    }
+
     @BeforeEach
     void setUp() throws Exception {
         lenient()
@@ -90,60 +203,17 @@ class CertSignControllerTest {
             doc.save(baos);
             pdfBytes = baos.toByteArray();
         }
-        ClassPathResource pfxResource = new ClassPathResource("certs/test-cert.pfx");
-        try (InputStream is = pfxResource.getInputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            is.transferTo(baos);
-            pfxBytes = baos.toByteArray();
-        }
-        ClassPathResource p12Resource = new ClassPathResource("certs/test-cert.p12");
-        try (InputStream is = p12Resource.getInputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            is.transferTo(baos);
-            p12Bytes = baos.toByteArray();
-        }
-        ClassPathResource jksResource = new ClassPathResource("certs/test-cert.jks");
-        try (InputStream is = jksResource.getInputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            is.transferTo(baos);
-            jksBytes = baos.toByteArray();
-        }
-        ClassPathResource pemKeyResource = new ClassPathResource("certs/test-key.pem");
-        try (InputStream is = pemKeyResource.getInputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            is.transferTo(baos);
-            pemKeyBytes = baos.toByteArray();
-        }
-        ClassPathResource pemCertResource = new ClassPathResource("certs/test-cert.pem");
-        try (InputStream is = pemCertResource.getInputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            is.transferTo(baos);
-            pemCertBytes = baos.toByteArray();
-        }
-        ClassPathResource keyResource = new ClassPathResource("certs/test-key.key");
-        try (InputStream is = keyResource.getInputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            is.transferTo(baos);
-            keyBytes = baos.toByteArray();
-        }
-        ClassPathResource crtResource = new ClassPathResource("certs/test-cert.crt");
-        try (InputStream is = crtResource.getInputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            is.transferTo(baos);
-            crtCertBytes = baos.toByteArray();
-        }
-        ClassPathResource cerResource = new ClassPathResource("certs/test-cert.cer");
-        try (InputStream is = cerResource.getInputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            is.transferTo(baos);
-            cerCertBytes = baos.toByteArray();
-        }
-        ClassPathResource derCertResource = new ClassPathResource("certs/test-cert.der");
-        try (InputStream is = derCertResource.getInputStream();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            is.transferTo(baos);
-            derCertBytes = baos.toByteArray();
-        }
+        // .pfx and .p12 are the same PKCS#12 container, and .crt/.cer/.pem the same PEM
+        // certificate - the tests only vary the filename to exercise extension handling.
+        pfxBytes = certificateMaterial.pkcs12();
+        p12Bytes = certificateMaterial.pkcs12();
+        jksBytes = certificateMaterial.jks();
+        pemKeyBytes = certificateMaterial.privateKeyPem();
+        keyBytes = certificateMaterial.privateKeyPem();
+        pemCertBytes = certificateMaterial.certificatePem();
+        crtCertBytes = certificateMaterial.certificatePem();
+        cerCertBytes = certificateMaterial.certificatePem();
+        derCertBytes = certificateMaterial.certificateDer();
 
         lenient()
                 .when(pdfDocumentFactory.load(any(MultipartFile.class)))
