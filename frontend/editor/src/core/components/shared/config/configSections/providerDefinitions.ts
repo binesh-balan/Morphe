@@ -33,7 +33,7 @@ const useGoogleProvider = (): Provider => {
     type: "oauth2",
     scope: t("provider.oauth2.google.scope", "Sign-in authentication"),
     documentationUrl:
-      "https://docs.stirlingpdf.com/Configuration/OAuth%20SSO%20Configuration",
+      "https://github.com/binesh-balan/Morphe/blob/main/docs/configuration/sso-configuration.md",
     fields: [
       {
         key: "clientId",
@@ -91,7 +91,7 @@ const useGitHubProvider = (): Provider => {
     type: "oauth2",
     scope: t("provider.oauth2.github.scope", "Sign-in authentication"),
     documentationUrl:
-      "https://docs.stirlingpdf.com/Configuration/OAuth%20SSO%20Configuration",
+      "https://github.com/binesh-balan/Morphe/blob/main/docs/configuration/sso-configuration.md",
     fields: [
       {
         key: "clientId",
@@ -149,7 +149,7 @@ const useKeycloakProvider = (): Provider => {
     scope: t("provider.oauth2.keycloak.scope", "SSO"),
     businessTier: false,
     documentationUrl:
-      "https://docs.stirlingpdf.com/Configuration/OAuth%20SSO%20Configuration",
+      "https://github.com/binesh-balan/Morphe/blob/main/docs/configuration/sso-configuration.md",
     fields: [
       {
         key: "issuer",
@@ -220,7 +220,7 @@ const useGenericOAuth2Provider = (): Provider => {
     scope: t("provider.oauth2.generic.scope", "SSO"),
     businessTier: false,
     documentationUrl:
-      "https://docs.stirlingpdf.com/Configuration/OAuth%20SSO%20Configuration",
+      "https://github.com/binesh-balan/Morphe/blob/main/docs/configuration/sso-configuration.md",
     fields: [
       {
         key: "enabled",
@@ -664,7 +664,7 @@ const useSAML2Provider = (): Provider => {
     scope: t("provider.saml2.scope", "SSO (SAML)"),
     businessTier: true,
     documentationUrl:
-      "https://docs.stirlingpdf.com/Configuration/SAML%20SSO%20Configuration/",
+      "https://github.com/binesh-balan/Morphe/blob/main/docs/configuration/sso-configuration.md",
     fields: [
       {
         key: "enabled",

@@ -50,13 +50,12 @@ public class OpenApiConfig {
                                 new License()
                                         .name("Open-Core - MIT Licensed")
                                         .url(
-                                                "https://raw.githubusercontent.com/Stirling-Tools/Stirling-PDF/refs/heads/main/LICENSE"))
+                                                "https://raw.githubusercontent.com/binesh-balan/Morphe/main/LICENSE"))
                         .termsOfService("https://www.stirlingpdf.com/terms")
                         .contact(
                                 new Contact()
-                                        .name("Stirling Software")
-                                        .url("https://www.stirlingpdf.com")
-                                        .email("contact@stirlingpdf.com"))
+                                        .name("Morphe PDF")
+                                        .url("https://github.com/binesh-balan/Morphe"))
                         .description(DEFAULT_DESCRIPTION);
 
         OpenAPI openAPI = new OpenAPI().info(info).openapi("3.0.3");

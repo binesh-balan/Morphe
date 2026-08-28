@@ -1256,7 +1256,7 @@ public class GlobalExceptionHandler {
 
             ProblemDetail problemDetail =
                     createBaseProblemDetail(HttpStatus.INTERNAL_SERVER_ERROR, message, request);
-            problemDetail.setType(URI.create("https://stirlingpdf.com/errors/temp-file-not-found"));
+            problemDetail.setType(URI.create("/errors/temp-file-not-found"));
             problemDetail.setTitle(title);
             problemDetail.setProperty("title", title);
             problemDetail.setProperty("errorCode", "E999");

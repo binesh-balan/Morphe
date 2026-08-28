@@ -1288,7 +1288,7 @@ export function useTranslatedToolCatalog(): TranslatedToolCatalog {
         description: t("home.devSsoGuide.desc", "Link to SSO guide"),
         categoryId: ToolCategoryId.ADVANCED_TOOLS,
         subcategoryId: SubcategoryId.DEVELOPER_TOOLS,
-        link: "https://docs.stirlingpdf.com/Configuration/Single%20Sign-On%20Configuration/",
+        link: "https://github.com/binesh-balan/Morphe/blob/main/docs/configuration/sso-configuration.md",
         endpoints: ["dev-sso-guide-docs"],
         synonyms: getSynonyms(t, "devSsoGuide"),
         supportsAutomate: false,

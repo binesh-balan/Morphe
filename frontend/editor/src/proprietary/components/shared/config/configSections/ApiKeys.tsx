@@ -8,6 +8,7 @@ import RefreshModal from "./apiKeys/RefreshModal";
 import useApiKey from "./apiKeys/hooks/useApiKey";
 import { useTranslation } from "react-i18next";
 import LocalIcon from "@app/components/shared/LocalIcon";
+import { devApiLink } from "@app/constants/links";
 
 export default function ApiKeys() {
   const [copied, setCopied] = useState<string | null>(null);
@@ -96,7 +97,7 @@ export default function ApiKeys() {
             <Stack gap={4}>
               <Text size="sm">
                 <Anchor
-                  href="https://docs.stirlingpdf.com/API"
+                  href={devApiLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{

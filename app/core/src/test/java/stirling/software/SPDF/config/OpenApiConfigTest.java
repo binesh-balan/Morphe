@@ -54,8 +54,8 @@ class OpenApiConfigTest {
             assertThat(openAPI.getInfo().getTermsOfService())
                     .isEqualTo("https://www.stirlingpdf.com/terms");
             assertThat(openAPI.getInfo().getContact()).isNotNull();
-            assertThat(openAPI.getInfo().getContact().getEmail())
-                    .isEqualTo("contact@stirlingpdf.com");
+            assertThat(openAPI.getInfo().getContact().getUrl())
+                    .isEqualTo("https://github.com/binesh-balan/Morphe");
         }
 
         @Test
