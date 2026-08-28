@@ -696,17 +696,17 @@
   }
 }
 
-/* ─── Stirling logo thinking animation ─────────────────────────────────── */
+/* ─── Morphe logo thinking animation ─────────────────────────────────── */
 
-.stirling-thinking__path-right {
-  animation: stirling-orbit-right 2s ease-in-out infinite;
+.morphe-thinking__path-right {
+  animation: morphe-orbit-right 2s ease-in-out infinite;
 }
 
-.stirling-thinking__path-left {
-  animation: stirling-orbit-left 2s ease-in-out infinite;
+.morphe-thinking__path-left {
+  animation: morphe-orbit-left 2s ease-in-out infinite;
 }
 
-@keyframes stirling-orbit-right {
+@keyframes morphe-orbit-right {
   0%,
   100% {
     transform: translate(0, 0);
@@ -726,7 +726,7 @@
   }
 }
 
-@keyframes stirling-orbit-left {
+@keyframes morphe-orbit-left {
   0%,
   100% {
     transform: translate(0, 0);
@@ -747,11 +747,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .stirling-thinking__path-right {
+  .morphe-thinking__path-right {
     animation: none;
     opacity: 0.5;
   }
-  .stirling-thinking__path-left {
+  .morphe-thinking__path-left {
     animation: none;
     opacity: 1;
   }
