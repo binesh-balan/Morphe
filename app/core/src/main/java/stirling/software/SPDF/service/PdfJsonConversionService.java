@@ -1107,10 +1107,7 @@ public class PdfJsonConversionService {
             if (font == null) {
                 continue;
             }
-            boolean hasUsableProgram =
-                    hasPayload(font.getPdfProgram())
-                            || hasPayload(font.getWebProgram())
-                            || hasPayload(font.getProgram());
+            boolean hasUsableProgram = hasUsableFontProgram(font);
 
             // Only clear cosDictionary for Type3 fonts (which have inline content streams)
             // All other font types may need ToUnicode CMap or encoding from the dictionary
@@ -1126,6 +1123,13 @@ public class PdfJsonConversionService {
 
     private boolean hasPayload(String value) {
         return value != null && !value.isBlank();
+    }
+
+    private boolean hasUsableFontProgram(PdfJsonFont font) {
+        return font != null
+                && (hasPayload(font.getPdfProgram())
+                        || hasPayload(font.getWebProgram())
+                        || hasPayload(font.getProgram()));
     }
 
     private PdfJsonFont buildFontModel(
@@ -6790,6 +6794,17 @@ public class PdfJsonConversionService {
                     }
                     PdfJsonFont clone = cloneFont(font);
                     PdfJsonFont toStore = clone != null ? clone : font;
+                    PdfJsonFont existing = mergedFonts.get(cacheKey);
+                    // The client echoes back font models it was handed - including the
+                    // lightweight ones from extractDocumentMetadata, which have their program
+                    // bytes stripped for wire size. Overwriting the server's cached copy (which
+                    // still has the real embedded font program) with that stripped echo forces
+                    // every subsequent glyph in the font to fall back to a Standard14 substitute.
+                    if (existing != null
+                            && hasUsableFontProgram(existing)
+                            && !hasUsableFontProgram(toStore)) {
+                        continue;
+                    }
                     mergedFonts.put(cacheKey, toStore);
                     if (toStore.getUid() != null) {
                         type3NormalizedFontCache.remove(toStore.getUid());
