@@ -6549,9 +6549,15 @@ public class PdfJsonConversionService {
             PDPage page = document.getPage(pageIndex);
             PdfJsonPage pageModel = new PdfJsonPage();
             pageModel.setPageNumber(pageNumber);
-            PDRectangle mediaBox = page.getMediaBox();
-            pageModel.setWidth(mediaBox.getWidth());
-            pageModel.setHeight(mediaBox.getHeight());
+            // CropBox defines the visible page area (a page can ship with bleed outside it, as
+            // this one does); falling back to MediaBox only when no CropBox is set matches
+            // extractPages/extractSinglePage's sibling call sites.
+            PDRectangle pageBox = page.getCropBox();
+            if (pageBox == null || pageBox.getWidth() == 0 || pageBox.getHeight() == 0) {
+                pageBox = page.getMediaBox();
+            }
+            pageModel.setWidth(pageBox.getWidth());
+            pageModel.setHeight(pageBox.getHeight());
             pageModel.setRotation(page.getRotation());
 
             // Extract text on-demand using cached fonts (ensures consistent font UIDs)
@@ -6957,15 +6963,29 @@ public class PdfJsonConversionService {
         boolean preserveExistingResources =
                 shouldPreserveExistingResources(pageModel.getResources());
 
-        PDRectangle currentBox = page.getMediaBox();
-        float fallbackWidth = currentBox != null ? currentBox.getWidth() : 612f;
-        float fallbackHeight = currentBox != null ? currentBox.getHeight() : 792f;
+        PDRectangle currentMediaBox = page.getMediaBox();
+        PDRectangle currentCropBox = page.getCropBox();
+        PDRectangle currentVisibleBox = currentCropBox != null ? currentCropBox : currentMediaBox;
+        float fallbackWidth = currentVisibleBox != null ? currentVisibleBox.getWidth() : 612f;
+        float fallbackHeight = currentVisibleBox != null ? currentVisibleBox.getHeight() : 792f;
 
         float width = safeFloat(pageModel.getWidth(), fallbackWidth);
         float height = safeFloat(pageModel.getHeight(), fallbackHeight);
-        PDRectangle newBox = new PDRectangle(width, height);
-        page.setMediaBox(newBox);
-        page.setCropBox(newBox);
+
+        // A page's CropBox can be inset from its MediaBox (bleed outside the visible area, as
+        // opposed to the two boxes matching and both starting at the origin). Rebuilding both as
+        // one origin-anchored box on every edit collapses that inset - visible-area size is
+        // unchanged, so leave the page's own boxes alone; only a genuine resize (a different
+        // visible size than the page already has) should replace them.
+        boolean visibleSizeUnchanged =
+                currentVisibleBox != null
+                        && Math.abs(currentVisibleBox.getWidth() - width) < 0.5f
+                        && Math.abs(currentVisibleBox.getHeight() - height) < 0.5f;
+        if (!visibleSizeUnchanged) {
+            PDRectangle newBox = new PDRectangle(width, height);
+            page.setMediaBox(newBox);
+            page.setCropBox(newBox);
+        }
 
         if (pageModel.getRotation() != null) {
             page.setRotation(pageModel.getRotation());
