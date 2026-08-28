@@ -369,6 +369,56 @@ class PdfJsonRoundTripFidelityTest {
                                 + activeFont);
     }
 
+    /**
+     * A page's CropBox can be inset from its MediaBox - bleed outside the visible area, as many
+     * printed layouts ship. exportUpdatedPages used to rebuild both boxes as one origin-anchored
+     * rectangle sized from the JSON page's width/height on every edit, collapsing that inset:
+     * MediaBox shrank to match CropBox, so the page rendered ~36pt wider and taller than it should,
+     * revealing bleed content that was never meant to be visible.
+     */
+    @Test
+    @DisplayName("export keeps the page's CropBox inset instead of collapsing it into MediaBox")
+    void exportPreservesCropBoxInset() throws IOException {
+        byte[] original = cropBoxPdf();
+        String jobId = "fidelity-job-" + (++jobCounter);
+
+        ByteArrayOutputStream metadataOut = new ByteArrayOutputStream();
+        service.extractDocumentMetadata(
+                new MockMultipartFile("fileInput", "input.pdf", "application/pdf", original),
+                jobId,
+                metadataOut);
+        PdfJsonDocumentMetadata metadata =
+                objectMapper.readValue(metadataOut.toByteArray(), PdfJsonDocumentMetadata.class);
+
+        ByteArrayOutputStream pageOut = new ByteArrayOutputStream();
+        service.extractSinglePage(jobId, 1, pageOut);
+        PdfJsonPage pageModel = objectMapper.readValue(pageOut.toByteArray(), PdfJsonPage.class);
+        PdfJsonTextElement edited = pageModel.getTextElements().get(0);
+        edited.setText(edited.getText() + " Edited.");
+
+        PdfJsonDocument updates = new PdfJsonDocument();
+        updates.setPages(new ArrayList<>(List.of(pageModel)));
+        updates.setFonts(metadata.getFonts());
+
+        ByteArrayOutputStream pdfOut = new ByteArrayOutputStream();
+        service.exportUpdatedPages(jobId, updates, pdfOut);
+
+        try (PDDocument rebuilt = Loader.loadPDF(pdfOut.toByteArray())) {
+            PDRectangle mediaBox = rebuilt.getPage(0).getMediaBox();
+            PDRectangle cropBox = rebuilt.getPage(0).getCropBox();
+            assertTrue(
+                    Math.abs(mediaBox.getWidth() - 600f) < 0.5f
+                            && Math.abs(mediaBox.getHeight() - 800f) < 0.5f,
+                    () ->
+                            "expected MediaBox to stay 600x800 (the original bleed area), got "
+                                    + mediaBox);
+            assertTrue(
+                    Math.abs(cropBox.getWidth() - 560f) < 0.5f
+                            && Math.abs(cropBox.getHeight() - 760f) < 0.5f,
+                    () -> "expected CropBox to stay inset to 560x760, got " + cropBox);
+        }
+    }
+
     /** A rebuilt PDF plus the pixel rows covering the edited line, which scoring must ignore. */
     private record Rebuild(byte[] pdf, ExcludedRun excluded) {}
 
@@ -823,6 +873,22 @@ class PdfJsonRoundTripFidelityTest {
             cs.setFont(font, 14f);
             cs.newLineAtOffset(72, 700);
             cs.showText("Embedded font fidelity check.");
+            cs.endText();
+        }
+        return toBytes(document);
+    }
+
+    /** A page whose CropBox is inset from its MediaBox, like a print layout with bleed. */
+    private static byte[] cropBoxPdf() throws IOException {
+        PDDocument document = new PDDocument();
+        PDPage page = new PDPage(new PDRectangle(600, 800));
+        page.setCropBox(new PDRectangle(20, 20, 560, 760));
+        document.addPage(page);
+        try (PDPageContentStream cs = new PDPageContentStream(document, page)) {
+            cs.beginText();
+            cs.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA), 14f);
+            cs.newLineAtOffset(40, 700);
+            cs.showText("Cropbox fidelity check.");
             cs.endText();
         }
         return toBytes(document);
