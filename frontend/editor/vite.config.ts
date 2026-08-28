@@ -164,6 +164,64 @@ function subpathBareRedirectPlugin(subpath: string): PluginOption {
   };
 }
 
+// vite-plugin-static-copy's dev middleware defers its own registration until
+// after Vite's internal middlewares are set up (it splices itself in just
+// before viteServePublicMiddleware/viteTransformMiddleware). On this Vite
+// version that's already too late — the SPA html fallback claims the request
+// first, so every copied asset (brand logos, pdfium.wasm, pdfjs data, ...)
+// 404s to index.html in `vite dev` even though the production build (which
+// copies files for real instead of serving through middleware) is unaffected.
+// Serve the brand logo folders directly, registered the same way
+// subpathBareRedirectPlugin is below — an un-returned `middlewares.use()`
+// call runs before Vite's own middleware stack exists, not just before two
+// named ones — so this actually wins the race in dev.
+const BRAND_LOGO_MIME: Record<string, string> = {
+  ".svg": "image/svg+xml",
+  ".png": "image/png",
+  ".ico": "image/x-icon",
+};
+
+function brandAssetsDevServePlugin(): PluginOption {
+  const dirs: Record<string, string> = {
+    "modern-logo": path.resolve(
+      __dirname,
+      "src/core/assets/brand/modern-logo",
+    ),
+    "classic-logo": path.resolve(
+      __dirname,
+      "src/core/assets/brand/classic-logo",
+    ),
+  };
+  return {
+    name: "brand-assets-dev-serve",
+    apply: "serve",
+    configureServer(server) {
+      server.middlewares.use(async (req, res, next) => {
+        const url = (req.url ?? "").split("?")[0];
+        const [, variant, ...rest] = url.split("/");
+        const dir = dirs[variant];
+        if (!dir || rest.length === 0) return next();
+
+        const filePath = path.resolve(dir, ...rest);
+        if (!filePath.startsWith(dir)) return next();
+
+        try {
+          const stats = await fs.stat(filePath);
+          if (!stats.isFile()) return next();
+          res.setHeader(
+            "Content-Type",
+            BRAND_LOGO_MIME[path.extname(filePath)] ??
+              "application/octet-stream",
+          );
+          res.end(await fs.readFile(filePath));
+        } catch {
+          next();
+        }
+      });
+    },
+  };
+}
+
 // NOTE: cloud/ is a SHARED layer, not a runnable build flavor — it's compiled
 // into the saas and desktop builds. It has no entry here and no vite tsconfig;
 // it is only typechecked standalone via editor/src/cloud/tsconfig.json
@@ -264,6 +322,7 @@ export default defineConfig(async ({ mode, command }) => {
     },
     plugins: [
       react(),
+      brandAssetsDevServePlugin(),
       ...(runSubpath ? [subpathBareRedirectPlugin(runSubpath)] : []),
       tsconfigPaths({
         projects: [tsconfigProject],
