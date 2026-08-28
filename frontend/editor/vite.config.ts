@@ -352,13 +352,26 @@ export default defineConfig(async ({ mode, command }) => {
             }) as PluginOption,
           ]
         : []),
+      // node_modules is hoisted to the workspace root (frontend/), so every
+      // target below that copies from it has a leading "../" - and that's
+      // exactly what breaks vite-plugin-static-copy's destination path: it
+      // derives the copy's destination subdirectory from the src path
+      // relative to editor/, stripping only the leading "../" segments, so
+      // "node_modules/@embedpdf/pdfium/dist" (etc.) gets mirrored under dest
+      // too. pdfium.wasm landed at
+      // dist/pdfium/node_modules/@embedpdf/pdfium/dist/pdfium.wasm instead of
+      // dist/pdfium/pdfium.wasm - the path pdfiumService actually requests -
+      // and the dev server served its SPA-fallback HTML for that missing
+      // path (200 OK, wrong MIME), which failed WebAssembly compilation and
+      // left the Viewer stuck loading. `rename: { stripBase: true }` is what
+      // discards the mirrored directory tree; a plain `rename` string only
+      // replaces the filename, which was already correct.
       viteStaticCopy({
         targets: [
           {
-            // node_modules is hoisted to the workspace root (frontend/), so
-            // these paths walk up one level from editor/.
             src: "../node_modules/@embedpdf/pdfium/dist/pdfium.wasm",
             dest: "pdfium",
+            rename: { stripBase: true },
           },
           {
             // Copy jscanify vendor files to dist
@@ -371,12 +384,14 @@ export default defineConfig(async ({ mode, command }) => {
             // aren't available.
             src: "../node_modules/pdfjs-dist/cmaps/*",
             dest: "pdfjs/cmaps",
+            rename: { stripBase: true },
           },
           {
             // pdfjs-dist standard font data (Helvetica/Times/etc.) needed so
             // workers can substitute non-embedded base 14 fonts without DOM access.
             src: "../node_modules/pdfjs-dist/standard_fonts/*",
             dest: "pdfjs/standard_fonts",
+            rename: { stripBase: true },
           },
           {
             // Brand assets live in core; the editor serves them by URL per
