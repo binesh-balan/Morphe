@@ -183,10 +183,7 @@ const BRAND_LOGO_MIME: Record<string, string> = {
 
 function brandAssetsDevServePlugin(): PluginOption {
   const dirs: Record<string, string> = {
-    "modern-logo": path.resolve(
-      __dirname,
-      "src/core/assets/brand/modern-logo",
-    ),
+    "modern-logo": path.resolve(__dirname, "src/core/assets/brand/modern-logo"),
     "classic-logo": path.resolve(
       __dirname,
       "src/core/assets/brand/classic-logo",
