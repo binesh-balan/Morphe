@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -34,6 +35,7 @@ import org.apache.pdfbox.pdmodel.PDResources;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.common.PDStream;
 import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType0Font;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
 import org.apache.pdfbox.pdmodel.graphics.color.PDColor;
@@ -300,6 +302,73 @@ class PdfJsonRoundTripFidelityTest {
                                 name, similarity, minSimilarity, REPORT_DIR.resolve(name)));
     }
 
+    /**
+     * extractDocumentMetadata strips font program bytes before handing fonts to the client, so the
+     * metadata response stays small. The editor holds onto that font list and sends it back as part
+     * of every export. exportUpdatedPages used to merge it in unconditionally, so that stripped
+     * echo clobbered the real, program-bearing font the server had cached - silently downgrading
+     * every embedded font to a Standard14 substitute on export.
+     */
+    @Test
+    @DisplayName("export keeps the cached embedded font when the client echoes stripped metadata")
+    void exportSurvivesStrippedFontMetadataEcho() throws IOException {
+        byte[] original = embeddedFontPdf();
+        String jobId = "fidelity-job-" + (++jobCounter);
+
+        ByteArrayOutputStream metadataOut = new ByteArrayOutputStream();
+        service.extractDocumentMetadata(
+                new MockMultipartFile("fileInput", "input.pdf", "application/pdf", original),
+                jobId,
+                metadataOut);
+        PdfJsonDocumentMetadata metadata =
+                objectMapper.readValue(metadataOut.toByteArray(), PdfJsonDocumentMetadata.class);
+
+        // Confirms the premise: the metadata endpoint really did strip the program bytes, so the
+        // assertion below is exercising the clobbering bug and not something else entirely.
+        assertTrue(
+                metadata.getFonts().stream()
+                        .allMatch(
+                                f ->
+                                        (f.getPdfProgram() == null || f.getPdfProgram().isBlank())
+                                                && (f.getWebProgram() == null
+                                                        || f.getWebProgram().isBlank())
+                                                && (f.getProgram() == null
+                                                        || f.getProgram().isBlank())),
+                "expected extractDocumentMetadata to strip font program bytes");
+
+        ByteArrayOutputStream pageOut = new ByteArrayOutputStream();
+        service.extractSinglePage(jobId, 1, pageOut);
+        PdfJsonPage pageModel = objectMapper.readValue(pageOut.toByteArray(), PdfJsonPage.class);
+        // An unedited page can take the fast in-place rewrite path, which reuses the cached PDF's
+        // own bytes and never consults the merged font models at all - that would pass here
+        // whether or not the clobbering bug is present. Editing the text forces a real rewrite
+        // that has to resolve a font, which is what actually exercises the bug.
+        PdfJsonTextElement edited = pageModel.getTextElements().get(0);
+        edited.setText(edited.getText() + " Edited.");
+
+        PdfJsonDocument updates = new PdfJsonDocument();
+        updates.setPages(new ArrayList<>(List.of(pageModel)));
+        // Simulates the editor echoing back the lightweight font list it received from the
+        // metadata endpoint, exactly as buildPayload() does on every save.
+        updates.setFonts(metadata.getFonts());
+
+        ByteArrayOutputStream pdfOut = new ByteArrayOutputStream();
+        service.exportUpdatedPages(jobId, updates, pdfOut);
+
+        // The rewritten page keeps the original (now unused) font resource declared alongside
+        // whatever new one the rewrite actually drew with, so checking resource *presence* proves
+        // nothing - a clobbered font still leaves the old DejaVuSans entry sitting there unused.
+        // Resolving the /Fn tag the rewrite's own Tf operator selected is the only way to see
+        // which font it actually drew the edited text with.
+        String activeFont = activeTextFontName(pdfOut.toByteArray());
+        assertTrue(
+                activeFont.contains("DejaVuSans"),
+                () ->
+                        "expected the edited text to render with the cached embedded DejaVu Sans"
+                                + " font, but it used: "
+                                + activeFont);
+    }
+
     /** A rebuilt PDF plus the pixel rows covering the edited line, which scoring must ignore. */
     private record Rebuild(byte[] pdf, ExcludedRun excluded) {}
 
@@ -537,6 +606,29 @@ class PdfJsonRoundTripFidelityTest {
         }
     }
 
+    /**
+     * The font actually selected by page 1's last {@code Tf} operator, resolved to its base name.
+     * Unlike {@link #fontNames}, this reflects what the content stream drew with, not merely what
+     * the resource dictionary happens to still list.
+     */
+    private static String activeTextFontName(byte[] pdfBytes) throws IOException {
+        byte[] content = decodedPageOneContent(pdfBytes);
+        String text = new String(content, java.nio.charset.StandardCharsets.ISO_8859_1);
+        java.util.regex.Matcher matcher =
+                java.util.regex.Pattern.compile("/(\\S+)\\s+[-\\d.]+\\s+Tf").matcher(text);
+        String lastTag = null;
+        while (matcher.find()) {
+            lastTag = matcher.group(1);
+        }
+        if (lastTag == null) {
+            return "<no Tf operator found>";
+        }
+        try (PDDocument document = Loader.loadPDF(pdfBytes)) {
+            PDFont font = document.getPage(0).getResources().getFont(COSName.getPDFName(lastTag));
+            return font == null ? lastTag + "=?" : font.getName();
+        }
+    }
+
     /** Page 1's decoded content stream, for inspecting what the rebuild actually emitted. */
     private static byte[] decodedPageOneContent(byte[] pdfBytes) throws IOException {
         try (PDDocument document = Loader.loadPDF(pdfBytes);
@@ -710,6 +802,27 @@ class PdfJsonRoundTripFidelityTest {
             cs.showText("The quick brown fox jumps over the lazy dog.");
             cs.newLineAtOffset(0, -16);
             cs.showText("Second line for leading and baseline checks.");
+            cs.endText();
+        }
+        return toBytes(document);
+    }
+
+    /**
+     * Draws with a real embedded font program instead of Standard14 - specifically one that is not
+     * also the fallback service's own default font, so a test relying on this fixture can tell
+     * "kept the original" apart from "silently fell back".
+     */
+    private static byte[] embeddedFontPdf() throws IOException {
+        PDDocument document = letterPage();
+        try (InputStream fontStream =
+                        PdfJsonRoundTripFidelityTest.class.getResourceAsStream(
+                                "/static/fonts/DejaVuSans.ttf");
+                PDPageContentStream cs = new PDPageContentStream(document, document.getPage(0))) {
+            PDFont font = PDType0Font.load(document, fontStream, true);
+            cs.beginText();
+            cs.setFont(font, 14f);
+            cs.newLineAtOffset(72, 700);
+            cs.showText("Embedded font fidelity check.");
             cs.endText();
         }
         return toBytes(document);
