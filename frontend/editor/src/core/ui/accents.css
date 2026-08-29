@@ -85,19 +85,19 @@
   --_bd: var(--p-c-334155);
   --_tint: color-mix(in srgb, var(--p-c-94a3b8) 16%, transparent);
 }
-/* brand: Stirling red — a bespoke brand colour, not part of the token palette. */
+/* brand: Morphe indigo — a bespoke brand colour, not part of the token palette. */
 .sui-acc-brand {
-  --_solid: var(--p-brand-red-650);
-  --_solid-hover: var(--p-brand-red-700);
+  --_solid: var(--p-indigo-600);
+  --_solid-hover: var(--p-indigo-800);
   --_on: #ffffff;
-  --_text: var(--p-brand-red-650);
-  --_bd: var(--p-brand-red-200);
-  --_tint: color-mix(in srgb, var(--p-brand-red-650) 9%, transparent);
+  --_text: var(--p-indigo-600);
+  --_bd: var(--p-indigo-200);
+  --_tint: color-mix(in srgb, var(--p-indigo-600) 9%, transparent);
 }
 [data-theme="dark"] .sui-acc-brand {
-  --_text: var(--p-brand-red-300);
-  --_bd: var(--p-brand-red-900);
-  --_tint: color-mix(in srgb, var(--p-brand-red-300) 16%, transparent);
+  --_text: var(--p-indigo-300);
+  --_bd: var(--p-indigo-800);
+  --_tint: color-mix(in srgb, var(--p-indigo-300) 16%, transparent);
 }
 /* ai: multi-hue gradient for AI features — no single-colour token. */
 .sui-acc-ai {
