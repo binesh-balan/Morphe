@@ -1,7 +1,7 @@
 # Standalone unoserver image for Morphe PDF remote UNO mode.
 # Pinned to unoserver 3.6 to match Morphe PDF's client (avoids 3.4/3.6 wire mismatch).
 
-FROM ubuntu:noble@sha256:561618e2c15bf2397621dd04f96926663a3b5616c189cf7e38db7e82f5c538ea
+FROM ubuntu:noble@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55
 
 ARG UNOSERVER_VERSION=3.6
 # ~120 MB of CJK fonts — opt-in.
