@@ -16,7 +16,7 @@ engine = [
     "psycopg[binary,pool]>=3.3.4",
     "pydantic>=2.13.4",
     # <2 cap: 1.99.0 patches CVE-2026-46678; 2.0 is an untested major migration.
-    "pydantic-ai>=1.107.2,<2.0.0",
+    "pydantic-ai>=1.107.7,<2.0.0",
     "pydantic-ai-slim[voyageai]>=1.107.2,<2.0.0",
     "pydantic-settings>=2.15.0",
     "python-dotenv>=1.2.2",
