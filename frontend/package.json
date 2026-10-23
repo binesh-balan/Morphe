@@ -151,7 +151,7 @@
     "prettier": "^3.8.1",
     "puppeteer": "^25.8.0",
     "rollup-plugin-visualizer": "^7.0.1",
-    "storybook": "^10.5.10",
+    "storybook": "^10.6.3",
     "stylelint": "^17.14.1",
     "tsx": "^4.22.4",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
